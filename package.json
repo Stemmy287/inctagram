@@ -26,5 +26,8 @@
     "redux-thunk": "^2.4.2",
     "sass": "^1.62.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "prettier": "2.8.8"
   }
 }
