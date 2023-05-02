@@ -7,6 +7,7 @@
   width: 100%;
   border-bottom: 1px solid $dark300;
   @include flex-center-vert;
+
   .title {
     @include text(26px, 600);
     padding: 60px;
