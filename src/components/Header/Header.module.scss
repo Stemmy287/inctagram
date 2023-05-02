@@ -1,0 +1,14 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.header {
+  height: 60px;
+  background-color: $dark700;
+  width: 100%;
+  border-bottom: 1px solid $dark300;
+  @include flex-center-vert;
+  .title {
+    @include text(26px, 600);
+    padding: 60px;
+  }
+}
