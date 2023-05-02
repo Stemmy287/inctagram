@@ -16,6 +16,21 @@
     outline: none;
     @include text(16px, 400, 24px, $light900);
     padding: 5px 0;
+
+    &:hover {
+      color: $light900;
+      border-bottom: 1px solid $light900;
+    }
+
+    &:focus {
+      color: $light100;
+      border-bottom: 1px solid $light100;
+    }
+
+    &:disabled {
+      color: $dark100;
+      border-bottom: 1px solid $dark100;
+    }
   }
 }
 
