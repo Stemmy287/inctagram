@@ -3,6 +3,7 @@
 
 .container {
   @include flex-column;
+  width: 100%;
 
   > span {
     @include text(14px, 400px, 14px, $dark100);

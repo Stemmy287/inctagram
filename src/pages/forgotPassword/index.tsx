@@ -10,6 +10,9 @@ const ForgotPassword: NextPageWithLayout = () => {
       <div className={s.container}>
         <h1 className={s.title}>Forgot Password</h1>
         <Input title="Email"/>
+        <div className={s.desc}>
+          <span>Enter your email address and we will send you further instructions</span>
+        </div>
       </div>
     </LoginDetailsWrapper>
   );
