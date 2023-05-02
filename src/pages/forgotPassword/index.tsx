@@ -5,6 +5,8 @@ import s from '@/styles/ForgotPassword.module.scss'
 import {Input} from "@/components/Input/Input";
 import {Button} from "@/components/Button/Button";
 import Link from "next/link";
+import {Popup} from "@/components/Popup/Popup";
+import {TitlePopup} from "@/components/TitlePopup/TitlePopup";
 
 const ForgotPassword: NextPageWithLayout = () => {
   return (
@@ -20,6 +22,9 @@ const ForgotPassword: NextPageWithLayout = () => {
         <Button title="Send Link" callback={() => {}}/>
         <Link className={s.link} href={''}>Back to Sign In</Link>
       </div>
+      <Popup onClose={() => {}}>
+        <TitlePopup title="Email sent" onClose={() => {}}/>
+      </Popup>
     </LoginDetailsWrapper>
   );
 };
