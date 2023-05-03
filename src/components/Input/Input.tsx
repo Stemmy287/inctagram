@@ -1,23 +1,23 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Input.module.scss'
+import {FieldValues, UseFormRegister} from 'react-hook-form'
 
 type PropsType = {
   title?: string
   disabled?: boolean
-  value: string
-  onChange: (value: string) => void
+  error?: string
+  register: UseFormRegister<FieldValues>
+  name: string
 }
 
-export const Input = ({title, disabled, value, onChange}: PropsType) => {
+export const Input = ({title, disabled, register, name, error}: PropsType) => {
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value)
-  }
 
  return (
    <div className={s.container}>
-     {title && <span>{title}</span>}
-     <input value={value} onChange={onChangeHandler} disabled={disabled}/>
+     {title && <span className={s.title}>{title}</span>}
+     <input className={error ? `${s.input} ${s.errorInput}` : s.input} disabled={disabled} {...register(name)}/>
+     {error && <span className={s.error}>{error}</span>}
    </div>
 
  )

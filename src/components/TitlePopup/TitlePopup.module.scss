@@ -1,0 +1,18 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 24px;
+  border: 1px solid $dark100;
+
+  > h3 {
+    @include text(20px, 700, 36px)
+  }
+
+  > img {
+    cursor: pointer;
+  }
+}
