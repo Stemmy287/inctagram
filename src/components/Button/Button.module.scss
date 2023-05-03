@@ -1,0 +1,28 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.btn {
+  border: none;
+  border-radius: 2px;
+  background: $accent500;
+  height: 36px;
+  width: 100%;
+  @include text(16px, 600, 24px);
+  cursor: pointer;
+
+  &:hover {
+    background: $accent100;
+    transition: 150ms;
+  }
+
+  &:disabled {
+    background: $accent900;
+    color: $light900;
+    cursor: auto;
+  }
+
+  &:active {
+    background: $accent700;
+    color: $light500;
+  }
+}

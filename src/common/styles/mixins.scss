@@ -1,0 +1,48 @@
+//text
+@mixin text($fontSize, $fontWeight, $lineHeight: normal, $color: #FFFFFF) {
+
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+
+  @if $lineHeight == normal {
+    line-height: normal;
+  } @else {
+    line-height: $lineHeight ;
+  }
+
+  @if ($color == #FFFFFF) {
+    color: #FFFFFF
+  } @else {
+    color: $color;
+  }
+
+}
+
+//display flex
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-column {
+  @include flex-center;
+  flex-direction: column;
+}
+
+
+@mixin flex-center-vert {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center-horiz {
+  display: flex;
+  justify-content: center;
+}

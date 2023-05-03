@@ -1,0 +1,36 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  @include flex-column;
+  width: 100%;
+
+  > span {
+    @include text(14px, 400px, 14px, $dark100);
+  }
+
+  > input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid $dark300;
+    outline: none;
+    @include text(16px, 400, 24px, $light900);
+    padding: 5px 0;
+
+    &:hover {
+      color: $light900;
+      border-bottom: 1px solid $light900;
+    }
+
+    &:focus {
+      color: $light100;
+      border-bottom: 1px solid $light100;
+    }
+
+    &:disabled {
+      color: $dark100;
+      border-bottom: 1px solid $dark100;
+    }
+  }
+}
+

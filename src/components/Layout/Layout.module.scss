@@ -1,0 +1,11 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  @include flex-center-column;
+  .main {
+    @include flex-center;
+    width: 100%;
+    padding: 30px;
+  }
+}
