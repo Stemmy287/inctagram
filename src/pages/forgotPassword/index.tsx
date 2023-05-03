@@ -8,6 +8,7 @@ import Link from "next/link";
 import {Popup} from "@/components/Popup/Popup";
 import {TitlePopup} from "@/components/TitlePopup/TitlePopup";
 import {useState} from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ForgotPassword: NextPageWithLayout = () => {
 
@@ -15,6 +16,10 @@ const ForgotPassword: NextPageWithLayout = () => {
 
   const onClosePopupHandler = () => {
     setIsActive(false)
+  }
+
+  const onCaptcha = (value: string) => {
+    console.log(value)
   }
 
   return (
@@ -30,6 +35,12 @@ const ForgotPassword: NextPageWithLayout = () => {
           </div>
           <Button title="Send Link" callback={() => {}}/>
           <Link className={s.link} href={''}>Back to Sign In</Link>
+          <ReCAPTCHA
+            sitekey="6LdUtdklAAAAAIAhcAayU_lJI6vMPtMNe3jbLtK0"
+            onChange={onCaptcha}
+            theme={"dark"}
+            hl={'en'}
+          />
         </div>
       </LoginDetailsWrapper>
       {isActive &&
