@@ -15,14 +15,14 @@
     transition: 150ms;
   }
 
+  &:active {
+    background: $accent700;
+    color: $light500;
+  }
+
   &:disabled {
     background: $accent900;
     color: $light900;
     cursor: auto;
-  }
-
-  &:active {
-    background: $accent700;
-    color: $light500;
   }
 }
