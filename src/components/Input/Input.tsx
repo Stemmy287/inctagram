@@ -19,6 +19,5 @@ export const Input = ({title, disabled, register, name, error}: PropsType) => {
      <input className={error ? `${s.input} ${s.errorInput}` : s.input} disabled={disabled} {...register(name)}/>
      {error && <span className={s.error}>{error}</span>}
    </div>
-
  )
 };
