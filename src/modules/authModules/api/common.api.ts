@@ -1,20 +1,6 @@
-import axios from 'axios'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
 
-
 export const API_URL = 'https://inctagram-api-git-main-shuliakleonid.vercel.app/api/'
-
-export const instance = axios.create({
-	baseURL: API_URL,
-	withCredentials: true
-})
-
-instance.interceptors.request.use((config) => {
-	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-	return config
-})
-
-
 
 export const api = createApi({
 	reducerPath: 'authApi',
