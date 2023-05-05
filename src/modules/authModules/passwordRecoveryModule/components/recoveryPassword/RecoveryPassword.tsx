@@ -10,11 +10,7 @@ import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {
-	passwordRecoveryApi,
-	PasswordRecoveryType
-} from '@/modules/authModules/passwordRecoveryModule/api/passwordRecovery'
-
+import { PasswordRecoveryType } from '@/modules/authModules/api/common.api'
 
 export const RecoveryPassword = () => {
 
@@ -30,7 +26,6 @@ export const RecoveryPassword = () => {
 	})
 
 	const onSubmit: SubmitHandler<PasswordRecoveryType> = (data) => {
-		passwordRecoveryApi.passwordRecoveryApi({ email: data.email })
 		setIsActive(true)
 	}
 

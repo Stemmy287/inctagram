@@ -58,4 +58,9 @@ type MeResponseType = {
 	email: string
 }
 
+export type PasswordRecoveryType = {
+	email: string
+	recaptcha: string
+}
+
 
