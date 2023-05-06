@@ -40,5 +40,15 @@
   .error {
     @include text(14px, 400, 24px, $danger500);
   }
+
+  .eye * {
+      fill: #fff
+  }
+}
+
+.icon {
+   path {
+    fill: #fff
+  }
 }
 

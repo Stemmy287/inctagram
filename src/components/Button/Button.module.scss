@@ -8,6 +8,7 @@
   height: 36px;
   width: 100%;
   @include text(16px, 600, 24px);
+  font-family: inherit;
   cursor: pointer;
 
   &:hover {
