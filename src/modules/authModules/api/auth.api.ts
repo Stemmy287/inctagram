@@ -1,28 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { LoginFormData } from '@/pages/login'
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
 	tagTypes: ['authApi'],
-	baseQuery: fetchBaseQuery({ baseUrl: API_URL, prepareHeaders: (headers) => {
-
-			const token = localStorage.getItem('token');
-
-			if (token) {
-				// Добавляем токен в заголовок Authorization
-				headers.set('Authorization', `Bearer ${token}`);
-			}
-
-			return headers;
-		} }),
-
+	baseQuery: fetchBaseQuery({
+		baseUrl: API_URL
+	}),
 	endpoints: builder => ({
 		login: builder.mutation<LoginUpdateResponseType, any>({
-			query: (arg: LoginParamsType) => ({
-				body: arg,
+			query: (body: LoginFormData) => ({
 				url: 'auth/login',
-				method: 'POST'
+				method: 'POST',
+				body: body
 			})
 		}),
 		logout: builder.mutation({
@@ -32,14 +24,13 @@ export const authApi = createApi({
 			})
 		}),
 		me: builder.query<MeResponseType, any>({
-			query: () => ({
-				url: 'auth/me'
-			})
+			query: () => 'auth/me'
 		})
 	})
 })
 
-export const {useMeQuery, useLogoutMutation, useLoginMutation} = authApi
+
+export const { useMeQuery, useLogoutMutation, useLoginMutation } = authApi
 
 type LoginParamsType = {
 	email: string
@@ -61,3 +52,14 @@ export type PasswordRecoveryType = {
 	recaptcha: string
 }
 
+// , prepareHeaders: (headers) => {
+//
+// 	const token = localStorage.getItem('token')
+//
+// 	if (token) {
+// 		// Добавляем токен в заголовок Authorization
+// 		headers.set('Authorization', `Bearer ${token}`)
+// 	}
+//
+// 	return headers
+// }
