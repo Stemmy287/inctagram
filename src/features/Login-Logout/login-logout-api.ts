@@ -1,4 +1,4 @@
-import { instance } from '@/modules/authModules/api/common.api'
+import { instance } from '@/modules/authModules/api/auth.api'
 import { AxiosResponse } from 'axios'
 
 export const loginLogoutApi = {

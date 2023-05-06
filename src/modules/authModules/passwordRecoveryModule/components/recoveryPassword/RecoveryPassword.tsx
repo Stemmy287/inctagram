@@ -10,7 +10,7 @@ import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { PasswordRecoveryType } from '@/modules/authModules/api/common.api'
+import { PasswordRecoveryType } from '@/modules/authModules/api/auth.api'
 
 export const RecoveryPassword = () => {
 

@@ -1,9 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const API_URL = 'https://inctagram-api-git-main-shuliakleonid.vercel.app/api/'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-export const api = createApi({
+export const authApi = createApi({
 	reducerPath: 'authApi',
+	tagTypes: ['authApi'],
 	baseQuery: fetchBaseQuery({ baseUrl: API_URL, prepareHeaders: (headers) => {
 
 			const token = localStorage.getItem('token');
@@ -15,7 +16,6 @@ export const api = createApi({
 
 			return headers;
 		} }),
-	tagTypes: ['API'],
 
 	endpoints: builder => ({
 		login: builder.mutation<LoginUpdateResponseType, any>({
@@ -39,18 +39,16 @@ export const api = createApi({
 	})
 })
 
-export const { login, logout, me } = api.endpoints
+export const {useMeQuery, useLogoutMutation, useLoginMutation} = authApi
 
 type LoginParamsType = {
 	email: string
 	password: string
 }
 
-
 type LoginUpdateResponseType = {
 	accessToken: string
 }
-
 
 type MeResponseType = {
 	userId: number
@@ -62,5 +60,4 @@ export type PasswordRecoveryType = {
 	email: string
 	recaptcha: string
 }
-
 
