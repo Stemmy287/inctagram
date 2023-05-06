@@ -53,7 +53,7 @@ const ForgotPassword: NextPageWithLayout = () => {
             </div>
           </div>
           <Button title="Send Link" callback={() => {}} disabled={!!errors.email}/>
-          <Link className={s.link} href={''}>Back to Sign In</Link>
+          <Link className={s.link} href={'/login'}>Back to Sign In</Link>
           <Captcha callback={onCaptcha} error={!!errors.captcha?.message}/>
         </form>
       </LoginDetailsWrapper>

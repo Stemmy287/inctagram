@@ -1,0 +1,46 @@
+@import "./src/common/styles/mixins.scss";
+@import "./src/common/styles/variables.scss";
+
+.container {
+  @include flex-column;
+  row-gap: 35px;
+
+  .title {
+    @include text(20px, 700, 36px);
+    text-align: center;
+  }
+
+  .logo {
+    width: 125px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+.email{}
+  .inputItem {
+    display: flex;
+    align-items: center;
+  }
+  .forgotLinkBlock{
+    display: flex;
+    justify-content: flex-end;
+    .forgotLink {
+      @include text(14px, 400, 24px, $light900);
+    }
+  }
+
+}
+.desc {
+  margin-top: 24px;
+  @include flex-center-column;
+  row-gap: 12px;
+
+  > span {
+    @include text(14px, 400, 24px, $light900);
+  }
+
+}
+.link {
+  @include text(16px, 600, 24px, $accent500);
+}
+
