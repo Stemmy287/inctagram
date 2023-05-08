@@ -15,7 +15,7 @@ import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/aut
 export const RecoveryPassword = () => {
 	const [isActive, setIsActive] = useState(false)
 
-	const [recoveryPassword, { isSuccess}] = useRecoveryPasswordMutation()
+	const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -27,13 +27,14 @@ export const RecoveryPassword = () => {
 		handleSubmit,
 		setValue,
 		formState: { errors },
-		getValues
+		getValues,
+		setError
 	} = useForm<PasswordRecoveryType>({
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
-		await recoveryPassword(data)
+	const onSubmit: SubmitHandler<PasswordRecoveryType> = data => {
+		recoveryPassword(data)
 		isSuccess && setIsActive(true)
 	}
 
@@ -41,8 +42,10 @@ export const RecoveryPassword = () => {
 		setIsActive(false)
 	}
 
+	console.log(errors.recaptcha)
 	const onCaptcha = (value: string) => {
 		setValue('recaptcha', value)
+		setError('recaptcha', { message: '' })
 	}
 
 	return (
