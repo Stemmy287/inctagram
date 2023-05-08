@@ -1,28 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const API_URL = 'https://inctagram-api-git-main-shuliakleonid.vercel.app/api/'
 
-export const api = createApi({
+export const authApi = createApi({
 	reducerPath: 'authApi',
-	baseQuery: fetchBaseQuery({ baseUrl: API_URL, prepareHeaders: (headers) => {
-
-			const token = localStorage.getItem('token');
-
-			if (token) {
-				// Добавляем токен в заголовок Authorization
-				headers.set('Authorization', `Bearer ${token}`);
-			}
-
-			return headers;
-		} }),
-	tagTypes: ['API'],
-
+	tagTypes: ['authApi'],
+	baseQuery: fetchBaseQuery({
+		baseUrl: API_URL
+	}),
 	endpoints: builder => ({
 		login: builder.mutation<LoginUpdateResponseType, any>({
-			query: (arg: LoginParamsType) => ({
-				body: arg,
+			query: (body: LoginParamsType) => ({
 				url: 'auth/login',
-				method: 'POST'
+				method: 'POST',
+				body
 			})
 		}),
 		logout: builder.mutation({
@@ -35,22 +26,27 @@ export const api = createApi({
 			query: () => ({
 				url: 'auth/me'
 			})
+		}),
+		recoveryPassword: builder.mutation<any, PasswordRecoveryType>({
+			query: body => ({
+				url: 'auth/password-recovery',
+				method: 'POST',
+				body
+			})
 		})
 	})
 })
 
-export const { login, logout, me } = api.endpoints
+export const { useMeQuery, useLogoutMutation, useLoginMutation, useRecoveryPasswordMutation } = authApi
 
 type LoginParamsType = {
 	email: string
 	password: string
 }
 
-
 type LoginUpdateResponseType = {
 	accessToken: string
 }
-
 
 type MeResponseType = {
 	userId: number
@@ -62,5 +58,3 @@ export type PasswordRecoveryType = {
 	email: string
 	recaptcha: string
 }
-
-

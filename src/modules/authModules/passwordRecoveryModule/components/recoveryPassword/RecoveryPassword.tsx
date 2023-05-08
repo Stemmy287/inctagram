@@ -10,23 +10,31 @@ import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { PasswordRecoveryType } from '@/modules/authModules/api/common.api'
+import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/authModules'
 
 export const RecoveryPassword = () => {
-
 	const [isActive, setIsActive] = useState(false)
+
+	const [recoveryPassword, { isSuccess}] = useRecoveryPasswordMutation()
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
 		recaptcha: yup.string().required()
 	})
 
-	const { register, handleSubmit, setValue, formState: { errors }, getValues } = useForm<PasswordRecoveryType>({
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		formState: { errors },
+		getValues
+	} = useForm<PasswordRecoveryType>({
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<PasswordRecoveryType> = (data) => {
-		setIsActive(true)
+	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
+		await recoveryPassword(data)
+		isSuccess && setIsActive(true)
 	}
 
 	const onClosePopupHandler = () => {
@@ -48,13 +56,21 @@ export const RecoveryPassword = () => {
 							<span>Enter your email address and we will send you further instructions</span>
 						</div>
 					</div>
-					<Button title='Send Link' callback={() => {
-					}} disabled={!!errors.email} />
-					<Link className={s.link} href={''}>Back to Sign In</Link>
-					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />
+					<div className={s.btn}>
+						{isSuccess && (
+							<span className={s.resend}>
+								The link has been sent by email. If you dont receive an email send link again
+							</span>
+						)}
+						<Button title={isSuccess ? 'Send Link Again' : 'Send Link'} callback={() => {}} disabled={!!errors.email} />
+					</div>
+					<Link className={s.link} href={''}>
+						Back to Sign In
+					</Link>
+					{!isSuccess && <Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />}
 				</form>
 			</LoginDetailsWrapper>
-			{isActive &&
+			{isActive && (
 				<Popup onClose={onClosePopupHandler}>
 					<TitlePopup title='Email sent' onClose={onClosePopupHandler} />
 					<div className={s.notification}>
@@ -63,7 +79,8 @@ export const RecoveryPassword = () => {
 							<Button title='OK' callback={onClosePopupHandler} />
 						</div>
 					</div>
-				</Popup>}
+				</Popup>
+			)}
 		</>
 	)
 }

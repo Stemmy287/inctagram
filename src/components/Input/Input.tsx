@@ -1,18 +1,17 @@
-import React from 'react';
+import React from 'react'
 import s from './Input.module.scss'
-import {FieldValues, UseFormRegister} from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form'
 
 type PropsType = {
-  title?: string
-  disabled?: boolean
-  error?: string
-  register: UseFormRegister<FieldValues>
-  name: string
+	title?: string
+	disabled?: boolean
+	error?: string
+	register: UseFormRegister<any>
+	name: string
 }
 
 export const Input = ({title, disabled, register, name, error}: PropsType) => {
-
-
+  
  return (
    <div className={s.container}>
      {title && <span className={s.title}>{title}</span>}
