@@ -9,8 +9,8 @@ type PropsType = {
 
 export const Captcha = ({callback, error}: PropsType) => {
 
-  const onChangeHandler = (value: string) => {
-    callback(value)
+  const onChangeHandler = (value: string | null) => {
+    callback(value || '')
   }
 
  return (

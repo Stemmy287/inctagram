@@ -42,7 +42,6 @@ export const RecoveryPassword = () => {
 		setIsActive(false)
 	}
 
-	console.log(errors.recaptcha)
 	const onCaptcha = (value: string) => {
 		setValue('recaptcha', value)
 		setError('recaptcha', { message: '' })

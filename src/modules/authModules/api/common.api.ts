@@ -37,7 +37,12 @@ export const authApi = createApi({
 	})
 })
 
-export const { useMeQuery, useLogoutMutation, useLoginMutation, useRecoveryPasswordMutation } = authApi
+export const {
+	useMeQuery,
+	useLogoutMutation,
+	useLoginMutation,
+	useRecoveryPasswordMutation
+} = authApi
 
 type LoginParamsType = {
 	email: string
