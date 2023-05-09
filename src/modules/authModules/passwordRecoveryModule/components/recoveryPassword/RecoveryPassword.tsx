@@ -14,6 +14,7 @@ import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/aut
 
 export const RecoveryPassword = () => {
 	const [isActive, setIsActive] = useState(false)
+	const [resendLink, setResendLink] = useState(false)
 
 	const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
 
@@ -21,7 +22,7 @@ export const RecoveryPassword = () => {
 		email: yup.string().email('email should be correct').required('field required'),
 		recaptcha: yup.string().required()
 	})
-
+	console.log(isSuccess)
 	const {
 		register,
 		handleSubmit,
@@ -33,15 +34,18 @@ export const RecoveryPassword = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<PasswordRecoveryType> = data => {
-		recoveryPassword(data)
-		isSuccess && setIsActive(true)
+	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
+		await recoveryPassword(data)
+	}
+
+	if (isSuccess && !resendLink && !isActive) {
+		setResendLink(true)
+		setIsActive(true)
 	}
 
 	const onClosePopupHandler = () => {
 		setIsActive(false)
 	}
-
 	const onCaptcha = (value: string) => {
 		setValue('recaptcha', value)
 		setError('recaptcha', { message: '' })
@@ -59,17 +63,21 @@ export const RecoveryPassword = () => {
 						</div>
 					</div>
 					<div className={s.btn}>
-						{isSuccess && (
+						{resendLink && (
 							<span className={s.resend}>
 								The link has been sent by email. If you dont receive an email send link again
 							</span>
 						)}
-						<Button title={isSuccess ? 'Send Link Again' : 'Send Link'} callback={() => {}} disabled={!!errors.email} />
+						<Button
+							title={resendLink ? 'Send Link Again' : 'Send Link'}
+							callback={() => {}}
+							disabled={!!errors.email}
+						/>
 					</div>
 					<Link className={s.link} href={''}>
 						Back to Sign In
 					</Link>
-					{!isSuccess && <Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />}
+					{!resendLink && <Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />}
 				</form>
 			</LoginDetailsWrapper>
 			{isActive && (
