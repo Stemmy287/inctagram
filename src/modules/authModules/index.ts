@@ -1,2 +1,3 @@
-export * from '@/modules/authModules/passwordRecoveryModule/components/passwordRecovery/PasswordRecovery'
-export * from './api/common.api'
+export * from '@/modules/authModules/authApi/authApi'
+export * from '@/modules/authModules/passwordRecoveryModule/components/PasswordRecovery/PasswordRecovery'
+export * from '@/modules/authModules/passwordRecoveryModule/components/ResetPassword/ResetPassword'

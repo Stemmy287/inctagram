@@ -70,7 +70,6 @@ export const PasswordRecovery = () => {
 						)}
 						<Button
 							title={resendLink ? 'Send Link Again' : 'Send Link'}
-							callback={() => {}}
 							disabled={!!errors.email}
 						/>
 					</div>
