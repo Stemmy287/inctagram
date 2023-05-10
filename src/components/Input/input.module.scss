@@ -9,46 +9,53 @@
     @include text(14px, 400px, 14px, $dark100);
   }
 
-  .input {
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid $dark300;
-    outline: none;
-    @include text(16px, 400, 24px, $light900);
-    padding: 5px 0;
+  .inputWrapper {
+    width: 100%;
+    position: relative;
+    .input {
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid $dark300;
+      outline: none;
+      width: 100%;
+      @include text(16px, 400, 24px, $light900);
+      padding: 5px 0;
 
-    &:hover {
-      color: $light900;
-      border-bottom: 1px solid $light900;
+      &[data-isShowPassword="false"] {
+        -webkit-text-security: disc;
+      }
+
+      &:hover {
+        color: $light900;
+        border-bottom: 1px solid $light900;
+      }
+
+      &:focus {
+        color: $light100;
+        border-bottom: 1px solid $light100;
+      }
+
+      &:disabled {
+        color: $dark100;
+        border-bottom: 1px solid $dark100;
+      }
     }
 
-    &:focus {
-      color: $light100;
-      border-bottom: 1px solid $light100;
+    .eye {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      cursor: pointer;
     }
 
-    &:disabled {
-      color: $dark100;
-      border-bottom: 1px solid $dark100;
+    .errorInput {
+      border-bottom: 1px solid $danger500;
     }
   }
 
-  .errorInput {
-    border-bottom: 1px solid $danger500;
-  }
 
   .error {
     @include text(14px, 400, 24px, $danger500);
-  }
-
-  .eye * {
-      fill: #fff
-  }
-}
-
-.icon {
-   path {
-    fill: #fff
   }
 }
 
