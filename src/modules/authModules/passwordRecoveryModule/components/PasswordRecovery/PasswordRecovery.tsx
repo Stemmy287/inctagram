@@ -6,11 +6,11 @@ import { Button } from '@/components/Button/Button'
 import Link from 'next/link'
 import { Captcha } from '@/components/Captcha/Captcha'
 import { Popup } from '@/components/Popup/Popup'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/authModules'
+import { Notification } from '@/components/Notification/Notification'
 
 export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
@@ -57,7 +57,13 @@ export const PasswordRecovery = () => {
 				<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 					<h1 className={s.title}>Forgot Password</h1>
 					<div>
-						<Input title='Email' register={register} name={'email'} error={errors.email?.message || ''} disabled={isLoading}/>
+						<Input
+							title='Email'
+							register={register}
+							name={'email'}
+							error={errors.email?.message || ''}
+							disabled={isLoading}
+						/>
 						<div className={s.desc}>
 							<span>Enter your email address and we will send you further instructions</span>
 						</div>
@@ -78,13 +84,12 @@ export const PasswordRecovery = () => {
 			</LoginDetailsWrapper>
 			{isActive && (
 				<Popup onClose={onClosePopupHandler}>
-					<TitlePopup title='Email sent' onClose={onClosePopupHandler} />
-					<div className={s.notification}>
-						<span>We have sent a link to confirm your email to {getValues().email} </span>
-						<div className={s.btn}>
-							<Button title='OK' callback={onClosePopupHandler}/>
-						</div>
-					</div>
+					<Notification
+						title='Email sent'
+						buttonTitle='OK'
+						message={`We have sent a link to confirm your email to ${getValues().email}`}
+						onClose={onClosePopupHandler}
+					/>
 				</Popup>
 			)}
 		</>
