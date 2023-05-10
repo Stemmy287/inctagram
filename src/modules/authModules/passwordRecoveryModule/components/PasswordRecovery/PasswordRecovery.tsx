@@ -16,7 +16,7 @@ export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
 	const [resendLink, setResendLink] = useState(false)
 
-	const [recoveryPassword, { isSuccess, reset }] = useRecoveryPasswordMutation()
+	const [recoveryPassword, { isSuccess, isLoading, reset }] = useRecoveryPasswordMutation()
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -57,7 +57,7 @@ export const PasswordRecovery = () => {
 				<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 					<h1 className={s.title}>Forgot Password</h1>
 					<div>
-						<Input title='Email' register={register} name={'email'} error={errors.email?.message || ''} />
+						<Input title='Email' register={register} name={'email'} error={errors.email?.message || ''} disabled={isLoading}/>
 						<div className={s.desc}>
 							<span>Enter your email address and we will send you further instructions</span>
 						</div>
@@ -68,7 +68,7 @@ export const PasswordRecovery = () => {
 								The link has been sent by email. If you dont receive an email send link again
 							</span>
 						)}
-						<Button title={resendLink ? 'Send Link Again' : 'Send Link'} disabled={!!errors.email} />
+						<Button title={resendLink ? 'Send Link Again' : 'Send Link'} disabled={!!errors.email || isLoading} />
 					</div>
 					<Link className={s.link} href={''}>
 						Back to Sign In
@@ -82,7 +82,7 @@ export const PasswordRecovery = () => {
 					<div className={s.notification}>
 						<span>We have sent a link to confirm your email to {getValues().email} </span>
 						<div className={s.btn}>
-							<Button title='OK' callback={onClosePopupHandler} />
+							<Button title='OK' callback={onClosePopupHandler}/>
 						</div>
 					</div>
 				</Popup>

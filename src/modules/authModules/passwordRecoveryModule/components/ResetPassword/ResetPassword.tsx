@@ -14,7 +14,7 @@ type PropsType = {}
 export const ResetPassword = ({}: PropsType) => {
 	const router = useRouter()
 
-	const [resetPassword] = useResetPasswordMutation()
+	const [resetPassword, {isLoading}] = useResetPasswordMutation()
 
 	const schema = yup.object().shape({
 		newPassword: yup
@@ -53,6 +53,7 @@ export const ResetPassword = ({}: PropsType) => {
 					name='newPassword'
 					title='New password'
 					error={errors.newPassword?.message}
+					disabled={isLoading}
 					password
 				/>
 				<div>
@@ -61,11 +62,15 @@ export const ResetPassword = ({}: PropsType) => {
 						name='passwordConfirmation'
 						title='Password confirmation'
 						error={errors.passwordConfirmation?.message}
+						disabled={isLoading}
 						password
 					/>
 					<span className={s.warn}>Your password must be between 6 and 20 characters</span>
 				</div>
-				<Button title='Create new password' disabled={!!errors.newPassword || !!errors.passwordConfirmation} />
+				<Button
+					title='Create new password'
+					disabled={!!errors.newPassword || !!errors.passwordConfirmation || isLoading}
+				/>
 			</form>
 		</LoginDetailsWrapper>
 	)
