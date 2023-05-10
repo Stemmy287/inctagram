@@ -34,7 +34,7 @@ export const Input = ({ title, disabled, register, name, error, password }: Prop
 					className={error ? `${s.input} ${s.errorInput}` : s.input}
 					disabled={disabled}
 					{...register(name)}
-					data-isShowPassword={password && isShowPassword}
+					data-isshowpassword={password && isShowPassword}
 					autoComplete={password ? 'off' : 'on'}
 				/>
 				{password && eyePassword}

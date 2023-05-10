@@ -20,7 +20,7 @@
       width: 100%;
       @include text(16px, 400, 24px, $light900);
       padding: 5px 0;
-      &[data-isShowPassword="false"] {
+      &[data-isshowpassword="false"] {
         -webkit-text-security: disc;
       }
 
