@@ -5,7 +5,6 @@ import s from './ResetPassword.module.scss'
 import { Input } from '@/components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ResetPasswordType } from '@/modules/authModules'
-import { Simulate } from 'react-dom/test-utils'
 import { Button } from '@/components/Button/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,23 +12,29 @@ import { yupResolver } from '@hookform/resolvers/yup'
 type PropsType = {}
 
 export const ResetPassword = ({}: PropsType) => {
-
 	const router = useRouter()
 
 	const schema = yup.object().shape({
-		password: yup.string().required('field required'),
-		passwordConfirmation: yup.string().oneOf([yup.ref('password')], 'The password must match the new password')
+		newPassword: yup.string()
+			.min(6, 'Password must be at least 6 characters')
+			.max(20, 'Password must be at most 20 characters')
+			.required('field required'),
+		passwordConfirmation: yup.string()
+			.min(6, 'Password must be at least 6 characters')
+			.max(20, 'Password must be at most 20 characters')
+			.oneOf([yup.ref('newPassword')], 'The password must match the new password')
+			.required()
 	})
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<ResetPasswordType>({
+	} = useForm<Omit<ResetPasswordType, 'recoveryCode'>>({
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<ResetPasswordType> = async data => {
+	const onSubmit: SubmitHandler<Omit<ResetPasswordType, 'recoveryCode'>> = async data => {
 		console.log(data)
 	}
 
@@ -37,17 +42,17 @@ export const ResetPassword = ({}: PropsType) => {
 		<LoginDetailsWrapper>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 				<h1 className={s.title}>Create New Password</h1>
-				<Input register={register} name='password' title='password' error={errors.password?.message} />
+				<Input register={register} name='newPassword' title='New password' error={errors.newPassword?.message} />
 				<div>
 					<Input
 						register={register}
 						name='passwordConfirmation'
-						title='passwordConfirmation'
+						title='Password confirmation'
 						error={errors.passwordConfirmation?.message}
 					/>
 					<span className={s.warn}>Your password must be between 6 and 20 characters</span>
 				</div>
-				<Button title='Create new password' disabled={!!errors.password || !!errors.passwordConfirmation}/>
+				<Button title='Create new password' disabled={!!errors.newPassword || !!errors.passwordConfirmation} />
 			</form>
 		</LoginDetailsWrapper>
 	)
