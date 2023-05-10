@@ -4,7 +4,7 @@ import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetai
 import s from './ResetPassword.module.scss'
 import { Input } from '@/components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { ResetPasswordType } from '@/modules/authModules'
+import { ResetPasswordType, useResetPasswordMutation } from '@/modules/authModules'
 import { Button } from '@/components/Button/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,7 +12,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 type PropsType = {}
 
 export const ResetPassword = ({}: PropsType) => {
+
 	const router = useRouter()
+
+	const [resetPassword] = useResetPasswordMutation()
 
 	const schema = yup.object().shape({
 		newPassword: yup.string()
@@ -35,7 +38,9 @@ export const ResetPassword = ({}: PropsType) => {
 	})
 
 	const onSubmit: SubmitHandler<Omit<ResetPasswordType, 'recoveryCode'>> = async data => {
-		console.log(data)
+		if (router.query.code) {
+			resetPassword({newPassword: data.newPassword, recoveryCode: router.query.code.toString()})
+		}
 	}
 
 	return (

@@ -33,6 +33,13 @@ export const authApi = createApi({
 				method: 'POST',
 				body
 			})
+		}),
+		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
+			query: body => ({
+				url: 'auth/new-password',
+				method: 'POST',
+				body
+			})
 		})
 	})
 })
@@ -41,7 +48,8 @@ export const {
 	useMeQuery,
 	useLogoutMutation,
 	useLoginMutation,
-	useRecoveryPasswordMutation
+	useRecoveryPasswordMutation,
+	useResetPasswordMutation
 } = authApi
 
 type LoginParamsType = {
@@ -65,7 +73,7 @@ export type PasswordRecoveryType = {
 }
 
 export type ResetPasswordType = {
-	password: string
+	newPassword: string
 	passwordConfirmation: string
-	code: string
+	recoveryCode: string
 }
