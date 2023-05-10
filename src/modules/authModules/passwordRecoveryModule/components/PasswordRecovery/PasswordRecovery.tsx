@@ -36,6 +36,7 @@ export const PasswordRecovery = () => {
 
 	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
 		await recoveryPassword(data)
+		localStorage.setItem('email', data.email)
 	}
 
 	if (isSuccess && !resendLink && !isActive) {
