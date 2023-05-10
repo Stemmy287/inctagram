@@ -16,7 +16,7 @@ export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
 	const [resendLink, setResendLink] = useState(false)
 
-	const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
+	const [recoveryPassword, { isSuccess, reset }] = useRecoveryPasswordMutation()
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -35,12 +35,13 @@ export const PasswordRecovery = () => {
 	})
 	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
 		await recoveryPassword(data)
-		localStorage.setItem('email', data.email)
 	}
 
-	if (isSuccess && !resendLink && !isActive) {
-		setResendLink(true)
+	if (isSuccess) {
+		localStorage.setItem('email', getValues().email)
+		!resendLink && setResendLink(true)
 		setIsActive(true)
+		reset()
 	}
 	const onClosePopupHandler = () => {
 		setIsActive(false)
@@ -67,10 +68,7 @@ export const PasswordRecovery = () => {
 								The link has been sent by email. If you dont receive an email send link again
 							</span>
 						)}
-						<Button
-							title={resendLink ? 'Send Link Again' : 'Send Link'}
-							disabled={!!errors.email}
-						/>
+						<Button title={resendLink ? 'Send Link Again' : 'Send Link'} disabled={!!errors.email} />
 					</div>
 					<Link className={s.link} href={''}>
 						Back to Sign In
