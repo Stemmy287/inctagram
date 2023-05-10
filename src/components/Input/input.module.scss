@@ -20,9 +20,26 @@
       width: 100%;
       @include text(16px, 400, 24px, $light900);
       padding: 5px 0;
-
       &[data-isShowPassword="false"] {
         -webkit-text-security: disc;
+      }
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: $light900;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+
+      &:-webkit-autofill:hover {
+        -webkit-text-fill-color: $light900;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $light100;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+      &:-webkit-autofill:disabled {
+        -webkit-text-fill-color: $dark100;
+        transition: background-color 5000s ease-in-out 0s;
       }
 
       &:hover {
