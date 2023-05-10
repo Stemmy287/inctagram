@@ -35,6 +35,7 @@ export const Input = ({ title, disabled, register, name, error, password }: Prop
 					disabled={disabled}
 					{...register(name)}
 					data-isShowPassword={password && isShowPassword}
+					autoComplete={password ? 'off' : 'on'}
 				/>
 				{password && eyePassword}
 			</div>
