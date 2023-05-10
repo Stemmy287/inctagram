@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import s from './RecoveryPassword.module.scss'
+import s from './PasswordRecovery.module.scss'
 import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetailsWrapper'
 import { Input } from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/authModules'
 
-export const RecoveryPassword = () => {
+export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
 	const [resendLink, setResendLink] = useState(false)
 
@@ -22,7 +22,7 @@ export const RecoveryPassword = () => {
 		email: yup.string().email('email should be correct').required('field required'),
 		recaptcha: yup.string().required()
 	})
-	console.log(isSuccess)
+
 	const {
 		register,
 		handleSubmit,
