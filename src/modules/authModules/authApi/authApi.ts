@@ -69,7 +69,7 @@ type MeResponseType = {
 
 export type PasswordRecoveryType = {
 	email: string
-	recaptcha: string
+	recaptcha?: string
 }
 
 export type ResetPasswordType = {

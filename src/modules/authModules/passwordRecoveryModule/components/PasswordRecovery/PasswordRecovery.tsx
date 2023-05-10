@@ -33,7 +33,6 @@ export const PasswordRecovery = () => {
 	} = useForm<PasswordRecoveryType>({
 		resolver: yupResolver(schema)
 	})
-
 	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {
 		await recoveryPassword(data)
 		localStorage.setItem('email', data.email)
@@ -43,7 +42,6 @@ export const PasswordRecovery = () => {
 		setResendLink(true)
 		setIsActive(true)
 	}
-
 	const onClosePopupHandler = () => {
 		setIsActive(false)
 	}
