@@ -3,7 +3,6 @@
 
 .notification {
   width: 378px;
-  @include flex-center-column;
   padding: 30px 24px;
   row-gap: 18px;
 
@@ -11,8 +10,17 @@
     @include text(16px, 400, 24px);
   }
 
-  .btn {
-    width: 96px;
-    align-self: end;
+  .logout {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 18px;
+
+    .btn {
+      width: 150px;
+    }
+
   }
+
 }
+
+

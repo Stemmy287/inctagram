@@ -1,12 +1,12 @@
-import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 import s from './Input.module.scss'
-import {FieldValues, UseFormRegister} from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form'
 
 type PropsType =Omit<DefaultInputPropsType, 'type'> & {
   title?: string
   disabled?: boolean
   error?: string
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<any>
   name: string
 }
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,

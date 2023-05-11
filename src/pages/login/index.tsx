@@ -14,13 +14,22 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
-import { useLoginMutation, useMeQuery } from '@/modules/authModules'
-
+import { useLoginMutation } from '@/modules/authModules'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { loggedIn } from '@/modules/authReducer/auth.selectors'
 
 const Login: NextPageWithLayout = () => {
 
-	// const {data = [], isLoading} = useMeQuery({})
-	const [login, { isError }] = useLoginMutation()
+	const [login] = useLoginMutation()
+
+	const isLoggedIn = useAppSelector(loggedIn)
+
+	const router = useRouter()
+
+	if (isLoggedIn) {
+		router.push('/profile')
+	}
 
 	const [passwordShown, setPasswordShown] = useState(false)
 	const togglePasswordVisiblity = () => {
@@ -36,17 +45,12 @@ const Login: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const send = async (data: LoginFormData) => {
-		await login(data).unwrap()
-	}
-
-	const onSubmit: SubmitHandler<LoginFormData> = (data) => {
-		console.log(data)
-		send(data)
+	const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+		const res = await login(data).unwrap()
+		localStorage.setItem('token', res.accessToken)
 	}
 
 	return (
-
 		<LoginDetailsWrapper>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 				<h1 className={s.title}>Sing in</h1>
@@ -76,7 +80,6 @@ const Login: NextPageWithLayout = () => {
 				<Link className={s.link} href={'/registration'}>Sing up</Link>
 			</div>
 		</LoginDetailsWrapper>
-
 	)
 }
 
