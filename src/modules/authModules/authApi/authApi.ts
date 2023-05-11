@@ -41,7 +41,17 @@ export const authApi = createApi({
 				method: 'POST',
 				body
 			})
-		})
+		}),
+
+		// registration
+		registration: builder.mutation<string, any>({
+			query: (body: RegisterParamsType) => ({
+				url: 'auth/registration',
+				method: 'POST',
+				body
+			})
+		}),
+
 	})
 })
 
@@ -50,10 +60,17 @@ export const {
 	useLogoutMutation,
 	useLoginMutation,
 	useRecoveryPasswordMutation,
-	useResetPasswordMutation
+	useResetPasswordMutation,
+	useRegistrationMutation
 } = authApi
 
 type LoginParamsType = {
+	email: string
+	password: string
+}
+
+export type RegisterParamsType = {
+	userName: string
 	email: string
 	password: string
 }

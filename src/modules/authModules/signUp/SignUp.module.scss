@@ -1,0 +1,42 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  @include flex-center-column;
+  width: 330px;
+  row-gap: 35px;
+
+  .title {
+    @include text(20px, 700, 36px)
+  }
+  .authIcons {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+    .icon {
+      cursor: pointer;
+    }
+  }
+  .btn {
+    width: 100%;
+    .resend {
+      display: inline-block;
+      @include text(16px, 400, 24px);
+      margin-bottom: 20px;
+    }
+  }
+
+  .desc {
+
+    margin-top: 7px;
+
+    > span {
+      @include text(14px, 400, 24px, $light900);
+    }
+  }
+
+  .link {
+    @include text(16px, 600, 24px, $accent500);
+  }
+
+}

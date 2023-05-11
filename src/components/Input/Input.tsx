@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import s from './Input.module.scss'
+import s from './input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
 import eyeOff from '../../../public/icons/eye-off-outline.svg'
 import eye from '../../../public/icons/eye-outline.svg'
