@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
+import React, { useState } from 'react'
 import s from './Input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
 import eyeOff from '../../../public/icons/eye-off-outline.svg'
