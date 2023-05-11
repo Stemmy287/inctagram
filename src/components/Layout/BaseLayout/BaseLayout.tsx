@@ -4,6 +4,7 @@ import { Layout } from '@/components/Layout/Layout'
 import { useMeQuery } from '@/modules/authModules'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { selectIsInitialized } from '@/modules/appModules/appSelectors'
+import { Preloader } from '@/components/Preloader/Preloader'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	const {} = useMeQuery()
@@ -15,7 +16,7 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 			{
 				isInitialized
 					? children
-					: <h2>Initialized...</h2>
+					: <Preloader/>
 			}
 		</Layout>
 	)
