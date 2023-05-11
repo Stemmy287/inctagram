@@ -14,9 +14,8 @@ import googleIcon from '@/../public/icons/google-icon.svg'
 import githubIcon from '@/../public/icons/github-icon.svg'
 import Image from 'next/image'
 import {
-  RegisterParamsType, ResetPasswordType,
+  RegisterParamsType,
   useRegistrationMutation,
-  useResetPasswordMutation
 } from "@/modules/authModules";
 
 
