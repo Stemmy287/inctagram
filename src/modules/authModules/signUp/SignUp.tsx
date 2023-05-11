@@ -48,16 +48,12 @@ export const SignUp: NextPageWithLayout = () => {
   })
   const onSubmit: SubmitHandler<RegisterParamsType> = async data => {
     await registration(data)
+    setIsActive(true)
 
   }
 
   const onClosePopupHandler = () => {
     setIsActive(false)
-  }
-
-  if(isSuccess) {
-    setIsActive(true)
-    reset()
   }
 
   return (
