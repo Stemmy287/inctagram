@@ -1,7 +1,6 @@
 @import "@/common/styles/mixins.scss";
 @import "@/common/styles/variables.scss";
 
-
 .container {
   @include flex-center-column;
   row-gap: 30px;
@@ -14,7 +13,6 @@
 
     > h1 {
       @include text(20px, 700, 36px);
-
     }
 
     > span {
