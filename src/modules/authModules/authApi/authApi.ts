@@ -73,14 +73,32 @@ export const authApi = createApi({
 				url: 'auth/password-recovery',
 				method: 'POST',
 				body
-			})
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
+			}
 		}),
 		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
 			query: body => ({
 				url: 'auth/new-password',
 				method: 'POST',
 				body
-			})
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
+			}
 		}),
 
 		// registration
@@ -89,7 +107,16 @@ export const authApi = createApi({
 				url: 'auth/registration',
 				method: 'POST',
 				body
-			})
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
+			}
 		}),
 
 	})

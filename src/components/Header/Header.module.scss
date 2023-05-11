@@ -14,4 +14,9 @@
     @include text(26px, 600);
     padding: 60px;
   }
+
+  .loading {
+    position: absolute;
+    bottom: 0;
+  }
 }
