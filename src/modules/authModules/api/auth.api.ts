@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { LoginFormData } from '@/pages/login'
+import { LoginFormData } from '../../../pages/auth/login'
 import { appActions } from '@/modules/app/app.reducer'
 import { authActions } from '@/modules/authReducer/authReducer'
 
@@ -90,3 +90,7 @@ export type PasswordRecoveryType = {
 	recaptcha: string
 }
 
+export type LoginFormData = {
+	email: string
+	password: string
+}

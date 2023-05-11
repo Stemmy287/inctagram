@@ -2,7 +2,6 @@ import googleLogo from '/public/icons/googleSvg.svg'
 import githubLogo from '/public/icons/githubSvg.svg'
 import eyeOn from '/public/icons/eye.svg'
 import s from '@/styles/Login.module.scss'
-import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/Button/Button'
@@ -18,6 +17,7 @@ import { useLoginMutation } from '@/modules/authModules'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authReducer/auth.selectors'
+import { LoginFormData } from '@/modules/authModules/api/auth.api'
 
 const Login: NextPageWithLayout = () => {
 
@@ -70,7 +70,7 @@ const Login: NextPageWithLayout = () => {
 					<Image src={eyeOn} alt={'visible password'} onClick={togglePasswordVisiblity} />
 				</div>
 				<div className={s.forgotLinkBlock}>
-					<Link className={s.forgotLink} href={'/forgotPassword'}> Forgot password</Link>
+					<Link className={s.forgotLink} href={'/auth/password-recovery'}> Forgot password</Link>
 				</div>
 				<Button title='Sing in' callback={() => {
 				}} />
@@ -81,13 +81,4 @@ const Login: NextPageWithLayout = () => {
 			</div>
 		</LoginDetailsWrapper>
 	)
-}
-
-Login.getLayout = getLayout
-export default Login
-
-//types
-export type LoginFormData = {
-	email: string
-	password: string
 }
