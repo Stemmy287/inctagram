@@ -2,7 +2,7 @@ import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { useRouter } from 'next/router'
-import { loggedIn } from '@/modules/authReducer/auth.selectors'
+import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 
 const Home: NextPageWithLayout = () => {
 
@@ -13,7 +13,7 @@ const Home: NextPageWithLayout = () => {
 	if (isLoggedIn) {
 		router.push('/profile')
 	} else {
-		router.push('/login')
+		router.push('/auth/login')
 	}
 	return (
 		<>

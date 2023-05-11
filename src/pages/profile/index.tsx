@@ -3,7 +3,7 @@ import { LogoutModal } from '@/modules/authModules/loginLogoutModule/components/
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { loggedIn } from '@/modules/authReducer/auth.selectors'
+import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 
 const Profile = () => {
 
@@ -12,7 +12,7 @@ const Profile = () => {
 	const router = useRouter()
 
 	if (!isLoggedIn) {
-		router.push('/login')
+		router.push('auth/login')
 	}
 
 	const [isActive, setIsActive] = useState(true)
@@ -20,11 +20,8 @@ const Profile = () => {
 	return (
 		<div>
 			Profile
-			{
-				isActive && <LogoutModal setIsActive={setIsActive} name={'paha'} email={'paasd@ma.ru'} />
-			}
+			{isActive && <LogoutModal setIsActive={setIsActive}/>}
 		</div>
-
 	)
 }
 

@@ -6,7 +6,7 @@ import s from './logoutModal.module.scss'
 import { useLogoutMutation } from '@/modules/authModules'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { userInfo } from '@/modules/authReducer/auth.selectors'
+import { userInfo } from '@/modules/authModules/authReducer/authSelectors'
 
 type PropsType = {
 	setIsActive: (isActive: boolean) => void
@@ -23,7 +23,7 @@ export const LogoutModal: FC<PropsType> = ({setIsActive}) => {
 	}
 
 	if (isSuccess) {
-		router.push('/login')
+		router.push('auth/login')
 	}
 
 	return (

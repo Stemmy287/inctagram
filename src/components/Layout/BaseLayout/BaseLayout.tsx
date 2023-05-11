@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { Layout } from '@/components/Layout/Layout'
 import { useMeQuery } from '@/modules/authModules'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { selectIsInitialized } from '@/modules/app/app.selectors'
+import { selectIsInitialized } from '@/modules/appModules/appSelectors'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	const {} = useMeQuery()

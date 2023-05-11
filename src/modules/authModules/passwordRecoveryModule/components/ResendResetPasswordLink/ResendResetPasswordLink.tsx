@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { NextPageWithLayout } from '@/pages/_app'
-import { useRecoveryPasswordMutation } from '@/modules/authModules'
 import { NotificationPage } from '@/components/NotificationPage/NotificationPage'
 import timeImage from '../../../../../../public/images/rafiki.png'
 import { Button } from '@/components/Button/Button'
 import { Popup } from '@/components/Popup/Popup'
 import { Notification } from '@/components/Notification/Notification'
+import { useRecoveryPasswordMutation } from '@/modules/authModules/authApi/authApi'
 
 export const ResendResetPasswordLink: NextPageWithLayout = () => {
 	const [recoveryPassword, { isLoading, isSuccess , reset}] = useRecoveryPasswordMutation()

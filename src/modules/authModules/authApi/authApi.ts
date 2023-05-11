@@ -1,32 +1,72 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { appActions } from '@/modules/appModules/appReducer'
+import { authActions } from '@/modules/authModules/authReducer/authReducer'
 
-export const API_URL = 'https://inctagram-api-git-main-shuliakleonid.vercel.app/api/'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
-	tagTypes: ['authApi'],
+	tagTypes: ['login', 'logout', 'me'],
 	baseQuery: fetchBaseQuery({
-		baseUrl: API_URL,
-		credentials: 'include'
+		credentials: 'include',
+		baseUrl: API_URL, prepareHeaders: (headers) => {
+			const token = localStorage.getItem('token')
+			if (token) {
+				headers.set('Authorization', `Bearer ${token}`)
+			}
+			return headers
+		}
 	}),
-	endpoints: builder => ({
-		login: builder.mutation<LoginUpdateResponseType, any>({
-			query: (body: LoginParamsType) => ({
+	endpoints: (builder) => ({
+		login: builder.mutation<LoginResponseType, LoginFormData>({
+			query: (body) => ({
 				url: 'auth/login',
 				method: 'POST',
 				body
-			})
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
+			}
 		}),
-		logout: builder.mutation({
+		logout: builder.mutation<void, void>({
 			query: () => ({
 				url: 'auth/logout',
 				method: 'POST'
-			})
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
+					localStorage.removeItem('token')
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
+			}
 		}),
-		me: builder.query<MeResponseType, any>({
-			query: () => ({
-				url: 'auth/me'
-			})
+		me: builder.query<UserType, void>({
+			query: () => 'auth/me',
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					const res = await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+					dispatch(authActions.setUser({ user: res.data }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				} finally {
+					dispatch(appActions.setAppInitialized({ isInitialized: true }))
+				}
+			}
 		}),
 		recoveryPassword: builder.mutation<any, PasswordRecoveryType>({
 			query: body => ({
@@ -45,27 +85,28 @@ export const authApi = createApi({
 	})
 })
 
+
 export const {
 	useMeQuery,
 	useLogoutMutation,
-	useLoginMutation,
+	useLoginMutation ,
 	useRecoveryPasswordMutation,
 	useResetPasswordMutation
 } = authApi
 
-type LoginParamsType = {
-	email: string
-	password: string
-}
-
-type LoginUpdateResponseType = {
+type LoginResponseType = {
 	accessToken: string
 }
 
-type MeResponseType = {
+export type UserType = {
 	userId: number
 	userName: string
 	email: string
+}
+
+export type LoginFormData = {
+	email: string
+	password: string
 }
 
 export type PasswordRecoveryType = {
@@ -78,3 +119,4 @@ export type ResetPasswordType = {
 	passwordConfirmation: string
 	recoveryCode: string
 }
+

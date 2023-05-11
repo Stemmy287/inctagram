@@ -4,10 +4,10 @@ import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetai
 import s from './ResetPassword.module.scss'
 import { Input } from '@/components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { ResetPasswordType, useResetPasswordMutation } from '@/modules/authModules'
 import { Button } from '@/components/Button/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { ResetPasswordType, useResetPasswordMutation } from '@/modules/authModules/authApi/authApi'
 
 type PropsType = {}
 

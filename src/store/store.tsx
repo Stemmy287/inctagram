@@ -1,8 +1,8 @@
 import { ThunkDispatch, configureStore } from "@reduxjs/toolkit";
 import { AnyAction, combineReducers } from "redux";
-import { authApi } from '@/modules/authModules/api/auth.api'
-import { appReducer } from '@/modules/app/app.reducer'
-import { authReducer } from '@/modules/authReducer/authReducer'
+import { appReducer } from '@/modules/appModules/appReducer'
+import { authReducer } from '@/modules/authModules/authReducer/authReducer'
+import { authApi } from '@/modules/authModules'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,

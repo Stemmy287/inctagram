@@ -1,5 +1,5 @@
-@import "./src/common/styles/mixins.scss";
-@import "./src/common/styles/variables.scss";
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
 
 .container {
   @include flex-column;
