@@ -13,6 +13,8 @@ type PropsType = {
 	name: string
 	password?: boolean
 }
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement>
 
 export const Input = ({ title, disabled, register, name, error, password }: PropsType) => {
 
