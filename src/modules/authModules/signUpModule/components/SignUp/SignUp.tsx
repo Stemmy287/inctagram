@@ -10,15 +10,13 @@ import {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import googleIcon from '@/../public/icons/google-icon.svg'
-import githubIcon from '@/../public/icons/github-icon.svg'
+import googleIcon from 'public/icons/google-icon.svg'
+import githubIcon from 'public/icons/github-icon.svg'
 import Image from 'next/image'
 import {
   RegisterParamsType,
   useRegistrationMutation,
 } from "@/modules/authModules";
-
-
 export const SignUp: NextPageWithLayout = () => {
 
   const [registration,  { isSuccess, isLoading, reset }] = useRegistrationMutation()

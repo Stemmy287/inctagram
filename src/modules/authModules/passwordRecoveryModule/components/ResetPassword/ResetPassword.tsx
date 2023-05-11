@@ -14,7 +14,7 @@ type PropsType = {}
 export const ResetPassword = ({}: PropsType) => {
 	const router = useRouter()
 
-	const [resetPassword, {isLoading}] = useResetPasswordMutation()
+	const [resetPassword, {isLoading, isSuccess}] = useResetPasswordMutation()
 
 	const schema = yup.object().shape({
 		newPassword: yup
@@ -37,11 +37,14 @@ export const ResetPassword = ({}: PropsType) => {
 	} = useForm<Omit<ResetPasswordType, 'recoveryCode'>>({
 		resolver: yupResolver(schema)
 	})
-
 	const onSubmit: SubmitHandler<Omit<ResetPasswordType, 'recoveryCode'>> = async data => {
 		if (router.query.code) {
 			resetPassword({ newPassword: data.newPassword, recoveryCode: router.query.code.toString() })
 		}
+	}
+
+	if(isSuccess) {
+		router.push('login')
 	}
 
 	return (
