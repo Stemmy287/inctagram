@@ -7,13 +7,14 @@ import { loggedIn } from '@/modules/authReducer/auth.selectors'
 
 const Home: NextPageWithLayout = () => {
 
-	const isInitialized = useAppSelector(selectIsInitialized)
 	const isLoggedIn = useAppSelector(loggedIn)
 
 	const router = useRouter()
 
-	if (isLoggedIn ?? isInitialized) {
+	if (isLoggedIn) {
 		router.push('/profile')
+	} else {
+		router.push('/login')
 	}
 	return (
 		<>
