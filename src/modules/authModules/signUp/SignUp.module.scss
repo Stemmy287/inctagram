@@ -17,6 +17,12 @@
       cursor: pointer;
     }
   }
+
+  .inputs {
+    @include flex-column;
+    row-gap: 35px;
+  }
+
   .btn {
     width: 100%;
     .resend {

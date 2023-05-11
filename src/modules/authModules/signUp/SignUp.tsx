@@ -46,17 +46,18 @@ export const SignUp: NextPageWithLayout = () => {
   } = useForm<RegisterParamsType>({
     resolver: yupResolver(schema)
   })
-
-
   const onSubmit: SubmitHandler<RegisterParamsType> = async data => {
     await registration(data)
-    await alert(data)
-    await console.log(data)
-    setIsActive(true)
+
   }
 
   const onClosePopupHandler = () => {
     setIsActive(false)
+  }
+
+  if(isSuccess) {
+    setIsActive(true)
+    reset()
   }
 
   return (
@@ -70,12 +71,14 @@ export const SignUp: NextPageWithLayout = () => {
           </div>
 
           <div>
-            <Input title="Username" register={register} name={'userName'} error={errors.userName?.message || ''}/>
-            <Input title="Email" register={register} name={'email'} error={errors.email?.message || ''}/>
-            <Input password title="Password" register={register} name={'password'}
-                           error={errors.password?.message || ''} />
-            <Input password title="Password confirmation" register={register} name={'passwordConfirm'}
-                           error={errors.password?.message || ''} />
+            <div className={s.inputs}>
+              <Input title="Username" register={register} name={'userName'} error={errors.userName?.message || ''}/>
+              <Input title="Email" register={register} name={'email'} error={errors.email?.message || ''}/>
+              <Input password title="Password" register={register} name={'password'}
+                     error={errors.password?.message || ''} />
+              <Input password title="Password confirmation" register={register} name={'passwordConfirm'}
+                     error={errors.password?.message || ''} />
+            </div>
             <div className={s.desc}>
               <span>Enter your email address and we will send you further instructions</span>
             </div>
@@ -83,7 +86,7 @@ export const SignUp: NextPageWithLayout = () => {
           <Button title="Sign Up"
                   disabled={!!errors.password || isLoading}/>
           <h3>Do you have an account?</h3>
-          <Link className={s.link} href={'/signIn'}>Sign In</Link>
+          <Link className={s.link} href={'login'}>Sign In</Link>
         </form>
       </LoginDetailsWrapper>
       {isActive &&

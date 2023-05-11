@@ -80,7 +80,7 @@ export const Login: NextPageWithLayout = () => {
 				<div>
 					<span>Don’t have an account?</span>
 				</div>
-				<Link className={s.link} href={'/registration'}>
+				<Link className={s.link} href={'sign-up'}>
 					Sing up
 				</Link>
 			</div>
