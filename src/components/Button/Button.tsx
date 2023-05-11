@@ -3,7 +3,7 @@ import s from './Button.module.scss'
 
 type PropsType = {
   title: string
-  callback: () => void
+  callback?: () => void
   disabled?: boolean
 }
 

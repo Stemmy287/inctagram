@@ -12,12 +12,10 @@ export type NextPageWithLayout<P = {}> = NextPage<P> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
-
 const App = ({Component, pageProps}: AppPropsWithLayout) => {
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
 }
-
 export default App

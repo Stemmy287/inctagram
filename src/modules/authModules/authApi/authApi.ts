@@ -6,7 +6,8 @@ export const authApi = createApi({
 	reducerPath: 'authApi',
 	tagTypes: ['authApi'],
 	baseQuery: fetchBaseQuery({
-		baseUrl: API_URL
+		baseUrl: API_URL,
+		credentials: 'include'
 	}),
 	endpoints: builder => ({
 		login: builder.mutation<LoginUpdateResponseType, any>({
@@ -33,6 +34,13 @@ export const authApi = createApi({
 				method: 'POST',
 				body
 			})
+		}),
+		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
+			query: body => ({
+				url: 'auth/new-password',
+				method: 'POST',
+				body
+			})
 		})
 	})
 })
@@ -41,7 +49,8 @@ export const {
 	useMeQuery,
 	useLogoutMutation,
 	useLoginMutation,
-	useRecoveryPasswordMutation
+	useRecoveryPasswordMutation,
+	useResetPasswordMutation
 } = authApi
 
 type LoginParamsType = {
@@ -61,5 +70,11 @@ type MeResponseType = {
 
 export type PasswordRecoveryType = {
 	email: string
-	recaptcha: string
+	recaptcha?: string
+}
+
+export type ResetPasswordType = {
+	newPassword: string
+	passwordConfirmation: string
+	recoveryCode: string
 }
