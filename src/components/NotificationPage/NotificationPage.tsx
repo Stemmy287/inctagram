@@ -17,7 +17,7 @@ export const NotificationPage:NextPage<PropsWithChildren & PropsType> = ({title,
 			<span>{message}</span>
 			{children}
 		</div>
-		<Image src={image} alt={'notification img'}/>
+		<Image src={image} alt={'notification img'} priority={true}/>
   </div>
  );
 };
