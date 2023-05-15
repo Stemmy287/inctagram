@@ -1,0 +1,12 @@
+
+.main {
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .contentBox {
+    width: 100%;
+    margin: 100px 24px 36px;
+  }
+}
