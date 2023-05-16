@@ -1,29 +1,28 @@
-import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
-import { LogoutModal } from '@/modules/authModules/loginLogoutModule/components/logoutModal/logoutModal'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
+import {useEffect} from 'react'
+import {useRouter} from 'next/router'
+import {useAppSelector} from '@/assets/hooks/useAppSelector'
+import {loggedIn} from '@/modules/authModules/authReducer/authSelectors'
+import {getLayoutM} from '@/components/Layout/MainLayout/MainLayout';
 
 const Profile = () => {
 
-	const isLoggedIn = useAppSelector(loggedIn)
+    const isLoggedIn = useAppSelector(loggedIn)
 
-	const router = useRouter()
+    const router = useRouter()
 
-	if (!isLoggedIn) {
-		router.push('auth/login')
-	}
+    useEffect(() => {
+        if (!isLoggedIn) {
+            router.push('auth/login')
+        }
+    }, [isLoggedIn])
 
-	const [isActive, setIsActive] = useState(true)
 
-	return (
-		<div>
-			Profile
-			{isActive && <LogoutModal setIsActive={setIsActive}/>}
-		</div>
-	)
+    return (
+        <div>
+            Profile
+        </div>
+    )
 }
 
-Profile.getLayout = getLayout
+Profile.getLayout = getLayoutM
 export default Profile

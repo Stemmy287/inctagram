@@ -1,0 +1,46 @@
+@import "src/common/styles/mixins";
+@import "src/common/styles/variables";
+
+.navWrapper {
+  margin-top:60px;
+  width: 220px;
+  height: 100vh;
+  @include flex-center-horiz;
+  align-items: flex-start;
+  background-color: $dark700;
+  border: 1px solid $dark300;
+
+
+  .navbar {
+    padding-top: 140px;
+
+    .link {
+      cursor: pointer;
+      display: flex;
+      margin: 24px 0;
+      &:hover{
+        color:$accent700
+      }
+      .icon  {
+        margin-right: 15px;
+        &:hover{
+          fill:$accent700;
+        }
+      }
+
+      .title {
+        @include text(14px, 500, 24px, $light100);
+        font-family: 'Inter', sans-serif;
+        &:focus{
+          color:$accent700;
+        }
+      }
+    }
+.outButton{
+  position: absolute;
+  bottom: 36px;
+}
+
+
+  }
+}
