@@ -1,21 +1,18 @@
 import { UserType } from '@/modules/authModules'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
-	isLoggedIn: false,
-	user: {} as UserType
-}
-
-export type AuthInitialStateType = typeof initialState;
 
 const slice = createSlice({
 	name: 'auth',
-	initialState,
+	initialState: {
+		user: {} as UserType,
+		isLoggedIn: false
+	},
 	reducers: {
-		setUser: (state, action: PayloadAction<{user: UserType}>) => {
+		setUser: (state, action: PayloadAction<{ user: UserType }>) => {
 			state.user = action.payload.user
 		},
-		setIsLoggedIn: (state, action: PayloadAction<{isLoggedIn: boolean}>) => {
+		setIsLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
 			state.isLoggedIn = action.payload.isLoggedIn
 		}
 	}

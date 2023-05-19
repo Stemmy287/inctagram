@@ -1,5 +1,5 @@
 import { Popup } from '@/components/Popup/Popup'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import { Button } from '@/components/Button/Button'
 import s from './logoutModal.module.scss'
@@ -12,7 +12,7 @@ type PropsType = {
 	setIsActive: (isActive: boolean) => void
 }
 
-export const LogoutModal: FC<PropsType> = ({setIsActive}) => {
+export const LogoutModal: FC<PropsType> = ({ setIsActive }) => {
 
 	const [logout, { isSuccess }] = useLogoutMutation()
 	const user = useAppSelector(userInfo)
@@ -22,9 +22,12 @@ export const LogoutModal: FC<PropsType> = ({setIsActive}) => {
 		setIsActive(false)
 	}
 
-	if (isSuccess) {
-		router.push('auth/login')
-	}
+	useEffect(() => {
+		if (isSuccess) {
+			router.push('auth/login')
+		}
+	}, [isSuccess])
+
 
 	return (
 		<Popup onClose={onClosePopupHandler}>

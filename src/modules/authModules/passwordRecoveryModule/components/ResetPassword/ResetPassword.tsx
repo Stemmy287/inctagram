@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetailsWrapper'
 import s from './ResetPassword.module.scss'
@@ -43,9 +43,12 @@ export const ResetPassword = ({}: PropsType) => {
 		}
 	}
 
-	if(isSuccess) {
-		router.push('login')
-	}
+	useEffect(() => {
+		if(isSuccess) {
+			router.push('login')
+		}
+	}, [isSuccess])
+
 
 	return (
 		<LoginDetailsWrapper>

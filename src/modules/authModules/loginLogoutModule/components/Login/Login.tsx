@@ -15,6 +15,8 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { LoginFormData } from '@/modules/authModules/authApi/authApi'
+import { useEffect } from 'react'
+import GoogleSignIn from '@/modules/authModules/loginLogoutModule/components/LoginWithGoogle/LoginWithGoogle'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -23,9 +25,12 @@ export const Login: NextPageWithLayout = () => {
 
 	const router = useRouter()
 
-	if (isLoggedIn) {
-		router.push('/profile')
-	}
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.push('/profile')
+		}
+	}, [isLoggedIn])
+
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -50,8 +55,9 @@ export const Login: NextPageWithLayout = () => {
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 				<h1 className={s.title}>Sing in</h1>
 				<div className={s.logo}>
-					<Image src={googleLogo} alt={'sing in using google account'} onClick={() => {}} />
-					<Image src={githubLogo} alt={'sing in using github account'} onClick={() => {}} />
+					<GoogleSignIn/>
+					<Image src={githubLogo} alt={'sing in using github account'} onClick={() => {
+					}} />
 				</div>
 				<Input
 					title='Email'
@@ -74,7 +80,7 @@ export const Login: NextPageWithLayout = () => {
 						Forgot password
 					</Link>
 				</div>
-				<Button title='Sing in' disabled={isLoading}/>
+				<Button title='Sing in' disabled={isLoading} />
 			</form>
 			<div className={s.desc}>
 				<div>
