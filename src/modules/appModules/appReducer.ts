@@ -37,7 +37,13 @@ const slice = createSlice({
 				(action) => {
 					return action.type.endsWith('/rejected')
 				},
-				(state) => {
+				(state, action) => {
+					const { payload, error } = action
+					if (payload) {
+						state.error = payload.data.messages.length ? payload.data.messages[0].message : 'Some error occurred'
+					} else {
+						state.error = error.message ? error.message : 'Some error occurred'
+					}
 					state.status = 'failed'
 				}
 			)
