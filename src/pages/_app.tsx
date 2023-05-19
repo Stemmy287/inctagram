@@ -14,7 +14,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-	console.log('check')
+
 	const getLayout = Component.getLayout ?? ((page) => page)
 
 	return (

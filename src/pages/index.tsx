@@ -10,7 +10,6 @@ const Home: NextPageWithLayout = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
 
 	const router = useRouter()
-
 	useEffect(() => {
 		if (isLoggedIn) {
 			router.push('/profile')
