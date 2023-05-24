@@ -1,19 +1,23 @@
-import { ThunkDispatch, configureStore } from "@reduxjs/toolkit";
-import { AnyAction, combineReducers } from "redux";
+import { configureStore, ThunkDispatch } from '@reduxjs/toolkit'
+import { AnyAction, combineReducers } from 'redux'
 import { appReducer } from '@/modules/appModules/appReducer'
 import { authReducer } from '@/modules/authModules/authReducer/authReducer'
 import { authApi } from '@/modules/authModules'
+import { createProfileApi } from '@/modules/profileModules/createProfile/createProfileApi'
+import { uploadImageApi } from '@/modules/profileModules/uploadImage/uploadImageApi'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
+	[createProfileApi.reducerPath]:createProfileApi.reducer,
+	[uploadImageApi.reducerPath]:uploadImageApi.reducer,
 	app: appReducer,
-	authReducer: authReducer
+	authReducer: authReducer,
 })
 
 export const store = configureStore({
 	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(authApi.middleware),
+		getDefaultMiddleware().concat(authApi.middleware).concat(createProfileApi.middleware).concat(uploadImageApi.middleware),
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

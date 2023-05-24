@@ -15,6 +15,7 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { LoginFormData } from '@/modules/authModules/authApi/authApi'
+import { useEffect } from 'react'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -23,9 +24,11 @@ export const Login: NextPageWithLayout = () => {
 
 	const router = useRouter()
 
-	if (isLoggedIn) {
-		router.push('/profile')
-	}
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.push('/profile')
+		}
+	}, [isLoggedIn, router])
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
