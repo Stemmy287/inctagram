@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@/modules/authModules'
 
 export const uploadImageApi = createApi({
-	reducerPath: "uploadImageApi",
+	reducerPath: 'uploadImageApi',
 	baseQuery: fetchBaseQuery({
 		credentials: 'include',
 		baseUrl: API_URL, prepareHeaders: (headers) => {
@@ -15,23 +15,19 @@ export const uploadImageApi = createApi({
 	}),
 	endpoints: (build) => {
 		return {
-			uploadImage: build.mutation<any, any>({
+			uploadImage: build.mutation<any, File>({
 				query: (file) => {
-					const formData = new FormData();
-					formData.append('file', file);
-					// formData.append('Content-Type', 'multipart/form-data')
-					console.log(formData)
+					const formData = new FormData()
+					formData.append('file', file)
+
 					return {
-						method: "POST",
-						url: "users/profile/avatar",
-						body: formData,
-						// headers: {
-						// 	'Content-Type': 'multipart/form-data',
-						// },
-					};
-				},
-			}),
-		};
-	},
-});
-export const {useUploadImageMutation} = uploadImageApi
+						method: 'POST',
+						url: 'users/profile/avatar',
+						body: formData
+					}
+				}
+			})
+		}
+	}
+})
+export const { useUploadImageMutation } = uploadImageApi
