@@ -2,7 +2,7 @@ import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
 import s from '@/components/Input/Input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
 import eyeOff from '/public/icons/eye-off.svg'
-import eye from '../../../public/icons/eye-outline.svg'
+import eye from 'public/icons/eye-outline.svg'
 import Image from 'next/image'
 
 type PropsType = {
