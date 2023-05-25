@@ -24,7 +24,7 @@ const Profile = () => {
 
     return (
         <div>
-            {/*<GeneralInformation/>*/}
+            <GeneralInformation/>
             {/*{JSON.stringify(data)}*/}
             <UploadImage />
         </div>

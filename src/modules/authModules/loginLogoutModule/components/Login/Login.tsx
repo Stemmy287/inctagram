@@ -77,7 +77,7 @@ export const Login: NextPageWithLayout = () => {
 						Forgot password
 					</Link>
 				</div>
-				<Button title='Sing in' disabled={isLoading}/>
+				<Button title='Sign in' disabled={isLoading}/>
 			</form>
 			<div className={s.desc}>
 				<div>

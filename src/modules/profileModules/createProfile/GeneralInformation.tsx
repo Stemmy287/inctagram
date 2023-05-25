@@ -18,7 +18,9 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		username: yup.string().required('field required'),
 		firstname: yup.string().required('enter firstname'),
 		lastname: yup.string().required('enter lastname'),
-		city: yup.string().required('enter city')
+		city: yup.string().required('enter city'),
+		aboutMe:yup.string().required('add about me'),
+		dateOfBirth:yup.string().required('add date of birth')
 	})
 	const {
 		control,
@@ -68,7 +70,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		name={'city'}
 	/>
 
-		{/*<textarea {...register()} />*/}
+		<textarea {...register("aboutMe")} rows={10} />
 <Button title='Submit'/>
 	</form>
 
