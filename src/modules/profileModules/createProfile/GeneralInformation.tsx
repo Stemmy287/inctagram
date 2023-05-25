@@ -51,7 +51,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					register={register}
 					name={'lastname'}
 				/>
-				<label>Date of birthday</label>
+				<label>Date of birth</label>
 				<Controller
 					name='dateOfBirth'
 					control={control}
@@ -71,8 +71,8 @@ export const GeneralInformation: NextPageWithLayout = () => {
 				/>
 
 				<textarea
-					{...register('aboutMe')} rows={10} />
-				<Button title='Submit' />
+					{...register('aboutMe')} rows={5} />
+				<Button title='Save Changes' />
 			</form>
 
 		</div>

@@ -1,0 +1,8 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+
+.container{
+  @include flex-center-vert;
+  gap: 35px;
+  width: 726px;
+}
