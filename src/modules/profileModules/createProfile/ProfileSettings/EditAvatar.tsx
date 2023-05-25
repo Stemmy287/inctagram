@@ -21,7 +21,7 @@ export const EditAvatar = () => {
 	// 	}
 	// },[newAva])
 	return (
-		<div>
+		<div style={{width:300}}>
 			<Image
 				src={ava}
 				alt="ava"
