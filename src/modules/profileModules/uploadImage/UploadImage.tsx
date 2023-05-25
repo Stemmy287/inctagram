@@ -15,7 +15,7 @@ export const UploadImage = () => {
 	const refClick = () => inputRef.current?.click()
 	return (
 		<div>
-			<Image src='' alt='avatar'/>
+			{/*<Image src='' alt='avatar'/>*/}
 			<input
 				ref={inputRef}
 				accept="image/*"

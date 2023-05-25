@@ -84,7 +84,7 @@ export const Login: NextPageWithLayout = () => {
 					<span>Don’t have an account?</span>
 				</div>
 				<Link className={s.link} href={'sign-up'}>
-					Sing up
+					Sign up
 				</Link>
 			</div>
 		</LoginDetailsWrapper>
