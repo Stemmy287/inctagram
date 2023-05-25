@@ -6,8 +6,8 @@ const initialState = {
 	isInitialized: false
 }
 
-export type AppInitialStateType = typeof initialState;
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
+export type AppInitialStateType = typeof initialState
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const slice = createSlice({
 	name: 'app',
@@ -23,21 +23,26 @@ const slice = createSlice({
 			state.isInitialized = action.payload.isInitialized
 		}
 	},
-	extraReducers: (builder) => {
+	extraReducers: builder => {
 		builder
 			.addMatcher(
-				(action) => {
+				action => {
 					return action.type.endsWith('/pending')
 				},
-				(state) => {
+				state => {
 					state.status = 'loading'
 				}
 			)
 			.addMatcher(
-				(action) => {
+				action => {
 					return action.type.endsWith('/rejected')
 				},
 				(state, action) => {
+					if (action.meta.arg.endpointName === 'me') {
+						state.status = 'failed'
+						return state
+					}
+
 					const { payload, error } = action
 					if (payload) {
 						state.error = payload.data.messages.length ? payload.data.messages[0].message : 'Some error occurred'
@@ -48,10 +53,10 @@ const slice = createSlice({
 				}
 			)
 			.addMatcher(
-				(action) => {
+				action => {
 					return action.type.endsWith('/fulfilled')
 				},
-				(state) => {
+				state => {
 					state.status = 'succeeded'
 				}
 			)

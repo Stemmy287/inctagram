@@ -14,20 +14,28 @@ type PropsType = {
 	password?: boolean
 }
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export const Input = ({ title, disabled, register, name, error, password, ...restProps}: PropsType & DefaultInputPropsType) => {
-
+export const Input = ({
+	title,
+	disabled,
+	register,
+	name,
+	error,
+	password,
+	...restProps
+}: PropsType & DefaultInputPropsType) => {
 	const [isShowPassword, setIsShowPassword] = useState(false)
 
 	const onShowPasswordHandler = () => {
 		setIsShowPassword(!isShowPassword)
 	}
 
-	const eyePassword = isShowPassword
-		? <Image className={s.eye} src={eyeOff} alt={'off password'} onClick={onShowPasswordHandler}/>
-		: <Image className={s.eye} src={eye} alt={'show password'} onClick={onShowPasswordHandler}/>
+	const eyePassword = isShowPassword ? (
+		<Image className={s.eye} src={eyeOff} alt={'off password'} onClick={onShowPasswordHandler} />
+	) : (
+		<Image className={s.eye} src={eye} alt={'show password'} onClick={onShowPasswordHandler} />
+	)
 
 	return (
 		<div className={s.container}>
