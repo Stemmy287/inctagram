@@ -22,3 +22,5 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 }
 
 export const getLayout = (page: ReactElement) => <BaseLayout>{page}</BaseLayout>
+
+

@@ -15,6 +15,7 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { LoginFormData } from '@/modules/authModules/authApi/authApi'
+import { useEffect } from 'react'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -23,9 +24,11 @@ export const Login: NextPageWithLayout = () => {
 
 	const router = useRouter()
 
-	if (isLoggedIn) {
-		router.push('/profile')
-	}
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.push('/profile')
+		}
+	}, [isLoggedIn, router])
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -74,14 +77,14 @@ export const Login: NextPageWithLayout = () => {
 						Forgot password
 					</Link>
 				</div>
-				<Button title='Sing in' disabled={isLoading}/>
+				<Button title='Sign in' disabled={isLoading}/>
 			</form>
 			<div className={s.desc}>
 				<div>
 					<span>Don’t have an account?</span>
 				</div>
 				<Link className={s.link} href={'sign-up'}>
-					Sing up
+					Sign up
 				</Link>
 			</div>
 		</LoginDetailsWrapper>
