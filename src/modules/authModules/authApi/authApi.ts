@@ -9,7 +9,8 @@ export const authApi = createApi({
 	tagTypes: ['login', 'logout', 'me'],
 	baseQuery: fetchBaseQuery({
 		credentials: 'include',
-		baseUrl: API_URL, prepareHeaders: (headers) => {
+		baseUrl: API_URL,
+		prepareHeaders: headers => {
 			const token = localStorage.getItem('token')
 			if (token) {
 				headers.set('Authorization', `Bearer ${token}`)
@@ -17,9 +18,9 @@ export const authApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: (builder) => ({
+	endpoints: builder => ({
 		login: builder.mutation<LoginResponseType, LoginFormData>({
-			query: (body) => ({
+			query: body => ({
 				url: 'auth/login',
 				method: 'POST',
 				body

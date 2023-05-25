@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react'
 import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
 import { Button } from '@/components/Button/Button'
 import Image from 'next/image'
-import { Popup } from '@/components/Popup/Popup'
 
 export const UploadImage = () => {
 	const [uploadImage] = useUploadImageMutation()
@@ -16,17 +15,15 @@ export const UploadImage = () => {
 	const refClick = () => inputRef.current?.click()
 	return (
 		<div>
-			<Popup onClose={() => {}}>
-				<Image src='' alt='avatar' />
-				<input
-					ref={inputRef}
-					accept='image/*'
-					type='file'
-					onChange={uploadHandler}
-					style={{ display: 'none' }}
-				/>
-				<Button title='Select from computer' callback={refClick} />
-			</Popup>
+			<Image src='' alt='avatar'/>
+			<input
+				ref={inputRef}
+				accept="image/*"
+				type="file"
+				onChange={uploadHandler}
+				style={{display:'none'}}
+			/>
+			<Button title='Add Avatar' callback={refClick}/>
 		</div>
 	)
 }
