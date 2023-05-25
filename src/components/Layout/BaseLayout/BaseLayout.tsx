@@ -5,20 +5,19 @@ import { useMeQuery } from '@/modules/authModules'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { selectIsInitialized } from '@/modules/appModules/appSelectors'
 import { Preloader } from '@/components/Preloader/Preloader'
+import { SnackBar } from '@/components/SnackBar/SnackBar'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	const {} = useMeQuery()
 
+	const error = useAppSelector<string | null>(state => state.app.error)
 	const isInitialized = useAppSelector(selectIsInitialized)
 
 	return (
-		<Layout>
-			{
-				isInitialized
-					? children
-					: <Preloader/>
-			}
-		</Layout>
+		<>
+			<Layout>{isInitialized ? children : <Preloader />}</Layout>
+			{error ? <SnackBar /> : ''}
+		</>
 	)
 }
 

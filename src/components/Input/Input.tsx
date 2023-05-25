@@ -1,7 +1,7 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
 import s from './Input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
-import eyeOff from '../../../public/icons/eye-off-outline.svg'
+import eyeOff from '/public/icons/eye-off.svg'
 import eye from '../../../public/icons/eye-outline.svg'
 import Image from 'next/image'
 
@@ -14,20 +14,28 @@ type PropsType = {
 	password?: boolean
 }
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export const Input = ({ title, disabled, register, name, error, password, ...restProps}: PropsType & DefaultInputPropsType) => {
-
+export const Input = ({
+	title,
+	disabled,
+	register,
+	name,
+	error,
+	password,
+	...restProps
+}: PropsType & DefaultInputPropsType) => {
 	const [isShowPassword, setIsShowPassword] = useState(false)
 
 	const onShowPasswordHandler = () => {
 		setIsShowPassword(!isShowPassword)
 	}
 
-	const eyePassword = isShowPassword
-		? <Image className={s.eye} src={eyeOff} alt={'off password'} onClick={onShowPasswordHandler}/>
-		: <Image className={s.eye} src={eye} alt={'show password'} onClick={onShowPasswordHandler}/>
+	const eyePassword = isShowPassword ? (
+		<Image className={s.eye} src={eyeOff} alt={'off password'} onClick={onShowPasswordHandler} />
+	) : (
+		<Image className={s.eye} src={eye} alt={'show password'} onClick={onShowPasswordHandler} />
+	)
 
 	return (
 		<div className={s.container}>

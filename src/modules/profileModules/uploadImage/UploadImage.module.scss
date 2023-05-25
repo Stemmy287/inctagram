@@ -1,0 +1,81 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  @include flex-column;
+  width: 100%;
+
+  .title {
+    @include text(14px, 400px, 14px, $dark100);
+  }
+
+  .inputWrapper {
+    width: 100%;
+    position: relative;
+    .input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      background: transparent;
+      overflow: hidden;
+      //border: none;
+      //background-color: transparent;
+      //border-bottom: 1px solid $dark300;
+      //outline: none;
+      //width: 100%;
+      //@include text(16px, 400, 24px, $light900);
+      //padding: 5px 0;
+      //.visually-hidden {
+
+
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: $light900;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+
+      &:-webkit-autofill:hover {
+        -webkit-text-fill-color: $light900;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $light100;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+      &:-webkit-autofill:disabled {
+        -webkit-text-fill-color: $dark100;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+
+      &:hover {
+        color: $light900;
+        border-bottom: 1px solid $light900;
+      }
+
+      &:focus {
+        color: $light100;
+        border-bottom: 1px solid $light100;
+      }
+
+      &:disabled {
+        color: $dark100;
+        border-bottom: 1px solid $dark100;
+      }
+    }
+
+    .errorInput {
+      border-bottom: 1px solid $danger500;
+    }
+  }
+
+
+  .error {
+    @include text(14px, 400, 24px, $danger500);
+  }
+}
+
