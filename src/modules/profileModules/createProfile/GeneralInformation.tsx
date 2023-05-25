@@ -12,15 +12,15 @@ import 'react-datepicker/dist/react-datepicker.css'
 export const GeneralInformation: NextPageWithLayout = () => {
 
 
-	const [createProfile, { data,  isLoading }] = useCreateProfileMutation();
+	const [createProfile, { data, isLoading }] = useCreateProfileMutation()
 
 	const schema = yup.object().shape({
 		username: yup.string().required('field required'),
 		firstname: yup.string().required('enter firstname'),
 		lastname: yup.string().required('enter lastname'),
 		city: yup.string().required('enter city'),
-		aboutMe:yup.string().required('add about me'),
-		dateOfBirth:yup.string().required('add date of birth')
+		aboutMe: yup.string().required('add about me'),
+		dateOfBirth: yup.string().required('add date of birth')
 	})
 	const {
 		control,
@@ -31,49 +31,50 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 	const onSubmit: SubmitHandler<ProfileType> = async data => {
-	createProfile(data)
+		createProfile(data)
 	}
-	return(
-<div>
-	<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-	<Input
-		title='Username'
-		register={register}
-		name={'username'}
-	/>
-	<Input
-		title='First Name'
-		register={register}
-		name={'firstname'}
-	/>
-	<Input
-		title='Last Name'
-		register={register}
-		name={'lastname'}
-	/>
-		<label>Date of birthday</label>
-		<Controller
-			name='dateOfBirth'
-			control={control}
-			render={({ field: { onChange, value } }) => (
-				<DatePicker
-					showIcon={true}
-					selected={value}
-					onChange={onChange}
+	return (
+		<div>
+			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
+				<Input
+					title='Username'
+					register={register}
+					name={'username'}
 				/>
-			)}
-		/>
+				<Input
+					title='First Name'
+					register={register}
+					name={'firstname'}
+				/>
+				<Input
+					title='Last Name'
+					register={register}
+					name={'lastname'}
+				/>
+				<label>Date of birthday</label>
+				<Controller
+					name='dateOfBirth'
+					control={control}
+					render={({ field: { onChange, value } }) => (
+						<DatePicker
+							showIcon={true}
+							selected={value}
+							onChange={onChange}
+						/>
+					)}
+				/>
 
-	<Input
-		title='City'
-		register={register}
-		name={'city'}
-	/>
+				<Input
+					title='City'
+					register={register}
+					name={'city'}
+				/>
 
-		<textarea {...register("aboutMe")} rows={10} />
-<Button title='Submit'/>
-	</form>
+				<textarea
+					{...register('aboutMe')} rows={10} />
+				<Button title='Submit' />
+			</form>
 
-</div>
+		</div>
 	)
 }
