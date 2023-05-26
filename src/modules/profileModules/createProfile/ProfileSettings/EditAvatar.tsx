@@ -24,8 +24,9 @@ export const EditAvatar = () => {
 	}, [avaNewNew])
 
 	return (
-		<div>
-			<Image src={ava} alt='ava' width='300' height='300' />
+		<div style={{ width: 300 }}>
+			<Image src={ava} alt='ava' width='300' height='300' style={{ borderRadius: '50%' }} />
+
 			{/*<Button title={'AAA'} callback={()=>setAva(newAva)}/>*/}
 			<label></label>
 			<Button callback={onClose} title='Add a profile photo' />
