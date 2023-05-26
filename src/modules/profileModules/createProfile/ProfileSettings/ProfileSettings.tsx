@@ -8,8 +8,10 @@ export const ProfileSettings = () => {
 
 	return (
 		<div className={s.container}>
-			<EditAvatar/>
-			<GeneralInformation/>
+			<EditAvatar />
+			<div className={s.wrapper}>
+				<GeneralInformation />
+			</div>
 		</div>
 	)
 }

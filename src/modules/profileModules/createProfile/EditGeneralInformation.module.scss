@@ -1,0 +1,36 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+@import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 494px;
+  //height: 659px;
+  border-top: 1px solid $dark100;
+  border-bottom: 1px solid $dark100;
+  margin: 0 auto;
+
+  label {
+    color: $dark100;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  textarea {
+    background-color: $dark300;
+    margin-bottom: 48px;
+    border: 1px solid $dark100;
+  }
+
+  .datepicker {
+    margin-bottom: 24px;
+    input {
+      background-color: $dark300;
+      color: white;
+    }
+  }
+
+}
+

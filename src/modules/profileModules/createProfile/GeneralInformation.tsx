@@ -3,7 +3,7 @@ import { Input } from '@/components/Input/Input'
 import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import s from '@/modules/authModules/loginLogoutModule/components/Login/Login.module.scss'
+import s from '@/modules/profileModules/createProfile/EditGeneralInformation.module.scss'
 import { Button } from '@/components/Button/Button'
 import { ProfileType, useCreateProfileMutation } from '@/modules/profileModules/createProfile/createProfileApi'
 import DatePicker from 'react-datepicker'
@@ -42,13 +42,15 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					name='dateOfBirth'
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<DatePicker showIcon={true} selected={value} onChange={onChange} />
+						<DatePicker
+							wrapperClassName={s.datepicker}
+							showIcon selected={value} onChange={onChange} />
 					)}
 				/>
 
 				<Input title='City' register={register} name={'city'} />
-
-				<textarea placeholder='About me' {...register('aboutMe')} rows={5} />
+				<label>About me</label>
+				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />
 				<Button title='Save Changes' />
 			</form>
 		</div>

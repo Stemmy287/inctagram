@@ -1,0 +1,21 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+.container{
+  @include flex-center-column;
+  height: 492px;
+  width: 492px;
+  border-radius: 2px;
+  //background-color: $dark100;
+  .wrapper {
+    @include flex-center-column;
+    width: 222px;
+    height: 100%;
+    gap: 48px;
+    .photo {
+      border-radius: 2px;
+    }
+    .btn{
+      width: 100%;
+    }
+  }
+}

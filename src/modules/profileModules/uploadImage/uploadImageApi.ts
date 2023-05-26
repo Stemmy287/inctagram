@@ -33,11 +33,19 @@ export const uploadImageApi = createApi({
 					const res = await queryFulfilled
 					dispatch(uploadImageActions.setAva({ ava: res.data.avatars[0].url }))
 				}
+			}),
+			deleteImage: build.mutation<any, any>({
+				query: () => {
+					return {
+						method: 'DELETE',
+						url: 'users/profile/avatar'
+					}
+				}
 			})
 		}
 	}
 })
-export const { useUploadImageMutation } = uploadImageApi
+export const { useUploadImageMutation , useDeleteImageMutation} = uploadImageApi
 
 type avatars = Array<avatarsType>
 

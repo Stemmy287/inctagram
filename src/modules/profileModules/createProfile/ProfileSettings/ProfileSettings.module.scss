@@ -2,7 +2,13 @@
 @import "@/common/styles/variables";
 
 .container{
-  @include flex-center-vert;
-  gap: 35px;
-  width: 1024px;
+ //border:5px solid red;
+ width: 726px;
+ display: flex;
+ gap: 48px;
+ margin: 0 auto;
+  .wrapper{
+   margin: 0 auto;
+
+  }
 }
