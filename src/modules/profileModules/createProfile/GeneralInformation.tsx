@@ -71,7 +71,9 @@ export const GeneralInformation: NextPageWithLayout = () => {
 				/>
 
 				<textarea
-					{...register('aboutMe')} rows={5} />
+					placeholder='About me'
+					{...register('aboutMe')}
+					rows={5} />
 				<Button title='Save Changes' />
 			</form>
 

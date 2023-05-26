@@ -70,7 +70,7 @@ const onSaveHandler = () => {
 				?
 				<Button
 					callback={refClick}
-					title='Add a profile photo' />
+					title='Select from computer' />
 				: <Button
 					callback={onSaveHandler}
 					title='Save' />
