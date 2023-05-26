@@ -9,8 +9,7 @@ export const authApi = createApi({
 	tagTypes: ['login', 'logout', 'me'],
 	baseQuery: fetchBaseQuery({
 		credentials: 'include',
-		baseUrl: API_URL,
-		prepareHeaders: headers => {
+		baseUrl: API_URL, prepareHeaders: (headers) => {
 			const token = localStorage.getItem('token')
 			if (token) {
 				headers.set('Authorization', `Bearer ${token}`)
@@ -18,16 +17,22 @@ export const authApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: builder => ({
+	endpoints: (builder) => ({
 		login: builder.mutation<LoginResponseType, LoginFormData>({
-			query: body => ({
+			query: (body) => ({
 				url: 'auth/login',
 				method: 'POST',
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				await queryFulfilled
-				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
 			}
 		}),
 		logout: builder.mutation<void, void>({
@@ -36,18 +41,28 @@ export const authApi = createApi({
 				method: 'POST'
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				await queryFulfilled
-				dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
-				localStorage.removeItem('token')
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
+				try {
+					await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
+					localStorage.removeItem('token')
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
+				}
 			}
 		}),
 		me: builder.query<UserType, void>({
 			query: () => 'auth/me',
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				dispatch(appActions.setAppStatus({ status: 'loading' }))
 				try {
 					const res = await queryFulfilled
+					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
 					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
 					dispatch(authActions.setUser({ user: res.data }))
+				} catch (e) {
+					dispatch(appActions.setAppStatus({ status: 'failed' }))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}
@@ -82,8 +97,15 @@ export const authApi = createApi({
 			async onQueryStarted(_, { queryFulfilled }) {
 				await queryFulfilled
 			}
+		}),
+		regConfirmation: builder.mutation<void, ConfirmationType>({
+			query: body => ({
+				url: 'auth/registration-confirmation',
+				method: 'POST',
+				body
+			})
+			})
 		})
-	})
 })
 
 export const {
@@ -92,8 +114,13 @@ export const {
 	useLoginMutation,
 	useRecoveryPasswordMutation,
 	useResetPasswordMutation,
-	useRegistrationMutation
+	useRegistrationMutation,
+	useRegConfirmationMutation
 } = authApi
+
+export type ConfirmationType = {
+	confirmationCode: any
+}
 
 type LoginResponseType = {
 	accessToken: string
