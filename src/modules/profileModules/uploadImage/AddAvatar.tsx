@@ -9,7 +9,6 @@ type PropsType = {
 	onClose: () => void
 }
 export const AddAvatar: FC<PropsType> = ({ onClose }) => {
-
 	const [ava, setAva] = useState<any>(defaultAva)
 	const [file, setFile] = useState<any>(null)
 	const [isAvaBroken, setIsAvaBroken] = useState(false)
@@ -24,7 +23,6 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 			if (file.size < 4000000) {
 				convertFileToBase64(file, (file64: string) => {
 					setAva(file64)
-
 				})
 			} else {
 				console.error('Error: ', 'Файл слишком большого размера')
@@ -45,36 +43,22 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 		setIsAvaBroken(true)
 		alert('Кривая картинка')
 	}
-const onSaveHandler = () => {
-	uploadImage(file)
-	onClose()
-}
+	const onSaveHandler = () => {
+		uploadImage(file)
+		onClose()
+	}
 	return (
 		<Popup onClose={onClose}>
-			<Image
-				src={isAvaBroken ? defaultAva : ava}
-				onError={errorHandler}
-				alt='ava'
-				width='300'
-				height='300'
-			/>
+			<Image src={isAvaBroken ? defaultAva : ava} onError={errorHandler} alt='ava' width='300' height='300' />
 			<label>
-				<input type='file'
-							 onChange={uploadHandler}
-							 style={{ display: 'none' }}
-							 ref={inputRef}
-				/>
+				<input type='file' onChange={uploadHandler} style={{ display: 'none' }} ref={inputRef} />
 			</label>
 
-			{ava === defaultAva
-				?
-				<Button
-					callback={refClick}
-					title='Select from computer' />
-				: <Button
-					callback={onSaveHandler}
-					title='Save' />
-			}
+			{ava === defaultAva ? (
+				<Button callback={refClick} title='Select from computer' />
+			) : (
+				<Button callback={onSaveHandler} title='Save' />
+			)}
 		</Popup>
 	)
 }

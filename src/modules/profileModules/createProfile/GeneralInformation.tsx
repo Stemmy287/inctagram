@@ -10,8 +10,6 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 export const GeneralInformation: NextPageWithLayout = () => {
-
-
 	const [createProfile, { data, isLoading }] = useCreateProfileMutation()
 
 	const schema = yup.object().shape({
@@ -36,47 +34,23 @@ export const GeneralInformation: NextPageWithLayout = () => {
 	return (
 		<div>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					title='Username'
-					register={register}
-					name={'username'}
-				/>
-				<Input
-					title='First Name'
-					register={register}
-					name={'firstname'}
-				/>
-				<Input
-					title='Last Name'
-					register={register}
-					name={'lastname'}
-				/>
+				<Input title='Username' register={register} name={'username'} />
+				<Input title='First Name' register={register} name={'firstname'} />
+				<Input title='Last Name' register={register} name={'lastname'} />
 				<label>Date of birth</label>
 				<Controller
 					name='dateOfBirth'
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<DatePicker
-							showIcon={true}
-							selected={value}
-							onChange={onChange}
-						/>
+						<DatePicker showIcon={true} selected={value} onChange={onChange} />
 					)}
 				/>
 
-				<Input
-					title='City'
-					register={register}
-					name={'city'}
-				/>
+				<Input title='City' register={register} name={'city'} />
 
-				<textarea
-					placeholder='About me'
-					{...register('aboutMe')}
-					rows={5} />
+				<textarea placeholder='About me' {...register('aboutMe')} rows={5} />
 				<Button title='Save Changes' />
 			</form>
-
 		</div>
 	)
 }
