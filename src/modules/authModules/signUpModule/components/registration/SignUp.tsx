@@ -16,6 +16,7 @@ import Image from 'next/image'
 import { RegisterParamsType, loggedIn, useRegistrationMutation } from '@/modules/authModules'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { PopupSignUp } from '../popupSignUp/popupSignUp'
 
 export const SignUp: NextPageWithLayout = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
@@ -121,16 +122,7 @@ export const SignUp: NextPageWithLayout = () => {
 					</Link>
 				</form>
 			</LoginDetailsWrapper>
-			{isActive && (
-				<Popup onClose={onClosePopupHandler}>
-					<Notification
-						title='Email sent'
-						buttonTitle='OK'
-						message={`We have sent a link to confirm your email to ${email}`}
-						onClose={onClosePopupHandler}
-					/>
-				</Popup>
-			)}
+			{isActive && <PopupSignUp email={email} onClosePopupHandler={onClosePopupHandler} />}
 		</>
 	)
 }
