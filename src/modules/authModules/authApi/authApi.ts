@@ -53,35 +53,40 @@ export const authApi = createApi({
 				}
 			}
 		}),
-		recoveryPassword: builder.mutation<any, PasswordRecoveryType>({
+		recoveryPassword: builder.mutation<void, PasswordRecoveryType>({
 			query: body => ({
 				url: 'auth/password-recovery',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
+		resetPassword: builder.mutation<void, Omit<ResetPasswordType, 'passwordConfirmation'>>({
 			query: body => ({
 				url: 'auth/new-password',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		registration: builder.mutation<string, any>({
-			query: (body: RegisterParamsType) => ({
+		registration: builder.mutation<string, RegisterParamsType>({
+			query: body => ({
 				url: 'auth/registration',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
+		}),
+		regConfirmation: builder.mutation<void, ConfirmationType>({
+			query: body => ({
+				url: 'auth/registration-confirmation',
+				method: 'POST',
+				body
+			})
+		}),
+		regEmailResending: builder.mutation<void, regEmailResendingType>({
+			query: body => ({
+				url: 'auth/registration-email-resending',
+				method: 'POST',
+				body
+			})
 		})
 	})
 })
@@ -92,8 +97,18 @@ export const {
 	useLoginMutation,
 	useRecoveryPasswordMutation,
 	useResetPasswordMutation,
-	useRegistrationMutation
+	useRegistrationMutation,
+	useRegConfirmationMutation,
+	useRegEmailResendingMutation
 } = authApi
+
+export type ConfirmationType = {
+	confirmationCode: string
+}
+
+export type regEmailResendingType = {
+	email: string
+}
 
 type LoginResponseType = {
 	accessToken: string
