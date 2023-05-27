@@ -9,7 +9,8 @@ export const authApi = createApi({
 	tagTypes: ['login', 'logout', 'me'],
 	baseQuery: fetchBaseQuery({
 		credentials: 'include',
-		baseUrl: API_URL, prepareHeaders: (headers) => {
+		baseUrl: API_URL,
+		prepareHeaders: headers => {
 			const token = localStorage.getItem('token')
 			if (token) {
 				headers.set('Authorization', `Bearer ${token}`)
@@ -17,22 +18,16 @@ export const authApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: (builder) => ({
+	endpoints: builder => ({
 		login: builder.mutation<LoginResponseType, LoginFormData>({
-			query: (body) => ({
+			query: body => ({
 				url: 'auth/login',
 				method: 'POST',
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				dispatch(appActions.setAppStatus({ status: 'loading' }))
-				try {
-					await queryFulfilled
-					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
-					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
-				} catch (e) {
-					dispatch(appActions.setAppStatus({ status: 'failed' }))
-				}
+				await queryFulfilled
+				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
 			}
 		}),
 		logout: builder.mutation<void, void>({
@@ -41,62 +36,43 @@ export const authApi = createApi({
 				method: 'POST'
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				dispatch(appActions.setAppStatus({ status: 'loading' }))
-				try {
-					await queryFulfilled
-					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
-					dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
-					localStorage.removeItem('token')
-				} catch (e) {
-					dispatch(appActions.setAppStatus({ status: 'failed' }))
-				}
+				await queryFulfilled
+				dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
+				localStorage.removeItem('token')
 			}
 		}),
 		me: builder.query<UserType, void>({
 			query: () => 'auth/me',
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				dispatch(appActions.setAppStatus({ status: 'loading' }))
 				try {
 					const res = await queryFulfilled
-					dispatch(appActions.setAppStatus({ status: 'succeeded' }))
 					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
 					dispatch(authActions.setUser({ user: res.data }))
-				} catch (e) {
-					dispatch(appActions.setAppStatus({ status: 'failed' }))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}
 			}
 		}),
-		recoveryPassword: builder.mutation<any, PasswordRecoveryType>({
+		recoveryPassword: builder.mutation<void, PasswordRecoveryType>({
 			query: body => ({
 				url: 'auth/password-recovery',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
+		resetPassword: builder.mutation<void, Omit<ResetPasswordType, 'passwordConfirmation'>>({
 			query: body => ({
 				url: 'auth/new-password',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		registration: builder.mutation<string, any>({
-			query: (body: RegisterParamsType) => ({
+		registration: builder.mutation<string, RegisterParamsType>({
+			query: body => ({
 				url: 'auth/registration',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
 		regConfirmation: builder.mutation<void, ConfirmationType>({
 			query: body => ({
@@ -104,8 +80,15 @@ export const authApi = createApi({
 				method: 'POST',
 				body
 			})
+		}),
+		regEmailResending: builder.mutation<void, regEmailResendingType>({
+			query: body => ({
+				url: 'auth/registration-email-resending',
+				method: 'POST',
+				body
 			})
 		})
+	})
 })
 
 export const {
@@ -115,11 +98,16 @@ export const {
 	useRecoveryPasswordMutation,
 	useResetPasswordMutation,
 	useRegistrationMutation,
-	useRegConfirmationMutation
+	useRegConfirmationMutation,
+	useRegEmailResendingMutation
 } = authApi
 
 export type ConfirmationType = {
-	confirmationCode: any
+	confirmationCode: string
+}
+
+export type regEmailResendingType = {
+	email: string
 }
 
 type LoginResponseType = {

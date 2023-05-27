@@ -6,17 +6,21 @@ import { Button } from '@/components/Button/Button'
 import Link from 'next/link'
 import { Popup } from '@/components/Popup/Popup'
 import { Notification } from '@/components/Notification/Notification'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import googleIcon from '@/../public/icons/google-icon.svg'
 import githubIcon from '@/../public/icons/github-icon.svg'
 import Image from 'next/image'
-import { RegisterParamsType, useRegistrationMutation } from '@/modules/authModules'
+import { RegisterParamsType, loggedIn, useRegistrationMutation } from '@/modules/authModules'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@/assets/hooks/useAppSelector'
 
 export const SignUp: NextPageWithLayout = () => {
-	const [registration, { isLoading }] = useRegistrationMutation()
+	const isLoggedIn = useAppSelector(loggedIn)
+	const [registration, { isLoading, isSuccess }] = useRegistrationMutation()
+	const router = useRouter()
 	const [email, setEmail] = useState('')
 
 	const [isActive, setIsActive] = useState(false)
@@ -46,14 +50,26 @@ export const SignUp: NextPageWithLayout = () => {
 	})
 
 	const onSubmit: SubmitHandler<RegisterParamsType> = async data => {
+		localStorage.setItem('email', data.email)
 		setEmail(data.email)
 		await registration(data)
-		setIsActive(true)
 	}
 
 	const onClosePopupHandler = () => {
 		setIsActive(false)
 	}
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.push('/profile')
+		}
+	})
+
+	useEffect(() => {
+		if (isSuccess) {
+			setIsActive(true)
+		}
+	}, [isSuccess])
 
 	return (
 		<>
@@ -67,10 +83,18 @@ export const SignUp: NextPageWithLayout = () => {
 
 					<div>
 						<div className={s.inputs}>
-							<Input title='Username'
-										 register={register} name={'userName'} error={errors.userName?.message || ''} />
-							<Input title='Email'
-										 register={register} name={'email'} error={errors.email?.message || ''} />
+							<Input
+								title='Username'
+								register={register}
+								name={'userName'}
+								error={errors.userName?.message || ''}
+							/>
+							<Input
+								title='Email'
+								register={register}
+								name={'email'}
+								error={errors.email?.message || ''}
+							/>
 							<Input
 								password
 								title='Password'
