@@ -1,7 +1,36 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+
 .container {
-width: 192px;
+  //max-width: 228px;
+  //border: 1px solid red;
+  padding: 12px;
+  margin: 12px;
+  .photoWrapper {
+    //border: 1px solid red;
+    position: relative;
+    .photo {
+      border-radius: 50%;
+      margin: 24px;
+    }
+    .closeImg {
+      cursor: pointer;
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      top: 56px;
+      left: 192px;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
 
   .btn {
     background-color: transparent;
+    border: 3px solid $accent500;
+    padding: 6px 24px;
+    text-align: center;
+    @include text(16px, 600, 24px);
+    color: $accent500;
+    cursor: pointer;
   }
 }

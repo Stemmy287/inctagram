@@ -44,14 +44,17 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					render={({ field: { onChange, value } }) => (
 						<DatePicker
 							wrapperClassName={s.datepicker}
-							showIcon selected={value} onChange={onChange} />
+							showIcon
+							selected={value}
+							onChange={onChange}
+						/>
 					)}
 				/>
 
 				<Input title='City' register={register} name={'city'} />
 				<label>About me</label>
 				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />
-				<Button title='Save Changes' />
+				<div className={s.btn}><Button title='Save Changes' /></div>
 			</form>
 		</div>
 	)

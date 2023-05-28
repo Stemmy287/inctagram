@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import defaultAva from '../../../../../public/images/defaultPhoto.png'
 import deleteAva from '../../../../../public/icons/delete-ava.svg'
 import Image, { StaticImageData } from 'next/image'
@@ -13,24 +13,32 @@ export const EditAvatar = () => {
 	// const [deleteImage] = useUploadImageMutation()
 
 	const avaNew = useAppSelector(state => state.uploadImage.avatar)
-	const [ava, setAva] = useState<string|StaticImageData>(defaultAva)
+	const [ava, setAva] = useState<string | StaticImageData>(defaultAva)
 	const [openModal, setOpenModal] = useState(false)
 
 	const onClose = () => {
 		setOpenModal(!openModal)
 	}
-	const deleteImageHandler = () => {}
+	const deleteImageHandler = () => {
+		setAva(defaultAva)
+	}
 
-	// useEffect(() => {
-	// 	setAva(avaNew)
-	// }, [])
+	useEffect(() => {
+		setAva(avaNew)
+	}, [avaNew])
 
 	return (
 		<div className={s.container}>
-			<Image src={ava} alt='ava' width='192' height='192' style={{ borderRadius: '50%' }} />
-			<Image src={deleteAva} alt='delete-ava' onClick={deleteImageHandler}/>
-			<Button callback={onClose} title='Add a profile photo' />
-			{openModal && <AddAvatar onClose={onClose} />}
+			<div className={s.photoWrapper}>
+				<Image src={ava} alt='ava' width='192' height='192' className={s.photo} />
+				<Image src={deleteAva} alt='delete-ava' onClick={deleteImageHandler} className={s.closeImg} />
+			</div>
+
+			<div onClick={onClose} className={s.btn}>Add a profile photo</div>
+			{openModal
+				&&
+				<AddAvatar onClose={onClose} />
+			}
 		</div>
 	)
 }
