@@ -1,0 +1,26 @@
+@import "@/common/styles/mixins.scss";
+@import "@/common/styles/variables.scss";
+
+.container {
+  .hatProfile {
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .mainInfo {
+      .userNameAndBtn {
+      > h3 {
+        @include text(20px, 700, 36px);
+      }
+      }
+
+      .socialInfo {
+
+      }
+
+      .description {
+        @include text(16px, 400, 24px);
+      }
+    }
+  }
+}

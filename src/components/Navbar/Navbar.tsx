@@ -9,7 +9,7 @@ import {LogoutButton} from '@/components/Button/LogoutButton/LogoutButton';
 const navData = [
     {id: 1, title: 'Home', icon: homeIcon, href: '/home', alt: 'home-page'},
     {id: 2, title: 'Create', icon: addIcon, href: 'create', alt: 'create-page'},
-    {id: 3, title: 'My profile', icon: userIcon, href: 'my-profile', alt: 'profile-page'},
+    {id: 3, title: 'My profile', icon: userIcon, href: '/profile', alt: 'profile-page'},
 ]
 
 export const Navbar = () => {
