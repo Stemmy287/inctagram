@@ -27,3 +27,26 @@
     cursor: auto;
   }
 }
+
+.whiteBtn {
+  background: $light100;
+  color: $dark900;
+
+  &:hover {
+    background: $light100;
+    color: $dark300;
+    transition: 150ms;
+  }
+
+  &:active {
+    background: $light700;
+    color: $dark900;
+  }
+
+  &:disabled {
+    background: $light900;
+    color: $dark100;
+    cursor: auto;
+  }
+
+}
