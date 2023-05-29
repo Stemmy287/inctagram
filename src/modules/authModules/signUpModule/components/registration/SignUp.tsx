@@ -122,7 +122,6 @@ export const SignUp: NextPageWithLayout = () => {
 				</form>
 			</LoginDetailsWrapper>
 			{isActive && <PopupSignUp email={email} onClosePopupHandler={onClosePopupHandler} />}
-			<PostMenuModule postId='3333' />
 		</>
 	)
 }
