@@ -5,11 +5,12 @@ type PropsType = {
 	title: string
 	callback?: () => void
 	disabled?: boolean
+	white?: boolean
 }
 
-export const Button = ({ title, callback, disabled }: PropsType) => {
+export const Button = ({ title, callback, disabled, white }: PropsType) => {
 	return (
-		<button className={s.btn} disabled={disabled} onClick={callback}>
+		<button className={white ? `${s.btn} ${s.whiteBtn}` : s.btn} disabled={disabled} onClick={callback}>
 			{title}
 		</button>
 	)
