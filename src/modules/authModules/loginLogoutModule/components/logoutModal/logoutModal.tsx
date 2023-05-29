@@ -23,7 +23,7 @@ export const LogoutModal: FC<PropsType> = ({setIsActive}) => {
 	}
 
 	if (isSuccess) {
-		router.push('auth/login')
+		router.push('/auth/login')
 	}
 
 	return (

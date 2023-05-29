@@ -8,7 +8,7 @@ import { ProfileSettings } from '@/modules/profileModules/createProfile/ProfileS
 
 const Profile = () => {
 
-    const  { data, error, isLoading } = useGetUserQuery()
+    const  {} = useGetUserQuery()
 
     const isLoggedIn = useAppSelector(loggedIn)
 
@@ -16,7 +16,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (!isLoggedIn) {
-            router.push('auth/login')
+            router.push('/auth/login')
         }
     }, [isLoggedIn, router])
 

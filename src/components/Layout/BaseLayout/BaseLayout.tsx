@@ -16,7 +16,7 @@ export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	return (
 		<>
 			<Layout>{isInitialized ? children : <Preloader />}</Layout>
-			{error ? <SnackBar /> : ''}
+			{error && <SnackBar />}
 		</>
 	)
 }

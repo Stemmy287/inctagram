@@ -9,4 +9,5 @@ export * from '@/modules/authModules/loginLogoutModule/components/logoutModal/lo
 
 export * from '@/modules/authModules/authReducer/authReducer'
 export * from '@/modules/authModules/authReducer/authSelectors'
-export * from '@/modules/authModules/signUpModule/components/SignUp/SignUp'
+export * from '@/modules/authModules/signUpModule/components/registration/SignUp'
+export * from '@/modules/authModules/signUpModule/components/registrationEmailResending/RegistrationEmailResending'
