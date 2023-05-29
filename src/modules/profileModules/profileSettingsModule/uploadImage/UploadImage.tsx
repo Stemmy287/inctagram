@@ -1,7 +1,6 @@
 import React, { ChangeEvent } from 'react'
-import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
+import { useUploadImageMutation } from '@/modules/profileModules/profileSettingsModule/uploadImage/uploadImageApi'
 import { Button } from '@/components/Button/Button'
-import Image from 'next/image'
 
 export const UploadImage = () => {
 	const [uploadImage] = useUploadImageMutation()
@@ -18,12 +17,12 @@ export const UploadImage = () => {
 			{/*<Image src='' alt='avatar'/>*/}
 			<input
 				ref={inputRef}
-				accept="image/*"
-				type="file"
+				accept='image/*'
+				type='file'
 				onChange={uploadHandler}
-				style={{display:'none'}}
+				style={{ display: 'none' }}
 			/>
-			<Button title='Add Avatar' callback={refClick}/>
+			<Button title='Add Avatar' callback={refClick} />
 		</div>
 	)
 }

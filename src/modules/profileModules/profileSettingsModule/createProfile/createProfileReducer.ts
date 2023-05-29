@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProfileType } from '@/modules/profileModules/createProfile/createProfileApi'
+import { createSlice } from '@reduxjs/toolkit'
+import { ProfileType } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
 
 const initialState = {
 	profile: {} as ProfileType

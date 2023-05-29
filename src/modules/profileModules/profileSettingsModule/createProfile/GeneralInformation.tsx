@@ -5,14 +5,17 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import s from '@/modules/authModules/loginLogoutModule/components/Login/Login.module.scss'
 import { Button } from '@/components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '@/modules/profileModules/createProfile/createProfileApi'
+import {
+	ProfileType,
+	useCreateProfileMutation
+} from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 
 
-	const [createProfile, { data, isLoading }] = useCreateProfileMutation()
+	const [createProfile] = useCreateProfileMutation()
 
 	const schema = yup.object().shape({
 		username: yup.string().required('field required'),
@@ -25,8 +28,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 	const {
 		control,
 		register,
-		handleSubmit,
-		formState: { errors }
+		handleSubmit
 	} = useForm<ProfileType>({
 		resolver: yupResolver(schema)
 	})
