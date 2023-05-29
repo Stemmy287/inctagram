@@ -15,5 +15,14 @@ export const postApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: () => ({})
+	endpoints: builder => ({
+		deletePost: builder.mutation<void, string>({
+			query: postId => ({
+				url: `posts/${postId}`,
+				method: 'DELETE'
+			})
+		})
+	})
 })
+
+export const { useDeletePostMutation } = postApi

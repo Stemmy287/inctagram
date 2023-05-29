@@ -23,6 +23,7 @@ export const store = configureStore({
 			.concat(authApi.middleware)
 			.concat(createProfileApi.middleware)
 			.concat(uploadImageApi.middleware)
+			.concat(postApi.middleware)
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

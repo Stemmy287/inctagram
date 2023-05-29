@@ -1,29 +1,52 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import '@/common/styles/mixins.scss';
+@import '@/common/styles/variables.scss';
 
 .btn {
-  border: none;
-  border-radius: 2px;
-  background: $accent500;
-  height: 36px;
-  width: 100%;
-  @include text(16px, 600, 24px);
-  font-family: inherit;
-  cursor: pointer;
+	border: none;
+	border-radius: 2px;
+	background: $accent500;
+	height: 36px;
+	width: 100%;
+	@include text(16px, 600, 24px);
+	font-family: inherit;
+	cursor: pointer;
 
-  &:hover {
-    background: $accent100;
-    transition: 150ms;
-  }
+	&:hover {
+		background: $accent100;
+		transition: 150ms;
+	}
 
-  &:active {
-    background: $accent700;
-    color: $light500;
-  }
+	&:active {
+		background: $accent700;
+		color: $light500;
+	}
 
-  &:disabled {
-    background: $accent900;
-    color: $light900;
-    cursor: auto;
-  }
+	&:disabled {
+		background: $accent900;
+		color: $light900;
+		cursor: auto;
+	}
+}
+
+.btnOpacity {
+	background: $dark300;
+	border: 1px solid $accent500;
+	color: $accent500;
+
+	&:hover {
+		background: $dark100;
+		color: $accent300;
+	}
+
+	&:active {
+		border: 1px solid $accent700;
+		background: $dark300;
+		color: $accent700;
+	}
+
+	&:disabled {
+		background: $dark300;
+		color: $accent300;
+		cursor: auto;
+	}
 }
