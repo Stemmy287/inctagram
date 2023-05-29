@@ -40,7 +40,6 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 		reader.readAsDataURL(file)
 	}
 
-
 	const onSaveHandler = () => {
 		uploadImage(file)
 		onClose()

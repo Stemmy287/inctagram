@@ -3,19 +3,17 @@
 @import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
 
 .container {
-  //border: 1px solid red;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 494px;
-  //height: 659px;
-  //border-top: 1px solid $dark100;
-  //border-bottom: 1px solid $dark100;
-  margin: 12px auto;
-  padding: 24px;
-.btn{
-  align-self: flex-end;
-}
+  row-gap: 12px;
+
+  .btn {
+    align-self: flex-end;
+  }
+
   label {
     color: $dark100;
     font-size: 14px;
@@ -25,17 +23,19 @@
   textarea {
     background-color: $dark300;
     margin-bottom: 24px;
-    border: 1px solid $dark100;
+    border: 1px solid $dark300;
+    resize: none;
+    border-radius: 2px;
   }
 
   .datepicker {
     margin-bottom: 24px;
+
     input {
       background-color: $dark300;
       color: white;
       border: none;
     }
   }
-
 }
 

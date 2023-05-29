@@ -2,12 +2,8 @@
 @import "@/common/styles/variables";
 
 .container {
-  //max-width: 228px;
-  //border: 1px solid red;
-  padding: 12px;
-  margin: 12px;
+  margin-right: 24px;
   .photoWrapper {
-    //border: 1px solid red;
     position: relative;
     .photo {
       border-radius: 50%;
@@ -20,7 +16,7 @@
       width: 16px;
       top: 56px;
       left: 192px;
-      transform: translate(-50%, -50%) rotate(90deg);
+      //transform: translate(-50%, -50%) rotate(90deg);
     }
   }
 
