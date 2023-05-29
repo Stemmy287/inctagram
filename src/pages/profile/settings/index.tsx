@@ -1,11 +1,10 @@
-import {useEffect} from 'react'
-import {useRouter} from 'next/router'
-import {useAppSelector} from '@/assets/hooks/useAppSelector'
-import {loggedIn} from '@/modules/authModules/authReducer/authSelectors'
-import {getLayoutM} from '@/components/Layout/MainLayout/MainLayout';
-import { GeneralInformation } from '@/modules/profileModules/createProfile/GeneralInformation'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
+import { getLayoutM } from '@/components/Layout/MainLayout/MainLayout'
 import { useGetUserQuery } from '@/modules/profileModules/createProfile/createProfileApi'
-import { UploadImage } from '@/modules/profileModules/uploadImage/UploadImage'
+import { ProfileSettings } from '@/modules/profileModules/createProfile/ProfileSettings/ProfileSettings'
 
 const Profile = () => {
 
@@ -24,9 +23,7 @@ const Profile = () => {
 
     return (
         <div>
-            <GeneralInformation/>
-            {/*{JSON.stringify(data)}*/}
-            <UploadImage />
+           <ProfileSettings/>
         </div>
     )
 }

@@ -5,7 +5,7 @@ const initialState = {
 	profile: {} as ProfileType
 }
 
-export type AuthInitialStateType = typeof initialState;
+export type AuthInitialStateType = typeof initialState
 
 const slice = createSlice({
 	name: 'createProfile',
