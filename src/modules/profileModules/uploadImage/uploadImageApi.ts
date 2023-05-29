@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@/modules/authModules'
-import { string } from 'yup'
 import { uploadImageActions } from './uploadImageReducer'
 
 export const uploadImageApi = createApi({
@@ -46,12 +45,3 @@ export const uploadImageApi = createApi({
 	}
 })
 export const { useUploadImageMutation, useDeleteImageMutation } = uploadImageApi
-
-type avatars = Array<avatarsType>
-
-type avatarsType = {
-	url: string
-	width: number
-	height: number
-	fileSize: number
-}
