@@ -12,7 +12,7 @@ const Home: NextPageWithLayout = () => {
 	const router = useRouter()
 	useEffect(() => {
 		if (isLoggedIn) {
-			router.push('/profile')
+			router.push('/profile/settings')
 		} else {
 			router.push('/auth/login')
 		}
