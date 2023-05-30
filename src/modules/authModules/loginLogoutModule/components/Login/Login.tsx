@@ -26,7 +26,7 @@ export const Login: NextPageWithLayout = () => {
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			router.push('/profile/settings')
+			router.push('/profile')
 		}
 	}, [isLoggedIn, router])
 

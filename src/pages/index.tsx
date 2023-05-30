@@ -8,11 +8,11 @@ import { useEffect } from 'react'
 const Home: NextPageWithLayout = () => {
 
 	const isLoggedIn = useAppSelector(loggedIn)
-
 	const router = useRouter()
+
 	useEffect(() => {
 		if (isLoggedIn) {
-			router.push('/profile/settings')
+			router.push('/profile')
 		} else {
 			router.push('/auth/login')
 		}
