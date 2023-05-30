@@ -10,7 +10,7 @@ import { SnackBar } from '@/components/SnackBar/SnackBar'
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	const {} = useMeQuery()
 
-	const error = useAppSelector<string | null>(state => state.app.error)
+	const error = useAppSelector(state => state.app.error)
 	const isInitialized = useAppSelector(selectIsInitialized)
 
 	return (
