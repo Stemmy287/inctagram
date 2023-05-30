@@ -42,7 +42,8 @@ export type ProfileType = {
 	lastName: string
 	city: string
 	dateOfBirth: Date
-	aboutMe: string
+	aboutMe: string,
+	avatars: AvatarsType[]
 }
 export type FetchUserResponseType = {
 	id: number
