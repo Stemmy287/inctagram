@@ -6,6 +6,7 @@ import { Button } from '@/components/Button/Button'
 import { SocialInfo } from '@/components/SocialInfo/SocialInfo'
 import { useFetchProfileQuery } from '@/modules/profileModules/profileApi/profileApi'
 import { useRouter } from 'next/router'
+import { PostsList } from '@/modules/profileModules/profileModule/components/PostsList/PostsList'
 
 export const Profile = () => {
 	const { data: profile } = useFetchProfileQuery()
@@ -34,7 +35,7 @@ export const Profile = () => {
 					<span className={s.description}>{profile?.aboutMe || 'tell us about yourself!'}</span>
 				</div>
 			</div>
-			<div>PostsList</div>
+			<PostsList profileId={profile?.id || 0} />
 		</div>
 	)
 }
