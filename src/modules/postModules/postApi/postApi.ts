@@ -15,5 +15,36 @@ export const postApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: () => ({})
+	endpoints: builder => ({
+		fetchPosts: builder.query<ResponseType, number>({
+			query: userId => `posts/${userId}`
+		})
+	})
 })
+
+export type ResponseType<D = PostType[]> = {
+	totalCount: number
+	pagesCount: number
+	page: number
+	pageSize: number
+	items: D
+}
+
+export type PostType = {
+	id: number
+	description: string
+	location: string
+	images: ImagesType[]
+	createdAt: string
+	updatedAt: string
+}
+
+export type ImagesType = {
+	url: string
+	width: number
+	height: number
+	fileSize: number
+	uploadId: string
+}
+
+export const { useFetchPostsQuery } = postApi

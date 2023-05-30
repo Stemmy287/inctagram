@@ -1,8 +1,8 @@
-import {useEffect} from 'react'
-import {useRouter} from 'next/router'
-import {useAppSelector} from '@/assets/hooks/useAppSelector'
-import {loggedIn} from '@/modules/authModules/authReducer/authSelectors'
-import {getLayoutM} from '@/components/Layout/MainLayout/MainLayout';
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
+import { getLayoutM } from '@/components/Layout/MainLayout/MainLayout'
 import { GeneralInformation } from '@/modules/profileModules/profileSettingsModule/createProfile/GeneralInformation'
 import { useGetUserQuery } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
 import { UploadImage } from '@/modules/profileModules/profileSettingsModule/uploadImage/UploadImage'
