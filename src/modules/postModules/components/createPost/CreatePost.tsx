@@ -1,16 +1,16 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import defaultAva from 'public/images/defaultPhoto.png'
+import defaultAva from '../../../../public/images/defaultPhoto.png'
 import Image from 'next/image'
 import { Button } from '@/components/Button/Button'
 import { Popup } from '@/components/Popup/Popup'
 import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
-import s from './AddAvatar.module.scss'
+import s from './CreatePost.module.scss'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 
 type PropsType = {
 	onClose: () => void
 }
-export const AddAvatar: FC<PropsType> = ({ onClose }) => {
+export const CreatePost: FC<PropsType> = ({ onClose }) => {
 	const [ava, setAva] = useState<any>(defaultAva)
 	const [file, setFile] = useState<any>(null)
 	const inputRef = React.useRef<HTMLInputElement>(null)
