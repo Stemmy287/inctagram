@@ -1,22 +1,13 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import defaultAva from '../../../../public/images/defaultPhoto.png'
-import Image from 'next/image'
-import { Button } from '@/components/Button/Button'
 import { Popup } from '@/components/Popup/Popup'
-import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
 import s from './CreatePost.module.scss'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
-
+import { AddPhoto } from '@/modules/postModules/components/addPhoto/AddPhoto'
 type PropsType = {
 	onClose: () => void
 }
 export const CreatePost: FC<PropsType> = ({ onClose }) => {
-	const [ava, setAva] = useState<any>(defaultAva)
+	const [ava, setAva] = useState('')
 	const [file, setFile] = useState<any>(null)
-	const inputRef = React.useRef<HTMLInputElement>(null)
-	const refClick = () => inputRef.current?.click()
-	const [uploadImage] = useUploadImageMutation()
-
 	const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files[0]
@@ -40,33 +31,40 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 		reader.readAsDataURL(file)
 	}
 
-	const onSaveHandler = () => {
-		uploadImage(file)
-		onClose()
-	}
 	return (
 		<Popup onClose={onClose}>
-			<TitlePopup title='Add a profile photo' onClose={onClose} />
 			<div className={s.container}>
-				<div className={s.wrapper}>
-					<div className={s.photo}>
-						<Image src={ava} alt='ava' width='222' height='228' />
-						<input
-							type='file'
-							onChange={uploadHandler}
-							style={{ display: 'none' }}
-							ref={inputRef}
-						/>
-					</div>
-					<div className={s.btn}>
-						{ava === defaultAva ? (
-							<Button callback={refClick} title='Select from computer' />
-						) : (
-							<Button callback={onSaveHandler} title='Save' />
-						)}
-					</div>
-				</div>
+				{ava === '' ? (
+					<AddPhoto uploadHandler={uploadHandler} onClose={onClose} />
+				) : (
+					<h2>PHOTO COMPONENT</h2>
+				)}
 			</div>
 		</Popup>
+
+		// <Popup onClose={onClose}>
+		// 	<TitlePopup title='Add photo' onClose={onClose} />
+		// 	<div className={s.container}>
+		// 		<div className={s.wrapper}>
+		// 			<div className={s.photo}>
+		// 				{ava === defaultAva ? (
+		// 					<Image src={ava} alt='ava' width='222' height='228' />
+		// 				) : (
+		// 					<Image src={ava} alt='post-photo' width='492' height='564' />
+		// 				)}
+		//
+		// 				<input
+		// 					type='file'
+		// 					onChange={uploadHandler}
+		// 					style={{ display: 'none' }}
+		// 					ref={inputRef}
+		// 				/>
+		// 			</div>
+		// 			<div className={s.btn}>
+		// 				<Button callback={refClick} title='Select from computer' />
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </Popup>
 	)
 }

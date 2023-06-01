@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import s from './Button.module.scss'
 
 type PropsType = {
@@ -8,7 +8,7 @@ type PropsType = {
 	opacity?: boolean
 }
 
-export const Button = ({ title, callback, disabled, opacity }: PropsType) => {
+export const Button: FC<PropsType> = ({ title, callback, disabled, opacity }) => {
 	return (
 		<button
 			className={opacity ? s.btn + ' ' + s.btnOpacity : s.btn}
