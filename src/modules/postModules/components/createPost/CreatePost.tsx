@@ -2,6 +2,8 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import { Popup } from '@/components/Popup/Popup'
 import s from './CreatePost.module.scss'
 import { AddPhoto } from '@/modules/postModules/components/addPhoto/AddPhoto'
+import { AddPublication } from '@/modules/postModules/components/addPublication/AddPublication'
+
 type PropsType = {
 	onClose: () => void
 }
@@ -37,34 +39,9 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				{ava === '' ? (
 					<AddPhoto uploadHandler={uploadHandler} onClose={onClose} />
 				) : (
-					<h2>PHOTO COMPONENT</h2>
+					<AddPublication photo={ava} onClose={onClose} file={file} />
 				)}
 			</div>
 		</Popup>
-
-		// <Popup onClose={onClose}>
-		// 	<TitlePopup title='Add photo' onClose={onClose} />
-		// 	<div className={s.container}>
-		// 		<div className={s.wrapper}>
-		// 			<div className={s.photo}>
-		// 				{ava === defaultAva ? (
-		// 					<Image src={ava} alt='ava' width='222' height='228' />
-		// 				) : (
-		// 					<Image src={ava} alt='post-photo' width='492' height='564' />
-		// 				)}
-		//
-		// 				<input
-		// 					type='file'
-		// 					onChange={uploadHandler}
-		// 					style={{ display: 'none' }}
-		// 					ref={inputRef}
-		// 				/>
-		// 			</div>
-		// 			<div className={s.btn}>
-		// 				<Button callback={refClick} title='Select from computer' />
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </Popup>
 	)
 }

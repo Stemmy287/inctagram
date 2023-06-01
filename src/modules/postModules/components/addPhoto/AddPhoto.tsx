@@ -21,13 +21,20 @@ export const AddPhoto: FC<PropsType> = ({ uploadHandler, onClose }) => {
 	return (
 		<>
 			<TitlePopup title='Add photo' onClose={onClose} />
-			<div className={s.wrapper}>
-				<div className={s.photo}>
-					<Image src={defaultAva} alt='post-photo' width='192' height='192' />
-					<input type='file' onChange={uploadHandler} style={{ display: 'none' }} ref={inputRef} />
-				</div>
-				<div className={s.btn}>
-					<Button callback={refClick} title='Select from computer' />
+			<div className={s.container}>
+				<div className={s.wrapper}>
+					<div className={s.photo}>
+						<Image src={defaultAva} alt='post-photo' width='222' height='222' />
+						<input
+							type='file'
+							onChange={uploadHandler}
+							style={{ display: 'none' }}
+							ref={inputRef}
+						/>
+					</div>
+					<div className={s.btn}>
+						<Button callback={refClick} title='Select from computer' />
+					</div>
 				</div>
 			</div>
 		</>
