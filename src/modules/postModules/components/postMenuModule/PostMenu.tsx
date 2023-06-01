@@ -17,43 +17,49 @@ type PropsType = {
 }
 
 export const PostMenuModule: FC<PropsType> = ({ postId }) => {
-	const ref = useRef(null)
 	const [deletePost] = useDeletePostMutation()
 	const appStatus = useAppSelector(selectAppStatus)
 	const [showPopup, setShowPopup] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 
+	const ref = useRef(null)
+	useOnClickOutside(ref, () => setShowMenu(false), 'showMenu')
+
 	const showMenuHandler = () => {
-		setShowMenu(true)
+		setShowMenu(!showMenu)
 	}
 
-	const openPopuHandler = () => {
+	const openPopupHandler = () => {
 		setShowPopup(true)
-		setShowMenu(false)
+		setShowPopup(false)
 	}
 
 	const closePopupHandler = () => {
 		setShowPopup(false)
 	}
 
-	const deletPostHandler = async () => {
+	const deletePostHandler = async () => {
 		await deletePost(postId)
-		setShowPopup(false)
+		setShowMenu(false)
 	}
-
-	useOnClickOutside(ref, () => setShowMenu(false))
 
 	return (
 		<>
 			<div className={s.container}>
-				<Image src={postMenu} alt='postMenu' onClick={showMenuHandler} className={s.showmenu} />
+				<Image
+					src={postMenu}
+					alt='postMenu'
+					onClick={showMenuHandler}
+					className={s.showmenu}
+					id={'showMenu'}
+				/>
 				{showMenu && (
 					<div className={s.menu} ref={ref}>
 						<label className={s.action} onClick={() => {}}>
 							<Image src={edit} alt='edit' />
 							<div className={s.btn}>Edit post</div>
 						</label>
-						<label className={s.action} onClick={openPopuHandler}>
+						<label className={s.action} onClick={openPopupHandler}>
 							<Image src={trash} alt='trash' />
 							<div className={s.btn}>Delete post</div>
 						</label>
@@ -69,7 +75,7 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 							<div className={s.btns}>
 								<Button
 									title={'Yes'}
-									callback={deletPostHandler}
+									callback={deletePostHandler}
 									disabled={appStatus === 'loading'}
 									opacity
 								/>
