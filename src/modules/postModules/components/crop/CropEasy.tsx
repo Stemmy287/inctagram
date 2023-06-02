@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
 import Image from 'next/image'
 import s from './CropEasy.module.scss'
+import { selectOriginalPics } from '@/modules/postModules/postReducer/postReducer-selector'
 
 interface CropEasyProps {
 	setFlag: (flag: FlagType) => void
@@ -18,7 +19,10 @@ interface CropEasyProps {
 
 const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 	const photoURL = useAppSelector(selectUrlOriginalPics)
+	const originalPics = useAppSelector(selectOriginalPics)
 	const dispatch = useAppDispatch()
+
+	console.log(originalPics)
 
 	const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
 	const [zoom, setZoom] = useState(1)
@@ -52,26 +56,14 @@ const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 		setFlag('filter')
 	}
 
-	const zoomPercent = (value: number) => {
-		return `${Math.round(value * 100)}%`
-	}
-
 	return (
-		<>
+		<div>
 			<div className={s.header}>
 				<Image src={arrowBack} alt={'back button'} />
 				<div>{title}</div>
 				<button onClick={cropImage}>{btn}</button>
 			</div>
-			<div
-				style={{
-					background: '#333',
-					position: 'relative',
-					height: 492,
-					width: 'auto',
-					minWidth: 564
-				}}
-			>
+			<div className={s.wrapper}>
 				<Cropper
 					image={photoURL}
 					showGrid={false}
@@ -83,20 +75,15 @@ const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 					onCropComplete={onCropComplete}
 				/>
 			</div>
-			<div style={{ display: 'flex', flexDirection: 'column', margin: '16px' }}>
-				<div style={{ marginBottom: '16px' }}>
-					<label>Zoom: {zoomPercent(zoom)}</label>
-					<input
-						type='range'
-						min={1}
-						max={3}
-						step={0.1}
-						value={zoom}
-						onChange={e => onZoomChange(parseFloat(e.target.value))}
-					/>
-				</div>
-			</div>
-		</>
+			<input
+				type='range'
+				min={1}
+				max={3}
+				step={0.1}
+				value={zoom}
+				onChange={e => onZoomChange(parseFloat(e.target.value))}
+			/>
+		</div>
 	)
 }
 

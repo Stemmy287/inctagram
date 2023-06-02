@@ -1,12 +1,19 @@
-@import "@/common/styles/mixins";
-@import "@/common/styles/variables";
-
+@import '@/common/styles/mixins';
+@import '@/common/styles/variables';
 
 .header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 59px;
-  border-bottom: 2px solid $dark100;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 59px;
+	border-bottom: 2px solid $dark100;
+}
+
+.wrapper {
+	position: relative;
+	height: 492px;
+	min-height: 564px;
+	width: auto;
+	background: '#333';
 }
