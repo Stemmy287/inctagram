@@ -6,7 +6,6 @@ import { Popup } from '@/components/Popup/Popup'
 import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
 import s from './AddAvatar.module.scss'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
-import { CropImage } from '@/modules/postModules/hanna/cropImageModule/CropImage'
 
 type PropsType = {
 	onClose: () => void
