@@ -1,0 +1,12 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 59px;
+  border-bottom: 2px solid $dark100;
+}

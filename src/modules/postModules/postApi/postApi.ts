@@ -45,6 +45,7 @@ export const postApi = createApi({
 })
 
 export const { useAddPostPhotoMutation, useAddPostMutation, useDeletePostMutation } = postApi
+
 export type PostType = {
 	description: string
 }

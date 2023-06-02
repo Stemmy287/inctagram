@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '@/modules/postModules/components/crop/cropImage'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
+import arrowBack from 'public/icons/arrow-ios-back.svg'
 import { FlagType } from '@/modules/postModules/components/createPost/CreatePost'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { selectUrlOriginalPics } from '@/modules/postModules/postReducer/postReducer-selector'
 import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
+import Image from 'next/image'
+import s from './CropEasy.module.scss'
 
 interface CropEasyProps {
 	setFlag: (flag: FlagType) => void
+	title: string
+	btn: string
 }
 
-const CropEasy: React.FC<CropEasyProps> = ({ setFlag }) => {
+const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 	const photoURL = useAppSelector(selectUrlOriginalPics)
 	const dispatch = useAppDispatch()
 
@@ -54,14 +58,18 @@ const CropEasy: React.FC<CropEasyProps> = ({ setFlag }) => {
 
 	return (
 		<>
-			<TitlePopup title={'Cropping'} onClose={() => {}} />
+			<div className={s.header}>
+				<Image src={arrowBack} alt={'back button'} />
+				<div>{title}</div>
+				<button onClick={cropImage}>{btn}</button>
+			</div>
 			<div
 				style={{
 					background: '#333',
 					position: 'relative',
-					height: 400,
+					height: 492,
 					width: 'auto',
-					minWidth: 400
+					minWidth: 564
 				}}
 			>
 				<Cropper
@@ -86,9 +94,6 @@ const CropEasy: React.FC<CropEasyProps> = ({ setFlag }) => {
 						value={zoom}
 						onChange={e => onZoomChange(parseFloat(e.target.value))}
 					/>
-				</div>
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<button onClick={cropImage}>Crop</button>
 				</div>
 			</div>
 		</>
