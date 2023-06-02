@@ -68,8 +68,6 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 						)}
 					</div>
 				</div>
-
-				<CropImage ava={ava} />
 			</div>
 		</Popup>
 	)
