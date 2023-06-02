@@ -4,7 +4,7 @@ import s from './CreatePost.module.scss'
 import { AddPhoto } from '@/modules/postModules/components/addPhoto/AddPhoto'
 import { AddPublication } from '@/modules/postModules/components/addPublication/AddPublication'
 import { AddFilters } from '@/modules/postModules/components/addFilters/AddFilters'
-import CropEasy from '@/modules/postModules/components/crop/CropEasy'
+import { CropEasy } from '@/modules/postModules/components/crop/CropEasy'
 
 type PropsType = {
 	onClose: () => void
