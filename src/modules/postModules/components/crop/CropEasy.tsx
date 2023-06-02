@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '@/modules/postModules/components/crop/cropImage'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
+import { FlagType } from '@/modules/postModules/components/createPost/CreatePost'
+import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { selectUrlOriginalPics } from '@/modules/postModules/postReducer/postReducer-selector'
+import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
+import { postActions } from '@/modules/postModules/postReducer/postReducer'
 
 interface CropEasyProps {
-	photoURL: string
-	setOpenCrop: (val: boolean) => void
-	setPhotoURL: (val: string) => void
-	setFile: (file: File) => void
+	setFlag: (flag: FlagType) => void
 }
 
-const CropEasy: React.FC<CropEasyProps> = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
+const CropEasy: React.FC<CropEasyProps> = ({ setFlag }) => {
+	const photoURL = useAppSelector(selectUrlOriginalPics)
+	const dispatch = useAppDispatch()
+
 	const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
 	const [zoom, setZoom] = useState(1)
 	const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
@@ -38,9 +43,9 @@ const CropEasy: React.FC<CropEasyProps> = ({ photoURL, setOpenCrop, setPhotoURL,
 	const cropImage = async () => {
 		// @ts-ignore
 		const { file, url } = await getCroppedImg(photoURL, croppedAreaPixels)
-		setPhotoURL(url)
-		setFile(file)
-		setOpenCrop(false)
+		dispatch(postActions.setUrlCroppedPics({ urlCroppedPics: url }))
+		dispatch(postActions.setCroppedPics({ croppedPics: file }))
+		setFlag('filter')
 	}
 
 	const zoomPercent = (value: number) => {
@@ -82,10 +87,9 @@ const CropEasy: React.FC<CropEasyProps> = ({ photoURL, setOpenCrop, setPhotoURL,
 						onChange={e => onZoomChange(parseFloat(e.target.value))}
 					/>
 				</div>
-				{/*<div style={{ display: 'flex', justifyContent: 'space-between' }}>*/}
-				{/*<button onClick={() => setOpenCrop(false)}>Cancel</button>*/}
-				{/*<button onClick={cropImage}>Crop</button>*/}
-				{/*</div>*/}
+				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<button onClick={cropImage}>Crop</button>
+				</div>
 			</div>
 		</>
 	)

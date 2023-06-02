@@ -32,8 +32,8 @@ export const AddPhoto: FC<PropsType> = ({ onClose, setFlag }) => {
 			}
 			dispatch(postActions.setOriginalPics({ originalPics: file }))
 		}
-		// setFlag('crop')
-		setFlag('filter')
+		setFlag('crop')
+		// setFlag('filter')
 	}
 
 	return (

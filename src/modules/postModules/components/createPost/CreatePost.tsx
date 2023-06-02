@@ -4,6 +4,7 @@ import s from './CreatePost.module.scss'
 import { AddPhoto } from '@/modules/postModules/components/addPhoto/AddPhoto'
 import { AddPublication } from '@/modules/postModules/components/addPublication/AddPublication'
 import { AddFilters } from '@/modules/postModules/components/addFilters/AddFilters'
+import CropEasy from '@/modules/postModules/components/crop/CropEasy'
 
 type PropsType = {
 	onClose: () => void
@@ -22,6 +23,8 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 			<div className={s.container}>
 				{flag === 'load' ? (
 					<AddPhoto onClose={onClose} setFlag={flagChangeHandler} />
+				) : flag === 'crop' ? (
+					<CropEasy setFlag={flagChangeHandler} />
 				) : flag === 'filter' ? (
 					<AddFilters btn={'Next'} title={'Filters'} setFlag={flagChangeHandler} />
 				) : flag === 'final' ? (

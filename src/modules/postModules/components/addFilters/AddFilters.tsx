@@ -17,9 +17,9 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 	setFlag
 }) => {
 	const dispatch = useDispatch()
-	const croppedPics = useSelector<AppRootStateType, File>(state => state.postReducer.originalPics)
+	const croppedPics = useSelector<AppRootStateType, File>(state => state.postReducer.croppedPics)
 	const urlCroppedPics = useSelector<AppRootStateType, string>(
-		state => state.postReducer.urlOriginalPics
+		state => state.postReducer.urlCroppedPics
 	)
 
 	const [filter, setFilter] = useState('none')
