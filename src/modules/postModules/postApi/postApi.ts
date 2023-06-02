@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { uploadImageActions } from '@/modules/profileModules/uploadImage/uploadImageReducer'
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -29,7 +28,7 @@ export const postApi = createApi({
 				}
 			}
 		}),
-		addPost: builder.mutation<any, PostType>({
+		addPost: builder.mutation<FetchPostResponseType, PostType>({
 			query: data => ({
 				url: 'posts',
 				method: 'POST',
