@@ -46,3 +46,13 @@
   display: flex;
   justify-content: center;
 }
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}

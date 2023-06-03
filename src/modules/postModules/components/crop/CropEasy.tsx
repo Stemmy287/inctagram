@@ -1,47 +1,54 @@
-import React, { useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
-import getCroppedImg from '@/modules/postModules/components/crop/cropImage'
-import arrowBack from 'public/icons/arrow-ios-back.svg'
+import getCroppedImg from '@/assets/utils/cropImage/cropImage'
 import { FlagType } from '@/modules/postModules/components/createPost/CreatePost'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { selectUrlOriginalPics } from '@/modules/postModules/postReducer/postReducer-selector'
+import {
+	selectOriginalPics,
+	selectUrlOriginalPics
+} from '@/modules/postModules/postReducer/postReducer-selector'
 import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
-import Image from 'next/image'
 import s from './CropEasy.module.scss'
-import expand from 'public/icons/expand.svg'
-import image from 'public/icons/image.svg'
-import maximize from 'public/icons/maximize.svg'
 import { Area } from 'react-easy-crop/types'
+import { getImageDimensions } from '@/assets/utils/getImageDimensions/getImageDimensions'
+import { CropPhotoComponent } from './CropPhoto/CropPhotoComponent'
+import { HeaderForModal } from '@/modules/postModules/components/headerForModal/HeaderForModal'
 
-interface CropEasyProps {
+type PropsType = {
 	setFlag: (flag: FlagType) => void
 	title: string
 	btn: string
 }
 
-export const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
+export type SizeType = {
+	width: number
+	height: number
+}
+
+type CropType = {
+	x: number
+	y: number
+}
+
+export const CropEasy: FC<PropsType> = ({ setFlag }) => {
 	const photoURL = useAppSelector(selectUrlOriginalPics)
+	const pics = useAppSelector(selectOriginalPics)
 	const dispatch = useAppDispatch()
 
+	const [originalSize, setOriginalSize] = useState<SizeType>({} as SizeType)
+	const [currentSize, setCurrentSize] = useState<SizeType>({ height: 1, width: 1 })
 	const [editPhoto, setEditPhoto] = useState(false)
-	const [openModal, setOpenModal] = useState(false)
-	const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+	const [openMenu, setOpenMenu] = useState(false)
+	const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
 	const [zoom, setZoom] = useState(1)
-	const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
-		width: number
-		height: number
-		x: number
-		y: number
-	} | null>(null)
+	const [croppedAreaPixels, setCroppedAreaPixels] = useState<(SizeType & CropType) | null>(null)
 
 	const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
 		setCroppedAreaPixels(croppedAreaPixels)
-		// ширина высота
-		console.log(croppedAreaPixels)
 	}
 
-	const onCropChange = (crop: { x: number; y: number }) => {
+	const onCropChange = (crop: CropType) => {
 		setCrop(crop)
 	}
 
@@ -53,10 +60,16 @@ export const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 		setEditPhoto(!editPhoto)
 		setCrop({ x: 0, y: 0 })
 		setZoom(1)
+		if (openMenu) {
+			setOpenMenu(false)
+		}
 	}
 
 	const openModalHandler = () => {
-		setOpenModal(!openModal)
+		setOpenMenu(!openMenu)
+		if (editPhoto) {
+			setEditPhoto(false)
+		}
 	}
 
 	const cropImage = async () => {
@@ -68,15 +81,26 @@ export const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 		}
 	}
 
+	const originalPic = () => {
+		setZoom(1)
+		setCurrentSize(originalSize)
+	}
+
+	useEffect(() => {
+		getImageDimensions(pics).then(res => {
+			setOriginalSize({ width: res.width, height: res.height })
+			setCurrentSize({ width: res.width, height: res.height })
+		})
+	}, [pics])
+
 	return (
 		<div>
-			<div className={s.header}>
-				<Image src={arrowBack} alt={'back button'} />
-				<div>{title}</div>
-				<button onClick={cropImage} className={s.btn}>
-					{btn}
-				</button>
-			</div>
+			<HeaderForModal
+				title={'Cropping'}
+				callBack={cropImage}
+				btnTitle={'Next'}
+				clickBack={() => setFlag('load')}
+			/>
 			<div>
 				<div className={s.wrapper}>
 					<Cropper
@@ -84,73 +108,22 @@ export const CropEasy: React.FC<CropEasyProps> = ({ setFlag, title, btn }) => {
 						showGrid={false}
 						crop={crop}
 						zoom={zoom}
-						aspect={1}
+						aspect={currentSize.width / currentSize.height}
 						onZoomChange={onZoomChange}
 						onCropChange={onCropChange}
 						onCropComplete={onCropComplete}
 					/>
 				</div>
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						width: '40%',
-						zIndex: 99,
-						position: 'absolute'
-					}}
-				>
-					{editPhoto && (
-						<div className={s.inp}>
-							<input
-								type='range'
-								min={1}
-								max={3}
-								step={0.1}
-								value={zoom}
-								onChange={e => onZoomChange(parseFloat(e.target.value))}
-							/>
-						</div>
-					)}
-					{openModal && (
-						<div className={s.modal}>
-							<div className={s.modalMain}>
-								Оригинал
-								<Image src={image} alt={'image'} width={24} height={24} />
-							</div>
-							<div className={s.modalMain}>1:1</div>
-							<div className={s.modalMain}>4:5</div>
-							<div className={s.modalMain}>16:9</div>
-						</div>
-					)}
-					<div
-						style={{
-							display: 'flex',
-							position: 'relative',
-							bottom: 55,
-							left: 20
-						}}
-					>
-						<Image
-							src={expand}
-							alt={'expand'}
-							className={s.buttonChange}
-							onClick={openModalHandler}
-						/>
-						<Image
-							src={maximize}
-							alt={'maximize'}
-							className={s.buttonChange}
-							onClick={editPhotoHandler}
-							style={{ marginLeft: '20px' }}
-						/>
-					</div>
-					<Image
-						src={image}
-						alt={'image'}
-						className={s.buttonChange}
-						style={{ position: 'relative', bottom: 55 }}
-					/>
-				</div>
+				<CropPhotoComponent
+					editPhoto={editPhoto}
+					openMenu={openMenu}
+					zoom={zoom}
+					setZoom={setZoom}
+					editPhotoHandler={editPhotoHandler}
+					openModalHandler={openModalHandler}
+					originalPic={originalPic}
+					setCurrentSize={setCurrentSize}
+				/>
 			</div>
 		</div>
 	)

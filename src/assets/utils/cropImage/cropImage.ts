@@ -1,3 +1,4 @@
+import { SizeType } from '@/modules/postModules/components/crop/CropEasy'
 import { Area } from 'react-easy-crop'
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
@@ -16,7 +17,7 @@ export function getRadianAngle(degreeValue: number): number {
 /**
  * Returns the new bounding area of a rotated rectangle.
  */
-export function rotateSize(width: number, height: number): { width: number; height: number } {
+export function rotateSize(width: number, height: number): SizeType {
 	return {
 		width,
 		height

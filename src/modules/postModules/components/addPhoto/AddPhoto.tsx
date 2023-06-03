@@ -23,6 +23,7 @@ export const AddPhoto: FC<PropsType> = ({ onClose, setFlag }) => {
 	const upLoadHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length) {
 			const file = e.target.files?.[0]
+
 			if (file) {
 				const reader = new FileReader()
 				reader.onload = () => {
@@ -33,7 +34,6 @@ export const AddPhoto: FC<PropsType> = ({ onClose, setFlag }) => {
 			dispatch(postActions.setOriginalPics({ originalPics: file }))
 		}
 		setFlag('crop')
-		// setFlag('filter')
 	}
 
 	return (
