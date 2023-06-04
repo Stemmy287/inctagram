@@ -24,7 +24,7 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				{flag === 'load' ? (
 					<AddPhoto onClose={onClose} setFlag={flagChangeHandler} />
 				) : flag === 'crop' ? (
-					<CropEasy setFlag={flagChangeHandler} title={'Cropping'} btn={'Next'} />
+					<CropEasy setFlag={flagChangeHandler} />
 				) : flag === 'filter' ? (
 					<AddFilters btn={'Next'} title={'Filters'} setFlag={flagChangeHandler} />
 				) : flag === 'final' ? (

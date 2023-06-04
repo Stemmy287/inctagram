@@ -17,8 +17,6 @@ import { HeaderForModal } from '@/modules/postModules/components/headerForModal/
 
 type PropsType = {
 	setFlag: (flag: FlagType) => void
-	title: string
-	btn: string
 }
 
 export type SizeType = {
@@ -36,13 +34,13 @@ export const CropEasy: FC<PropsType> = ({ setFlag }) => {
 	const pics = useAppSelector(selectOriginalPics)
 	const dispatch = useAppDispatch()
 
-	const [originalSize, setOriginalSize] = useState<SizeType>({} as SizeType)
+	const [croppedAreaPixels, setCroppedAreaPixels] = useState<(SizeType & CropType) | null>(null)
 	const [currentSize, setCurrentSize] = useState<SizeType>({ height: 1, width: 1 })
+	const [originalSize, setOriginalSize] = useState<SizeType>({} as SizeType)
+	const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
 	const [editPhoto, setEditPhoto] = useState(false)
 	const [openMenu, setOpenMenu] = useState(false)
-	const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
 	const [zoom, setZoom] = useState(1)
-	const [croppedAreaPixels, setCroppedAreaPixels] = useState<(SizeType & CropType) | null>(null)
 
 	const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
 		setCroppedAreaPixels(croppedAreaPixels)
@@ -101,30 +99,28 @@ export const CropEasy: FC<PropsType> = ({ setFlag }) => {
 				btnTitle={'Next'}
 				clickBack={() => setFlag('load')}
 			/>
-			<div>
-				<div className={s.wrapper}>
-					<Cropper
-						image={photoURL}
-						showGrid={false}
-						crop={crop}
-						zoom={zoom}
-						aspect={currentSize.width / currentSize.height}
-						onZoomChange={onZoomChange}
-						onCropChange={onCropChange}
-						onCropComplete={onCropComplete}
-					/>
-				</div>
-				<CropPhotoComponent
-					editPhoto={editPhoto}
-					openMenu={openMenu}
+			<div className={s.wrapper}>
+				<Cropper
+					image={photoURL}
+					showGrid={false}
+					crop={crop}
 					zoom={zoom}
-					setZoom={setZoom}
-					editPhotoHandler={editPhotoHandler}
-					openModalHandler={openModalHandler}
-					originalPic={originalPic}
-					setCurrentSize={setCurrentSize}
+					aspect={currentSize.width / currentSize.height}
+					onZoomChange={onZoomChange}
+					onCropChange={onCropChange}
+					onCropComplete={onCropComplete}
 				/>
 			</div>
+			<CropPhotoComponent
+				editPhoto={editPhoto}
+				openMenu={openMenu}
+				zoom={zoom}
+				setZoom={setZoom}
+				editPhotoHandler={editPhotoHandler}
+				openModalHandler={openModalHandler}
+				originalPic={originalPic}
+				setCurrentSize={setCurrentSize}
+			/>
 		</div>
 	)
 }

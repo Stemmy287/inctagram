@@ -2,8 +2,7 @@
 @import "@/common/styles/variables.scss";
 
 .header {
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   align-items: center;
   justify-content: space-between;
   height: 59px;
