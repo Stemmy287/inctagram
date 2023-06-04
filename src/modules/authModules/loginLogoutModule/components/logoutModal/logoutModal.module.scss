@@ -1,0 +1,26 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+
+.notification {
+  width: 378px;
+  padding: 30px 24px;
+  row-gap: 18px;
+
+  > span {
+    @include text(16px, 400, 24px);
+  }
+
+  .logout {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 18px;
+
+    .btn {
+      width: 150px;
+    }
+
+  }
+
+}
+
+

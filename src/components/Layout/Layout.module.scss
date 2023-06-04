@@ -3,6 +3,7 @@
 
 .container {
   @include flex-center-column;
+  height: 100vh;
   .main {
     @include flex-center;
     width: 100%;
