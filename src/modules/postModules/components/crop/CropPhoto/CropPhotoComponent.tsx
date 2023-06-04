@@ -10,14 +10,14 @@ import { FC } from 'react'
 import { SizeType } from '../CropEasy'
 
 type PropsType = {
-	editPhoto: boolean
-	openMenu: boolean
 	zoom: number
-	setZoom: (val: number) => void
-	setCurrentSize: (data: SizeType) => void
+	openMenu: boolean
+	editPhoto: boolean
 	originalPic: () => void
 	openModalHandler: () => void
 	editPhotoHandler: () => void
+	setZoom: (val: number) => void
+	setCurrentSize: (data: SizeType) => void
 }
 
 export const CropPhotoComponent: FC<PropsType> = ({
@@ -54,40 +54,31 @@ export const CropPhotoComponent: FC<PropsType> = ({
 			)}
 			{openMenu && (
 				<div className={s.modal}>
-					<div className={s.modalMain}>
+					<label className={s.modalMain} onClick={originalPic}>
 						Оригинал
-						<Image src={image} alt={'image'} width={20} height={20} onClick={originalPic} />
-					</div>
-					<div className={s.modalMain}>
+						<Image src={image} alt={'image'} width={20} height={20} />
+					</label>
+					<label
+						className={s.modalMain}
+						onClick={() => rectanglePicHandler({ height: 1, width: 1 })}
+					>
 						1:1
-						<Image
-							src={rectangle1x1}
-							alt={'rectangle1x1'}
-							width={18}
-							height={18}
-							onClick={() => rectanglePicHandler({ height: 1, width: 1 })}
-						/>
-					</div>
-					<div className={s.modalMain}>
+						<Image src={rectangle1x1} alt={'rectangle1x1'} width={18} height={18} />
+					</label>
+					<label
+						className={s.modalMain}
+						onClick={() => rectanglePicHandler({ height: 5, width: 4 })}
+					>
 						4:5
-						<Image
-							src={rectangle4x5}
-							alt={'rectangle4x5'}
-							width={18}
-							height={18}
-							onClick={() => rectanglePicHandler({ height: 5, width: 4 })}
-						/>
-					</div>
-					<div className={s.modalMain}>
+						<Image src={rectangle4x5} alt={'rectangle4x5'} width={18} height={18} />
+					</label>
+					<label
+						className={s.modalMain}
+						onClick={() => rectanglePicHandler({ height: 9, width: 16 })}
+					>
 						16:9
-						<Image
-							src={rectangle16x9}
-							alt={'rectangle16x9'}
-							width={18}
-							height={18}
-							onClick={() => rectanglePicHandler({ height: 9, width: 16 })}
-						/>
-					</div>
+						<Image src={rectangle16x9} alt={'rectangle16x9'} width={18} height={18} />
+					</label>
 				</div>
 			)}
 			<div className={s.editButton}>
