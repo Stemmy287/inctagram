@@ -1,0 +1,61 @@
+@import '@/common/styles/mixins';
+@import '@/common/styles/variables';
+
+.editPhoto {
+	@include flex-space-between;
+	width: 450px;
+	z-index: 9;
+	position: absolute;
+
+	.editButton {
+		display: flex;
+		position: relative;
+		bottom: 55px;
+		left: 20px;
+
+		.buttonChange {
+			cursor: pointer;
+			display: flex;
+			width: 36px;
+			height: 36px;
+			background: $dark500;
+			opacity: 0.8;
+			border-radius: 2px;
+		}
+
+		.maxi {
+			margin-left: 20px;
+		}
+	}
+
+	.inp {
+		@include flex-center-vert;
+		width: 135px;
+		height: 40px;
+		background: $dark500;
+		opacity: 0.8;
+		border-radius: 2px;
+		position: inherit;
+		bottom: 100px;
+		left: 75px;
+	}
+
+	.modal {
+		@include flex-column;
+		width: 156px;
+		height: 157px;
+		position: inherit;
+		bottom: 100px;
+		left: 20px;
+		background: $dark500;
+		opacity: 0.8;
+		border-radius: 2px;
+
+		.modalMain {
+			@include flex-row;
+			justify-content: space-between;
+			padding: 10px;
+			cursor: pointer;
+		}
+	}
+}
