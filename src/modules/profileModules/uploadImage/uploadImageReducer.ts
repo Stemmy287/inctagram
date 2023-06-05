@@ -4,8 +4,6 @@ const initialState = {
 	avatar: '' as string
 }
 
-export type initialStateType = typeof initialState
-
 const slice = createSlice({
 	name: 'uploadImage',
 	initialState,
@@ -17,4 +15,3 @@ const slice = createSlice({
 })
 
 export const uploadImageReducer = slice.reducer
-export const uploadImageActions = slice.actions

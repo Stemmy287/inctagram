@@ -17,20 +17,20 @@ export const EditAvatar = () => {
 		setOpenModal(!openModal)
 	}
 
-	// const deleteImageHandler = () => {}
+	const deleteImageHandler = () => {}
 
 	return (
 		<div className={s.container}>
 			<div className={s.photoWrapper}>
 				{avaFromServer ? (
-					<img src={avaFromServer} alt={'ava'} className={s.photo} />
+					<Image src={avaFromServer} alt={'ava'} className={s.photo} width={192} height={192} />
 				) : (
 					<DefaultAva />
 				)}
 				<Image
 					src={deleteAva}
 					alt='delete-ava'
-					// onClick={deleteImageHandler}
+					onClick={deleteImageHandler}
 					className={s.closeImg}
 				/>
 			</div>

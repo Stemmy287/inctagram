@@ -33,7 +33,7 @@ export const uploadImageApi = createApi({
 		})
 	})
 })
-export const { useUploadImageMutation, useDeleteImageMutation } = uploadImageApi
+export const { useUploadImageMutation } = uploadImageApi
 
 type UploadImageType = {
 	avatars: AvatarsType[]

@@ -51,10 +51,6 @@ export const postApi = createApi({
 
 export const { useAddPostPhotoMutation, useAddPostMutation, useDeletePostMutation } = postApi
 
-// export type PostType = {
-// 	description: string
-// }
-
 export type PostType = {
 	description: string
 	childrenMetadata: ChildrenMetadata[]
@@ -71,13 +67,6 @@ export type FetchPostResponseType = {
 	createdAt: Date
 	updatedAt: string
 }
-// export type ImagesType = {
-// 	url: string
-// 	width: number
-// 	height: number
-// 	fileSize: number
-// 	uploadId: string
-// }
 
 export type ImagesType = {
 	images: ImagesTypeImages[]
