@@ -30,7 +30,7 @@ export const setImageFilter = async (
 	canvas.width = originalWidth
 	canvas.height = originalHeight
 
-	ctx.putImageData(data, 0, 0)
+	ctx.putImageData(data, canvas.width, canvas.height)
 
 	return new Promise<{ file: Blob; url: string }>((resolve, reject) => {
 		canvas.toBlob(blob => {
@@ -38,10 +38,10 @@ export const setImageFilter = async (
 				return reject(new Error('Failed to create a blob'))
 				// return
 			}
-			const modifiedFile = new File([blob], 'filtered.jpeg', { type: 'img/jpeg' })
-			resolve({ file: modifiedFile, url: canvas.toDataURL() })
-			// resolve({ file: modifiedFile, url: URL.createObjectURL(modifiedFile) })
-		}, 'image/jpeg')
+			const modifiedFile = new File([blob], 'filtered.jpeg', { type: 'image/jpeg' })
+			// resolve({ file: modifiedFile, url: canvas.toDataURL() })
+			resolve({ file: modifiedFile, url: URL.createObjectURL(modifiedFile) })
+		})
 	})
 
 	// const canvas = document.createElement('canvas')
