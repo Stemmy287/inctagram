@@ -1,0 +1,47 @@
+@import "@/common/styles/variables.scss";
+
+.container {
+
+
+  display: flex;
+  flex-direction: column;
+
+
+  //width: 972px;
+  width: 100%;
+  min-width: 972px;
+  //height: 564px;
+  height: 100%;
+  min-height: 564px;
+  background: $dark300;
+  border: 1px solid $dark100;
+  border-radius: 2px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 59px;
+    border-bottom: 2px solid $dark100;
+    //margin-left: 36px;
+    //margin-right: 36px;
+  }
+
+  .filtersContainer {
+    display: flex;
+    flex-direction: row;
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .filter {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+  }
+}
