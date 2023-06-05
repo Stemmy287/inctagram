@@ -26,11 +26,11 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				) : flag === 'crop' ? (
 					<CropEasy setFlag={flagChangeHandler} />
 				) : flag === 'filter' ? (
-					<AddFilters btn={'Next'} title={'Filters'} setFlag={flagChangeHandler} />
+					<AddFilters setFlag={flagChangeHandler} />
 				) : flag === 'final' ? (
 					<AddPublication onClose={onClose} />
 				) : (
-					<div>crop</div>
+					<div>ooops, something was wrong</div>
 				)}
 			</div>
 		</Popup>
