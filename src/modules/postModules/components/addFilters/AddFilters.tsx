@@ -10,6 +10,8 @@ import { AppRootStateType } from '@/store/store'
 import { newImage } from '@/modules/postModules/newImageInstance'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
 import { HeaderForModal } from '@/modules/postModules/components/headerForModal/HeaderForModal'
+import { setImageFilter } from '@/assets/utils/setImageFilter/setImageFilter'
+import { auto } from '@popperjs/core'
 
 export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 	btn,
@@ -25,40 +27,48 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 
 	const [filter, setFilter] = useState('none')
 
-	const handleImageSubmit = () => {
-		if (croppedPics) {
-			const img = newImage
-			img.src = URL.createObjectURL(croppedPics)
-			img.onload = () => {
-				const originalWidth = img.naturalWidth
-				const originalHeight = img.naturalHeight
-
-				const canvas = document.createElement('canvas')
-				const context = canvas.getContext('2d')
-
-				if (context) {
-					canvas.width = originalWidth
-					canvas.height = originalHeight
-
-					context.filter = filter
-
-					context.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-					canvas.toBlob(blob => {
-						if (blob) {
-							const modifiedFile = new File([blob], 'file.name', { type: 'image/jpeg' })
-							dispatch(postActions.setFilteredPics({ filteredPics: modifiedFile }))
-							// console.log(modifiedFile)
-						}
-					})
-					const newURL = canvas.toDataURL()
-					// console.log(newURL)
-					dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: newURL }))
-				}
-			}
+	const handleImageSubmit = async () => {
+		const res = await setImageFilter(croppedPics, urlCroppedPics, filter)
+		debugger
+		if (res) {
+			dispatch(postActions.setFilteredPics({ filteredPics: res.file as File }))
+			dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: res.url }))
+			setFlag('final')
 		}
 
-		setFlag('final')
+		// if (croppedPics) {
+		// 	const img = newImage
+		// 	img.src = URL.createObjectURL(croppedPics)
+		// 	img.onload = () => {
+		// 		const originalWidth = img.naturalWidth
+		// 		const originalHeight = img.naturalHeight
+		//
+		// 		const canvas = document.createElement('canvas')
+		// 		const context = canvas.getContext('2d')
+		//
+		// 		if (context) {
+		// 			canvas.width = originalWidth
+		// 			canvas.height = originalHeight
+		//
+		// 			context.filter = filter
+		//
+		// 			context.drawImage(img, 0, 0, canvas.width, canvas.height)
+		//
+		// 			canvas.toBlob(blob => {
+		// 				if (blob) {
+		// 					const modifiedFile = new File([blob], 'file.name', { type: 'image/jpeg' })
+		// 					dispatch(postActions.setFilteredPics({ filteredPics: modifiedFile }))
+		// 					// console.log(modifiedFile)
+		// 				}
+		// 			})
+		// 			const newURL = canvas.toDataURL()
+		// 			// console.log(newURL)
+		// 			dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: newURL }))
+		// 		}
+		// 	}
+		// }
+		//
+		// setFlag('final')
 	}
 
 	return (
