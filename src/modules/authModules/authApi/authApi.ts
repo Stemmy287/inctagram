@@ -53,6 +53,16 @@ export const authApi = createApi({
 				}
 			}
 		}),
+		updateTokens: builder.mutation<LoginResponseType, void>({
+			query: () => ({
+				url: 'auth/update-tokens',
+				method: 'POST'
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				const { data } = await queryFulfilled
+				localStorage.setItem('token', data.accessToken)
+			}
+		}),
 		recoveryPassword: builder.mutation<void, PasswordRecoveryType>({
 			query: body => ({
 				url: 'auth/password-recovery',
@@ -99,7 +109,8 @@ export const {
 	useResetPasswordMutation,
 	useRegistrationMutation,
 	useRegConfirmationMutation,
-	useRegEmailResendingMutation
+	useRegEmailResendingMutation,
+	useUpdateTokensMutation
 } = authApi
 
 export type ConfirmationType = {

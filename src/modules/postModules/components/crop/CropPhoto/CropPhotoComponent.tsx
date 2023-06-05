@@ -56,28 +56,28 @@ export const CropPhotoComponent: FC<PropsType> = ({
 				<div className={s.modal}>
 					<label className={s.modalMain} onClick={originalPic}>
 						Оригинал
-						<Image src={image} alt={'image'} width={20} height={20} />
+						<Image src={image} alt={'image'} className={s.image} />
 					</label>
 					<label
 						className={s.modalMain}
 						onClick={() => rectanglePicHandler({ height: 1, width: 1 })}
 					>
 						1:1
-						<Image src={rectangle1x1} alt={'rectangle1x1'} width={18} height={18} />
+						<Image src={rectangle1x1} alt={'rectangle1x1'} className={s.image} />
 					</label>
 					<label
 						className={s.modalMain}
 						onClick={() => rectanglePicHandler({ height: 5, width: 4 })}
 					>
 						4:5
-						<Image src={rectangle4x5} alt={'rectangle4x5'} width={18} height={18} />
+						<Image src={rectangle4x5} alt={'rectangle4x5'} className={s.image} />
 					</label>
 					<label
 						className={s.modalMain}
 						onClick={() => rectanglePicHandler({ height: 9, width: 16 })}
 					>
 						16:9
-						<Image src={rectangle16x9} alt={'rectangle16x9'} width={18} height={18} />
+						<Image src={rectangle16x9} alt={'rectangle16x9'} className={s.image} />
 					</label>
 				</div>
 			)}
@@ -91,7 +91,7 @@ export const CropPhotoComponent: FC<PropsType> = ({
 				/>
 			</div>
 			<div className={s.editButton}>
-				<Image src={image} alt={'image'} className={`${s.buttonChange} ${s.image}`} />
+				<Image src={image} alt={'image'} className={s.buttonChange} />
 			</div>
 		</div>
 	)
