@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import defaultAva from '../../../../../public/images/defaultPhoto.png'
 import deleteAva from '../../../../../public/icons/delete-ava.svg'
 import Image from 'next/image'
 import { AddAvatar } from '@/modules/profileModules/uploadImage/AddAvatar'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import s from './EditAvatar.module.scss'
 import { useGetUserQuery } from '@/modules/profileModules/createProfile/createProfileApi'
+import { DefaultAva } from '@/modules/profileModules/createProfile/ProfileSettings/DefaultAva'
 
 export const EditAvatar = () => {
 	const {} = useGetUserQuery()
@@ -25,7 +25,7 @@ export const EditAvatar = () => {
 				{avaFromServer ? (
 					<img src={avaFromServer} alt={'ava'} className={s.photo} />
 				) : (
-					<Image src={defaultAva} alt={'ava'} className={s.photo} />
+					<DefaultAva />
 				)}
 				<Image
 					src={deleteAva}

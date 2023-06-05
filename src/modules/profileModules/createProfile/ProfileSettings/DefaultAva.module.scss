@@ -1,0 +1,13 @@
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
+
+.borderDefault {
+
+  @include flex-center;
+  background-color: $dark500;
+  border-radius: 50%;
+  width: 192px;
+  height: 192px;
+  margin: 24px;
+
+}
