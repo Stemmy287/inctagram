@@ -8,6 +8,7 @@ import { uploadImageApi } from '@/modules/profileModules/uploadImage/uploadImage
 import { uploadImageReducer } from '@/modules/profileModules/uploadImage/uploadImageReducer'
 import { postApi } from '@/modules/postModules/postApi/postApi'
 import { postReducer } from '@/modules/postModules/postReducer/postReducer'
+import { createProfileReducer } from '@/modules/profileModules/createProfile/createProfileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	[uploadImageApi.reducerPath]: uploadImageApi.reducer,
 	[postApi.reducerPath]: postApi.reducer,
 	uploadImage: uploadImageReducer,
+	createProfileReducer: createProfileReducer,
 	app: appReducer,
 	authReducer: authReducer,
 	postReducer: postReducer

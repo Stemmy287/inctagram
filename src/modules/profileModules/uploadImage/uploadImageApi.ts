@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@/modules/authModules'
-import { uploadImageActions } from './uploadImageReducer'
+import { AvatarsType } from '@/modules/profileModules/createProfile/createProfileApi'
 
 export const uploadImageApi = createApi({
 	reducerPath: 'uploadImageApi',
@@ -15,33 +15,26 @@ export const uploadImageApi = createApi({
 			return headers
 		}
 	}),
-	endpoints: build => {
-		return {
-			uploadImage: build.mutation<any, File>({
-				query: file => {
-					const formData = new FormData()
-					formData.append('file', file)
-
-					return {
-						method: 'POST',
-						url: 'users/profile/avatar',
-						body: formData
-					}
-				},
-				async onQueryStarted(_, { dispatch, queryFulfilled }) {
-					const res = await queryFulfilled
-					dispatch(uploadImageActions.setAva({ ava: res.data.avatars[0].url }))
-				}
-			}),
-			deleteImage: build.mutation<any, any>({
-				query: () => {
-					return {
-						method: 'DELETE',
-						url: 'users/profile/avatar'
-					}
-				}
+	endpoints: build => ({
+		uploadImage: build.mutation<UploadImageType, FormData>({
+			query: file => ({
+				url: 'users/profile/avatar',
+				method: 'POST',
+				body: file
 			})
-		}
-	}
+		}),
+		deleteImage: build.mutation<void, void>({
+			query: () => {
+				return {
+					method: 'DELETE',
+					url: 'users/profile/avatar'
+				}
+			}
+		})
+	})
 })
-export const { useUploadImageMutation, useDeleteImageMutation } = uploadImageApi
+export const { useUploadImageMutation } = uploadImageApi
+
+type UploadImageType = {
+	avatars: AvatarsType[]
+}

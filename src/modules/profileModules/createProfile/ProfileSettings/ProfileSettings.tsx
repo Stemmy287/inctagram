@@ -4,7 +4,7 @@ import { EditAvatar } from '@/modules/profileModules/createProfile/ProfileSettin
 
 export const ProfileSettings = () => {
 	return (
-		<div className={s.container}>
+		<div>
 			<div className={s.wrapper}>
 				<EditAvatar />
 				<GeneralInformation />
@@ -12,4 +12,3 @@ export const ProfileSettings = () => {
 		</div>
 	)
 }
-

@@ -6,11 +6,14 @@ import { Popup } from '@/components/Popup/Popup'
 import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
 import s from './AddAvatar.module.scss'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
+import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
+import { createProfileActions } from '@/modules/profileModules/createProfile/createProfileReducer'
 
 type PropsType = {
 	onClose: () => void
 }
 export const AddAvatar: FC<PropsType> = ({ onClose }) => {
+	const dispatch = useAppDispatch()
 	const [ava, setAva] = useState<any>(defaultAva)
 	const [file, setFile] = useState<File | null>(null)
 	const inputRef = React.useRef<HTMLInputElement>(null)
@@ -42,8 +45,16 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 	}
 
 	const onSaveHandler = () => {
-		// console.log(file)
-		uploadImage(file as File)
+		const formData = new FormData()
+		formData.append('file', file as File)
+
+		uploadImage(formData)
+			.unwrap()
+			.then(() =>
+				convertFileToBase64(file as File, (file64: string) => {
+					dispatch(createProfileActions.setAva({ ava: file64 }))
+				})
+			)
 		onClose()
 	}
 	return (
