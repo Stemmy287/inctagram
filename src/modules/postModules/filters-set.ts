@@ -16,6 +16,21 @@ export const filters_set: FilterSetType[] = [
 		id: '5',
 		filter: 'contrast(150%) saturate(110%)',
 		filterTitle: 'Lofi'
+	},
+	{
+		id: '6',
+		filter: 'contrast(108%) brightness(108%) sepia(8%)',
+		filterTitle: 'Valensia'
+	},
+	{
+		id: '7',
+		filter: 'contrast(85%) brightness(110%) saturate(75%) sepia(22%)',
+		filterTitle: 'Reyes'
+	},
+	{
+		id: '8',
+		filter: 'brightness(110%) saturate(160%) sepia(30%) hue-rotate(350deg)',
+		filterTitle: 'Walden'
 	}
 ]
 

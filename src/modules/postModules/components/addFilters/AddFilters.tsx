@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStateType } from '@/store/store'
 import { newImage } from '@/modules/postModules/newImageInstance'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
+import { HeaderForModal } from '@/modules/postModules/components/headerForModal/HeaderForModal'
 
 export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 	btn,
@@ -62,19 +63,20 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 
 	return (
 		<div className={s.container}>
-			<div className={s.header}>
-				<Image src={arrowBack} alt={'back button'} />
-				<div>{title}</div>
-				<div onClick={handleImageSubmit}>{btn}</div>
-			</div>
+			<HeaderForModal
+				title={'Filters'}
+				btnTitle={'Next'}
+				callBack={handleImageSubmit}
+				clickBack={() => {}}
+			/>
 			<div className={s.filtersContainer}>
 				{/*<Image src={pics} alt={'picture'} width={500} height={500} style={{ filter: filter }} />*/}
 				<Image
 					src={urlCroppedPics}
 					alt={'picture'}
-					width={500}
+					width={486}
 					height={500}
-					style={{ filter: filter }}
+					style={{ filter: filter, objectFit: 'cover' }}
 				/>
 				<div className={s.filters}>
 					{filters_set.map(el => (
@@ -83,10 +85,10 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 								src={urlCroppedPics}
 								alt={el.filterTitle}
 								style={{ filter: el.filter }}
-								width={100}
-								height={100}
+								width={108}
+								height={108}
 							/>
-							<div>{el.filterTitle}</div>
+							<div style={{ marginTop: '6px' }}>{el.filterTitle}</div>
 						</div>
 					))}
 				</div>

@@ -30,7 +30,7 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				) : flag === 'final' ? (
 					<AddPublication onClose={onClose} />
 				) : (
-					<div>crop</div>
+					<div>ooops, something was wrong</div>
 				)}
 			</div>
 		</Popup>
