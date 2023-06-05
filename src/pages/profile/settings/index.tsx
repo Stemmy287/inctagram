@@ -3,29 +3,24 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { getLayoutM } from '@/components/Layout/MainLayout/MainLayout'
-import { useGetUserQuery } from '@/modules/profileModules/createProfile/createProfileApi'
 import { ProfileSettings } from '@/modules/profileModules/createProfile/ProfileSettings/ProfileSettings'
 
 const Profile = () => {
+	const isLoggedIn = useAppSelector(loggedIn)
 
-    const  {} = useGetUserQuery()
+	const router = useRouter()
 
-    const isLoggedIn = useAppSelector(loggedIn)
+	useEffect(() => {
+		if (!isLoggedIn) {
+			router.push('/auth/login')
+		}
+	}, [isLoggedIn, router])
 
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            router.push('/auth/login')
-        }
-    }, [isLoggedIn, router])
-
-
-    return (
-        <div>
-           <ProfileSettings/>
-        </div>
-    )
+	return (
+		<div>
+			<ProfileSettings />
+		</div>
+	)
 }
 
 Profile.getLayout = getLayoutM
