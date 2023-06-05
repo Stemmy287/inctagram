@@ -1,5 +1,5 @@
-@import '@/common/styles/mixins';
-@import '@/common/styles/variables';
+@import '@/common/styles/mixins.scss';
+@import '@/common/styles/variables.scss';
 
 .editPhoto {
 	@include flex-space-between;
@@ -56,6 +56,11 @@
 			justify-content: space-between;
 			padding: 10px;
 			cursor: pointer;
+
+			.image {
+				width: 18px;
+				height: 18px;
+			}
 		}
 	}
 }
