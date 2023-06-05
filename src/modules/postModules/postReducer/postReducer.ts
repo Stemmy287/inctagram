@@ -2,13 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
 	originalPics: {} as File,
-	urlOriginalPics: '' as string,
+	urlOriginalPics: '',
 
 	croppedPics: {} as File,
-	urlCroppedPics: '' as string,
+	urlCroppedPics: '',
 
 	filteredPics: {} as File,
-	urlFilteredPics: '' as string
+	urlFilteredPics: '',
+
+	uploadId: ''
 }
 
 type PostInitialStateType = typeof initialState
@@ -34,6 +36,9 @@ const slice = createSlice({
 		},
 		setUrlFilteredPics: (state, action: PayloadAction<{ urlFilteredPics: string }>) => {
 			state.urlFilteredPics = action.payload.urlFilteredPics
+		},
+		setUploadId: (state, action: PayloadAction<{ uploadId: string }>) => {
+			state.uploadId = action.payload.uploadId
 		}
 	}
 })

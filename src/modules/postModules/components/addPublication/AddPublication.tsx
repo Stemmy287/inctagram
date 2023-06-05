@@ -33,16 +33,20 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 	const [addPostPhoto] = useAddPostPhotoMutation()
 	const [addPost] = useAddPostMutation()
 	const onSubmit: SubmitHandler<PostType> = data => {
-		// console.log(finalPics)
-		addPost(data)
-		// addPost({ description: 'string' })
 		addPostPhoto(finalPics)
+			.unwrap()
+			.then(res => {
+				addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] }).then(() =>
+					onClose()
+				)
+			})
 	}
 
 	const finalPics = useSelector<AppRootStateType, File>(state => state.postReducer.filteredPics)
 	const urlFinalPics = useSelector<AppRootStateType, string>(
 		state => state.postReducer.urlFilteredPics
 	)
+	const uploadId = useSelector<AppRootStateType, string>(state => state.postReducer.uploadId)
 
 	return (
 		<Popup onClose={onClose}>

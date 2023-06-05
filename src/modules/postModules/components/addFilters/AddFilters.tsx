@@ -1,24 +1,16 @@
 import React, { PropsWithChildren, useState } from 'react'
 import { NextPage } from 'next'
 import s from './AddFilters.module.scss'
-import arrowBack from 'public/icons/arrow-ios-back.svg'
 import Image from 'next/image'
 import { filters_set } from '@/modules/postModules/filters-set'
 import { FlagType } from '@/modules/postModules/components/createPost/CreatePost'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStateType } from '@/store/store'
-import { newImage } from '@/modules/postModules/newImageInstance'
 import { postActions } from '@/modules/postModules/postReducer/postReducer'
 import { HeaderForModal } from '@/modules/postModules/components/headerForModal/HeaderForModal'
 import { setImageFilter } from '@/assets/utils/setImageFilter/setImageFilter'
-import { auto } from '@popperjs/core'
 
-export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
-	btn,
-	title,
-	children,
-	setFlag
-}) => {
+export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag }) => {
 	const dispatch = useDispatch()
 	const croppedPics = useSelector<AppRootStateType, File>(state => state.postReducer.croppedPics)
 	const urlCroppedPics = useSelector<AppRootStateType, string>(
@@ -27,48 +19,17 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 
 	const [filter, setFilter] = useState('none')
 
-	const handleImageSubmit = () => {
-		// const res = await setImageFilter(croppedPics, urlCroppedPics, filter)
-		// debugger
-		// if (res) {
-		// 	dispatch(postActions.setFilteredPics({ filteredPics: res.file as File }))
-		// 	dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: res.url }))
-		// 	setFlag('final')
-		// }
-
-		if (croppedPics) {
-			const img = newImage
-			img.src = URL.createObjectURL(croppedPics)
-			img.onload = () => {
-				const originalWidth = img.naturalWidth
-				const originalHeight = img.naturalHeight
-
-				const canvas = document.createElement('canvas')
-				const context = canvas.getContext('2d')
-
-				if (context) {
-					canvas.width = originalWidth
-					canvas.height = originalHeight
-
-					context.filter = filter
-
-					context.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-					canvas.toBlob(blob => {
-						if (blob) {
-							const modifiedFile = new File([blob], 'file.name', { type: blob.type })
-							dispatch(postActions.setFilteredPics({ filteredPics: modifiedFile }))
-							// console.log(modifiedFile)
-						}
-					}, 'image/jpeg')
-					const newURL = canvas.toDataURL()
-					// console.log(newURL)
-					dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: newURL }))
-				}
-			}
+	const handleImageSubmit = async () => {
+		const res = await setImageFilter(croppedPics, filter)
+		if (res) {
+			dispatch(postActions.setFilteredPics({ filteredPics: res.file as File }))
+			dispatch(postActions.setUrlFilteredPics({ urlFilteredPics: res.url }))
+			setFlag('final')
 		}
+	}
 
-		setFlag('final')
+	const clickBackHandler = () => {
+		setFlag('crop')
 	}
 
 	return (
@@ -77,10 +38,9 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 				title={'Filters'}
 				btnTitle={'Next'}
 				callBack={handleImageSubmit}
-				clickBack={() => {}}
+				clickBack={clickBackHandler}
 			/>
 			<div className={s.filtersContainer}>
-				{/*<Image src={pics} alt={'picture'} width={500} height={500} style={{ filter: filter }} />*/}
 				<Image
 					src={urlCroppedPics}
 					alt={'picture'}
@@ -108,7 +68,5 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({
 }
 
 type PropsType = {
-	title: string
-	btn: string
 	setFlag: (flag: FlagType) => void
 }
