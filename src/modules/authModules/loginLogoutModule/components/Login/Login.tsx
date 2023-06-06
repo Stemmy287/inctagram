@@ -87,7 +87,6 @@ export const Login: NextPageWithLayout = () => {
 					Sign up
 				</Link>
 			</div>
-			<PostMenuModule postId={'111'} />
 		</LoginDetailsWrapper>
 	)
 }
