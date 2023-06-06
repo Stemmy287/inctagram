@@ -4,8 +4,6 @@ import s from './SignUp.module.scss'
 import { Input } from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 import Link from 'next/link'
-import { Popup } from '@/components/Popup/Popup'
-import { Notification } from '@/components/Notification/Notification'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -17,6 +15,7 @@ import { RegisterParamsType, loggedIn, useRegistrationMutation } from '@/modules
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { PopupSignUp } from '../popupSignUp/popupSignUp'
+import { PostMenuModule } from '@/modules/postModules/components/postMenuModule/PostMenu'
 
 export const SignUp: NextPageWithLayout = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
@@ -81,7 +80,6 @@ export const SignUp: NextPageWithLayout = () => {
 						<Image className={s.icon} src={googleIcon} alt='google-icon' />
 						<Image className={s.icon} src={githubIcon} alt='github-icon' />
 					</div>
-
 					<div>
 						<div className={s.inputs}>
 							<Input
@@ -96,6 +94,7 @@ export const SignUp: NextPageWithLayout = () => {
 								name={'email'}
 								error={errors.email?.message || ''}
 							/>
+
 							<Input
 								password
 								title='Password'

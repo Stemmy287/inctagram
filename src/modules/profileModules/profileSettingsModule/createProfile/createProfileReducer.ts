@@ -1,19 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { ProfileType } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
-	profile: {} as ProfileType
+	ava: ''
 }
-
-export type AuthInitialStateType = typeof initialState;
 
 const slice = createSlice({
 	name: 'createProfile',
 	initialState,
 	reducers: {
-		// setUser: (state, action: PayloadAction<{profile: ProfileType}>) => {
-		// 	state.profile = action.payload.profile
-		// },
+		setAva: (state, action: PayloadAction<{ ava: string }>) => {
+			state.ava = action.payload.ava
+		}
 	}
 })
 

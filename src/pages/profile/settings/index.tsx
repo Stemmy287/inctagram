@@ -3,33 +3,25 @@ import { useRouter } from 'next/router'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { getLayoutM } from '@/components/Layout/MainLayout/MainLayout'
-import { GeneralInformation } from '@/modules/profileModules/profileSettingsModule/createProfile/GeneralInformation'
-import { useGetUserQuery } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
-import { UploadImage } from '@/modules/profileModules/profileSettingsModule/uploadImage/UploadImage'
+import { ProfileSettings } from '@/modules/profileModules/createProfile/ProfileSettings/ProfileSettings'
 
-const ProfileSettingsPage = () => {
+const Profile = () => {
+	const isLoggedIn = useAppSelector(loggedIn)
 
-    const  {} = useGetUserQuery()
+	const router = useRouter()
 
-    const isLoggedIn = useAppSelector(loggedIn)
+	useEffect(() => {
+		if (!isLoggedIn) {
+			router.push('/auth/login')
+		}
+	}, [isLoggedIn, router])
 
-    const router = useRouter()
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            router.push('/auth/login')
-        }
-    }, [isLoggedIn, router])
-
-
-    return (
-        <div>
-            <GeneralInformation/>
-            {/*{JSON.stringify(data)}*/}
-            <UploadImage />
-        </div>
-    )
+	return (
+		<div>
+			<ProfileSettings />
+		</div>
+	)
 }
 
-ProfileSettingsPage.getLayout = getLayoutM
-export default ProfileSettingsPage
+Profile.getLayout = getLayoutM
+export default Profile

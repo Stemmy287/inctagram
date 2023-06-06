@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@/modules/authModules'
+import { createProfileActions } from '@/modules/profileModules/createProfile/createProfileReducer'
 
 export const createProfileApi = createApi({
 	reducerPath: 'createProfileApi',
@@ -17,7 +18,11 @@ export const createProfileApi = createApi({
 	endpoints: build => {
 		return {
 			getUser: build.query<FetchUserResponseType, void>({
-				query: () => 'users/profile'
+				query: () => 'users/profile',
+				async onQueryStarted(_, { dispatch, queryFulfilled }) {
+					const res = await queryFulfilled
+					dispatch(createProfileActions.setAva({ ava: res.data.avatars[0].url }))
+				}
 			}),
 			createProfile: build.mutation<FetchUserResponseType, ProfileType>({
 				query: profileInfo => {
@@ -42,8 +47,7 @@ export type ProfileType = {
 	lastName: string
 	city: string
 	dateOfBirth: Date
-	aboutMe: string,
-	avatars: AvatarsType[]
+	aboutMe?: string
 }
 export type FetchUserResponseType = {
 	id: number

@@ -16,6 +16,7 @@ import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
 import { LoginFormData } from '@/modules/authModules/authApi/authApi'
 import { useEffect } from 'react'
+import { PostMenuModule } from '@/modules/postModules/components/postMenuModule/PostMenu'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -77,7 +78,7 @@ export const Login: NextPageWithLayout = () => {
 						Forgot password
 					</Link>
 				</div>
-				<Button title='Sign in' disabled={isLoading}/>
+				<Button title='Sign in' disabled={isLoading} />
 			</form>
 			<div className={s.desc}>
 				<div>
@@ -87,6 +88,7 @@ export const Login: NextPageWithLayout = () => {
 					Sign up
 				</Link>
 			</div>
+			<PostMenuModule postId={'111'} />
 		</LoginDetailsWrapper>
 	)
 }
