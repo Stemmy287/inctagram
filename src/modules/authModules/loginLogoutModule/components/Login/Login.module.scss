@@ -1,5 +1,5 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .container {
   @include flex-column;
@@ -16,20 +16,26 @@
     justify-content: space-between;
     margin: 0 auto;
   }
-.email{}
+
+  .email {
+  }
+
   .inputItem {
     display: flex;
     align-items: center;
   }
-  .forgotLinkBlock{
+
+  .forgotLinkBlock {
     display: flex;
     justify-content: flex-end;
+
     .forgotLink {
       @include text(14px, 400, 24px, $light900);
     }
   }
 
 }
+
 .desc {
   margin-top: 24px;
   @include flex-center-column;
@@ -40,6 +46,7 @@
   }
 
 }
+
 .link {
   @include text(16px, 600, 24px, $accent500);
 }

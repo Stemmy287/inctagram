@@ -1,7 +1,6 @@
-import React from 'react'
-import { NextPageWithLayout } from '@/pages/_app'
-import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
-import { RegistrationEmailResending } from '@/modules/authModules'
+import { NextPageWithLayout } from 'pages/_app'
+import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
+import { RegistrationEmailResending } from 'modules/authModules'
 
 const RegistrationEmailResendPage: NextPageWithLayout = () => <RegistrationEmailResending />
 

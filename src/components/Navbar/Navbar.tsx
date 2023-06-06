@@ -4,8 +4,8 @@ import homeIcon from '/public/icons/home.svg'
 import addIcon from '/public/icons/plus-square.svg'
 import userIcon from '/public/icons/user.svg'
 import Link from 'next/link'
-import { LogoutButton } from '@/components/Button/LogoutButton/LogoutButton'
-import { CreatePost } from '@/modules/postModules/components/createPost/CreatePost'
+import { LogoutButton } from 'components/Button/LogoutButton/LogoutButton'
+import { CreatePost } from 'modules/postModules/components/createPost/CreatePost'
 import { useState } from 'react'
 
 const navData = [

@@ -1,12 +1,12 @@
-import { UserType } from '@/modules/authModules'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { UserType } from 'modules/authModules/authApi/authApi'
 
 const initialState = {
 	isLoggedIn: false,
 	user: {} as UserType
 }
 
-export type AuthInitialStateType = typeof initialState;
+export type AuthInitialStateType = typeof initialState
 
 const slice = createSlice({
 	name: 'auth',

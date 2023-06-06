@@ -1,5 +1,5 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
-import s from '@/components/Input/Input.module.scss'
+import s from 'components/Input/Input.module.scss'
 import { UseFormRegister } from 'react-hook-form'
 import eyeOff from '/public/icons/eye-off.svg'
 import eye from 'public/icons/eye-outline.svg'
@@ -14,7 +14,10 @@ type PropsType = {
 	password?: boolean
 }
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<
+	InputHTMLAttributes<HTMLInputElement>,
+	HTMLInputElement
+>
 
 export const Input = ({
 	title,

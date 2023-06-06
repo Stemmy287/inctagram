@@ -1,11 +1,11 @@
 import React, { PropsWithChildren, ReactElement, useEffect } from 'react'
 import { NextPage } from 'next'
-import { Layout } from '@/components/Layout/Layout'
-import { useMeQuery, useUpdateTokensMutation } from '@/modules/authModules'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { selectAppError, selectIsInitialized } from '@/modules/appModules/appSelectors'
-import { Preloader } from '@/components/Preloader/Preloader'
-import { SnackBar } from '@/components/SnackBar/SnackBar'
+import { Preloader } from 'components/Preloader/Preloader'
+import { useMeQuery, useUpdateTokensMutation } from 'modules/authModules/authApi/authApi'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { selectAppError, selectIsInitialized } from 'modules/appModules/appSelectors'
+import { Layout } from 'components/Layout/Layout'
+import { SnackBar } from 'components/SnackBar/SnackBar'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	const [updateTokens] = useUpdateTokensMutation()

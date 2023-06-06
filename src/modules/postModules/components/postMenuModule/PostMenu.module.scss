@@ -1,56 +1,56 @@
-@import '@/common/styles/mixins.scss';
-@import '@/common/styles/variables.scss';
+@import 'common/styles/mixins.scss';
+@import 'common/styles/variables.scss';
 
 .container {
-	@include flex-column;
-	 position: absolute;
+  @include flex-column;
+  position: absolute;
 
-	.showmenu {
-		cursor: pointer;
-	}
+  .showmenu {
+    cursor: pointer;
+  }
 
-	.menu {
-		width: 137px;
-		height: 85px;
-		position: relative;
-		right: 112px;
-		border: 1px #4c4c4c solid;
-		background-color: black;
-		z-index: 99;
+  .menu {
+    width: 137px;
+    height: 85px;
+    position: relative;
+    right: 112px;
+    border: 1px #4c4c4c solid;
+    background-color: black;
+    z-index: 99;
 
-		.action {
-			display: flex;
-			justify-content: start;
-			margin: 10px 0 12px 10px;
-			cursor: pointer;
+    .action {
+      display: flex;
+      justify-content: start;
+      margin: 10px 0 12px 10px;
+      cursor: pointer;
 
-			.btn {
-				font-size: 15px;
-				margin-left: 10px;
-				display: flex;
-				align-items: center;
-			}
-		}
-	}
+      .btn {
+        font-size: 15px;
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
 }
 
 .notification {
-	width: 378px;
-	padding: 30px 24px;
-	row-gap: 18px;
+  width: 378px;
+  padding: 30px 24px;
+  row-gap: 18px;
 
-	.description {
-		margin-bottom: 30px;
-	}
+  .description {
+    margin-bottom: 30px;
+  }
 
-	.logout {
-		display: flex;
-		justify-content: end;
-		margin-top: 18px;
+  .logout {
+    display: flex;
+    justify-content: end;
+    margin-top: 18px;
 
-		.btns {
-			width: 96px;
-			margin-left: 15px;
-		}
-	}
+    .btns {
+      width: 96px;
+      margin-left: 15px;
+    }
+  }
 }

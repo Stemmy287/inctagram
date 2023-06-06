@@ -1,9 +1,10 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .error {
   border: 1px solid #FF0000;
   padding: 8px;
+
   > span {
     @include text(10px, 400, 12px, #FF0000)
   }

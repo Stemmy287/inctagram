@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FC } from 'react'
 import defaultAva from '/public/images/defaultPhoto.png'
 import Image from 'next/image'
-import { Button } from '@/components/Button/Button'
+import { Button } from 'components/Button/Button'
 import s from './AddPhoto.module.scss'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
+import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useDispatch } from 'react-redux'
-import { postActions } from '@/modules/postModules/postReducer/postReducer'
-import { FlagType } from '@/modules/postModules/components/createPost/CreatePost'
+import { postActions } from 'modules/postModules/postReducer/postReducer'
+import { FlagType } from 'modules/postModules/components/createPost/CreatePost'
 
 type PropsType = {
 	uploadHandler?: (e: ChangeEvent<HTMLInputElement>) => void

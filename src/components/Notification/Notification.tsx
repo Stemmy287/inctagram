@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Notification.module.scss'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
-import { Button } from '@/components/Button/Button'
+import { TitlePopup } from 'components/TitlePopup/TitlePopup'
+import { Button } from 'components/Button/Button'
 
 type PropsType = {
 	title: string
@@ -10,7 +10,7 @@ type PropsType = {
 	onClose: () => void
 }
 
-export const Notification = ({title, buttonTitle, message, onClose}: PropsType) => {
+export const Notification = ({ title, buttonTitle, message, onClose }: PropsType) => {
 	return (
 		<>
 			<TitlePopup title={title} onClose={onClose} />

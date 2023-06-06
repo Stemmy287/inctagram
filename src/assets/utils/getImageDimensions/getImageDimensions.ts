@@ -1,4 +1,4 @@
-import { SizeType } from '@/modules/postModules/components/crop/CropEasy'
+import { SizeType } from 'modules/postModules/components/crop/CropEasy'
 
 export function getImageDimensions(file: File): Promise<SizeType> {
 	return new Promise(resolve => {

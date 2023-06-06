@@ -1,5 +1,5 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .header {
   height: 60px;
@@ -21,6 +21,7 @@
     position: absolute;
     bottom: 0;
   }
+
   .outButton {
     margin-right: 64px;
   }

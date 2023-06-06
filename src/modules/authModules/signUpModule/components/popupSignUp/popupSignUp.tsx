@@ -1,5 +1,5 @@
-import { Popup } from '@/components/Popup/Popup'
-import { Notification } from '@/components/Notification/Notification'
+import { Popup } from 'components/Popup/Popup'
+import { Notification } from 'components/Notification/Notification'
 import { FC } from 'react'
 
 type PropsType = {
