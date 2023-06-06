@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import s from '@/components/Button/LogoutButton/LogoutButton.module.scss'
+import s from 'components/Button/LogoutButton/LogoutButton.module.scss'
 import Image from 'next/image'
 import logoutIcon from '/public/icons/logout.svg'
 import { LogoutModal } from 'modules/authModules/loginLogoutModule/components/logoutModal/logoutModal'

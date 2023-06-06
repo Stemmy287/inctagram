@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import defaultAva from 'public/images/defaultPhoto.png'
+import defaultAva from '../../../../public/images/defaultPhoto.png'
 import Image from 'next/image'
 import { Button } from 'components/Button/Button'
 import { Popup } from 'components/Popup/Popup'

@@ -1,7 +1,7 @@
 import { NotificationPage } from 'components/NotificationPage/NotificationPage'
 import { NextPageWithLayout } from 'pages/_app'
 import { NextRouter, useRouter } from 'next/router'
-import img from '../public/icons/bro.svg'
+import img from '../../../../../../public/icons/bro.svg'
 import { Button } from 'components/Button/Button'
 import { useEffect } from 'react'
 import { useAppSelector } from 'assets/hooks/useAppSelector'

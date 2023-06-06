@@ -1,19 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
-import Cropper from 'react-easy-crop'
-import getCroppedImg from 'assets/utils/cropImage/cropImage'
-import { FlagType } from 'modules/postModules/components/createPost/CreatePost'
-import { useAppSelector } from 'assets/hooks/useAppSelector'
-import {
-	selectOriginalPics,
-	selectUrlOriginalPics
-} from 'modules/postModules/postReducer/postReducer-selector'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
-import { postActions } from 'modules/postModules/postReducer/postReducer'
-import s from './CropEasy.module.scss'
-import { Area } from 'react-easy-crop/types'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import getCroppedImg from 'assets/utils/cropImage/cropImage'
 import { getImageDimensions } from 'assets/utils/getImageDimensions/getImageDimensions'
+import { postActions } from 'modules/postModules/postReducer/postReducer'
+import {
+	selectUrlOriginalPics,
+	selectOriginalPics
+} from 'modules/postModules/postReducer/postReducer-selector'
+import { FC, useState, useEffect } from 'react'
+import Cropper, { Area } from 'react-easy-crop'
+import { FlagType } from '../createPost/CreatePost'
+import { HeaderForModal } from '../headerForModal/HeaderForModal'
+import s from './CropEasy.module.scss'
 import { CropPhotoComponent } from './CropPhoto/CropPhotoComponent'
-import { HeaderForModal } from 'modules/postModules/components/headerForModal/HeaderForModal'
 
 type PropsType = {
 	setFlag: (flag: FlagType) => void

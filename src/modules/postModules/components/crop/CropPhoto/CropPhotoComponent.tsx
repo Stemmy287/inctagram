@@ -1,13 +1,13 @@
-import expand from 'public/icons/expand.svg'
-import image from 'public/icons/image.svg'
-import maximize from 'public/icons/maximize.svg'
-import rectangle1x1 from 'public/icons/Rectangle_1x1.svg'
-import rectangle4x5 from 'public/icons/Rectangle_4x5.svg'
-import rectangle16x9 from 'public/icons/Rectangle_16x9.svg'
+import expand from '../../../../../../public/icons/expand.svg'
+import image from '../../../../../../public/icons/image.svg'
+import maximize from '../../../../../../public/icons/maximize.svg'
+import rectangle1x1 from '../../../../../../public/icons/Rectangle_1x1.svg'
+import rectangle4x5 from '../../../../../../public/icons/Rectangle_4x5.svg'
+import rectangle16x9 from '../../../../../../public/icons/Rectangle_16x9.svg'
 import Image from 'next/image'
 import s from './CropPhoto.module.scss'
-import { FC } from 'react'
 import { SizeType } from '../CropEasy'
+import { FC } from 'react'
 
 type PropsType = {
 	zoom: number

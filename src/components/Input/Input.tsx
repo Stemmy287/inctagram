@@ -1,9 +1,9 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
-import s from 'components/Input/Input.module.scss'
+import s from './Input.module.scss'
+import eyeOff from '../../../public/icons/eye-off.svg'
+import eye from '../../../public/icons/eye-outline.svg'
+import { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react'
 import { UseFormRegister } from 'react-hook-form'
-import eyeOff from '/public/icons/eye-off.svg'
-import eye from 'public/icons/eye-outline.svg'
-import Image from 'next/image'
+import Image from 'next/dist/client/image'
 
 type PropsType = {
 	title?: string

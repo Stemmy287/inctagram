@@ -1,5 +1,5 @@
 import { NotificationPage } from 'components/NotificationPage/NotificationPage'
-import img from '@/../public/icons/rafiki.svg'
+import img from '../../../../../../public/icons/rafiki.svg'
 import { Button } from 'components/Button/Button'
 import { useRegEmailResendingMutation } from 'modules/authModules/authApi/authApi'
 import { PopupSignUp } from '../popupSignUp/popupSignUp'

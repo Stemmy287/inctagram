@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import s from './Header.module.scss'
 import Image from 'next/image'
-import arrowBack from 'public/icons/arrow-ios-back.svg'
+import arrowBack from '../../../../../public/icons/arrow-ios-back.svg'
 
 type PropsType = {
 	title: string

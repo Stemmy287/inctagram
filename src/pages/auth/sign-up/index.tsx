@@ -1,6 +1,6 @@
-import { NextPageWithLayout } from 'pages/_app'
 import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
-import { SignUp } from 'modules/authModules/signUpModule/components/registration/SignUp'
+import { SignUp } from 'modules/authModules'
+import { NextPageWithLayout } from 'pages/_app'
 
 const SignUpPage: NextPageWithLayout = () => <SignUp />
 
