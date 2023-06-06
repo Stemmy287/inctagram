@@ -3,9 +3,12 @@ import { Input } from '@/components/Input/Input'
 import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import s from '@/modules/profileModules/createProfile/EditGeneralInformation.module.scss'
+import s from './EditGeneralInformation.module.scss'
 import { Button } from '@/components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '@/modules/profileModules/createProfile/createProfileApi'
+import {
+	ProfileType,
+	useCreateProfileMutation
+} from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 

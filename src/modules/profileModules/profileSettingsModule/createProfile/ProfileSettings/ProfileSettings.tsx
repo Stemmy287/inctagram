@@ -1,6 +1,6 @@
-import { GeneralInformation } from '@/modules/profileModules/createProfile/GeneralInformation'
+import { GeneralInformation } from '@/modules/profileModules/profileSettingsModule/createProfile/GeneralInformation'
 import s from './ProfileSettings.module.scss'
-import { EditAvatar } from '@/modules/profileModules/createProfile/ProfileSettings/EditAvatar'
+import { EditAvatar } from '@/modules/profileModules/profileSettingsModule/createProfile/ProfileSettings/EditAvatar'
 
 export const ProfileSettings = () => {
 	return (

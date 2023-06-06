@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import deleteAva from '../../../../../public/icons/delete-ava.svg'
+import deleteAva from 'public/icons/delete-ava.svg'
 import Image from 'next/image'
 import { AddAvatar } from '@/modules/profileModules/uploadImage/AddAvatar'
 import { useAppSelector } from '@/assets/hooks/useAppSelector'
 import s from './EditAvatar.module.scss'
-import { useGetUserQuery } from '@/modules/profileModules/createProfile/createProfileApi'
-import { DefaultAva } from '@/modules/profileModules/createProfile/ProfileSettings/DefaultAva'
+import { useGetUserQuery } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
+import { DefaultAva } from '@/modules/profileModules/profileSettingsModule/createProfile/ProfileSettings/DefaultAva'
 
 export const EditAvatar = () => {
 	const {} = useGetUserQuery()

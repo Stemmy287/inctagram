@@ -3,11 +3,11 @@ import defaultAva from 'public/images/defaultPhoto.png'
 import Image from 'next/image'
 import { Button } from '@/components/Button/Button'
 import { Popup } from '@/components/Popup/Popup'
-import { useUploadImageMutation } from '@/modules/profileModules/uploadImage/uploadImageApi'
+import { useUploadImageMutation } from '@/modules/profileModules/profileSettingsModule/uploadImage/uploadImageApi'
 import s from './AddAvatar.module.scss'
 import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
 import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
-import { createProfileActions } from '@/modules/profileModules/createProfile/createProfileReducer'
+import { createProfileActions } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileReducer'
 
 type PropsType = {
 	onClose: () => void

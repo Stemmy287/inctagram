@@ -19,12 +19,12 @@ export const Profile = () => {
 	return (
 		<div className={s.container}>
 			<div className={s.hatProfile}>
-				<Image className={s.avatar} src={defaultPhoto} alt='avatar' />
+				<Image className={s.avatar} src={profile?.avatars[0].url || defaultPhoto} alt='avatar'  width={192} height={192}/>
 				<div className={s.mainInfo}>
 					<div className={s.userNameAndBtn}>
 						<h3>{profile?.userName}</h3>
 						<div className={s.buttonWrapper}>
-							<Button title='Profile Settings' callback={toSettingsHandler} white />
+							<Button title='Profile Settings' callback={toSettingsHandler} />
 						</div>
 					</div>
 					<div className={s.socialInfo}>
