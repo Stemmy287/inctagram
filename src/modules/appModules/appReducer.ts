@@ -45,7 +45,7 @@ const slice = createSlice({
 
 					const { payload, error } = action
 					if (payload) {
-						state.error = payload.data.messages.length
+						state.error = payload.data?.messages.length
 							? payload.data.messages[0].message
 							: 'Some error occurred'
 					} else {

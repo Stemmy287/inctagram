@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { FetchUserResponseType } from '@/modules/profileModules/createProfile/createProfileApi'
 
 const initialState = {
 	ava: ''
@@ -11,6 +12,9 @@ const slice = createSlice({
 		setAva: (state, action: PayloadAction<{ ava: string }>) => {
 			state.ava = action.payload.ava
 		}
+		// setProfileData: (state, action: PayloadAction<FetchUserResponseType>) => {
+		// 	state.profileData = action.payload
+		// }
 	}
 })
 
