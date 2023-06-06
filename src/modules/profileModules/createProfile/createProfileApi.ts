@@ -22,6 +22,7 @@ export const createProfileApi = createApi({
 				async onQueryStarted(_, { dispatch, queryFulfilled }) {
 					const res = await queryFulfilled
 					dispatch(createProfileActions.setAva({ ava: res.data.avatars[0].url }))
+					// dispatch(createProfileActions.setProfileData(res.data))
 				}
 			}),
 			createProfile: build.mutation<FetchUserResponseType, ProfileType>({
@@ -29,9 +30,7 @@ export const createProfileApi = createApi({
 					return {
 						method: 'PUT',
 						url: 'users/profile',
-						body: {
-							profileInfo
-						}
+						body: profileInfo
 					}
 				}
 			})
@@ -55,7 +54,7 @@ export type FetchUserResponseType = {
 	firstName: string
 	lastName: string
 	city: string
-	dateOfBirth: Date
+	dateOfBirth: string
 	aboutMe: string
 	avatars: AvatarsType[]
 }
