@@ -1,21 +1,27 @@
-@import "@/common/styles/mixins";
-@import "@/common/styles/variables";
-.container{
-  min-width:700px;
+@import "common/styles/mixins";
+@import "common/styles/variables";
+
+.container {
+  min-width: 700px;
   min-height: 450px;
-  .title{
+
+  .title {
   }
-  .wrapper{
-  display: flex;
-    .photo{
+
+  .wrapper {
+    display: flex;
+
+    .photo {
       width: 50%;
       min-height: 100%;
     }
-    .form{
+
+    .form {
       width: 50%;
       min-height: 100%;
       padding: 24px;
-      textarea{
+
+      textarea {
         background-color: $dark100;
         border: 1px solid $dark100;
         resize: none;

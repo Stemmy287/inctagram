@@ -1,5 +1,5 @@
-import { SizeType } from '@/modules/postModules/components/crop/CropEasy'
 import { Area } from 'react-easy-crop'
+import { SizeType } from 'modules/postModules/components/crop/CropEasy'
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
 	new Promise((resolve, reject) => {

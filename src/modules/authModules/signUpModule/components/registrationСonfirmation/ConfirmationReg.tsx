@@ -1,12 +1,12 @@
-import { NotificationPage } from '@/components/NotificationPage/NotificationPage'
-import { NextPageWithLayout } from '@/pages/_app'
+import { NotificationPage } from 'components/NotificationPage/NotificationPage'
+import { NextPageWithLayout } from 'pages/_app'
 import { NextRouter, useRouter } from 'next/router'
-import img from '@/../public/icons/bro.svg'
-import { Button } from '@/components/Button/Button'
-import { useRegConfirmationMutation } from '@/modules/authModules'
+import img from '../public/icons/bro.svg'
+import { Button } from 'components/Button/Button'
 import { useEffect } from 'react'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { selectAppError } from '@/modules/appModules'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { selectAppError } from 'modules/appModules'
+import { useRegConfirmationMutation } from 'modules/authModules/authApi/authApi'
 
 export const ConfirmationReg: NextPageWithLayout = () => {
 	const [regConfirmation, { isSuccess }] = useRegConfirmationMutation()

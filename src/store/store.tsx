@@ -1,14 +1,14 @@
 import { configureStore, ThunkDispatch } from '@reduxjs/toolkit'
 import { AnyAction, combineReducers } from 'redux'
-import { appReducer } from '@/modules/appModules/appReducer'
-import { authReducer } from '@/modules/authModules/authReducer/authReducer'
-import { authApi } from '@/modules/authModules'
-import { createProfileApi } from '@/modules/profileModules/createProfile/createProfileApi'
-import { uploadImageApi } from '@/modules/profileModules/uploadImage/uploadImageApi'
-import { uploadImageReducer } from '@/modules/profileModules/uploadImage/uploadImageReducer'
-import { postApi } from '@/modules/postModules/postApi/postApi'
-import { postReducer } from '@/modules/postModules/postReducer/postReducer'
-import { createProfileReducer } from '@/modules/profileModules/createProfile/createProfileReducer'
+import { appReducer } from 'modules/appModules/appReducer'
+import { authReducer } from 'modules/authModules/authReducer/authReducer'
+import { authApi } from 'modules/authModules'
+import { createProfileApi } from 'modules/profileModules/createProfile/createProfileApi'
+import { uploadImageApi } from 'modules/profileModules/uploadImage/uploadImageApi'
+import { uploadImageReducer } from 'modules/profileModules/uploadImage/uploadImageReducer'
+import { postApi } from 'modules/postModules/postApi/postApi'
+import { postReducer } from 'modules/postModules/postReducer/postReducer'
+import { createProfileReducer } from 'modules/profileModules/createProfile/createProfileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,

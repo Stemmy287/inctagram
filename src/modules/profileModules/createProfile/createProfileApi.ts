@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from '@/modules/authModules'
-import { createProfileActions } from '@/modules/profileModules/createProfile/createProfileReducer'
+import { API_URL } from 'modules/authModules'
+import { createProfileActions } from 'modules/profileModules/createProfile/createProfileReducer'
 
 export const createProfileApi = createApi({
 	reducerPath: 'createProfileApi',

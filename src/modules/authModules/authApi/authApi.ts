@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { appActions } from '@/modules/appModules/appReducer'
-import { authActions } from '@/modules/authModules/authReducer/authReducer'
+import { appActions } from 'modules/appModules/appReducer'
+import { authActions } from 'modules/authModules/authReducer/authReducer'
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
 

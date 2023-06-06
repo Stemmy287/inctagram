@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from '@/modules/authModules'
-import { AvatarsType } from '@/modules/profileModules/createProfile/createProfileApi'
+import { API_URL } from 'modules/authModules'
+import { AvatarsType } from 'modules/profileModules/createProfile/createProfileApi'
 
 export const uploadImageApi = createApi({
 	reducerPath: 'uploadImageApi',

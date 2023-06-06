@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { NextPage } from 'next'
-import { Header } from '@/components/Header/Header'
+import { Header } from 'components/Header/Header'
 import s from './Layout.module.scss'
 
 export const Layout: NextPage<PropsWithChildren> = ({ children }) => {

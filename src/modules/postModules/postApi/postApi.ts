@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { postActions } from '@/modules/postModules/postReducer/postReducer'
+import { postActions } from 'modules/postModules/postReducer/postReducer'
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
 

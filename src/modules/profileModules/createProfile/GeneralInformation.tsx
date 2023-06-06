@@ -1,16 +1,19 @@
-import { NextPageWithLayout } from '@/pages/_app'
-import { Input } from '@/components/Input/Input'
+import { NextPageWithLayout } from 'pages/_app'
+import { Input } from 'components/Input/Input'
 import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import s from '@/modules/profileModules/createProfile/EditGeneralInformation.module.scss'
-import { Button } from '@/components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '@/modules/profileModules/createProfile/createProfileApi'
+import s from 'modules/profileModules/createProfile/EditGeneralInformation.module.scss'
+import { Button } from 'components/Button/Button'
+import {
+	ProfileType,
+	useCreateProfileMutation
+} from 'modules/profileModules/createProfile/createProfileApi'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 export const GeneralInformation: NextPageWithLayout = () => {
-	const [createProfile, { data, isLoading }] = useCreateProfileMutation()
+	const [createProfile] = useCreateProfileMutation()
 
 	const schema = yup.object().shape({
 		username: yup.string().required('field required'),
@@ -54,7 +57,9 @@ export const GeneralInformation: NextPageWithLayout = () => {
 				<Input title='City' register={register} name={'city'} />
 				<label>About me</label>
 				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />
-				<div className={s.btn}><Button title='Save Changes' /></div>
+				<div className={s.btn}>
+					<Button title='Save Changes' />
+				</div>
 			</form>
 		</div>
 	)
