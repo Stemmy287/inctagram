@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { FetchUserResponseType } from '@/modules/profileModules/createProfile/createProfileApi'
 
 const initialState = {
 	ava: ''

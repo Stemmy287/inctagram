@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NextPageWithLayout } from 'pages/_app'
 import { NotificationPage } from 'components/NotificationPage/NotificationPage'
-import timeImage from '../../../../../../public/images/rafiki.png'
+import timeImage from '../../../../../../public/icons/rafiki.svg'
 import { Button } from 'components/Button/Button'
 import { Popup } from 'components/Popup/Popup'
 import { Notification } from 'components/Notification/Notification'
