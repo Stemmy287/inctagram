@@ -1,33 +1,28 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './PostsList.module.scss'
-import {useFetchPostsQuery} from '@/modules/postModules/postApi/postApi'
-import Image from 'next/image';
+import { useFetchPostsQuery } from '@/modules/postModules/postApi/postApi'
+import { Post } from '@/modules/profileModules/profileModule/components/Post/Post'
 
 type PropsType = {
-    profileId: number
+	profileId: number
 }
 
-export const PostsList = ({profileId}: PropsType) => {
-    const [skip, setSkip] = useState(true)
+export const PostsList = ({ profileId }: PropsType) => {
+	const [skip, setSkip] = useState(true)
 
-    const {data: posts} = useFetchPostsQuery(profileId, {skip})
+	const { data: posts } = useFetchPostsQuery(profileId, { skip })
 
-    useEffect(() => {
-        if (profileId) {
-            setSkip(false)
-        }
-    }, [profileId])
+	useEffect(() => {
+		if (profileId) {
+			setSkip(false)
+		}
+	}, [profileId])
 
-    return <>
-        {posts?.items.length
-            ? <div className={s.container}>
-                {posts?.items?.map(post =>
-                    <div key={post.id} className={s.post}>
-                        <Image src={post.images[0].url} alt='post img' width={230} height={230}/>
-                    </div>
-                )}
-            </div>
-            : 'Create your new post!'
-        }
-    </>
+	return (
+		posts?.items.length
+			? <div className={s.container}>
+				{posts?.items?.map(post => <Post key={post.id} post={post} />)}
+			</div>
+			: <>Create your first post!</>
+	)
 }

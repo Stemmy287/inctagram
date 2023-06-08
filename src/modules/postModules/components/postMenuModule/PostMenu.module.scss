@@ -3,7 +3,6 @@
 
 .container {
 	@include flex-column;
-	 position: absolute;
 
 	.showmenu {
 		cursor: pointer;

@@ -7,18 +7,4 @@
   flex-wrap: wrap;
   row-gap: 12px;
   column-gap: 12px;
-  .post {
-    background-color: blue;
-    width: 230px;
-    height: 230px;
-    border-radius: 3px;
-    > img {
-      border-radius: 3px;
-      cursor: pointer;
-      &:hover {
-        filter: brightness(50%);
-        transition: .1s;
-      }
-    }
-  }
 }
