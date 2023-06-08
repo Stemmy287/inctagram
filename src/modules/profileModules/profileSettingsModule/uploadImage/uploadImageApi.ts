@@ -16,7 +16,7 @@ export const uploadImageApi = createApi({
 		}
 	}),
 	endpoints: build => ({
-		uploadImage: build.mutation<UploadImageType, File>({
+		uploadImage: build.mutation<UploadImageType, File | FormData>({
 			query: file => ({
 				url: 'users/profile/avatar',
 				method: 'POST',
