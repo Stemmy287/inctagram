@@ -35,8 +35,8 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 		addPostPhoto(finalPics)
 			.unwrap()
 			.then(res => {
-				debugger
-				addPost({ ...data, childrenMetadata: [{ uploadId: res.uploadId }] }).then(() =>
+				//@ts-ignore
+				addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] }).then(() =>
 					onClose()
 				)
 			})
