@@ -26,7 +26,6 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors }
 	} = useForm<PostType>({
 		resolver: yupResolver(schema)
 	})
@@ -36,7 +35,7 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 		addPostPhoto(finalPics)
 			.unwrap()
 			.then(res => {
-				addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] }).then(() =>
+				addPost({ ...data, childrenMetadata: [{ uploadId: res.uploadId }] }).then(() =>
 					onClose()
 				)
 			})
@@ -46,7 +45,6 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 	const urlFinalPics = useSelector<AppRootStateType, string>(
 		state => state.postReducer.urlFilteredPics
 	)
-	const uploadId = useSelector<AppRootStateType, string>(state => state.postReducer.uploadId)
 
 	return (
 		<Popup onClose={onClose}>
