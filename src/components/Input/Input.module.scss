@@ -1,5 +1,5 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .container {
   @include flex-column;
@@ -12,6 +12,7 @@
   .inputWrapper {
     width: 100%;
     position: relative;
+
     .input {
       border: none;
       background-color: transparent;
@@ -20,6 +21,7 @@
       width: 100%;
       @include text(16px, 400, 24px, $light900);
       padding: 5px 0;
+
       &[data-isshowpassword="false"] {
         -webkit-text-security: disc;
       }
@@ -33,10 +35,12 @@
         -webkit-text-fill-color: $light900;
         transition: background-color 5000s ease-in-out 0s;
       }
+
       &:-webkit-autofill:focus {
         -webkit-text-fill-color: $light100;
         transition: background-color 5000s ease-in-out 0s;
       }
+
       &:-webkit-autofill:disabled {
         -webkit-text-fill-color: $dark100;
         transition: background-color 5000s ease-in-out 0s;

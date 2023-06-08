@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react'
-import { Popup } from '@/components/Popup/Popup'
+import { Popup } from 'components/Popup/Popup'
+import { FC, useState } from 'react'
+import { AddFilters } from '../addFilters/AddFilters'
+import { AddPhoto } from '../addPhoto/AddPhoto'
+import { AddPublication } from '../addPublication/AddPublication'
+import { CropEasy } from '../crop/CropEasy'
 import s from './CreatePost.module.scss'
-import { AddPhoto } from '@/modules/postModules/components/addPhoto/AddPhoto'
-import { AddPublication } from '@/modules/postModules/components/addPublication/AddPublication'
-import { AddFilters } from '@/modules/postModules/components/addFilters/AddFilters'
-import { CropEasy } from '@/modules/postModules/components/crop/CropEasy'
 
 type PropsType = {
 	onClose: () => void

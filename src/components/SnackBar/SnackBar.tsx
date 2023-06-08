@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import warningIcon from '../../../public/icons/warning.svg'
 import closeIcon from '../../../public/icons/close.svg'
 import Image from 'next/image'
-import { appActions } from '@/modules/appModules'
-import { useAppDispatch } from '@/assets/hooks/useAppDispatch'
 import s from './SnackBar.module.scss'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { useAppDispatch } from 'assets/hooks/useAppDispatch'
+import { appActions } from 'modules/appModules/appReducer'
 
 export const SnackBar = () => {
 	const error = useAppSelector<string | null>(state => state.app.error)

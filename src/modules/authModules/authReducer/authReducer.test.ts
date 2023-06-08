@@ -1,6 +1,5 @@
 import { authActions, AuthInitialStateType, authReducer } from './authReducer'
-import { UserType } from '@/modules/authModules/'
-
+import { UserType } from 'modules/authModules/authApi/authApi'
 
 let initialState: AuthInitialStateType
 
@@ -10,7 +9,6 @@ beforeEach(() => {
 		user: {} as UserType
 	}
 })
-
 
 test('should handle setUser', () => {
 	const user: UserType = { userId: 1, userName: 'John Doe', email: 'emailtest@mail.com' }

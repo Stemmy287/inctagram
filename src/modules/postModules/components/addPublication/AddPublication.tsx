@@ -1,19 +1,19 @@
-import { Popup } from '@/components/Popup/Popup'
+import { Popup } from 'components/Popup/Popup'
 import s from './AddPublication.module.scss'
 import { FC } from 'react'
-import { TitlePopup } from '@/components/TitlePopup/TitlePopup'
+import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import Image from 'next/image'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button } from '@/components/Button/Button'
+import { Button } from 'components/Button/Button'
 import {
 	PostType,
 	useAddPostMutation,
 	useAddPostPhotoMutation
-} from '@/modules/postModules/postApi/postApi'
+} from 'modules/postModules/postApi/postApi'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '@/store/store'
+import { AppRootStateType } from 'store/store'
 
 type PropsType = {
 	onClose: () => void
@@ -46,8 +46,6 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 	const urlFinalPics = useSelector<AppRootStateType, string>(
 		state => state.postReducer.urlFilteredPics
 	)
-	const uploadId = useSelector<AppRootStateType, string>(state => state.postReducer.uploadId)
-
 	return (
 		<Popup onClose={onClose}>
 			<div className={s.container}>

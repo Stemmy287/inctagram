@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { NextPageWithLayout } from '@/pages/_app'
-import { NotificationPage } from '@/components/NotificationPage/NotificationPage'
-import timeImage from '../../../../../../public/images/rafiki.png'
-import { Button } from '@/components/Button/Button'
-import { Popup } from '@/components/Popup/Popup'
-import { Notification } from '@/components/Notification/Notification'
-import { useRecoveryPasswordMutation } from '@/modules/authModules/authApi/authApi'
+import { NextPageWithLayout } from 'pages/_app'
+import { NotificationPage } from 'components/NotificationPage/NotificationPage'
+import timeImage from '../../../../../../public/icons/rafiki.svg'
+import { Button } from 'components/Button/Button'
+import { Popup } from 'components/Popup/Popup'
+import { Notification } from 'components/Notification/Notification'
+import { useRecoveryPasswordMutation } from 'modules/authModules/authApi/authApi'
 
 export const ResendResetPasswordLink: NextPageWithLayout = () => {
-	const [recoveryPassword, { isLoading, isSuccess , reset}] = useRecoveryPasswordMutation()
+	const [recoveryPassword, { isLoading, isSuccess, reset }] = useRecoveryPasswordMutation()
 
 	const [email, setEmail] = useState<null | string>()
 
@@ -36,7 +36,9 @@ export const ResendResetPasswordLink: NextPageWithLayout = () => {
 		<>
 			<NotificationPage
 				title='Email verification link invalid'
-				message={'Looks like the verification link has expired. Not to worry, we can send the link again'}
+				message={
+					'Looks like the verification link has expired. Not to worry, we can send the link again'
+				}
 				image={timeImage}
 			>
 				<Button title='Resend link' callback={onResendHandler} disabled={isLoading} />
