@@ -1,15 +1,15 @@
-import { NextPageWithLayout } from '@/pages/_app'
-import { Input } from '@/components/Input/Input'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import s from '@/modules/profileModules/createProfile/EditGeneralInformation.module.scss'
-import { Button } from '@/components/Button/Button'
+import s from './GeneralInformation.module.scss'
+import { NextPageWithLayout } from 'pages/_app'
 import {
 	ProfileType,
 	useCreateProfileMutation,
 	useGetUserQuery
-} from '@/modules/profileModules/createProfile/createProfileApi'
+} from 'modules/profileModules/profileApi/createProfileApi'
+import { Input } from 'components/Input/Input'
+import { Button } from 'components/Button/Button'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const [createProfile] = useCreateProfileMutation()
