@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@/modules/authModules'
-import { AvatarsType } from '@/modules/profileModules/createProfile/createProfileApi'
+import { AvatarsType } from '@/modules/profileModules/profileSettingsModule/createProfile/createProfileApi'
 
 export const uploadImageApi = createApi({
 	reducerPath: 'uploadImageApi',
@@ -16,7 +16,7 @@ export const uploadImageApi = createApi({
 		}
 	}),
 	endpoints: build => ({
-		uploadImage: build.mutation<UploadImageType, FormData>({
+		uploadImage: build.mutation<UploadImageType, File>({
 			query: file => ({
 				url: 'users/profile/avatar',
 				method: 'POST',
