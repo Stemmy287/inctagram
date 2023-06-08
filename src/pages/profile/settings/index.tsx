@@ -1,7 +1,7 @@
 import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { getLayoutM } from 'components/Layout/MainLayout/MainLayout'
 import { loggedIn } from 'modules/authModules'
-import { ProfileSettings } from 'modules/profileModules/createProfile/ProfileSettings/ProfileSettings'
+import { ProfileSettings } from 'modules/profileModules/components/ProfileSettings/ProfileSettings'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 

@@ -19,10 +19,11 @@ export const baseQueryWithReauth: BaseQueryFn<
 		)
 		if (refreshResult.data) {
 			// @ts-ignore
-			api.dispatch(authActions.setToken({ token: refreshResult.data.accessToken as string }))
+			api.dispatch(authActions.setToken({ token: refreshResult.data.accessToken }))
 			result = await baseQuery(args, api, extraOptions)
 		} else {
 			api.dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
+			api.dispatch(authActions.setToken({ token: null }))
 		}
 	}
 	return result

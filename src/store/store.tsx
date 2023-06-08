@@ -3,10 +3,10 @@ import { AnyAction, combineReducers } from 'redux'
 import { appReducer } from 'modules/appModules/appReducer'
 import { authReducer } from 'modules/authModules/authReducer/authReducer'
 import { authApi } from 'modules/authModules'
-import { profileApi } from 'modules/profileModules/createProfile/profileApi/createProfileApi'
+import { profileApi } from 'modules/profileModules/profileApi/createProfileApi'
 import { postApi } from 'modules/postModules/postApi/postApi'
 import { postReducer } from 'modules/postModules/postReducer/postReducer'
-import { profileReducer } from 'modules/profileModules/createProfile/profileReducer/profileReducer'
+import { profileReducer } from 'modules/profileModules/profileReducer/profileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
