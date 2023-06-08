@@ -15,7 +15,6 @@ import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
 import { LoginFormData, useLoginMutation } from 'modules/authModules/authApi/authApi'
 import { useEffect } from 'react'
-import { PostMenuModule } from 'modules/postModules/components/postMenuModule/PostMenu'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -26,7 +25,7 @@ export const Login: NextPageWithLayout = () => {
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			router.push('/profile/settings')
+			router.push('/profile')
 		}
 	}, [isLoggedIn, router])
 

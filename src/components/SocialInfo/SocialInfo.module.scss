@@ -1,0 +1,15 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  >span {
+    @include text(14px, 400, 24px);
+  }
+
+  .count {
+    font-weight: 700;
+  }
+}

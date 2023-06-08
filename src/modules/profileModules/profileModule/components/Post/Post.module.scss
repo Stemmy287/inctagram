@@ -1,0 +1,52 @@
+@import "common/styles/variables";
+@import "common/styles/mixins";
+
+.closedPost {
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(50%);
+    transition: .1s;
+  }
+}
+
+.openedPost {
+  display: flex;
+  position: relative;
+  .content {
+    width: 480px;
+    .header {
+      height: 59px;
+      border-bottom: 1px solid $dark100;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      column-gap: 12px;
+      position: relative;
+      >img {
+        border-radius: 50%;
+      }
+      > span {
+        @include text(16px, 600, 24px, $light100);
+      }
+      .burgerMenu {
+        position: absolute;
+        right: 24px;
+      }
+    }
+  }
+  .close {
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: .9s;
+    &:hover {
+      transform: rotate(360deg);
+      transition: .9s;
+    }
+  }
+}
+

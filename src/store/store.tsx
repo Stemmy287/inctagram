@@ -6,16 +6,16 @@ import { authApi } from 'modules/authModules'
 import { profileApi } from 'modules/profileModules/profileApi/createProfileApi'
 import { postApi } from 'modules/postModules/postApi/postApi'
 import { postReducer } from 'modules/postModules/postReducer/postReducer'
-import { profileReducer } from 'modules/profileModules/profileReducer/profileReducer'
+import { profileReducer } from '../modules/profileModules/profileReducer/profileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
 	[postApi.reducerPath]: postApi.reducer,
 	[profileApi.reducerPath]: profileApi.reducer,
-	profile: profileReducer,
 	app: appReducer,
 	authReducer: authReducer,
-	postReducer: postReducer
+	postReducer: postReducer,
+	profileReducer: profileReducer
 })
 
 export const store = configureStore({
@@ -23,8 +23,8 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
 			.concat(authApi.middleware)
-			.concat(postApi.middleware)
 			.concat(profileApi.middleware)
+			.concat(postApi.middleware)
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

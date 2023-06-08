@@ -21,7 +21,7 @@ export const profileApi = createApi({
 					body
 				})
 			}),
-			uploadImage: build.mutation<UploadImageType, FormData>({
+			uploadImage: build.mutation<UploadImageType, FormData | File>({
 				query: body => ({
 					url: 'users/profile/avatar',
 					method: 'POST',

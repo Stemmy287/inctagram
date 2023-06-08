@@ -1,10 +1,12 @@
 import { authActions, AuthInitialStateType, authReducer } from './authReducer'
-import { UserType } from 'modules/authModules/authApi/authApi'
+import { UserType } from '../authApi/authApi'
+
 
 let initialState: AuthInitialStateType
 
 beforeEach(() => {
 	initialState = {
+		token: '',
 		isLoggedIn: false,
 		user: {} as UserType
 	}

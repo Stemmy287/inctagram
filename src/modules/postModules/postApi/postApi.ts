@@ -6,27 +6,30 @@ export const postApi = createApi({
 	reducerPath: 'postApi',
 	baseQuery: baseQueryWithReauth,
 	endpoints: builder => ({
+		fetchPosts: builder.query<ResponseType<FetchPostResponseType[]>, number>({
+			query: userId => `posts/${userId}`
+		}),
 		addPostPhoto: builder.mutation<ImagesType, File>({
 			query: file => {
 				const formData = new FormData()
 				formData.append('file', file)
 
 				return {
-					url: 'posts/image',
 					method: 'POST',
+					url: 'posts/image',
 					body: formData
 				}
 			},
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				const res = await queryFulfilled
-				dispatch(postActions.setUploadId({ uploadId: res.data.images[0].uploadId }))
+				dispatch(postActions.setUploadId({ uploadId: res.data.uploadId }))
 			}
 		}),
 		addPost: builder.mutation<FetchPostResponseType, PostType>({
-			query: body => ({
+			query: data => ({
 				url: 'posts',
 				method: 'POST',
-				body
+				body: data
 			})
 		}),
 		deletePost: builder.mutation<void, string>({
@@ -38,13 +41,12 @@ export const postApi = createApi({
 	})
 })
 
-export const { useAddPostPhotoMutation, useAddPostMutation, useDeletePostMutation } = postApi
+export const {useAddPostPhotoMutation, useAddPostMutation, useDeletePostMutation, useFetchPostsQuery} = postApi
 
 export type PostType = {
 	description: string
 	childrenMetadata: ChildrenMetadata[]
 }
-
 type ChildrenMetadata = {
 	uploadId: string
 }
@@ -59,13 +61,17 @@ export type FetchPostResponseType = {
 }
 
 export type ImagesType = {
-	images: ImagesTypeImages[]
-}
-
-type ImagesTypeImages = {
 	url: string
 	width: number
 	height: number
 	fileSize: number
 	uploadId: string
+}
+
+export type ResponseType<D> = {
+    totalCount: number
+    pagesCount: number
+    page: number
+    pageSize: number
+    items: D
 }
