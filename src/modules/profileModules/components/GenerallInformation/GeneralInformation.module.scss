@@ -1,6 +1,5 @@
-@import "common/styles/mixins";
-@import "common/styles/variables";
-@import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+@import "@/common/styles/mixins";
+@import "@/common/styles/variables";
 
 .container {
   margin-top: 16px;
@@ -10,6 +9,7 @@
   width: 494px;
   row-gap: 12px;
 
+
   .btn {
     align-self: flex-end;
   }
@@ -17,7 +17,7 @@
   label {
     color: $dark100;
     font-size: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
   }
 
   textarea {
@@ -28,15 +28,17 @@
     border-radius: 2px;
     color:white;
   }
-
-  .datepicker {
-    margin-bottom: 24px;
-
-    input {
-      background-color: $dark300;
+  .calendar {
+    .calendarInput{
+      margin-bottom: 12px;
+      padding: 5px;
+      background-color: $dark100;
       color: white;
       border: none;
+      width: fit-content;
+      border-radius: 2px;
     }
   }
+
 }
 
