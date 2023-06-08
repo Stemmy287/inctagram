@@ -1,20 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from 'modules/authModules'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { createProfileActions } from 'modules/profileModules/createProfile/createProfileReducer'
+import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
 
 export const createProfileApi = createApi({
 	reducerPath: 'createProfileApi',
-	baseQuery: fetchBaseQuery({
-		credentials: 'include',
-		baseUrl: API_URL,
-		prepareHeaders: headers => {
-			const token = localStorage.getItem('token')
-			if (token) {
-				headers.set('Authorization', `Bearer ${token}`)
-			}
-			return headers
-		}
-	}),
+	baseQuery: baseQueryWithReauth,
 	endpoints: build => {
 		return {
 			getUser: build.query<FetchUserResponseType, void>({
@@ -22,21 +12,21 @@ export const createProfileApi = createApi({
 				async onQueryStarted(_, { dispatch, queryFulfilled }) {
 					const res = await queryFulfilled
 					dispatch(createProfileActions.setAva({ ava: res.data.avatars[0].url }))
-					// dispatch(createProfileActions.setProfileData(res.data))
 				}
 			}),
 			createProfile: build.mutation<FetchUserResponseType, ProfileType>({
-				query: profileInfo => {
+				query: body => {
 					return {
-						method: 'PUT',
 						url: 'users/profile',
-						body: profileInfo
+						method: 'PUT',
+						body
 					}
 				}
 			})
 		}
 	}
 })
+
 export const { useGetUserQuery, useCreateProfileMutation } = createProfileApi
 
 export type ProfileType = {

@@ -1,38 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from 'modules/authModules'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { AvatarsType } from 'modules/profileModules/createProfile/createProfileApi'
+import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
 
 export const uploadImageApi = createApi({
 	reducerPath: 'uploadImageApi',
-	baseQuery: fetchBaseQuery({
-		credentials: 'include',
-		baseUrl: API_URL,
-		prepareHeaders: headers => {
-			const token = localStorage.getItem('token')
-			if (token) {
-				headers.set('Authorization', `Bearer ${token}`)
-			}
-			return headers
-		}
-	}),
+	baseQuery: baseQueryWithReauth,
 	endpoints: build => ({
 		uploadImage: build.mutation<UploadImageType, FormData>({
-			query: file => ({
+			query: body => ({
 				url: 'users/profile/avatar',
 				method: 'POST',
-				body: file
+				body
 			})
 		}),
 		deleteImage: build.mutation<void, void>({
 			query: () => {
 				return {
-					method: 'DELETE',
-					url: 'users/profile/avatar'
+					url: 'users/profile/avatar',
+					method: 'DELETE'
 				}
 			}
 		})
 	})
 })
+
 export const { useUploadImageMutation } = uploadImageApi
 
 type UploadImageType = {

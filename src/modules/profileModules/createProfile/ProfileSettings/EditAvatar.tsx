@@ -8,7 +8,7 @@ import { DefaultAva } from 'modules/profileModules/createProfile/ProfileSettings
 import { AddAvatar } from 'modules/profileModules/uploadImage/AddAvatar'
 
 export const EditAvatar = () => {
-	const {} = useGetUserQuery()
+	// const {} = useGetUserQuery()
 
 	const avaFromServer = useAppSelector(state => state.createProfileReducer.ava)
 	const [openModal, setOpenModal] = useState(false)

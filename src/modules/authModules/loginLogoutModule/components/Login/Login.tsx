@@ -45,7 +45,7 @@ export const Login: NextPageWithLayout = () => {
 
 	const onSubmit: SubmitHandler<LoginFormData> = async data => {
 		const res = await login(data).unwrap()
-		localStorage.setItem('token', res.accessToken)
+		// localStorage.setItem('token', res.accessToken)
 	}
 
 	return (

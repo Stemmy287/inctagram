@@ -8,18 +8,18 @@ import { Layout } from 'components/Layout/Layout'
 import { SnackBar } from 'components/SnackBar/SnackBar'
 
 export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
-	const [updateTokens] = useUpdateTokensMutation()
+	// const [updateTokens] = useUpdateTokensMutation()
 	const {} = useMeQuery()
 
 	const error = useAppSelector(selectAppError)
 	const isInitialized = useAppSelector(selectIsInitialized)
-
-	useEffect(() => {
-		// Refresh token every 55 minutes
-		setInterval(() => {
-			updateTokens()
-		}, 55 * 60 * 1000)
-	}, [updateTokens])
+	//
+	// useEffect(() => {
+	// 	// Refresh token every 55 minutes
+	// 	setInterval(() => {
+	// 		updateTokens()
+	// 	}, 55 * 60 * 1000)
+	// }, [updateTokens])
 
 	return (
 		<>

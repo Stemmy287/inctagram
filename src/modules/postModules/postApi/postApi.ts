@@ -1,21 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import { createApi } from '@reduxjs/toolkit/dist/query/react'
 import { postActions } from 'modules/postModules/postReducer/postReducer'
-
-export const API_URL = process.env.NEXT_PUBLIC_API_URL
+import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
 
 export const postApi = createApi({
 	reducerPath: 'postApi',
-	baseQuery: fetchBaseQuery({
-		credentials: 'include',
-		baseUrl: API_URL,
-		prepareHeaders: headers => {
-			const token = localStorage.getItem('token')
-			if (token) {
-				headers.set('Authorization', `Bearer ${token}`)
-			}
-			return headers
-		}
-	}),
+	baseQuery: baseQueryWithReauth,
 	endpoints: builder => ({
 		addPostPhoto: builder.mutation<ImagesType, File>({
 			query: file => {
@@ -23,8 +12,8 @@ export const postApi = createApi({
 				formData.append('file', file)
 
 				return {
-					method: 'POST',
 					url: 'posts/image',
+					method: 'POST',
 					body: formData
 				}
 			},
@@ -34,10 +23,10 @@ export const postApi = createApi({
 			}
 		}),
 		addPost: builder.mutation<FetchPostResponseType, PostType>({
-			query: data => ({
+			query: body => ({
 				url: 'posts',
 				method: 'POST',
-				body: data
+				body
 			})
 		}),
 		deletePost: builder.mutation<void, string>({
@@ -55,6 +44,7 @@ export type PostType = {
 	description: string
 	childrenMetadata: ChildrenMetadata[]
 }
+
 type ChildrenMetadata = {
 	uploadId: string
 }
@@ -71,6 +61,7 @@ export type FetchPostResponseType = {
 export type ImagesType = {
 	images: ImagesTypeImages[]
 }
+
 type ImagesTypeImages = {
 	url: string
 	width: number
