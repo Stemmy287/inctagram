@@ -18,8 +18,6 @@ export const PostsList = ({profileId}: PropsType) => {
         }
     }, [profileId])
 
-    console.log(posts)
-
     return <>
         {posts?.items.length
             ? <div className={s.container}>
