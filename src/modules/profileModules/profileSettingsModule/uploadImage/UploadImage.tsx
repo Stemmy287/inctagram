@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { Button } from 'components/Button/Button'
-import { useUploadImageMutation } from '../../profileApi/createProfileApi'
+import { useUploadImageMutation } from '../../profileApi/profileApi'
 
 export const UploadImage = () => {
 	const [uploadImage] = useUploadImageMutation()

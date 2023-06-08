@@ -1,5 +1,4 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { FetchUserResponseType } from './createProfileApi'
 import { baseQueryWithReauth } from '../../api/baseQueryWithReauth'
 
 
@@ -9,8 +8,63 @@ export const profileApi = createApi({
 	endpoints: builder => ({
 		fetchProfile: builder.query<FetchUserResponseType, void>({
 			query: () => 'users/profile'
+		}),
+		createProfile: builder.mutation<FetchUserResponseType, ProfileType>({
+			query: body => ({
+				url: 'users/profile',
+				method: 'PUT',
+				body
+			})
+		}),
+		uploadImage: builder.mutation<UploadImageType, FormData | File>({
+			query: body => ({
+				url: 'users/profile/avatar',
+				method: 'POST',
+				body
+			})
+		}),
+		deleteImage: builder.mutation<void, void>({
+			query: () => ({
+				url: 'users/profile/avatar',
+				method: 'DELETE'
+			})
 		})
 	})
 })
 
-export const { useFetchProfileQuery } = profileApi
+export const { useFetchProfileQuery,
+	useCreateProfileMutation,
+	useDeleteImageMutation,
+	useUploadImageMutation } = profileApi
+
+export type ProfileType = {
+	id: number
+	userName: string
+	firstName: string
+	lastName: string
+	city: string
+	dateOfBirth: Date
+	aboutMe?: string
+}
+
+export type FetchUserResponseType = {
+	id: number
+	userName: string
+	firstName: string
+	lastName: string
+	city: string
+	dateOfBirth: string
+	aboutMe: string
+	avatars: AvatarsType[]
+}
+
+export type AvatarsType = {
+	url: string
+	width: number
+	height: number
+	fileSize: number
+}
+
+type UploadImageType = {
+	avatars: AvatarsType[]
+}

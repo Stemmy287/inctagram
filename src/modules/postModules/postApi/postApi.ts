@@ -48,7 +48,7 @@ export type PostType = {
 	childrenMetadata: ChildrenMetadata[]
 }
 type ChildrenMetadata = {
-	uploadId: string
+
 }
 
 export type FetchPostResponseType = {

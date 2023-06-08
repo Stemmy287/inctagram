@@ -6,7 +6,7 @@ import { Popup } from 'components/Popup/Popup'
 import s from './AddAvatar.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
-import { useUploadImageMutation } from 'modules/profileModules/profileApi/createProfileApi'
+import { useUploadImageMutation } from 'modules/profileModules/profileApi/profileApi'
 import { profileActions } from 'modules/profileModules/profileReducer/profileReducer'
 import { appActions } from 'modules/appModules'
 

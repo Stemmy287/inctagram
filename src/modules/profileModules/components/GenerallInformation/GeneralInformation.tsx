@@ -1,19 +1,16 @@
-import * as yup from 'yup'
+	import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
-import {
-	ProfileType,
-	useCreateProfileMutation,
-	useGetUserQuery
-} from 'modules/profileModules/profileApi/createProfileApi'
+
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
+	import { ProfileType, useCreateProfileMutation, useFetchProfileQuery } from '../../profileApi/profileApi'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const [createProfile] = useCreateProfileMutation()
-	const { data: profileData } = useGetUserQuery()
+	const { data: profileData } = useFetchProfileQuery()
 	const defaultDate = profileData?.dateOfBirth
 		? new Date(profileData.dateOfBirth).toISOString().split('T')[0]
 		: undefined
