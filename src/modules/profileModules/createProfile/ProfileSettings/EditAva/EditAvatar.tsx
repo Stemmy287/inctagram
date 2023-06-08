@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import deleteAva from '../../../../../public/icons/delete-ava.svg'
+import deleteAva from '../../../../../../public/icons/delete-ava.svg'
 import Image from 'next/image'
 import s from './EditAvatar.module.scss'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
-import { useGetUserQuery } from 'modules/profileModules/createProfile/createProfileApi'
-import { DefaultAva } from 'modules/profileModules/createProfile/ProfileSettings/DefaultAva'
-import { AddAvatar } from 'modules/profileModules/uploadImage/AddAvatar'
+// import { useGetUserQuery } from 'modules/profileModules/createProfile/profileApi/createProfileApi'
+import { DefaultAva } from '../DefaultAva/DefaultAva'
+import { AddAvatar } from 'modules/profileModules/uploadImage/AddAva/AddAvatar'
 
 export const EditAvatar = () => {
 	// const {} = useGetUserQuery()
 
-	const avaFromServer = useAppSelector(state => state.createProfileReducer.ava)
+	const avaFromServer = useAppSelector(state => state.profile.ava)
 	const [openModal, setOpenModal] = useState(false)
 
 	const onClose = () => {

@@ -3,20 +3,16 @@ import { AnyAction, combineReducers } from 'redux'
 import { appReducer } from 'modules/appModules/appReducer'
 import { authReducer } from 'modules/authModules/authReducer/authReducer'
 import { authApi } from 'modules/authModules'
-import { createProfileApi } from 'modules/profileModules/createProfile/createProfileApi'
-import { uploadImageApi } from 'modules/profileModules/uploadImage/uploadImageApi'
-import { uploadImageReducer } from 'modules/profileModules/uploadImage/uploadImageReducer'
+import { profileApi } from 'modules/profileModules/createProfile/profileApi/createProfileApi'
 import { postApi } from 'modules/postModules/postApi/postApi'
 import { postReducer } from 'modules/postModules/postReducer/postReducer'
-import { createProfileReducer } from 'modules/profileModules/createProfile/createProfileReducer'
+import { profileReducer } from 'modules/profileModules/createProfile/profileReducer/profileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
-	[createProfileApi.reducerPath]: createProfileApi.reducer,
-	[uploadImageApi.reducerPath]: uploadImageApi.reducer,
 	[postApi.reducerPath]: postApi.reducer,
-	uploadImage: uploadImageReducer,
-	createProfileReducer: createProfileReducer,
+	[profileApi.reducerPath]: profileApi.reducer,
+	profile: profileReducer,
 	app: appReducer,
 	authReducer: authReducer,
 	postReducer: postReducer
@@ -27,9 +23,8 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware()
 			.concat(authApi.middleware)
-			.concat(createProfileApi.middleware)
-			.concat(uploadImageApi.middleware)
 			.concat(postApi.middleware)
+			.concat(profileApi.middleware)
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

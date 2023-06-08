@@ -1,13 +1,14 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import defaultAva from '../../../../public/images/defaultPhoto.png'
+import defaultAva from '../../../../../public/images/defaultPhoto.png'
 import Image from 'next/image'
 import { Button } from 'components/Button/Button'
 import { Popup } from 'components/Popup/Popup'
-import { useUploadImageMutation } from 'modules/profileModules/uploadImage/uploadImageApi'
 import s from './AddAvatar.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
-import { createProfileActions } from 'modules/profileModules/createProfile/createProfileReducer'
+import { useUploadImageMutation } from 'modules/profileModules/createProfile/profileApi/createProfileApi'
+import { profileActions } from 'modules/profileModules/createProfile/profileReducer/profileReducer'
+import { appActions } from 'modules/appModules'
 
 type PropsType = {
 	onClose: () => void
@@ -30,7 +31,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 					setAva(file64)
 				})
 			} else {
-				console.error('Error: ', 'Файл слишком большого размера')
+				dispatch(appActions.setAppError({ error: 'Файл слишком большого размера' }))
 			}
 		}
 	}
@@ -52,7 +53,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 			.unwrap()
 			.then(() =>
 				convertFileToBase64(file as File, (file64: string) => {
-					dispatch(createProfileActions.setAva({ ava: file64 }))
+					dispatch(profileActions.setAva({ ava: file64 }))
 				})
 			)
 		onClose()

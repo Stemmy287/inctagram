@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { createProfileActions } from 'modules/profileModules/createProfile/createProfileReducer'
 import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
+import { profileActions } from '../profileReducer/profileReducer'
 
-export const createProfileApi = createApi({
-	reducerPath: 'createProfileApi',
+export const profileApi = createApi({
+	reducerPath: 'profileApi',
 	baseQuery: baseQueryWithReauth,
 	endpoints: build => {
 		return {
@@ -11,23 +11,39 @@ export const createProfileApi = createApi({
 				query: () => 'users/profile',
 				async onQueryStarted(_, { dispatch, queryFulfilled }) {
 					const res = await queryFulfilled
-					dispatch(createProfileActions.setAva({ ava: res.data.avatars[0].url }))
+					dispatch(profileActions.setAva({ ava: res.data.avatars[0].url }))
 				}
 			}),
 			createProfile: build.mutation<FetchUserResponseType, ProfileType>({
-				query: body => {
-					return {
-						url: 'users/profile',
-						method: 'PUT',
-						body
-					}
-				}
+				query: body => ({
+					url: 'users/profile',
+					method: 'PUT',
+					body
+				})
+			}),
+			uploadImage: build.mutation<UploadImageType, FormData>({
+				query: body => ({
+					url: 'users/profile/avatar',
+					method: 'POST',
+					body
+				})
+			}),
+			deleteImage: build.mutation<void, void>({
+				query: () => ({
+					url: 'users/profile/avatar',
+					method: 'DELETE'
+				})
 			})
 		}
 	}
 })
 
-export const { useGetUserQuery, useCreateProfileMutation } = createProfileApi
+export const {
+	useGetUserQuery,
+	useCreateProfileMutation,
+	useDeleteImageMutation,
+	useUploadImageMutation
+} = profileApi
 
 export type ProfileType = {
 	id: number
@@ -38,6 +54,7 @@ export type ProfileType = {
 	dateOfBirth: Date
 	aboutMe?: string
 }
+
 export type FetchUserResponseType = {
 	id: number
 	userName: string
@@ -48,9 +65,14 @@ export type FetchUserResponseType = {
 	aboutMe: string
 	avatars: AvatarsType[]
 }
+
 export type AvatarsType = {
 	url: string
 	width: number
 	height: number
 	fileSize: number
+}
+
+type UploadImageType = {
+	avatars: AvatarsType[]
 }

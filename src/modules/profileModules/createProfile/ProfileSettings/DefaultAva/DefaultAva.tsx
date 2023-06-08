@@ -1,5 +1,5 @@
 import React from 'react'
-import image from '../../../../../public/icons/image.svg'
+import image from '../../../../../../public/icons/image.svg'
 import s from './DefaultAva.module.scss'
 import Image from 'next/image'
 

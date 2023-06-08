@@ -3,19 +3,19 @@ import { Input } from 'components/Input/Input'
 import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import s from 'modules/profileModules/createProfile/EditGeneralInformation.module.scss'
+import s from './GeneralInformation.module.scss'
 import { Button } from 'components/Button/Button'
 import {
 	ProfileType,
-	useCreateProfileMutation, useGetUserQuery
-} from 'modules/profileModules/createProfile/createProfileApi'
+	useCreateProfileMutation,
+	useGetUserQuery
+} from 'modules/profileModules/createProfile/profileApi/createProfileApi'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const [createProfile] = useCreateProfileMutation()
 	const { data: profileData } = useGetUserQuery()
-	// const profileData = useAppSelector(state => state.createProfileReducer.profileData)
 
 	const schema = yup.object().shape({
 		userName: yup.string().required('field required'),
