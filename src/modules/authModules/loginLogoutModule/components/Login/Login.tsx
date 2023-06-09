@@ -42,9 +42,8 @@ export const Login: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<LoginFormData> = async data => {
-		const res = await login(data).unwrap()
-		// localStorage.setItem('token', res.accessToken)
+	const onSubmit: SubmitHandler<LoginFormData> = data => {
+		login(data)
 	}
 
 	return (

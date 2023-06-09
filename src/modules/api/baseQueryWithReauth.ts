@@ -20,6 +20,8 @@ export const baseQueryWithReauth: BaseQueryFn<
 		if (refreshResult.data) {
 			// @ts-ignore
 			api.dispatch(authActions.setToken({ token: refreshResult.data.accessToken }))
+			// @ts-ignore
+			localStorage.setItem('token', refreshResult.data.accessToken)
 			result = await baseQuery(args, api, extraOptions)
 		} else {
 			api.dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
