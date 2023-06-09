@@ -4,18 +4,11 @@ import {baseQueryWithReauth} from 'modules/api/baseQueryWithReauth'
 export const postApi = createApi({
     reducerPath: 'postApi',
     baseQuery: baseQueryWithReauth,
+    tagTypes: ['Posts'],
     endpoints: builder => ({
         fetchPosts: builder.query<ResponseType<FetchPostResponseType[]>, { userId:number, pageNumber: number }>({
-            query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=18`,
-            serializeQueryArgs: ({ endpointName }) => {
-                return endpointName
-            },
-            merge: (currentCache, newItems) => {
-                currentCache.items.push(...newItems.items)
-            },
-            forceRefetch: ({ currentArg, previousArg }) => {
-                return currentArg !== previousArg
-            }
+            query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=9`,
+            providesTags: ['Posts']
         }),
         addPostPhoto: builder.mutation<{ images: ImagesType[] }, File>({
             query: file => {
@@ -34,7 +27,8 @@ export const postApi = createApi({
                 url: 'posts',
                 method: 'POST',
                 body
-            })
+            }),
+            invalidatesTags: ['Posts']
         }),
         deletePost: builder.mutation<void, string>({
             query: postId => ({
