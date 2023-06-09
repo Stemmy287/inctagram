@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { Layout } from '../Layout'
 import { Navbar } from '../../Navbar/Navbar'
 import { SnackBar } from '../../SnackBar/SnackBar'
+import { Header } from '../../Header/Header'
 
 
 export const MainLayout: NextPage<PropsWithChildren> = ({ children }) => {
@@ -24,12 +25,11 @@ export const MainLayout: NextPage<PropsWithChildren> = ({ children }) => {
 
 	return (
 		<>
-			<Layout>
+			<Header/>
 				<div className={s.main}>
 					<Navbar />
 					<div className={s.contentBox}>{children}</div>
 				</div>
-			</Layout>
 			{error && <SnackBar />}
 		</>
 	)

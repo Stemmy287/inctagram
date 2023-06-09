@@ -10,10 +10,10 @@ const initialState = {
     filteredPics: {} as File,
     urlFilteredPics: '',
 
-    uploadId: ''
-}
+    uploadId: '',
 
-type PostInitialStateType = typeof initialState
+    pageNumber: 1
+}
 
 const slice = createSlice({
     name: 'post',
@@ -37,6 +37,9 @@ const slice = createSlice({
         setUrlFilteredPics: (state, action: PayloadAction<{ urlFilteredPics: string }>) => {
             state.urlFilteredPics = action.payload.urlFilteredPics
         },
+        setPageNumber: (state, action: PayloadAction<number>) => {
+            state.pageNumber = action.payload
+        }
     }
 })
 
