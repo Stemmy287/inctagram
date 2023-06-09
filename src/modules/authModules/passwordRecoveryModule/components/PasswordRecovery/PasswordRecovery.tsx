@@ -10,10 +10,7 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Notification } from 'components/Notification/Notification'
-import {
-	PasswordRecoveryType,
-	useRecoveryPasswordMutation
-} from 'modules/authModules/authApi/authApi'
+import { PasswordRecoveryType, useRecoveryPasswordMutation } from 'modules/authModules/authApi/authApi'
 
 export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
@@ -40,12 +37,6 @@ export const PasswordRecovery = () => {
 		await recoveryPassword(data)
 	}
 
-	if (isSuccess) {
-		localStorage.setItem('email', getValues().email)
-		!resendLink && setResendLink(true)
-		setIsActive(true)
-		reset()
-	}
 	const onClosePopupHandler = () => {
 		setIsActive(false)
 	}
@@ -62,6 +53,7 @@ export const PasswordRecovery = () => {
 			reset()
 		}
 	}, [isSuccess])
+
 
 	return (
 		<>
@@ -94,7 +86,7 @@ export const PasswordRecovery = () => {
 					<Link className={s.link} href={'login'}>
 						Back to Sign In
 					</Link>
-					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />
+					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} reset={isSuccess} />
 				</form>
 			</LoginDetailsWrapper>
 			{isActive && (
