@@ -5,8 +5,17 @@ export const postApi = createApi({
     reducerPath: 'postApi',
     baseQuery: baseQueryWithReauth,
     endpoints: builder => ({
-        fetchPosts: builder.query<ResponseType<FetchPostResponseType[]>, number>({
-            query: userId => `posts/${userId}`
+        fetchPosts: builder.query<ResponseType<FetchPostResponseType[]>, { userId:number, pageNumber: number }>({
+            query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=18`,
+            serializeQueryArgs: ({ endpointName }) => {
+                return endpointName
+            },
+            merge: (currentCache, newItems) => {
+                currentCache.items.push(...newItems.items)
+            },
+            forceRefetch: ({ currentArg, previousArg }) => {
+                return currentArg !== previousArg
+            }
         }),
         addPostPhoto: builder.mutation<{ images: ImagesType[] }, File>({
             query: file => {
