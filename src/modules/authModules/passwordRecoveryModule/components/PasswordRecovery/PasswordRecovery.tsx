@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './PasswordRecovery.module.scss'
 import { LoginDetailsWrapper } from 'components/LoginDetailsWrapper/LoginDetailsWrapper'
 import { Input } from 'components/Input/Input'
@@ -54,6 +54,15 @@ export const PasswordRecovery = () => {
 		setError('recaptcha', { message: '' })
 	}
 
+	useEffect(() => {
+		if (isSuccess) {
+			localStorage.setItem('email', getValues().email)
+			!resendLink && setResendLink(true)
+			setIsActive(true)
+			reset()
+		}
+	}, [isSuccess])
+
 	return (
 		<>
 			<LoginDetailsWrapper>
@@ -85,7 +94,7 @@ export const PasswordRecovery = () => {
 					<Link className={s.link} href={'login'}>
 						Back to Sign In
 					</Link>
-					{!resendLink && <Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />}
+					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />
 				</form>
 			</LoginDetailsWrapper>
 			{isActive && (

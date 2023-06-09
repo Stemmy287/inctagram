@@ -7,7 +7,7 @@ type PropsType = {
 	error: boolean
 }
 
-export const Captcha = ({ callback, error }: PropsType) => {
+export const Captcha = ({ callback, error}: PropsType) => {
 	const onChangeHandler = (value: string | null) => {
 		callback(value || '')
 	}
@@ -15,7 +15,7 @@ export const Captcha = ({ callback, error }: PropsType) => {
 	return (
 		<div className={error ? s.error : ''}>
 			<ReCAPTCHA
-				sitekey='6LdUtdklAAAAAIAhcAayU_lJI6vMPtMNe3jbLtK0'
+				sitekey='6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'
 				onChange={onChangeHandler}
 				theme={'dark'}
 				hl={'en'}
