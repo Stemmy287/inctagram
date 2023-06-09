@@ -1,19 +1,23 @@
-	import * as yup from 'yup'
+import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
-
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-	import { ProfileType, useCreateProfileMutation, useFetchProfileQuery } from '../../profileApi/profileApi'
+import { ProfileType, useCreateProfileMutation } from '../../profileApi/profileApi'
+import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
+import { selectUser } from '../../profileReducer/profileReducer-selector'
 
 export const GeneralInformation: NextPageWithLayout = () => {
+	const user = useAppSelector(selectUser)
+
 	const [createProfile] = useCreateProfileMutation()
-	const { data: profileData } = useFetchProfileQuery()
-	const defaultDate = profileData?.dateOfBirth
-		? new Date(profileData.dateOfBirth).toISOString().split('T')[0]
+
+	const defaultDate = user?.dateOfBirth
+		? new Date(user.dateOfBirth).toISOString().split('T')[0]
 		: undefined
+
 	const schema = yup.object().shape({
 		userName: yup.string().required('field required'),
 		firstName: yup.string().required('enter firstname'),
@@ -22,23 +26,25 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		aboutMe: yup.string().required('add about me'),
 		dateOfBirth: yup.string().required('add date of birth')
 	})
+
 	const {
 		register,
-		handleSubmit,
-		formState: { errors }
+		handleSubmit
 	} = useForm<ProfileType>({
 		defaultValues: {
-			userName: profileData?.userName,
-			firstName: profileData?.firstName,
-			lastName: profileData?.lastName,
-			city: profileData?.city,
-			aboutMe: profileData?.aboutMe
+			userName: user?.userName,
+			firstName: user?.firstName,
+			lastName: user?.lastName,
+			city: user?.city,
+			aboutMe: user?.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})
-	const onSubmit: SubmitHandler<ProfileType> = async data => {
-		await createProfile(data)
+
+	const onSubmit: SubmitHandler<ProfileType> = data => {
+		createProfile(data)
 	}
+
 	return (
 		<div>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
@@ -46,7 +52,6 @@ export const GeneralInformation: NextPageWithLayout = () => {
 				<Input title='First Name' register={register} name={'firstName'} />
 				<Input title='Last Name' register={register} name={'lastName'} />
 				<label>Date of birth</label>
-
 				<div className={s.calendar}>
 					<input
 						type='date'
@@ -55,7 +60,6 @@ export const GeneralInformation: NextPageWithLayout = () => {
 						className={s.calendarInput}
 					/>
 				</div>
-
 				<Input title='City' register={register} name={'city'} />
 				<label>About me</label>
 				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />

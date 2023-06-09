@@ -31,7 +31,6 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 
 	const openPopupHandler = () => {
 		setShowPopup(true)
-		setShowPopup(false)
 	}
 
 	const closePopupHandler = () => {
@@ -41,6 +40,7 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 	const deletePostHandler = async () => {
 		await deletePost(postId)
 		setShowMenu(false)
+		setShowPopup(false)
 	}
 
 	return (
@@ -55,7 +55,8 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 				/>
 				{showMenu && (
 					<div className={s.menu} ref={ref}>
-						<label className={s.action} onClick={() => {}}>
+						<label className={s.action} onClick={() => {
+						}}>
 							<Image src={edit} alt='edit' />
 							<div className={s.btn}>Edit post</div>
 						</label>

@@ -49,10 +49,10 @@ export const SignUp: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<RegisterParamsType> = async data => {
+	const onSubmit: SubmitHandler<RegisterParamsType> = data => {
 		localStorage.setItem('email', data.email)
 		setEmail(data.email)
-		await registration(data)
+		registration(data)
 	}
 
 	const onClosePopupHandler = () => {

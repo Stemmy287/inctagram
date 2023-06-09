@@ -14,8 +14,9 @@ export const authApi = createApi({
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				await queryFulfilled
+				const res = await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+				localStorage.setItem('token', res.data.accessToken)
 			}
 		}),
 		logout: builder.mutation<void, void>({

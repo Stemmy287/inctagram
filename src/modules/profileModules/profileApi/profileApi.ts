@@ -1,13 +1,21 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '../../api/baseQueryWithReauth'
+import { profileActions } from '../profileReducer/profileReducer'
 
 
 export const profileApi = createApi({
 	reducerPath: 'profileApi',
 	baseQuery: baseQueryWithReauth,
 	endpoints: builder => ({
-		fetchProfile: builder.query<FetchUserResponseType, void>({
-			query: () => 'users/profile'
+		fetchProfile: builder.query<FetchUserResponseType, null>({
+			query: () => ({
+				url: 'users/profile',
+				method: 'GET'
+			}),
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				const res = await queryFulfilled
+				dispatch(profileActions.setUser({ user: res.data }))
+			}
 		}),
 		createProfile: builder.mutation<FetchUserResponseType, ProfileType>({
 			query: body => ({
@@ -32,10 +40,12 @@ export const profileApi = createApi({
 	})
 })
 
-export const { useFetchProfileQuery,
+export const {
+	useFetchProfileQuery,
 	useCreateProfileMutation,
 	useDeleteImageMutation,
-	useUploadImageMutation } = profileApi
+	useUploadImageMutation
+} = profileApi
 
 export type ProfileType = {
 	id: number

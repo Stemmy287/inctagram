@@ -5,19 +5,18 @@ import s from './EditAvatar.module.scss'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { DefaultAva } from '../DefaultAva/DefaultAva'
 import { AddAvatar } from 'modules/profileModules/components/uploadImage/AddAva/AddAvatar'
-import { selectAva } from 'modules/profileModules/profileReducer/profileReducer-selector'
+import { selectUser } from 'modules/profileModules/profileReducer/profileReducer-selector'
 
 export const EditAvatar = () => {
-	// const {} = useGetUserQuery()
-
-	const avaFromServer = useAppSelector(selectAva)
+	const avaFromServer = useAppSelector(selectUser)?.avatars[1].url
 	const [openModal, setOpenModal] = useState(false)
 
 	const onClose = () => {
 		setOpenModal(!openModal)
 	}
 
-	const deleteImageHandler = () => {}
+	const deleteImageHandler = () => {
+	}
 
 	return (
 		<div className={s.container}>

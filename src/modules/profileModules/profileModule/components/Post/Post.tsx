@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import s from './Post.module.scss'
 import Image from 'next/image'
-
 import defaultPhoto from '../../../../../../public/images/defaultPhoto.png'
-import close  from '../../../../../../public/icons/closeIcon.svg'
+import close from '../../../../../../public/icons/closeIcon.svg'
 import { FetchPostResponseType } from '../../../../postModules/postApi/postApi'
-import { useFetchProfileQuery } from '../../../profileApi/profileApi'
 import { Popup } from '../../../../../components/Popup/Popup'
 import { PostMenuModule } from '../../../../postModules/components/postMenuModule/PostMenu'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import { selectUser } from '../../../profileReducer/profileReducer-selector'
 
 
 type PropsType = {
@@ -17,7 +17,7 @@ type PropsType = {
 export const Post = ({ post }: PropsType) => {
 
 	const [isActive, setIsActive] = useState(false)
-	const {data: profile} = useFetchProfileQuery()
+	const user = useAppSelector(selectUser)
 
 	const onCloseHandler = () => {
 		setIsActive(false)
@@ -52,18 +52,18 @@ export const Post = ({ post }: PropsType) => {
 					<div className={s.content}>
 						<div className={s.header}>
 							<Image
-								src={profile?.avatars[0].url || defaultPhoto}
+								src={user?.avatars[0].url || defaultPhoto}
 								alt='ava'
 								width={36}
 								height={36}
 							/>
-							<span>{profile?.userName}</span>
+							<span>{user?.userName}</span>
 							<div className={s.burgerMenu}>
-								<PostMenuModule postId={'111'} />
+								<PostMenuModule postId={post.id.toString()} />
 							</div>
 						</div>
 					</div>
-					<Image src={close} alt='close' className={s.close} onClick={onCloseHandler}/>
+					<Image src={close} alt='close' className={s.close} onClick={onCloseHandler} />
 				</div>
 			</Popup>}
 		</>
