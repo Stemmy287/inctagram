@@ -1,8 +1,8 @@
 import { NextPageWithLayout } from 'pages/_app'
-import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
+import { getAuthLayout } from 'components/Layout/AuthLayout/AuthLayout'
 import { RegistrationEmailResending } from 'modules/authModules'
 
 const RegistrationEmailResendPage: NextPageWithLayout = () => <RegistrationEmailResending />
 
-RegistrationEmailResendPage.getLayout = getLayout
+RegistrationEmailResendPage.getLayout = getAuthLayout
 export default RegistrationEmailResendPage

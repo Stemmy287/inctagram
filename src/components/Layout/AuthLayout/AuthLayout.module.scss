@@ -3,6 +3,8 @@
 
 .container {
   @include flex-center-column;
+  border-right: 1px solid $dark300;
+  border-left: 1px solid $dark300;
   .main {
     display: flex;
     justify-content: center;

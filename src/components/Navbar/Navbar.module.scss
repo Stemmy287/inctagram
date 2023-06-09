@@ -2,17 +2,14 @@
 @import "src/common/styles/variables";
 
 .navWrapper {
-  margin-top: 60px;
-  width: 220px;
-  height: 100vh;
-  @include flex-center-horiz;
-  align-items: flex-start;
-  background-color: $dark700;
-  border: 1px solid $dark300;
+  min-width: 220px;
+  height: calc(100vh - 60px);
 
+  background-color: $dark700;
 
   .navbar {
-    padding-top: 140px;
+    padding-top: 72px;
+    padding-left: 63px;
 
     .link {
       cursor: pointer;

@@ -4,7 +4,6 @@ import s from './MainLayout.module.scss'
 import { useAppSelector } from '../../../assets/hooks/useAppSelector'
 import { loggedIn } from '../../../modules/authModules'
 import { useRouter } from 'next/router'
-import { Layout } from '../Layout'
 import { Navbar } from '../../Navbar/Navbar'
 import { SnackBar } from '../../SnackBar/SnackBar'
 import { Header } from '../../Header/Header'
@@ -24,14 +23,14 @@ export const MainLayout: NextPage<PropsWithChildren> = ({ children }) => {
 	}, [isLoggedIn, router])
 
 	return (
-		<>
+		<div className={s.container}>
 			<Header/>
 				<div className={s.main}>
 					<Navbar />
 					<div className={s.contentBox}>{children}</div>
 				</div>
 			{error && <SnackBar />}
-		</>
+		</div>
 	)
 }
 

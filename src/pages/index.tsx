@@ -1,4 +1,4 @@
-import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
+import { getAuthLayout } from 'components/Layout/AuthLayout/AuthLayout'
 import { NextPageWithLayout } from 'pages/_app'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { useRouter } from 'next/router'
@@ -20,6 +20,6 @@ const Home: NextPageWithLayout = () => {
 	return <>Home</>
 }
 
-Home.getLayout = getLayout
+Home.getLayout = getAuthLayout
 export default Home
 

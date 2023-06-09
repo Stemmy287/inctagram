@@ -6,12 +6,9 @@
   background-color: $dark700;
   width: 100%;
   border-bottom: 1px solid $dark300;
-  position: fixed;
   @include flex-center-vert;
   justify-content: space-between;
-  top: 0;
-
-
+  position: relative;
   .title {
     @include text(26px, 600);
     padding: 60px;

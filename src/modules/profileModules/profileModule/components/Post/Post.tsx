@@ -37,8 +37,8 @@ export const Post = ({ post }: PropsType) => {
 				className={s.closedPost}
 				src={filterImageSize()[0].url}
 				alt='post img'
-				width={230}
-				height={230}
+				width={234}
+				height={229}
 				onClick={onModalHandler}
 			/>
 			{isActive && <Popup onClose={onCloseHandler}>

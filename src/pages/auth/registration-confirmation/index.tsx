@@ -1,8 +1,8 @@
-import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
+import { getAuthLayout } from 'components/Layout/AuthLayout/AuthLayout'
 import { ConfirmationReg } from 'modules/authModules/signUpModule/components/registrationСonfirmation/ConfirmationReg'
 import { NextPageWithLayout } from 'pages/_app'
 
 const ConfirmationRegPage: NextPageWithLayout = () => <ConfirmationReg />
 
-ConfirmationRegPage.getLayout = getLayout
+ConfirmationRegPage.getLayout = getAuthLayout
 export default ConfirmationRegPage

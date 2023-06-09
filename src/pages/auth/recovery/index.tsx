@@ -1,9 +1,9 @@
 import React from 'react'
 import { NextPageWithLayout } from 'pages/_app'
 import { ResetPassword } from 'modules/authModules'
-import { getLayout } from 'components/Layout/BaseLayout/BaseLayout'
+import { getAuthLayout } from 'components/Layout/AuthLayout/AuthLayout'
 
 const ResetPasswordPage: NextPageWithLayout = () => <ResetPassword />
 
-ResetPasswordPage.getLayout = getLayout
+ResetPasswordPage.getLayout = getAuthLayout
 export default ResetPasswordPage
