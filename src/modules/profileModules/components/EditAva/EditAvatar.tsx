@@ -6,37 +6,41 @@ import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { DefaultAva } from '../DefaultAva/DefaultAva'
 import { AddAvatar } from 'modules/profileModules/components/uploadImage/AddAva/AddAvatar'
 import { selectUser } from 'modules/profileModules/profileReducer/profileReducer-selector'
+import { useDeleteAvatarMutation } from 'modules/profileModules/profileApi/profileApi'
 
 export const EditAvatar = () => {
-	const avaFromServer = useAppSelector(selectUser)?.avatars[1].url
+	const avaFromServer = useAppSelector(selectUser)
 	const [openModal, setOpenModal] = useState(false)
+	const [deleteAvatar] = useDeleteAvatarMutation()
 
-	const onClose = () => {
-		setOpenModal(!openModal)
-	}
-
-	const deleteImageHandler = () => {
-	}
+	const onCloseHandler = () => setOpenModal(!openModal)
+	const deleteAvatarHandler = () => deleteAvatar()
 
 	return (
 		<div className={s.container}>
 			<div className={s.photoWrapper}>
 				{avaFromServer ? (
-					<Image src={avaFromServer} alt={'ava'} className={s.photo} width={192} height={192} />
+					<Image
+						src={avaFromServer.avatars[1].url}
+						alt={'ava'}
+						className={s.photo}
+						width={192}
+						height={192}
+					/>
 				) : (
 					<DefaultAva />
 				)}
 				<Image
 					src={deleteAva}
 					alt='delete-ava'
-					onClick={deleteImageHandler}
+					onClick={deleteAvatarHandler}
 					className={s.closeImg}
 				/>
 			</div>
-			<div onClick={onClose} className={s.btn}>
+			<div onClick={onCloseHandler} className={s.btn}>
 				Add a profile photo
 			</div>
-			{openModal && <AddAvatar onClose={onClose} />}
+			{openModal && <AddAvatar onClose={onCloseHandler} />}
 		</div>
 	)
 }

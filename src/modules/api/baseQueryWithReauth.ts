@@ -26,6 +26,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 		} else {
 			api.dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
 			api.dispatch(authActions.setToken({ token: null }))
+			localStorage.removeItem('token')
 		}
 	}
 	return result

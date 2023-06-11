@@ -2,7 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '../../api/baseQueryWithReauth'
 import { profileActions } from '../profileReducer/profileReducer'
 
-
 export const profileApi = createApi({
 	reducerPath: 'profileApi',
 	baseQuery: baseQueryWithReauth,
@@ -31,7 +30,7 @@ export const profileApi = createApi({
 				body
 			})
 		}),
-		deleteImage: builder.mutation<void, void>({
+		deleteAvatar: builder.mutation<void, void>({
 			query: () => ({
 				url: 'users/profile/avatar',
 				method: 'DELETE'
@@ -43,8 +42,8 @@ export const profileApi = createApi({
 export const {
 	useFetchProfileQuery,
 	useCreateProfileMutation,
-	useDeleteImageMutation,
-	useUploadImageMutation
+	useUploadImageMutation,
+	useDeleteAvatarMutation
 } = profileApi
 
 export type ProfileType = {
