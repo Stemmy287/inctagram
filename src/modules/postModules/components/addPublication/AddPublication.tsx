@@ -19,19 +19,21 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 	const schema = yup.object().shape({
 		description: yup.string().required('add about')
 	})
+
 	const { register, handleSubmit } = useForm<PostType>({
 		resolver: yupResolver(schema)
 	})
+
 	const [addPostPhoto] = useAddPostPhotoMutation()
 	const [addPost] = useAddPostMutation()
-	const onSubmit: SubmitHandler<PostType> = data => {
-		addPostPhoto(finalPics)
-			.unwrap()
-			.then(res => {
-				addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] }).then(() =>
-					onClose()
-				)
-			})
+
+	const onSubmit: SubmitHandler<PostType> = async data => {
+		const formData = new FormData()
+		formData.append('file', finalPics)
+
+		const res = await addPostPhoto(formData).unwrap()
+		await addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] })
+		onClose()
 	}
 
 	const finalPics = useSelector<AppRootStateType, File>(state => state.postReducer.filteredPics)

@@ -5,7 +5,11 @@ import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '../../profileApi/profileApi'
+import {
+	ProfileType,
+	useCreateProfileMutation,
+	useFetchProfileQuery
+} from '../../profileApi/profileApi'
 import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../profileReducer/profileReducer-selector'
 
@@ -41,8 +45,9 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<ProfileType> = data => {
-		createProfile(data)
+	const onSubmit: SubmitHandler<ProfileType> = async data => {
+		await createProfile(data)
+		// useFetchProfileQuery(null)
 	}
 
 	return (
