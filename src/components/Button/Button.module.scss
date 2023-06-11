@@ -29,12 +29,12 @@
 }
 
 .btnOpacity {
-  background: $dark300;
+  background: $dark900;
   border: 1px solid $accent500;
   color: $accent500;
 
   &:hover {
-    background: $dark100;
+    background: $dark300;
     color: $accent300;
   }
 
@@ -50,3 +50,25 @@
     cursor: auto;
   }
 }
+
+.btnWhite {
+  background: $light100;
+  color: $dark900;
+
+  &:hover {
+    background: $light500;
+    color: $dark700;
+  }
+
+  &:active {
+    background: $light100;
+    color: $dark500;
+  }
+
+  &:disabled {
+    background: $light500;
+    color: $dark300;
+    cursor: auto;
+  }
+}
+

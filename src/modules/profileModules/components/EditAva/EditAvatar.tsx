@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import deleteAva from '../../../../../public/icons/delete-ava.svg'
 import Image from 'next/image'
 import s from './EditAvatar.module.scss'
-import { useAppSelector } from 'assets/hooks/useAppSelector'
-import image from '../../../../../public/icons/image.svg'
 import { AddAvatar } from 'modules/profileModules/components/uploadImage/AddAva/AddAvatar'
-import { selectUser } from 'modules/profileModules/profileReducer/profileReducer-selector'
 import { useDeleteAvatarMutation } from 'modules/profileModules/profileApi/profileApi'
+import { Avatar } from '../Avatar/Avatar'
+import { Button } from '../../../../components/Button/Button'
 
 export const EditAvatar = () => {
-	const avaFromServer = useAppSelector(selectUser)
 	const [openModal, setOpenModal] = useState(false)
 	const [deleteAvatar] = useDeleteAvatarMutation()
 
@@ -19,19 +17,7 @@ export const EditAvatar = () => {
 	return (
 		<div className={s.container}>
 			<div className={s.photoWrapper}>
-				{avaFromServer ? (
-					<Image
-						src={avaFromServer.avatars[1].url}
-						alt={'ava'}
-						className={s.photo}
-						width={192}
-						height={192}
-					/>
-				) : (
-					<div className={`${s.photo} ${s.borderDefault}`}>
-						<Image src={image} alt={'ava'} width={192} height={192} />
-					</div>
-				)}
+				<Avatar />
 				<Image
 					src={deleteAva}
 					alt='delete-ava'
@@ -39,9 +25,7 @@ export const EditAvatar = () => {
 					className={s.closeImg}
 				/>
 			</div>
-			<div onClick={onCloseHandler} className={s.btn}>
-				Add a profile photo
-			</div>
+			<Button title={'Add a profile photo'} style={'opacity'} callback={onCloseHandler}/>
 			{openModal && <AddAvatar onClose={onCloseHandler} />}
 		</div>
 	)

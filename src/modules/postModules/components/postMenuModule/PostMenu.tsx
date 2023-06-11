@@ -78,7 +78,7 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 									title={'Yes'}
 									callback={deletePostHandler}
 									disabled={appStatus === 'loading'}
-									opacity
+									style={'opacity'}
 								/>
 							</div>
 							<div className={s.btns}>

@@ -7,7 +7,7 @@
 	.photoWrapper {
 		position: relative;
 
-		.photo {
+		.avatarFromServer {
 			width: 192px;
 			height: 192px;
 			border-radius: 50%;
@@ -29,15 +29,5 @@
 			top: 56px;
 			left: 192px;
 		}
-	}
-
-	.btn {
-		background-color: transparent;
-		border: 3px solid $accent500;
-		padding: 6px 24px;
-		text-align: center;
-		@include text(16px, 600, 24px);
-		color: $accent500;
-		cursor: pointer;
 	}
 }

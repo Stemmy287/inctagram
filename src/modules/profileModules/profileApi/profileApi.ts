@@ -52,7 +52,7 @@ export type ProfileType = {
 	firstName: string
 	lastName: string
 	city: string
-	dateOfBirth: Date
+	dateOfBirth: string
 	aboutMe?: string
 }
 
@@ -62,7 +62,7 @@ export type FetchUserResponseType = {
 	firstName: string
 	lastName: string
 	city: string
-	dateOfBirth: Date
+	dateOfBirth: string
 	aboutMe: string
 	avatars: AvatarsType[]
 }

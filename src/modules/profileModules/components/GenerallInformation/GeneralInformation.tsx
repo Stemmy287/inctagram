@@ -14,7 +14,14 @@ export const GeneralInformation: NextPageWithLayout = () => {
 
 	const [createProfile] = useCreateProfileMutation()
 
-	// const defaultDate = new Date(user?.dateOfBirth ?? '').toISOString().split('T')[0]
+	const date = new Date(user?.dateOfBirth as string)
+
+	const formattedDate =
+		date.getFullYear() +
+		'-' +
+		('0' + (date.getMonth() + 1)).slice(-2) +
+		'-' +
+		('0' + date.getDate()).slice(-2)
 
 	const schema = yup.object().shape({
 		userName: yup.string().required('field required'),
@@ -31,8 +38,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 			firstName: user?.firstName,
 			lastName: user?.lastName,
 			city: user?.city,
-			aboutMe: user?.aboutMe,
-			dateOfBirth: user?.dateOfBirth
+			aboutMe: user?.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})
@@ -49,7 +55,12 @@ export const GeneralInformation: NextPageWithLayout = () => {
 				<Input title='Last Name' register={register} name={'lastName'} />
 				<label>Date of birth</label>
 				<div className={s.calendar}>
-					<input type='date' {...register('dateOfBirth')} className={s.calendarInput} />
+					<input
+						type='date'
+						{...register('dateOfBirth')}
+						className={s.calendarInput}
+						defaultValue={formattedDate}
+					/>
 				</div>
 				<Input title='City' register={register} name={'city'} />
 				<label>About me</label>
