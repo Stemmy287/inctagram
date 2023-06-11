@@ -1,11 +1,7 @@
-@import "common/styles/mixins";
-@import "common/styles/variables";
-
+@import 'common/styles/mixins';
 
 .wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
+	@include flex-row;
+	justify-content: flex-start;
+	align-items: flex-start;
 }

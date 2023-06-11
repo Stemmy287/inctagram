@@ -4,11 +4,9 @@ import { GeneralInformation } from '../../../components/GenerallInformation/Gene
 
 export const ProfileSettings = () => {
 	return (
-		<div>
-			<div className={s.wrapper}>
-				<EditAvatar />
-				<GeneralInformation />
-			</div>
+		<div className={s.wrapper}>
+			<EditAvatar />
+			<GeneralInformation />
 		</div>
 	)
 }

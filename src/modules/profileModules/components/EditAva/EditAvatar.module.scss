@@ -1,37 +1,43 @@
-@import "common/styles/mixins";
-@import "common/styles/variables";
+@import 'common/styles/mixins';
+@import 'common/styles/variables';
 
 .container {
-  margin-right: 24px;
+	margin-right: 24px;
 
-  .photoWrapper {
-    position: relative;
+	.photoWrapper {
+		position: relative;
 
-    .photo {
-      border-radius: 50%;
-      margin: 24px;
-      width: 192px;
-      height: 192px;
-    }
+		.photo {
+			width: 192px;
+			height: 192px;
+			border-radius: 50%;
+			margin: 24px;
+		}
 
-    .closeImg {
-      cursor: pointer;
-      position: absolute;
-      height: 16px;
-      width: 16px;
-      top: 56px;
-      left: 192px;
-      //transform: translate(-50%, -50%) rotate(90deg);
-    }
-  }
+		.borderDefault {
+			@include flex-center;
+			background-color: $dark500;
+			width: 48px;
+			height: 48px;
+		}
 
-  .btn {
-    background-color: transparent;
-    border: 3px solid $accent500;
-    padding: 6px 24px;
-    text-align: center;
-    @include text(16px, 600, 24px);
-    color: $accent500;
-    cursor: pointer;
-  }
+		.closeImg {
+			cursor: pointer;
+			position: absolute;
+			height: 16px;
+			width: 16px;
+			top: 56px;
+			left: 192px;
+		}
+	}
+
+	.btn {
+		background-color: transparent;
+		border: 3px solid $accent500;
+		padding: 6px 24px;
+		text-align: center;
+		@include text(16px, 600, 24px);
+		color: $accent500;
+		cursor: pointer;
+	}
 }

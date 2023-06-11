@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import defaultAva from '../../../../../../public/images/defaultPhoto.png'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { Button } from 'components/Button/Button'
 import { Popup } from 'components/Popup/Popup'
 import s from './AddAvatar.module.scss'
@@ -9,14 +9,16 @@ import { useAppDispatch } from 'assets/hooks/useAppDispatch'
 import { useUploadImageMutation } from 'modules/profileModules/profileApi/profileApi'
 import { profileActions } from 'modules/profileModules/profileReducer/profileReducer'
 import { appActions } from 'modules/appModules'
+import { convertFileToBase64 } from 'assets/utils/convertFileToBase64/convertFileToBase64'
 
 type PropsType = {
 	onClose: () => void
 }
+
 export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 	const dispatch = useAppDispatch()
-	const [ava, setAva] = useState<any>(defaultAva)
-	const [file, setFile] = useState<File | null>(null)
+	const [ava, setAva] = useState<StaticImageData | string>(defaultAva)
+	const [file, setFile] = useState<File>()
 	const inputRef = React.useRef<HTMLInputElement>(null)
 	const refClick = () => inputRef.current?.click()
 	const [uploadImage] = useUploadImageMutation()
@@ -36,28 +38,17 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 		}
 	}
 
-	const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-		const reader = new FileReader()
-		reader.onloadend = () => {
-			const file64 = reader.result as string
-			callBack(file64)
-		}
-		reader.readAsDataURL(file)
-	}
-
-	const onSaveHandler = () => {
+	const onSaveHandler = async () => {
 		const formData = new FormData()
 		formData.append('file', file as File)
 
-		uploadImage(formData)
-			.unwrap()
-			.then(() =>
-				convertFileToBase64(file as File, (file64: string) => {
-					dispatch(profileActions.setAva({ ava: file64 }))
-				})
-			)
+		await uploadImage(formData)
+		convertFileToBase64(file as File, (file64: string) => {
+			dispatch(profileActions.setAva({ ava: file64 }))
+		})
 		onClose()
 	}
+
 	return (
 		<Popup onClose={onClose}>
 			<TitlePopup title='Add a profile photo' onClose={onClose} />

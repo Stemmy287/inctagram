@@ -3,7 +3,7 @@ import deleteAva from '../../../../../public/icons/delete-ava.svg'
 import Image from 'next/image'
 import s from './EditAvatar.module.scss'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
-import { DefaultAva } from '../DefaultAva/DefaultAva'
+import image from '../../../../../public/icons/image.svg'
 import { AddAvatar } from 'modules/profileModules/components/uploadImage/AddAva/AddAvatar'
 import { selectUser } from 'modules/profileModules/profileReducer/profileReducer-selector'
 import { useDeleteAvatarMutation } from 'modules/profileModules/profileApi/profileApi'
@@ -28,7 +28,9 @@ export const EditAvatar = () => {
 						height={192}
 					/>
 				) : (
-					<DefaultAva />
+					<div className={`${s.photo} ${s.borderDefault}`}>
+						<Image src={image} alt={'ava'} width={192} height={192} />
+					</div>
 				)}
 				<Image
 					src={deleteAva}

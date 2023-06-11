@@ -23,10 +23,15 @@ export const Profile = () => {
 	}
 
 	return (
-		<div className={s.container}>
+		<>
 			<div className={s.hatProfile}>
-				<Image className={s.avatar} src={user?.avatars[0].url || defaultPhoto} alt='avatar' width={192}
-							 height={192} />
+				<Image
+					className={s.avatar}
+					src={user?.avatars[0].url || defaultPhoto}
+					alt='avatar'
+					width={192}
+					height={192}
+				/>
 				<div className={s.mainInfo}>
 					<div className={s.userNameAndBtn}>
 						<h3>{user?.userName}</h3>
@@ -43,6 +48,6 @@ export const Profile = () => {
 				</div>
 			</div>
 			<PostsList profileId={user?.id || 0} />
-		</div>
+		</>
 	)
 }

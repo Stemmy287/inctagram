@@ -4,11 +4,9 @@ import { EditAvatar } from '../EditAva/EditAvatar'
 
 export const ProfileSettings = () => {
 	return (
-		<div>
-			<div className={s.wrapper}>
-				<EditAvatar />
-				<GeneralInformation />
-			</div>
+		<div className={s.wrapper}>
+			<EditAvatar />
+			<GeneralInformation />
 		</div>
 	)
 }

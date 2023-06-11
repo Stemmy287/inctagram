@@ -1,10 +1,9 @@
-@import "common/styles/mixins.scss";
-@import "common/styles/variables.scss";
+@import 'common/styles/mixins.scss';
+@import 'common/styles/variables.scss';
 
 .container {
-  display: flex;
-  margin-top: 53px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 12px;
+	@include flex-space-between;
+	margin-top: 53px;
+	flex-wrap: wrap;
+	row-gap: 12px;
 }

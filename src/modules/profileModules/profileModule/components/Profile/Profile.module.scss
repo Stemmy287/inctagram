@@ -1,39 +1,41 @@
-@import "common/styles/mixins.scss";
-@import "common/styles/variables.scss";
+@import 'common/styles/mixins.scss';
+@import 'common/styles/variables.scss';
 
-.container {
-  .hatProfile {
-    display: flex;
-    column-gap: 38px;
-    .avatar {
-      border-radius: 50%;
-    }
+.hatProfile {
+	display: flex;
+	column-gap: 38px;
 
-    .mainInfo {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      row-gap: 19px;
-      .userNameAndBtn {
-        display: flex;
-        justify-content: space-between;
-      > h3 {
-        @include text(20px, 700, 36px);
-      }
-        .buttonWrapper {
-          width: 167px;
-        }
-      }
+	.avatar {
+		border-radius: 50%;
+		width: 192px;
+		height: 192px;
+	}
 
-      .socialInfo {
-        display: flex;
-        column-gap: 72px;
-      }
+	.mainInfo {
+		@include flex-column;
+		width: 100%;
+		row-gap: 19px;
 
-      .description {
-        margin-top: 4px;
-        @include text(16px, 400, 24px);
-      }
-    }
-  }
+		.userNameAndBtn {
+			@include flex-space-between;
+
+			> h3 {
+				@include text(20px, 700, 36px);
+			}
+
+			.buttonWrapper {
+				width: 167px;
+			}
+		}
+
+		.socialInfo {
+			display: flex;
+			column-gap: 72px;
+		}
+
+		.description {
+			margin-top: 4px;
+			@include text(16px, 400, 24px);
+		}
+	}
 }
