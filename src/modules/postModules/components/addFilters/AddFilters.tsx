@@ -7,8 +7,9 @@ import { FlagType } from 'modules/postModules/components/createPost/CreatePost'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppRootStateType } from 'store/store'
 import { postActions } from 'modules/postModules/postReducer/postReducer'
-import { HeaderForModal } from 'modules/postModules/components/headerForModal/HeaderForModal'
+
 import { setImageFilter } from 'assets/utils/setImageFilter/setImageFilter'
+import { HeaderForModal } from 'modules/postModules'
 
 export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag }) => {
 	const dispatch = useDispatch()

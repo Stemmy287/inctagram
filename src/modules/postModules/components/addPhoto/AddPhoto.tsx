@@ -5,8 +5,7 @@ import { Button } from 'components/Button/Button'
 import s from './AddPhoto.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useDispatch } from 'react-redux'
-import { postActions } from 'modules/postModules/postReducer/postReducer'
-import { FlagType } from 'modules/postModules/components/createPost/CreatePost'
+import { FlagType, postActions } from 'modules/postModules'
 
 type PropsType = {
 	uploadHandler?: (e: ChangeEvent<HTMLInputElement>) => void

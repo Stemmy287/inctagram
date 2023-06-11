@@ -11,11 +11,9 @@ import { selectUser } from '../../profileReducer/profileReducer-selector'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const user = useAppSelector(selectUser)
-
 	const [createProfile] = useCreateProfileMutation()
 
 	const date = new Date(user?.dateOfBirth as string)
-
 	const formattedDate =
 		date.getFullYear() +
 		'-' +

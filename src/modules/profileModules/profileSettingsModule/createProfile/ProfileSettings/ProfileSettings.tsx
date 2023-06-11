@@ -1,6 +1,6 @@
 import s from './ProfileSettings.module.scss'
 import { EditAvatar } from '../../../components/EditAva/EditAvatar'
-import { GeneralInformation } from '../../../components/GenerallInformation/GeneralInformation'
+import { GeneralInformation } from '../../../components/GeneralInformation/GeneralInformation'
 
 export const ProfileSettings = () => {
 	return (

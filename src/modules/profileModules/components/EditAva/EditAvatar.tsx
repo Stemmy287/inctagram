@@ -6,8 +6,11 @@ import { AddAvatar } from 'modules/profileModules/components/uploadImage/AddAva/
 import { useDeleteAvatarMutation } from 'modules/profileModules/profileApi/profileApi'
 import { Avatar } from '../Avatar/Avatar'
 import { Button } from '../../../../components/Button/Button'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { selectAva } from 'modules/profileModules/profileReducer/profileReducer-selector'
 
 export const EditAvatar = () => {
+	const avatarFromServer = useAppSelector(selectAva)
 	const [openModal, setOpenModal] = useState(false)
 	const [deleteAvatar] = useDeleteAvatarMutation()
 
@@ -18,14 +21,16 @@ export const EditAvatar = () => {
 		<div className={s.container}>
 			<div className={s.photoWrapper}>
 				<Avatar />
-				<Image
-					src={deleteAva}
-					alt='delete-ava'
-					onClick={deleteAvatarHandler}
-					className={s.closeImg}
-				/>
+				{!!avatarFromServer?.length && (
+					<Image
+						src={deleteAva}
+						alt='delete-ava'
+						onClick={deleteAvatarHandler}
+						className={s.closeImg}
+					/>
+				)}
 			</div>
-			<Button title={'Add a profile photo'} style={'opacity'} callback={onCloseHandler}/>
+			<Button title={'Add a profile photo'} style={'opacity'} callback={onCloseHandler} />
 			{openModal && <AddAvatar onClose={onCloseHandler} />}
 		</div>
 	)

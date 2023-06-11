@@ -1,10 +1,7 @@
 import { Popup } from 'components/Popup/Popup'
 import { FC, useState } from 'react'
-import { AddFilters } from '../addFilters/AddFilters'
-import { AddPhoto } from '../addPhoto/AddPhoto'
-import { AddPublication } from '../addPublication/AddPublication'
-import { CropEasy } from '../crop/CropEasy'
 import s from './CreatePost.module.scss'
+import { AddFilters, AddPhoto, AddPublication, CropEasy } from 'modules/postModules'
 
 type PropsType = {
 	onClose: () => void
