@@ -5,7 +5,7 @@ import addIcon from '../../../public/icons/plus-square.svg'
 import userIcon from '../../../public/icons/user.svg'
 import Link from 'next/link'
 import { LogoutButton } from 'components/Button/LogoutButton/LogoutButton'
-import { CreatePost } from 'modules/postModules/components/createPost/CreatePost'
+import { CreatePost } from 'modules/postModules'
 import { useState } from 'react'
 
 const navData = [
@@ -24,7 +24,12 @@ export const Navbar = () => {
 				<div className={s.navbar}>
 					{navData &&
 						navData.map(i => (
-							<Link key={i.id} className={s.link} href={i.href} onClick={ i.id === 2 ? onCloseHandler : () => {}}>
+							<Link
+								key={i.id}
+								className={s.link}
+								href={i.href}
+								onClick={ i.id === 2 ? onCloseHandler : () => {}}
+							>
 								<Image className={s.icon} src={i.icon} alt={i.alt} />
 								<div className={s.title}> {i.title}</div>
 							</Link>
