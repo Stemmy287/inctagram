@@ -10,7 +10,7 @@ export const postApi = createApi({
 			ResponseType<FetchPostResponseType[]>,
 			{ userId: number; pageNumber: number }
 		>({
-			query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=9`,
+			query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=12`,
 			providesTags: ['Posts']
 		}),
 		addPostPhoto: builder.mutation<AddPostPhotoResponseType, FormData>({

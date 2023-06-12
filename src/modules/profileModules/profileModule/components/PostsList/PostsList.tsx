@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import s from './PostsList.module.scss'
-import { useFetchPostsQuery } from '../../../../postModules/postApi/postApi'
+import { useFetchPostsQuery } from 'modules/postModules'
 import { Post } from '../Post/Post'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectPageNumber } from '../../../../postModules/postReducer/postReducer-selector'
-
+import { selectPageNumber } from 'modules/postModules'
 
 type PropsType = {
 	profileId: number
@@ -15,7 +14,7 @@ export const PostsList = ({ profileId }: PropsType) => {
 
 	const pageNumber = useAppSelector(selectPageNumber)
 
-	const { data: posts} = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip })
+	const { data: posts } = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip })
 
 	useEffect(() => {
 
@@ -30,6 +29,5 @@ export const PostsList = ({ profileId }: PropsType) => {
 				? posts?.items?.map(post => <Post key={post.id} post={post} />)
 				: 'Create your first post!'}
 		</div>
-
 	)
 }
