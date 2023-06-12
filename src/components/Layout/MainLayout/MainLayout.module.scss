@@ -1,0 +1,17 @@
+@import "src/common/styles/variables";
+
+.container {
+  border-left: 1px solid $dark300;
+  border-right: 1px solid $dark300;
+  .main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .contentBox {
+      border-left: 1px solid $dark300;
+      min-height: calc(100vh - 60px);
+      width: 100%;
+      padding: 35px;
+    }
+  }
+}

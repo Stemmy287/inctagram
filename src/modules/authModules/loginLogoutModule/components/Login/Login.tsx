@@ -1,22 +1,20 @@
 import googleLogo from '/public/icons/googleSvg.svg'
 import githubLogo from '/public/icons/githubSvg.svg'
-import s from '@/modules/authModules/loginLogoutModule/components/Login/Login.module.scss'
+import s from 'modules/authModules/loginLogoutModule/components/Login/Login.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button } from '@/components/Button/Button'
-import { Input } from '@/components/Input/Input'
-import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetailsWrapper'
-import { NextPageWithLayout } from '@/pages/_app'
+import { Button } from 'components/Button/Button'
+import { Input } from 'components/Input/Input'
+import { LoginDetailsWrapper } from 'components/LoginDetailsWrapper/LoginDetailsWrapper'
+import { NextPageWithLayout } from 'pages/_app'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useLoginMutation } from '@/modules/authModules'
 import { useRouter } from 'next/router'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
-import { LoginFormData } from '@/modules/authModules/authApi/authApi'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
+import { LoginFormData, useLoginMutation } from 'modules/authModules/authApi/authApi'
 import { useEffect } from 'react'
-import GoogleSignIn from '@/modules/authModules/loginLogoutModule/components/LoginWithGoogle/LoginWithGoogle'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -29,8 +27,7 @@ export const Login: NextPageWithLayout = () => {
 		if (isLoggedIn) {
 			router.push('/profile')
 		}
-	}, [isLoggedIn])
-
+	}, [isLoggedIn, router])
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -45,9 +42,8 @@ export const Login: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<LoginFormData> = async data => {
-		const res = await login(data).unwrap()
-		localStorage.setItem('token', res.accessToken)
+	const onSubmit: SubmitHandler<LoginFormData> = data => {
+		login(data)
 	}
 
 	return (
@@ -80,14 +76,14 @@ export const Login: NextPageWithLayout = () => {
 						Forgot password
 					</Link>
 				</div>
-				<Button title='Sing in' disabled={isLoading} />
+				<Button title='Sign in' disabled={isLoading} />
 			</form>
 			<div className={s.desc}>
 				<div>
 					<span>Don’t have an account?</span>
 				</div>
 				<Link className={s.link} href={'sign-up'}>
-					Sing up
+					Sign up
 				</Link>
 			</div>
 		</LoginDetailsWrapper>

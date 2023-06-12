@@ -1,15 +1,14 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .header {
   height: 60px;
   background-color: $dark700;
   width: 100%;
   border-bottom: 1px solid $dark300;
-  position: fixed;
   @include flex-center-vert;
-  top: 0;
-
+  justify-content: space-between;
+  position: relative;
   .title {
     @include text(26px, 600);
     padding: 60px;
@@ -18,5 +17,9 @@
   .loading {
     position: absolute;
     bottom: 0;
+  }
+
+  .outButton {
+    margin-right: 64px;
   }
 }

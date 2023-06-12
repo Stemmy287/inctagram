@@ -1,0 +1,29 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.header {
+  @include flex-row;
+  align-items: center;
+  justify-content: space-between;
+  height: 59px;
+  border-bottom: 2px solid $dark100;
+  padding: 12px;
+
+  .arrow {
+    cursor: pointer;
+  }
+
+  h1 {
+    @include text(20px, 700, 36px)
+  }
+
+  .btn {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    color: $accent500;
+  }
+}

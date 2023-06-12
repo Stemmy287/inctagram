@@ -1,29 +1,10 @@
-import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
-import { LogoutModal } from '@/modules/authModules/loginLogoutModule/components/logoutModal/logoutModal'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { useAppSelector } from '@/assets/hooks/useAppSelector'
-import { loggedIn } from '@/modules/authModules/authReducer/authSelectors'
+import React from 'react'
+import { NextPageWithLayout } from '../_app'
+import { Profile } from '../../modules/profileModules/profileModule/components/Profile/Profile'
+import { getLayoutM } from '../../components/Layout/MainLayout/MainLayout'
 
-const Profile = () => {
 
-	const isLoggedIn = useAppSelector(loggedIn)
+const ProfilePage: NextPageWithLayout = () => <Profile />
 
-	const router = useRouter()
-
-	if (!isLoggedIn) {
-		router.push('auth/login')
-	}
-
-	const [isActive, setIsActive] = useState(true)
-
-	return (
-		<div>
-			Profile
-			{isActive && <LogoutModal setIsActive={setIsActive}/>}
-		</div>
-	)
-}
-
-Profile.getLayout = getLayout
-export default Profile
+ProfilePage.getLayout = getLayoutM
+export default ProfilePage

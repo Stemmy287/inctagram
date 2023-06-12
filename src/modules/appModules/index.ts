@@ -1,2 +1,2 @@
-export * from '@/modules/appModules/appReducer'
-export * from '@/modules/appModules/appSelectors'
+export * from 'modules/appModules/appReducer'
+export * from 'modules/appModules/appSelectors'

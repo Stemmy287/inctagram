@@ -1,0 +1,24 @@
+@import "common/styles/mixins";
+@import "common/styles/variables";
+
+.container {
+  @include flex-center-column;
+  height: 492px;
+  width: 492px;
+  border-radius: 2px;
+
+  .wrapper {
+    @include flex-center-column;
+    width: 222px;
+    height: 100%;
+    gap: 48px;
+
+    .avatarFromServer {
+      border-radius: 2px;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

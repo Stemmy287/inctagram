@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react'
 import s from './Button.module.scss'
 
+type ButtonStyleType = 'opacity' | 'white'
+
 type PropsType = {
-  title: string
-  callback?: () => void
-  disabled?: boolean
+	title: string
+	callback?: () => void
+	disabled?: boolean
+	style?: ButtonStyleType
 }
 
-export const Button = ({title, callback, disabled}: PropsType) => {
+export const Button: FC<PropsType> = ({ title, callback, disabled, style }) => {
 
- return <button className={s.btn} disabled={disabled} onClick={callback}>{title}</button>;
+	const buttonClass = style === 'opacity'
+		? `${s.btn} ${s.btnOpacity}`
+		: style === 'white' ? `${s.btn} ${s.btnWhite}`
+			: s.btn
 
-};
+	return (
+		<button
+			className={buttonClass}
+			disabled={disabled}
+			onClick={callback}
+		>
+			{title}
+		</button>
+	)
+}

@@ -1,8 +1,9 @@
 import React from 'react'
-import { NextPageWithLayout } from '@/pages/_app'
-import { getLayout } from '@/components/Layout/BaseLayout/BaseLayout'
-import { Login } from '@/modules/authModules'
+import { NextPageWithLayout } from 'pages/_app'
+import { getAuthLayout } from 'components/Layout/AuthLayout/AuthLayout'
+import { Login } from 'modules/authModules'
+
 const LoginPage: NextPageWithLayout = () => <Login />
 
-LoginPage.getLayout = getLayout
+LoginPage.getLayout = getAuthLayout
 export default LoginPage

@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { Provider } from 'react-redux'
-import { store } from '@/store/store'
+import { store } from 'store/store'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 export type NextPageWithLayout<P = {}> = NextPage<P> & {

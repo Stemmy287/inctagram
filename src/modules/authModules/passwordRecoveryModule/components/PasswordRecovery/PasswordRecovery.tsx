@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './PasswordRecovery.module.scss'
-import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetailsWrapper'
-import { Input } from '@/components/Input/Input'
-import { Button } from '@/components/Button/Button'
+import { LoginDetailsWrapper } from 'components/LoginDetailsWrapper/LoginDetailsWrapper'
+import { Input } from 'components/Input/Input'
+import { Button } from 'components/Button/Button'
 import Link from 'next/link'
-import { Captcha } from '@/components/Captcha/Captcha'
-import { Popup } from '@/components/Popup/Popup'
+import { Captcha } from 'components/Captcha/Captcha'
+import { Popup } from 'components/Popup/Popup'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Notification } from '@/components/Notification/Notification'
-import { PasswordRecoveryType, useRecoveryPasswordMutation } from '@/modules/authModules/authApi/authApi'
+import { Notification } from 'components/Notification/Notification'
+import { PasswordRecoveryType, useRecoveryPasswordMutation } from 'modules/authModules/authApi/authApi'
 
 export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
@@ -37,12 +37,6 @@ export const PasswordRecovery = () => {
 		await recoveryPassword(data)
 	}
 
-	if (isSuccess) {
-		localStorage.setItem('email', getValues().email)
-		!resendLink && setResendLink(true)
-		setIsActive(true)
-		reset()
-	}
 	const onClosePopupHandler = () => {
 		setIsActive(false)
 	}
@@ -50,6 +44,16 @@ export const PasswordRecovery = () => {
 		setValue('recaptcha', value)
 		setError('recaptcha', { message: '' })
 	}
+
+	useEffect(() => {
+		if (isSuccess) {
+			localStorage.setItem('email', getValues().email)
+			!resendLink && setResendLink(true)
+			setIsActive(true)
+			reset()
+		}
+	}, [isSuccess])
+
 
 	return (
 		<>
@@ -74,12 +78,15 @@ export const PasswordRecovery = () => {
 								The link has been sent by email. If you dont receive an email send link again
 							</span>
 						)}
-						<Button title={resendLink ? 'Send Link Again' : 'Send Link'} disabled={!!errors.email || isLoading} />
+						<Button
+							title={resendLink ? 'Send Link Again' : 'Send Link'}
+							disabled={!!errors.email || isLoading}
+						/>
 					</div>
 					<Link className={s.link} href={'login'}>
 						Back to Sign In
 					</Link>
-					{!resendLink && <Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} />}
+					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} reset={isSuccess} />
 				</form>
 			</LoginDetailsWrapper>
 			{isActive && (

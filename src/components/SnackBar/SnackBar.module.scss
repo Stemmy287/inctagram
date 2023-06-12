@@ -1,0 +1,38 @@
+@import "common/styles/variables.scss";
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 41px;
+  border-radius: 7px;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.35),
+  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background-color: $warning300;
+  position: fixed;
+  bottom: 3%;
+  left: 1.5%;
+  padding: 0 12px 0 15px;
+  column-gap: 12px;
+
+  span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: $dark300;
+  }
+
+  .close_error_bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $danger300;
+    }
+  }
+}

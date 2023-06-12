@@ -1,0 +1,16 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  @include flex-center-column;
+  border-right: 1px solid $dark300;
+  border-left: 1px solid $dark300;
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 60px) ;
+    padding: 30px;
+  }
+}

@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
-import { LoginDetailsWrapper } from '@/components/LoginDetailsWrapper/LoginDetailsWrapper'
+import { LoginDetailsWrapper } from 'components/LoginDetailsWrapper/LoginDetailsWrapper'
 import s from './ResetPassword.module.scss'
-import { Input } from '@/components/Input/Input'
+import { Input } from 'components/Input/Input'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button } from '@/components/Button/Button'
+import { Button } from 'components/Button/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ResetPasswordType, useResetPasswordMutation } from '@/modules/authModules/authApi/authApi'
+import { ResetPasswordType, useResetPasswordMutation } from 'modules/authModules/authApi/authApi'
 
 type PropsType = {}
 
 export const ResetPassword = ({}: PropsType) => {
 	const router = useRouter()
 
-	const [resetPassword, {isLoading, isSuccess}] = useResetPasswordMutation()
+	const [resetPassword, { isLoading, isSuccess }] = useResetPasswordMutation()
 
 	const schema = yup.object().shape({
 		newPassword: yup
@@ -43,12 +43,9 @@ export const ResetPassword = ({}: PropsType) => {
 		}
 	}
 
-	useEffect(() => {
-		if(isSuccess) {
-			router.push('login')
-		}
-	}, [isSuccess])
-
+	if (isSuccess) {
+		router.push('login')
+	}
 
 	return (
 		<LoginDetailsWrapper>

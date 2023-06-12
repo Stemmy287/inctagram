@@ -1,0 +1,36 @@
+@import 'common/styles/mixins.scss';
+@import 'common/styles/variables.scss';
+
+.hatProfile {
+  display: flex;
+
+  .mainInfo {
+    @include flex-column;
+    row-gap: 45px;
+    width: 100%;
+    margin-left: 38px;
+    box-sizing: border-box;
+
+    .userNameAndBtn {
+      @include flex-space-between;
+
+      > h3 {
+        @include text(20px, 700, 36px);
+      }
+
+      .buttonWrapper {
+        width: 167px;
+      }
+    }
+
+    .socialInfo {
+      display: flex;
+      column-gap: 72px;
+    }
+
+    .description {
+      margin-top: 4px;
+      @include text(16px, 400, 24px);
+    }
+  }
+}

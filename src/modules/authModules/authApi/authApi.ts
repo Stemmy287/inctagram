@@ -1,32 +1,22 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { appActions } from '@/modules/appModules/appReducer'
-import { authActions } from '@/modules/authModules/authReducer/authReducer'
-
-export const API_URL = process.env.NEXT_PUBLIC_API_URL
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { appActions } from 'modules/appModules/appReducer'
+import { authActions } from 'modules/authModules/authReducer/authReducer'
+import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
-	tagTypes: ['login', 'logout', 'me'],
-	baseQuery: fetchBaseQuery({
-		credentials: 'include',
-		baseUrl: API_URL, prepareHeaders: (headers) => {
-			const token = localStorage.getItem('token')
-			if (token) {
-				headers.set('Authorization', `Bearer ${token}`)
-			}
-			return headers
-		}
-	}),
-	endpoints: (builder) => ({
+	baseQuery: baseQueryWithReauth,
+	endpoints: builder => ({
 		login: builder.mutation<LoginResponseType, LoginFormData>({
-			query: (body) => ({
+			query: body => ({
 				url: 'auth/login',
 				method: 'POST',
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				await queryFulfilled
+				const res = await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+				localStorage.setItem('token', res.data.accessToken)
 			}
 		}),
 		logout: builder.mutation<void, void>({
@@ -37,7 +27,7 @@ export const authApi = createApi({
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
-				localStorage.removeItem('token')
+				dispatch(authActions.setToken({ token: null }))
 			}
 		}),
 		me: builder.query<UserType, void>({
@@ -52,35 +42,40 @@ export const authApi = createApi({
 				}
 			}
 		}),
-		recoveryPassword: builder.mutation<any, PasswordRecoveryType>({
+		recoveryPassword: builder.mutation<void, PasswordRecoveryType>({
 			query: body => ({
 				url: 'auth/password-recovery',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		resetPassword: builder.mutation<any, Omit<ResetPasswordType, 'passwordConfirmation'>>({
+		resetPassword: builder.mutation<void, Omit<ResetPasswordType, 'passwordConfirmation'>>({
 			query: body => ({
 				url: 'auth/new-password',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
 		}),
-		registration: builder.mutation<string, any>({
-			query: (body: RegisterParamsType) => ({
+		registration: builder.mutation<string, RegisterParamsType>({
+			query: body => ({
 				url: 'auth/registration',
 				method: 'POST',
 				body
-			}),
-			async onQueryStarted(_, { queryFulfilled }) {
-				await queryFulfilled
-			}
+			})
+		}),
+		regConfirmation: builder.mutation<void, ConfirmationType>({
+			query: body => ({
+				url: 'auth/registration-confirmation',
+				method: 'POST',
+				body
+			})
+		}),
+		regEmailResending: builder.mutation<void, regEmailResendingType>({
+			query: body => ({
+				url: 'auth/registration-email-resending',
+				method: 'POST',
+				body
+			})
 		})
 	})
 })
@@ -91,8 +86,18 @@ export const {
 	useLoginMutation,
 	useRecoveryPasswordMutation,
 	useResetPasswordMutation,
-	useRegistrationMutation
+	useRegistrationMutation,
+	useRegConfirmationMutation,
+	useRegEmailResendingMutation
 } = authApi
+
+export type ConfirmationType = {
+	confirmationCode: string
+}
+
+export type regEmailResendingType = {
+	email: string
+}
 
 type LoginResponseType = {
 	accessToken: string

@@ -1,8 +1,8 @@
-@import "@/common/styles/mixins.scss";
-@import "@/common/styles/variables.scss";
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
 
 .loading {
-  width: 100%;
+  width: 1278px;
   height: 3px;
   position: fixed;
   overflow: hidden;
@@ -10,6 +10,7 @@
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
+
   &:before {
     content: "";
     position: absolute;
@@ -24,6 +25,7 @@
     -moz-border-radius: 20px;
     border-radius: 20px;
   }
+
   @keyframes lineAnim {
     0% {
       left: -40%;

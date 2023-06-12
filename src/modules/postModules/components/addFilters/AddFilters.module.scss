@@ -1,0 +1,43 @@
+@import "common/styles/variables.scss";
+
+.container {
+
+
+  display: flex;
+  flex-direction: column;
+
+
+  width: 972px;
+  //width: 100%;
+  //min-width: 972px;
+  height: 564px;
+  //height: 100%;
+  //min-height: 564px;
+  background: $dark300;
+  border: 1px solid $dark100;
+  border-radius: 2px;
+
+
+  .filtersContainer {
+    display: flex;
+    flex-direction: row;
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      width: 486px;
+
+      .filter {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 12px;
+      }
+    }
+
+  }
+}
