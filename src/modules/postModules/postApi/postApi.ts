@@ -11,6 +11,15 @@ export const postApi = createApi({
 			{ userId: number; pageNumber: number }
 		>({
 			query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=12`,
+			serializeQueryArgs: ({ endpointName }) => {
+				return endpointName
+			},
+			merge: (currentCache, newItems) => {
+				currentCache.items.push(...newItems.items)
+			},
+			forceRefetch({ currentArg, previousArg }) {
+				return currentArg !== previousArg
+			},
 			providesTags: ['Posts']
 		}),
 		addPostPhoto: builder.mutation<AddPostPhotoResponseType, FormData>({

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import s from './PostsList.module.scss'
-import { useFetchPostsQuery } from 'modules/postModules'
+import { postActions, selectPageNumber, useFetchPostsQuery } from 'modules/postModules'
 import { Post } from '../Post/Post'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectPageNumber } from 'modules/postModules'
+import { useAppSelector } from 'assets/hooks/useAppSelector'
+import { useAppDispatch } from 'assets/hooks/useAppDispatch'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 type PropsType = {
 	profileId: number
@@ -13,8 +14,9 @@ export const PostsList = ({ profileId }: PropsType) => {
 	const [skip, setSkip] = useState(true)
 
 	const pageNumber = useAppSelector(selectPageNumber)
+	const dispatch = useAppDispatch()
 
-	const { data: posts } = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip })
+	const { data: posts, isLoading } = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip })
 
 	useEffect(() => {
 
@@ -24,10 +26,19 @@ export const PostsList = ({ profileId }: PropsType) => {
 	}, [profileId])
 
 	return (
-		<div className={s.container}>
-			{posts?.items.length
-				? posts?.items?.map(post => <Post key={post.id} post={post} />)
-				: 'Create your first post!'}
-		</div>
-	)
+		 posts?.items.length
+			? <InfiniteScroll
+				next={() => dispatch(postActions.setPageNumber(pageNumber + 1))}
+				hasMore={posts.items.length < posts.totalCount}
+				loader={isLoading}
+				dataLength={posts.items.length}
+			>
+				<div className={s.container}>
+					{posts?.items?.map(post => <div key={post.id}><Post post={post} /></div>)}
+				</div>
+			</InfiniteScroll>
+			: 'Create your first post!'
+
+
+)
 }
