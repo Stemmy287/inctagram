@@ -1,9 +1,9 @@
 import React from 'react'
-import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../profileReducer/profileReducer-selector'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import Image from 'next/image'
 import s from './Avatar.module.scss'
-import image from '../../../../../public/icons/image.svg'
+import image from '../../../../../../public/icons/image.svg'
 
 
 export const Avatar = () => {

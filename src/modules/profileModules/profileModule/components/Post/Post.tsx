@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import s from './Post.module.scss'
 import Image from 'next/image'
 import close from '../../../../../../public/icons/closeIcon.svg'
-import { FetchPostResponseType } from '../../../../postModules/postApi/postApi'
+import { FetchPostResponseType } from 'modules/postModules/postApi/postApi'
 import { Popup } from '../../../../../components/Popup/Popup'
-import { PostMenuModule } from '../../../../postModules/components/postMenuModule/PostMenu'
+import { PostMenuModule } from 'modules/postModules/components/postMenuModule/PostMenu'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
-import { Avatar } from '../../../components/Avatar/Avatar'
+import { Avatar } from '../../../profileSettingsModule/components/Avatar/Avatar'
 
 
 type PropsType = {

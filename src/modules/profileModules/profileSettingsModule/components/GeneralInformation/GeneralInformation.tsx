@@ -5,13 +5,9 @@ import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-import {
-	ProfileType,
-	useCreateProfileMutation,
-	useFetchProfileQuery
-} from '../../profileApi/profileApi'
-import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../profileReducer/profileReducer-selector'
+import { ProfileType, useCreateProfileMutation } from '../../../profileApi/profileApi'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import { selectUser } from '../../../profileReducer/profileReducer-selector'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const user = useAppSelector(selectUser)

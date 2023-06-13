@@ -8,7 +8,7 @@ import { PostsList } from '../PostsList/PostsList'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import { loggedIn } from '../../../../authModules'
-import { Avatar } from '../../../components/Avatar/Avatar'
+import { Avatar } from '../../../profileSettingsModule/components/Avatar/Avatar'
 
 export const Profile = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
