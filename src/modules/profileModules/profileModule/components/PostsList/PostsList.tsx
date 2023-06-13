@@ -37,7 +37,7 @@ export const PostsList = ({ profileId }: PropsType) => {
 					{posts?.items?.map(post => <div key={post.id}><Post post={post} /></div>)}
 				</div>
 			</InfiniteScroll>
-			: 'Create your first post!'
+			: <>{'Create your first post!'}</>
 
 
 )
