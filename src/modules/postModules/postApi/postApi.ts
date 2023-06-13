@@ -18,6 +18,9 @@ export const postApi = createApi({
 				currentCache.items.push(...newItems.items)
 			},
 			forceRefetch({ currentArg, previousArg }) {
+				if (previousArg?.pageNumber === currentArg?.pageNumber) {
+					return previousArg === currentArg
+				}
 				return currentArg !== previousArg
 			},
 			providesTags: ['Posts']
