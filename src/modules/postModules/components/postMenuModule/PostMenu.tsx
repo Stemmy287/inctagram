@@ -74,7 +74,9 @@ export const PostMenuModule: FC<PropsType> = ({ postId, description }) => {
 					</div>
 				)}
 			</div>
-			{isEditPopupOpen && <EditPost description={description} onClose={closeEditPopup} />}
+			{isEditPopupOpen && (
+				<EditPost description={description} onClose={closeEditPopup} postId={postId} />
+			)}
 			{showPopup && (
 				<Popup onClose={closePopupHandler}>
 					<TitlePopup onClose={closePopupHandler} title={'Delete Post'} />

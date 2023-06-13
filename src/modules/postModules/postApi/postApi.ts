@@ -32,9 +32,10 @@ export const postApi = createApi({
 			query: body => ({
 				url: `posts/${body.postId}`,
 				method: 'PUT',
-					body: body.description
+				body: {
+					description: body.description
+				}
 			})
-
 		}),
 		deletePost: builder.mutation<void, string>({
 			query: postId => ({
@@ -92,6 +93,6 @@ export type ResponseType<D> = {
 }
 
 export type EditPostType = {
-	postId:string
+	postId: string
 	description: string
 }

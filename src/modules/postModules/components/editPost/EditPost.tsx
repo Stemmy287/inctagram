@@ -18,7 +18,12 @@ type PropsType = {
 	description: string
 	postId: string
 }
-export const EditPost = ({ onClose, description }: PropsType) => {
+
+type disType = {
+	description: string
+}
+
+export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const [isActive, setIsActive] = useState(false)
 	const [editPost] = useEditPostMutation()
 	const [value, setValue] = useState(description)
@@ -29,11 +34,15 @@ export const EditPost = ({ onClose, description }: PropsType) => {
 	const schema = yup.object().shape({
 		description: yup.string().required('add about')
 	})
-	const { register, handleSubmit } = useForm<EditPostType>({
+
+	const { register, handleSubmit } = useForm<disType>({
 		resolver: yupResolver(schema)
 	})
-	const onSubmit: SubmitHandler<EditPostType> = data => {
-		editPost(data)
+
+	const onSubmit: SubmitHandler<disType> = data => {
+		debugger
+		editPost({ description: data.description, postId: postId })
+		console.log({ description: data.description, postId: postId })
 	}
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
