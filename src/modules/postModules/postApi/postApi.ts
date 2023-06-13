@@ -28,6 +28,14 @@ export const postApi = createApi({
 			}),
 			invalidatesTags: ['Posts']
 		}),
+		editPost: builder.mutation<void, EditPostType>({
+			query: body => ({
+				url: `posts/${body.postId}`,
+				method: 'PUT',
+					body: body.description
+			})
+
+		}),
 		deletePost: builder.mutation<void, string>({
 			query: postId => ({
 				url: `posts/${postId}`,
@@ -40,6 +48,7 @@ export const postApi = createApi({
 export const {
 	useAddPostPhotoMutation,
 	useAddPostMutation,
+	useEditPostMutation,
 	useDeletePostMutation,
 	useFetchPostsQuery
 } = postApi
@@ -80,4 +89,9 @@ export type ResponseType<D> = {
 	page: number
 	pageSize: number
 	items: D
+}
+
+export type EditPostType = {
+	postId:string
+	description: string
 }

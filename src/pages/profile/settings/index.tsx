@@ -4,6 +4,7 @@ import { loggedIn } from 'modules/authModules'
 import { ProfileSettings } from 'modules/profileModules/components/ProfileSettings/ProfileSettings'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { getLayoutI } from '../../../components/Layout/InfoLayout/InfoLayout'
 
 const Profile = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
@@ -23,5 +24,5 @@ const Profile = () => {
 	)
 }
 
-Profile.getLayout = getLayoutM
+Profile.getLayout = getLayoutI
 export default Profile

@@ -9,7 +9,6 @@ import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
 export const Header = () => {
 	const isLoading = useAppSelector(selectAppStatus)
 	const isInitialized = useAppSelector(selectIsInitialized)
-	const isLoggedIn = useAppSelector(loggedIn)
 
 	return (
 		<div className={s.header}>
@@ -17,11 +16,6 @@ export const Header = () => {
 			{isLoading === 'loading' && isInitialized && (
 				<div className={s.loading}>
 					<LoadingLine />
-				</div>
-			)}
-			{isLoggedIn && ( // вставить нужное условие (типа isSettings)
-				<div className={s.outButton}>
-					<LogoutButton />
 				</div>
 			)}
 		</div>
