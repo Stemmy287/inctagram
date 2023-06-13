@@ -1,6 +1,4 @@
-import googleLogo from '/public/icons/googleSvg.svg'
-import githubLogo from '/public/icons/githubSvg.svg'
-import s from 'modules/authModules/loginLogoutModule/components/Login/Login.module.scss'
+import s from './Login.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from 'components/Button/Button'
@@ -15,19 +13,14 @@ import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
 import { LoginFormData, useLoginMutation } from 'modules/authModules/authApi/authApi'
 import { useEffect } from 'react'
+import GoogleSignIn from '../LoginWithGoogle/LoginWithGoogle'
+import GitHubSignIn from '../LoginWithGitHub/LoginWithGitHub'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
-
 	const isLoggedIn = useAppSelector(loggedIn)
 
 	const router = useRouter()
-
-	useEffect(() => {
-		if (isLoggedIn) {
-			router.push('/profile')
-		}
-	}, [isLoggedIn, router])
 
 	const schema = yup.object().shape({
 		email: yup.string().email('email should be correct').required('field required'),
@@ -42,18 +35,21 @@ export const Login: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<LoginFormData> = data => {
-		login(data)
-	}
+	const onSubmit: SubmitHandler<LoginFormData> = data => login(data)
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			router.push('/profile')
+		}
+	}, [isLoggedIn, router])
 
 	return (
 		<LoginDetailsWrapper>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 				<h1 className={s.title}>Sing in</h1>
 				<div className={s.logo}>
-					<GoogleSignIn/>
-					<Image src={githubLogo} alt={'sing in using github account'} onClick={() => {
-					}} />
+					<GoogleSignIn />
+					<GitHubSignIn />
 				</div>
 				<Input
 					title='Email'

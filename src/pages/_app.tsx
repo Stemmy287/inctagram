@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import 'styles/globals.css'
 import type { AppProps } from 'next/app'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
@@ -15,12 +15,13 @@ type AppPropsWithLayout = AppProps & {
 }
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-	console.log('check')
-	const getLayout = Component.getLayout ?? ((page) => page)
+	const getLayout = Component.getLayout ?? (page => page)
 
 	return (
 		<Provider store={store}>
-			<GoogleOAuthProvider clientId={'553777753445-0vp2nacg4s0h2464gjlbhq2rchi0be3b.apps.googleusercontent.com'}>
+			<GoogleOAuthProvider
+				clientId={'553777753445-0vp2nacg4s0h2464gjlbhq2rchi0be3b.apps.googleusercontent.com'}
+			>
 				{getLayout(<Component {...pageProps} />)}
 			</GoogleOAuthProvider>
 		</Provider>

@@ -1,41 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { useGoogleLogin } from '@react-oauth/google'
-import { NextPageWithLayout } from '@/pages/_app'
-import googleLogo from '/public/icons/googleSvg.svg'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import axios from 'axios'
+import { useGoogleLogin } from '@react-oauth/google'
+import googleLogo from '../../../../../../public/icons/googleSvg.svg'
+import { NextPageWithLayout } from 'pages/_app'
 
-
-const GoogleSignIn: NextPageWithLayout = () => {
-
-	const [user, setUser] = useState<any>([])
-	const [profile, setProfile] = useState<any>([])
-
-	const login = useGoogleLogin({
-		onSuccess: (codeResponse) => setUser(codeResponse),
-		onError: (error) => console.log('Login Failed:', error)
-	})
-
-	useEffect(() => {
-			if (user) {
-				axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-					headers: {
-						Authorization: `Bearer ${user.access_token}`,
-						Accept: 'application/json'
-					}
-				})
-					.then((res) => {
-						setProfile(res.data)
-					})
-			}
-		},
-		[user])
-
-
-	return (
-		<Image src={googleLogo} onClick={() => login()} alt={'sing in using google account'} />
-	)
+type ResponseGoogleType = {
+	authuser: string
+	code: string
+	prompt: string
+	scope: string
 }
 
+const GoogleSignIn: NextPageWithLayout = () => {
+	const [code, setCode] = useState<ResponseGoogleType>()
+
+	const login = useGoogleLogin({
+		onSuccess: codeResponse => {
+			setCode(codeResponse as ResponseGoogleType)
+		},
+		flow: 'auth-code'
+	})
+
+	return (
+		<>
+			<Image src={googleLogo} onClick={() => login()} alt={'sing in using google account'} />
+		</>
+	)
+}
 
 export default GoogleSignIn
