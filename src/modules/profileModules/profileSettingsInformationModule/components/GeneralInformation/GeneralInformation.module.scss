@@ -29,7 +29,6 @@
     }
     .calendarInput {
       padding: 6px 12px;
-      background-color: $dark500;
       color: white;
       width: fit-content;
       border-radius: 2px;
@@ -37,6 +36,10 @@
       @include text(16px, 400, 24px);
       font-family: inherit;
       cursor: pointer;
+      background: $dark500 url("../../../../../../public/images/calendar.png") no-repeat 90%;
+      &::-webkit-calendar-picker-indicator {
+        opacity: 0;
+      }
     }
   }
 
