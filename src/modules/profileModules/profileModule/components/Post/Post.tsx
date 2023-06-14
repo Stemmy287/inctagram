@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import s from './Post.module.scss'
 import Image from 'next/image'
 import close from '../../../../../../public/icons/closeIcon.svg'
-import { FetchPostResponseType } from '../../../../postModules/postApi/postApi'
+import { FetchPostResponseType, postActions, PostMenuModule } from '../../../../postModules'
 import { Popup } from '../../../../../components/Popup/Popup'
-import { PostMenuModule } from '../../../../postModules/components/postMenuModule/PostMenu'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import { Avatar } from '../../../components/Avatar/Avatar'
@@ -28,7 +27,9 @@ export const Post = ({ post }: PropsType) => {
 	}
 
 	const filterImageSize = () => {
-		return post.images.filter(ps => ps.width === 640)
+		const filtered = post.images.filter(ps => ps.width === 640)
+		dispatch(postActions.setShowedPost({ value: filtered[0].url }))
+		return filtered
 	}
 
 	return (
@@ -69,4 +70,3 @@ export const Post = ({ post }: PropsType) => {
 		</>
 	)
 }
-

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import { EditPostType, useEditPostMutation } from '../../postApi/postApi'
+import { useEditPostMutation } from '../../postApi/postApi'
 import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileModules/profileReducer/profileReducer-selector'
 import { Popup } from '../../../../components/Popup/Popup'
@@ -12,6 +12,7 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { selectAppStatus } from '../../../appModules'
+import { selectShowedPost } from '../../postReducer/postReducer-selector'
 
 type PropsType = {
 	onClose: () => void
@@ -27,9 +28,9 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const [isActive, setIsActive] = useState(false)
 	const [editPost] = useEditPostMutation()
 	const [value, setValue] = useState(description)
-	const image = useAppSelector(state => state.postReducer.urlFilteredPics[0])
 	const user = useAppSelector(selectUser)
 	const appStatus = useAppSelector(selectAppStatus)
+	const postImage = useAppSelector(selectShowedPost)
 
 	const schema = yup.object().shape({
 		description: yup.string().required('add about')
@@ -40,9 +41,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	})
 
 	const onSubmit: SubmitHandler<disType> = data => {
-		debugger
 		editPost({ description: data.description, postId: postId })
-		console.log({ description: data.description, postId: postId })
 	}
 
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -65,10 +64,10 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 						<div className={s.imageWrapper}>
 							<Image
 								className={s.closedPost}
-								src={image}
+								src={postImage}
 								alt='post img'
-								width={234}
-								height={229}
+								width={485}
+								height={485}
 								onClick={onModalHandler}
 							/>
 						</div>

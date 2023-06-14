@@ -14,7 +14,7 @@ const initialState = {
 
 	pageNumber: 1,
 
-	showedPost: null as null | string
+	showedPost: ''
 }
 
 const slice = createSlice({
@@ -42,7 +42,7 @@ const slice = createSlice({
 		setPageNumber: (state, action: PayloadAction<number>) => {
 			state.pageNumber = action.payload
 		},
-		setShowedPost: (state, action: PayloadAction<{ value: string | null }>) => {
+		setShowedPost: (state, action: PayloadAction<{ value: string }>) => {
 			state.showedPost = action.payload.value
 		}
 	}
