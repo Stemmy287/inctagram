@@ -71,6 +71,13 @@
 
     .errorInput {
       border-bottom: 1px solid $danger500;
+      &:hover {
+        border-bottom: 1px solid $danger500;
+      }
+      &:focus {
+        color: $light100;
+        border-bottom: 1px solid $danger500;
+      }
     }
   }
 
