@@ -48,24 +48,25 @@ export const GeneralInformation: NextPageWithLayout = () => {
 	}
 
 	return (
-			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-				<Input title='Username' register={register} name={'userName'} />
-				<Input title='First Name' register={register} name={'firstName'} />
-				<Input title='Last Name' register={register} name={'lastName'} />
-				<label>Date of birth</label>
-				<div className={s.calendar}>
-					<input
-						type='date'
-						{...register('dateOfBirth')}
-						className={s.calendarInput}
-						defaultValue={formattedDate}
-					/>
-				</div>
-				<Input title='City' register={register} name={'city'} />
-				<TextArea title='About me' register={register} name='aboutMe'/>
-				<div className={s.btn}>
-					<Button title='Save Changes' />
-				</div>
-			</form>
+		<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
+			<Input title='Username' register={register} name={'userName'} />
+			<Input title='First Name' register={register} name={'firstName'} />
+			<Input title='Last Name' register={register} name={'lastName'} />
+			<div className={s.calendar}>
+				<label>Date of birthday</label>
+				<input
+					type='date'
+					{...register('dateOfBirth')}
+					className={s.calendarInput}
+					defaultValue={formattedDate}
+				/>
+			</div>
+			<Input title='City' register={register} name={'city'} />
+			<TextArea title='About me' register={register} name='aboutMe' />
+			<div className={s.line}></div>
+			<div className={s.btn}>
+				<Button title='Save Changes' />
+			</div>
+		</form>
 	)
 }
