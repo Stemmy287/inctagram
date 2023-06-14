@@ -10,7 +10,7 @@ export const Avatar = () => {
 	const avatarFromServer = useAppSelector(selectUser)?.avatars[0]?.url
 
 	return (
-		<div>
+		<div className={s.container}>
 			{avatarFromServer
 				?
 				<Image src={avatarFromServer} alt={'avatar'} width={192} height={192} className={s.avatarFromServer} />

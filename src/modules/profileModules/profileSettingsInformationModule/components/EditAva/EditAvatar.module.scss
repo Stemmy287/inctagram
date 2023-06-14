@@ -1,0 +1,17 @@
+@import 'common/styles/mixins.scss';
+@import 'common/styles/variables.scss';
+
+.container {
+	margin-right: 40px;
+	margin-top: 48px;
+	.photoWrapper {
+		position: relative;
+
+		.closeImg {
+			cursor: pointer;
+			position: absolute;
+			top: 30px;
+			left: 167px;
+		}
+	}
+}

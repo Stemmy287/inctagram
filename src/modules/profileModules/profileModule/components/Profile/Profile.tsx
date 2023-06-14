@@ -8,7 +8,7 @@ import { PostsList } from '../PostsList/PostsList'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import { loggedIn } from '../../../../authModules'
-import { Avatar } from '../../../profileSettingsModule/components/Avatar/Avatar'
+import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
 
 export const Profile = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
@@ -18,7 +18,7 @@ export const Profile = () => {
 	const router = useRouter()
 
 	const toSettingsHandler = () => {
-		router.push('/profile/settings')
+		router.push('/profile/settings_information')
 	}
 
 	return (

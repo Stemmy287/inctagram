@@ -1,0 +1,7 @@
+@import 'common/styles/mixins.scss';
+
+
+.wrapper {
+	@include flex-row;
+	margin-top: 10px;
+}

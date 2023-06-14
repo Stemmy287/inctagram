@@ -47,7 +47,6 @@ export const GeneralInformation: NextPageWithLayout = () => {
 	}
 
 	return (
-		<div>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
 				<Input title='Username' register={register} name={'userName'} />
 				<Input title='First Name' register={register} name={'firstName'} />
@@ -68,6 +67,5 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					<Button title='Save Changes' />
 				</div>
 			</form>
-		</div>
 	)
 }

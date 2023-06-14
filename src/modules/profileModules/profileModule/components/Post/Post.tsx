@@ -7,7 +7,7 @@ import { Popup } from '../../../../../components/Popup/Popup'
 import { PostMenuModule } from 'modules/postModules/components/postMenuModule/PostMenu'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
-import { Avatar } from '../../../profileSettingsModule/components/Avatar/Avatar'
+import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
 
 
 type PropsType = {

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import deleteAva from '../../../../../../public/icons/delete-ava.svg'
 import Image from 'next/image'
 import s from './EditAvatar.module.scss'
-import { AddAvatar } from 'modules/profileModules/profileSettingsModule/components/AddAva/AddAvatar'
+import { AddAvatar } from 'modules/profileModules/profileSettingsInformationModule/components/AddAva/AddAvatar'
 import { useDeleteAvatarMutation } from 'modules/profileModules/profileApi/profileApi'
 import { Avatar } from '../Avatar/Avatar'
 import { Button } from '../../../../../components/Button/Button'
@@ -27,6 +27,8 @@ export const EditAvatar = () => {
 						alt='delete-ava'
 						onClick={deleteAvatarHandler}
 						className={s.closeImg}
+						width={16}
+						height={16}
 					/>
 				)}
 			</div>
