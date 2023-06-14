@@ -8,6 +8,7 @@ import { Button } from 'components/Button/Button'
 import { ProfileType, useCreateProfileMutation } from '../../../profileApi/profileApi'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
+import { TextArea } from '../../../../../components/TextArea/TextArea'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const user = useAppSelector(selectUser)
@@ -61,8 +62,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					/>
 				</div>
 				<Input title='City' register={register} name={'city'} />
-				<label>About me</label>
-				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />
+				<TextArea title='About me' register={register} name='aboutMe'/>
 				<div className={s.btn}>
 					<Button title='Save Changes' />
 				</div>
