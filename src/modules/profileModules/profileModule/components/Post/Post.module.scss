@@ -14,31 +14,38 @@
 .openedPost {
   display: flex;
   position: relative;
+
   .content {
     width: 480px;
+
     .header {
+      display: flex;
+      justify-content: space-between;
       height: 59px;
       border-bottom: 1px solid $dark100;
       padding: 0 24px;
-      display: flex;
       align-items: center;
       column-gap: 12px;
       position: relative;
-      >img {
+      .avatarAndLogin {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+      }
+      > img {
         border-radius: 50%;
       }
+
       > span {
         @include text(16px, 600, 24px, $light100);
       }
-      .burgerMenu {
-        position: absolute;
-        right: 24px;
-      }
     }
+
     .description {
       padding: 24px;
     }
   }
+
   .close {
     position: absolute;
     right: -30px;
@@ -46,6 +53,7 @@
     cursor: pointer;
     transform: rotate(0deg);
     transition: .9s;
+
     &:hover {
       transform: rotate(360deg);
       transition: .9s;

@@ -6,8 +6,9 @@ import { FetchPostResponseType, postActions, PostMenuModule } from '../../../../
 import { Popup } from '../../../../../components/Popup/Popup'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectUser } from '../../../profileReducer/profileReducer-selector'
-import { Avatar } from '../../../components/Avatar/Avatar'
+
 import { useAppDispatch } from '../../../../../assets/hooks/useAppDispatch'
+import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
 
 type PropsType = {
 	post: FetchPostResponseType
@@ -53,11 +54,11 @@ export const Post = ({ post }: PropsType) => {
 						/>
 						<div className={s.content}>
 							<div className={s.header}>
-								<Avatar />
-								<span>{user?.userName}</span>
-								<div className={s.burgerMenu}>
-									<PostMenuModule description={post.description} postId={post.id.toString()} />
+								<div className={s.avatarAndLogin}>
+									<Avatar small />
+									<span>{user?.userName}</span>
 								</div>
+								<PostMenuModule description={post.description} postId={post.id.toString()} />
 							</div>
 							<div className={s.description}>
 								<div>{post.description}</div>

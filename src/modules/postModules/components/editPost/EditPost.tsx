@@ -5,7 +5,7 @@ import { selectUser } from '../../../profileModules/profileReducer/profileReduce
 import { Popup } from '../../../../components/Popup/Popup'
 import s from '../editPost/EditPost.module.scss'
 import Image from 'next/image'
-import { Avatar } from '../../../profileModules/components/Avatar/Avatar'
+
 import { TitlePopup } from '../../../../components/TitlePopup/TitlePopup'
 import { Button } from '../../../../components/Button/Button'
 import * as yup from 'yup'
@@ -13,6 +13,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { selectAppStatus } from '../../../appModules'
 import { selectShowedPost } from '../../postReducer/postReducer-selector'
+import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
 
 type PropsType = {
 	onClose: () => void

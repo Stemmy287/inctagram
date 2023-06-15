@@ -3,8 +3,7 @@
 
 .container {
   @include flex-column;
-  position: absolute;
-
+  position: relative;
   .showmenu {
     cursor: pointer;
   }
@@ -12,8 +11,9 @@
   .menu {
     width: 137px;
     height: 85px;
-    position: relative;
-    right: 112px;
+    position: absolute;
+    top: 35px;
+    left: -114px;
     border: 1px #4c4c4c solid;
     background-color: black;
     z-index: 99;
