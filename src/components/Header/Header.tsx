@@ -15,9 +15,7 @@ export const Header = () => {
 		<div className={s.header}>
 			<h1 className={s.title}>Inctagram</h1>
 			{isLoading === 'loading' && isInitialized && (
-				<div className={s.loading}>
 					<LoadingLine />
-				</div>
 			)}
 			{isLoggedIn && ( // вставить нужное условие (типа isSettings)
 				<div className={s.outButton}>
