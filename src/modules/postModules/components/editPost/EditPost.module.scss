@@ -1,0 +1,60 @@
+@import "../../../.././common/styles/mixins";
+@import "../../../.././common/styles/variables";
+
+.editPost {
+  min-width: 700px;
+  min-height: 450px;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .imageWrapper {
+      width: 485px;
+      height: 504px;
+    }
+
+    .content {
+      padding: 0 24px;
+      position: relative;
+
+      .userInfo {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .description {
+        position: relative;
+
+        .form {
+          .descriptionBlock {
+            display: flex;
+            flex-direction: column;
+
+            > label {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 24px;
+              color: #BDC1C7;
+            }
+
+            > textarea {
+              background: #171717;
+              border: 1px solid #4C4C4C;
+              border-radius: 2px;
+              color: #ffffff;
+
+            }
+          }
+
+          .btnBlock {
+
+          }
+        }
+
+      }
+    }
+  }
+
+}

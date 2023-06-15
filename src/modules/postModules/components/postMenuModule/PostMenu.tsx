@@ -4,21 +4,24 @@ import postMenu from '../../../../../public/icons/more-horizontal-outline.svg'
 import trash from '../../../../../public/icons/trash-outline.svg'
 import edit from '../../../../../public/icons/edit-2-outline.svg'
 import Image from 'next/image'
-import { useDeletePostMutation } from '../../postApi/postApi'
+import { FetchPostResponseType, useDeletePostMutation } from '../../postApi/postApi'
 import { Popup } from 'components/Popup/Popup'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { Button } from 'components/Button/Button'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { selectAppStatus } from 'modules/appModules'
 import useOnClickOutside from 'assets/hooks/useOutsideClick'
+import { EditPost } from '../editPost/EditPost'
 
 type PropsType = {
 	postId: string
+	description: string
 }
 
-export const PostMenuModule: FC<PropsType> = ({ postId }) => {
+export const PostMenuModule: FC<PropsType> = ({ postId, description }) => {
 	const [deletePost] = useDeletePostMutation()
 	const appStatus = useAppSelector(selectAppStatus)
+	const [isEditPopupOpen, setEditPopupOpen] = useState(false)
 	const [showPopup, setShowPopup] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 
@@ -36,7 +39,12 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 	const closePopupHandler = () => {
 		setShowPopup(false)
 	}
-
+	const openEditPopup = () => {
+		setEditPopupOpen(true)
+	}
+	const closeEditPopup = () => {
+		setEditPopupOpen(false)
+	}
 	const deletePostHandler = async () => {
 		await deletePost(postId)
 		setShowMenu(false)
@@ -55,8 +63,7 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 				/>
 				{showMenu && (
 					<div className={s.menu} ref={ref}>
-						<label className={s.action} onClick={() => {
-						}}>
+						<label className={s.action} onClick={openEditPopup}>
 							<Image src={edit} alt='edit' />
 							<div className={s.btn}>Edit post</div>
 						</label>
@@ -67,6 +74,9 @@ export const PostMenuModule: FC<PropsType> = ({ postId }) => {
 					</div>
 				)}
 			</div>
+			{isEditPopupOpen && (
+				<EditPost description={description} onClose={closeEditPopup} postId={postId} />
+			)}
 			{showPopup && (
 				<Popup onClose={closePopupHandler}>
 					<TitlePopup onClose={closePopupHandler} title={'Delete Post'} />

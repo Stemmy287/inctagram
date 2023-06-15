@@ -10,6 +10,8 @@ import { Button } from 'components/Button/Button'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from 'store/store'
 import { PostType, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
+import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
+import { selectAppStatus } from '../../../appModules'
 
 type PropsType = {
 	onClose: () => void
@@ -26,6 +28,8 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 
 	const [addPostPhoto] = useAddPostPhotoMutation()
 	const [addPost] = useAddPostMutation()
+	const appStatus = useAppSelector(selectAppStatus)
+
 
 	const onSubmit: SubmitHandler<PostType> = async data => {
 		const formData = new FormData()
@@ -51,7 +55,7 @@ export const AddPublication: FC<PropsType> = ({ onClose }) => {
 					<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 						<label>Add publication description</label>
 						<textarea placeholder='Textarea' {...register('description')} rows={4} />
-						<Button title='Add publication' />
+						<Button title='Add publication'  disabled={appStatus === 'loading'}/>
 					</form>
 				</div>
 			</div>

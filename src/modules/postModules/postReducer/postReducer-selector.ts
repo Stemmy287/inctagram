@@ -6,4 +6,4 @@ export const selectUrlOriginalPics = (state: AppRootStateType) => state.postRedu
 export const selectCroppedPics = (state: AppRootStateType) => state.postReducer.croppedPics
 export const selectUrlCroppedPics = (state: AppRootStateType) => state.postReducer.urlCroppedPics
 export const selectPageNumber = (state: AppRootStateType) => state.postReducer.pageNumber
-
+export const selectShowedPost = (state: AppRootStateType) => state.postReducer.showedPost
