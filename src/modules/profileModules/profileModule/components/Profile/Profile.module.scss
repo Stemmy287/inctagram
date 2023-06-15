@@ -3,17 +3,17 @@
 
 .hatProfile {
   display: flex;
-
+  margin-bottom: 48px;
   .mainInfo {
     @include flex-column;
-    row-gap: 45px;
+
     width: 100%;
     margin-left: 38px;
     box-sizing: border-box;
 
     .userNameAndBtn {
       @include flex-space-between;
-
+      margin-bottom: 20px;
       > h3 {
         @include text(20px, 700, 36px);
       }
@@ -26,10 +26,10 @@
     .socialInfo {
       display: flex;
       column-gap: 72px;
+      margin-bottom: 23px;
     }
 
     .description {
-      margin-top: 4px;
       @include text(16px, 400, 24px);
     }
   }

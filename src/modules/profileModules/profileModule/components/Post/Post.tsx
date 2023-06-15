@@ -51,7 +51,7 @@ export const Post = ({ post }: PropsType) => {
 					/>
 					<div className={s.content}>
 						<div className={s.header}>
-							<Avatar />
+							<Avatar small/>
 							<span>{user?.userName}</span>
 							<div className={s.burgerMenu}>
 								<PostMenuModule postId={post.id.toString()} />
