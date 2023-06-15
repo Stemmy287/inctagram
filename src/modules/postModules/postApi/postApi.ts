@@ -4,26 +4,21 @@ import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
 export const postApi = createApi({
 	reducerPath: 'postApi',
 	baseQuery: baseQueryWithReauth,
-	tagTypes: ['Posts'],
 	endpoints: builder => ({
 		fetchPosts: builder.query<
 			ResponseType<FetchPostResponseType[]>,
 			{ userId: number; pageNumber: number }
 		>({
 			query: ({ userId, pageNumber }) => `posts/${userId}?pageNumber=${pageNumber}&pageSize=12`,
-			serializeQueryArgs: ({ endpointName }) => {
+			serializeQueryArgs: ({ endpointName}) => {
 				return endpointName
 			},
 			merge: (currentCache, newItems) => {
 				currentCache.items.push(...newItems.items)
 			},
-			forceRefetch({ currentArg, previousArg }) {
-				if (previousArg?.pageNumber === currentArg?.pageNumber) {
-					return previousArg === currentArg
-				}
-				return currentArg !== previousArg
+			forceRefetch({ currentArg, previousArg}) {
+				return !(previousArg?.pageNumber === currentArg?.pageNumber)
 			},
-			providesTags: ['Posts']
 		}),
 		addPostPhoto: builder.mutation<AddPostPhotoResponseType, FormData>({
 			query: body => ({
@@ -38,7 +33,6 @@ export const postApi = createApi({
 				method: 'POST',
 				body
 			}),
-			invalidatesTags: ['Posts']
 		}),
 		editPost: builder.mutation<void, EditPostType>({
 			query: body => ({
@@ -47,7 +41,6 @@ export const postApi = createApi({
 				body: {
 					description: body.description
 				},
-				invalidatesTags: ['Posts']
 			})
 		}),
 		deletePost: builder.mutation<void, string>({
@@ -55,7 +48,6 @@ export const postApi = createApi({
 				url: `posts/${postId}`,
 				method: 'DELETE'
 			}),
-			invalidatesTags: ['Posts']
 		})
 	})
 })

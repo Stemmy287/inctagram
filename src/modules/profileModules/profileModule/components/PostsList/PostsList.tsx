@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import s from './PostsList.module.scss'
 import { postActions, selectPageNumber, useFetchPostsQuery } from 'modules/postModules'
 import { Post } from '../Post/Post'
@@ -11,19 +11,13 @@ type PropsType = {
 }
 
 export const PostsList = ({ profileId }: PropsType) => {
-	const [skip, setSkip] = useState(true)
 
 	const pageNumber = useAppSelector(selectPageNumber)
 	const dispatch = useAppDispatch()
 
-	const { data: posts, isLoading } = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip })
-
-	useEffect(() => {
-
-		if (profileId) {
-			setSkip(false)
-		}
-	}, [profileId])
+	const {
+		data: posts,
+		isLoading } = useFetchPostsQuery({ userId: profileId, pageNumber: pageNumber }, { skip: !profileId })
 
 	return (
 		 posts?.items.length
