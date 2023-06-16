@@ -4,22 +4,25 @@ import { SettingsNavBar } from '../../../../../components/SettingsNavBar/Setting
 import { CommonWrapper } from '../../../../../components/CommonWrapper/CommonWrapper'
 import { CurrentSubscription } from '../CurrentSubscription/CurrentSubscription'
 import { Radio } from '../../../../../components/RadioButton/Radio'
+import { PaymentButton } from '../PaymentButton/PaymentButton'
+import paypal from '../../../../../../public/images/paypal.png'
+import stripe from '../../../../../../public/images/stripe.png'
 
 export const ProfileSettingManagement = () => {
 
 	const optionsType = [
-		{value: 'Personal', title: 'Personal', disabled: false},
-		{value: 'Business', title: 'Business'}
+		{ value: 'Personal', title: 'Personal', disabled: false },
+		{ value: 'Business', title: 'Business' }
 	]
 
 	const optionsChangeSub = [
-		{value: '$10', title: '$10 per 1 Day'},
-		{value: '$50', title: '$50 per 7 Day'},
-		{value: '$100', title: '$100 per month'}
+		{ value: '$10', title: '$10 per 1 Day' },
+		{ value: '$50', title: '$50 per 7 Day' },
+		{ value: '$100', title: '$100 per month' }
 	]
 
 	const [valueType, setValueType] = useState('Personal')
-	const [valueChangeSub, setValueChangeSub] = useState('$50')
+	const [valueChangeSub, setValueChangeSub] = useState('$10')
 
 	const onChangeType = (value: string) => {
 		setValueType(value)
@@ -55,6 +58,9 @@ export const ProfileSettingManagement = () => {
 						onChange={onChangeSub}
 					/>
 				</CommonWrapper>
+				<div className={s.paymentSystems}>
+					<PaymentButton img={paypal} />Or<PaymentButton img={stripe} />
+				</div>
 			</div>
 		</div>
 	)

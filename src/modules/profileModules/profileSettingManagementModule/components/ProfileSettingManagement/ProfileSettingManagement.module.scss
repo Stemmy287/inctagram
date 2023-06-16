@@ -10,5 +10,11 @@
       display: flex;
       column-gap: 48px;
     }
+    .paymentSystems {
+      display: flex;
+      align-items: center;
+      column-gap: 54px;
+      align-self: end;
+    }
   }
 }

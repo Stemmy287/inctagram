@@ -1,0 +1,11 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.btn {
+  width: 96px;
+  height: 64px;
+  border-radius: 5px;
+  background-color: $dark500;
+  border: 1px solid $dark300;
+  cursor: pointer;
+}
