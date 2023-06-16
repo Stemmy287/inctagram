@@ -1,0 +1,14 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.title {
+  @include text(16px, 600, 24px)
+}
+
+.container {
+  margin-top: 12px;
+  background-color: $dark500;
+  border-radius: 2px;
+  border: 1px solid $dark300;
+  padding: 12px 24px;
+}
