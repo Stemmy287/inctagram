@@ -1,0 +1,14 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  width: 726px;
+  .contentWrapper {
+    @include flex-column;
+    row-gap: 30px;
+    .currentSubscription {
+      display: flex;
+      column-gap: 48px;
+    }
+  }
+}

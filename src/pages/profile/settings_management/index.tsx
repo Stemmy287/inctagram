@@ -1,8 +1,10 @@
 import { getLayoutM } from 'components/Layout/MainLayout/MainLayout'
 import React from 'react'
-import { SettingsNavBar } from '../../../components/SettingsNavBar/SettingsNavBar'
+import {
+	ProfileSettingManagement
+} from '../../../modules/profileModules/profileSettingManagementModule/components/ProfileSettingManagement/ProfileSettingManagement'
 
-const ProfileSettingsManagementPage = () => <div><SettingsNavBar/><h1>in development</h1></div>
+const ProfileSettingsManagementPage = () => <ProfileSettingManagement/>
 
 ProfileSettingsManagementPage.getLayout = getLayoutM
 export default ProfileSettingsManagementPage
