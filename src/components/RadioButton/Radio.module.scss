@@ -1,0 +1,54 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  @include flex-column;
+  row-gap: 24px;
+
+  .radioWrapper {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    row-gap: 24px;
+    .radio {
+      display: none;
+    }
+
+    .fake {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid $light100;
+      border-radius: 50%;
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: $light100;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+      }
+    }
+    .radio:checked + .fake:before {
+      opacity: 1;
+    }
+    .radio:disabled + .fake {
+      border: 2px solid $dark100;
+      pointer-events: none;
+    }
+    .text {
+      @include text(14px, 400, 24px);
+      margin-left: 14px;
+      &[aria-disabled='true'] {
+        color: $dark100;
+      }
+    }
+  }
+}
+
