@@ -1,0 +1,14 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  @include flex-column;
+  row-gap: 12px;
+  > span {
+    @include text(14px, 600, 24px);
+    &:nth-child(1) {
+      font-weight: 400;
+      color: $light900;
+    }
+  }
+}
