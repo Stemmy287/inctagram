@@ -126,6 +126,12 @@ and apply best practices. With ESLint, our codebase adheres to a single set of c
 improving readability, maintainability, and collaboration among team members.
 
 
+ - **reCAPTCHA**: We use reCAPTCHA to protect against spam and automated attacks.
+
+
+![---------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+
 ### ⚙️ Project setup dev server
 
 ```sh
@@ -175,6 +181,10 @@ npm run test
 
 - Paid account - Stripe, Paypall
 - storybook component library
+- Paid account - Stripe, Paypall
+- Auto-renewal of a subscription *
+- Buying more subscriptions
+- Viewing the "My payments" table
 
 ## 🤝 Team ✨
 
