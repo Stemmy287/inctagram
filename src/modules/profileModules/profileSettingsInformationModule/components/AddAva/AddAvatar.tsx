@@ -7,7 +7,6 @@ import s from './AddAvatar.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
 import { useUploadImageMutation } from 'modules/profileModules/profileApi/profileApi'
-import { profileActions } from 'modules/profileModules/profileReducer/profileReducer'
 import { appActions } from 'modules/appModules'
 import { convertFileToBase64 } from 'assets/utils/convertFileToBase64/convertFileToBase64'
 
@@ -21,6 +20,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 	const [file, setFile] = useState<File>()
 	const inputRef = React.useRef<HTMLInputElement>(null)
 	const refClick = () => inputRef.current?.click()
+
 	const [uploadImage] = useUploadImageMutation()
 
 	const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 					setAva(file64)
 				})
 			} else {
-				dispatch(appActions.setAppError({ error: 'Файл слишком большого размера' }))
+				dispatch(appActions.setAppError({ error: 'File is too big' }))
 			}
 		}
 	}
@@ -43,9 +43,6 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 		formData.append('file', file as File)
 
 		await uploadImage(formData)
-		convertFileToBase64(file as File, (file64: string) => {
-			dispatch(profileActions.setAva({ ava: file64 }))
-		})
 		onClose()
 	}
 
