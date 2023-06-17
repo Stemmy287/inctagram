@@ -1,11 +1,11 @@
 @import "common/styles/mixins.scss";
 @import "common/styles/variables.scss";
 
-.container {
-  display: inherit;
-  .label {
+  .container {
     cursor: pointer;
     display: flex;
+    width:fit-content;
+    height:fit-content;
     align-items: center;
     &:hover {
       .checkboxWrapper {
@@ -25,6 +25,7 @@
 
       .checkbox {
         display: none;
+
       }
 
       .fake {
@@ -34,7 +35,7 @@
         border: 2px solid $light100;
         border-radius: 2px;
         position: relative;
-
+        z-index: 100;
         &:before {
           content: '';
           position: absolute;
@@ -70,7 +71,5 @@
       }
     }
   }
-
-}
 
 
