@@ -6,7 +6,7 @@ import userIcon from '../../../public/icons/user.svg'
 import Link from 'next/link'
 import { LogoutButton } from 'components/Button/LogoutButton/LogoutButton'
 import { CreatePost } from 'modules/postModules'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 const navData = [
 	{ id: 1, title: 'Home', icon: homeIcon, href: '/home', alt: 'home-page' },

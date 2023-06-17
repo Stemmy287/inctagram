@@ -12,16 +12,13 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 export const Checkbox = ({title, disabled, ...restPros}: PropsType & DefaultInputPropsType) => {
 
 	return (
-		<div className={s.container}>
-			<label className={s.label} aria-disabled={disabled}>
+			<label className={s.container} aria-disabled={disabled}>
 				<div className={s.checkboxWrapper}>
 					<input className={s.checkbox} type='checkbox' disabled={disabled} {...restPros}/>
 					<span className={s.fake}></span>
 				</div>
 				{title && <span className={s.title} aria-disabled={disabled}>{title}</span>}
 			</label>
-		</div>
-
 	)
 }
 

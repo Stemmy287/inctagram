@@ -4,12 +4,13 @@
 .container {
   @include flex-column;
   row-gap: 24px;
-
   .radioWrapper {
     display: flex;
     cursor: pointer;
     align-items: center;
     row-gap: 24px;
+    width: fit-content;
+    height: fit-content;
     .radio {
       display: none;
     }

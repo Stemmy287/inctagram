@@ -48,7 +48,7 @@ export const ProfileSettingManagement = () => {
 						<CurrentSubscription title='Next payment' date='13.02.2023' />
 					</div>
 				</CommonWrapper>
-				<Checkbox title='Auto-Renewal' onChange={onChangeChecked} checked={valueCheckbox}/>
+				<Checkbox title='Auto-Renewal' onChange={onChangeChecked} checked={valueCheckbox} />
 				<CommonWrapper title='Account type'>
 					<Radio
 						options={optionsType}
