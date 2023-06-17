@@ -8,15 +8,16 @@ type PropsType = {
 	buttonTitle: string
 	message: string
 	onClose: () => void
+	bigButton?: boolean
 }
 
-export const Notification = ({ title, buttonTitle, message, onClose }: PropsType) => {
+export const Notification = ({ title, buttonTitle, message, onClose, bigButton }: PropsType) => {
 	return (
 		<>
 			<TitlePopup title={title} onClose={onClose} />
 			<div className={s.notification}>
 				<span>{message}</span>
-				<div className={s.btn}>
+				<div className={bigButton ? `${s.btn} ${s.bigBtn}` : s.btn}>
 					<Button title={buttonTitle} callback={onClose} />
 				</div>
 			</div>

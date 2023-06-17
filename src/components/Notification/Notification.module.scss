@@ -5,7 +5,7 @@
   width: 378px;
   @include flex-center-column;
   padding: 30px 24px;
-  row-gap: 18px;
+  row-gap: 30px;
 
   > span {
     @include text(16px, 400, 24px);
@@ -14,5 +14,8 @@
   .btn {
     width: 96px;
     align-self: end;
+  }
+  .bigBtn {
+    width: 100%;
   }
 }
