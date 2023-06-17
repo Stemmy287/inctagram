@@ -8,6 +8,8 @@ import { PaymentButton } from '../PaymentButton/PaymentButton'
 import paypal from '../../../../../../public/images/paypal.png'
 import stripe from '../../../../../../public/images/stripe.png'
 import { Checkbox } from '../../../../../components/Checkbox/Checkbox'
+import { Popup } from '../../../../../components/Popup/Popup'
+import { Notification } from '../../../../../components/Notification/Notification'
 
 export const ProfileSettingManagement = () => {
 
@@ -25,6 +27,7 @@ export const ProfileSettingManagement = () => {
 	const [valueType, setValueType] = useState('Personal')
 	const [valueChangeSub, setValueChangeSub] = useState('$10')
 	const [valueCheckbox, setValueCheckbox] = useState(false)
+	const [isActive, setIsActive] = useState(false)
 
 	const onChangeType = (value: string) => {
 		setValueType(value)
@@ -36,6 +39,10 @@ export const ProfileSettingManagement = () => {
 
 	const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
 		setValueCheckbox(e.currentTarget.checked)
+	}
+
+	const onClose = () => {
+		setIsActive(false)
 	}
 
 	return (
@@ -69,6 +76,17 @@ export const ProfileSettingManagement = () => {
 					<PaymentButton img={paypal} />Or<PaymentButton img={stripe} />
 				</div>
 			</div>
+			{isActive && <Popup onClose={onClose}>
+				<div className={s.notification}>
+					<Notification
+						title='Success'
+						buttonTitle='OK'
+						bigButton
+						message='Payment was successful!'
+						onClose={onClose}
+					/>
+				</div>
+			</Popup>}
 		</div>
 	)
 }
