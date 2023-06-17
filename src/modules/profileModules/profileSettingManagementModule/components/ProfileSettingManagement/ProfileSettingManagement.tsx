@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import s from './ProfileSettingManagement.module.scss'
 import { SettingsNavBar } from '../../../../../components/SettingsNavBar/SettingsNavBar'
 import { CommonWrapper } from '../../../../../components/CommonWrapper/CommonWrapper'
@@ -7,6 +7,7 @@ import { Radio } from '../../../../../components/RadioButton/Radio'
 import { PaymentButton } from '../PaymentButton/PaymentButton'
 import paypal from '../../../../../../public/images/paypal.png'
 import stripe from '../../../../../../public/images/stripe.png'
+import { Checkbox } from '../../../../../components/Checkbox/Checkbox'
 
 export const ProfileSettingManagement = () => {
 
@@ -23,6 +24,7 @@ export const ProfileSettingManagement = () => {
 
 	const [valueType, setValueType] = useState('Personal')
 	const [valueChangeSub, setValueChangeSub] = useState('$10')
+	const [valueCheckbox, setValueCheckbox] = useState(false)
 
 	const onChangeType = (value: string) => {
 		setValueType(value)
@@ -30,6 +32,10 @@ export const ProfileSettingManagement = () => {
 
 	const onChangeSub = (value: string) => {
 		setValueChangeSub(value)
+	}
+
+	const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
+		setValueCheckbox(e.currentTarget.checked)
 	}
 
 	return (
@@ -42,6 +48,7 @@ export const ProfileSettingManagement = () => {
 						<CurrentSubscription title='Next payment' date='13.02.2023' />
 					</div>
 				</CommonWrapper>
+				<Checkbox title='Auto-Renewal' onChange={onChangeChecked} checked={valueCheckbox}/>
 				<CommonWrapper title='Account type'>
 					<Radio
 						options={optionsType}
