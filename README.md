@@ -160,14 +160,7 @@ yarn next build
 yarn next start
 ```
 
-
-
-### Requirements
-
-To install and run the project, you need [NodeJS](https://nodejs.org/) v16.8+.
-![---------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-## 🔬 Tests
+### 🔬 Tests
 
 The project uses a jest framework for unit testing
 
@@ -175,9 +168,14 @@ The project uses a jest framework for unit testing
 npm run test
 ```
 
+### Requirements
+
+To install and run the project, you need [NodeJS](https://nodejs.org/) v16.8+.
+
+
 ![---------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## 🔧 Future scope
+## 🔮 Future scope
 
 - Paid account - Stripe, Paypall
 - storybook component library
@@ -185,6 +183,8 @@ npm run test
 - Auto-renewal of a subscription *
 - Buying more subscriptions
 - Viewing the "My payments" table
+
+![---------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ## 🤝 Team ✨
 
@@ -255,6 +255,6 @@ It was developed by these wonderful people
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 
-![---------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
 
 
