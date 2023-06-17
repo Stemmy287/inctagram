@@ -2,71 +2,75 @@
 @import "common/styles/variables.scss";
 
 .container {
-
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  &:hover {
-    .checkboxWrapper {
-      background-color: $dark100;
-    }
-  }
-  &[aria-disabled='true'] {
-    pointer-events: none;
-  }
-  .checkboxWrapper {
-    width: 36px;
-    height: 36px;
+  display: inherit;
+  .label {
+    cursor: pointer;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 50%;
-
-    .checkbox {
-      display: none;
+    &:hover {
+      .checkboxWrapper {
+        background-color: $dark100;
+      }
     }
+    &[aria-disabled='true'] {
+      pointer-events: none;
+    }
+    .checkboxWrapper {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
 
-    .fake {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2px solid $light100;
-      border-radius: 2px;
-      position: relative;
+      .checkbox {
+        display: none;
+      }
 
-      &:before {
-        content: '';
-        position: absolute;
-        display: block;
-        width: 16px;
-        height: 16px;
-        background: $light100 url("../../../public/icons/check-mark.svg") no-repeat 50%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0;
+      .fake {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid $light100;
+        border-radius: 2px;
+        position: relative;
+
+        &:before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: $light100 url("../../../public/icons/check-mark.svg") no-repeat 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+        }
+      }
+
+      .checkbox:checked + .fake:before {
+        opacity: 1;
+      }
+      .checkbox:disabled + .fake {
+        border: 2px solid $dark100;
+        pointer-events: none;
+      }
+      .checkbox:disabled + .fake:before {
+        background: $dark100 url("../../../public/icons/check-mark-disabled.svg") no-repeat 50%;
+        pointer-events: none;
       }
     }
 
-    .checkbox:checked + .fake:before {
-      opacity: 1;
-    }
-    .checkbox:disabled + .fake {
-      border: 2px solid $dark100;
-      pointer-events: none;
-    }
-    .checkbox:disabled + .fake:before {
-      background: $dark100 url("../../../public/icons/check-mark-disabled.svg") no-repeat 50%;
-      pointer-events: none;
+    .title {
+      @include text(14px, 400, 24px);
+      margin-left: 3px;
+      &[aria-disabled='true'] {
+        color: $light900;
+      }
     }
   }
 
-  .title {
-    @include text(14px, 400, 24px);
-    margin-left: 3px;
-    &[aria-disabled='true'] {
-      color: $light900;
-    }
-  }
 }
+
 
