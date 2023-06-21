@@ -1,64 +1,75 @@
-import { Popup } from 'components/Popup/Popup'
 import s from './AddPublication.module.scss'
-import { FC } from 'react'
-import { TitlePopup } from 'components/TitlePopup/TitlePopup'
+import React, { ChangeEvent, FC, useState } from 'react'
 import Image from 'next/image'
-import * as yup from 'yup'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Button } from 'components/Button/Button'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from 'store/store'
-import { PostType, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
+import { FlagType, HeaderForModal, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
 import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
-import { selectAppStatus } from '../../../appModules'
+import { TextArea } from '../../../../components/TextArea/TextArea'
+import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
+import { selectUser } from '../../../profileModules/profileReducer/profileReducer-selector'
 
 type PropsType = {
 	onClose: () => void
+	setFlag: (flag: FlagType) => void
 }
 
-export const AddPublication: FC<PropsType> = ({ onClose }) => {
-	const schema = yup.object().shape({
-		description: yup.string().required('add about')
-	})
+export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 
-	const { register, handleSubmit } = useForm<PostType>({
-		resolver: yupResolver(schema)
-	})
+	const [description, setDescription] = useState('')
 
 	const [addPostPhoto] = useAddPostPhotoMutation()
 	const [addPost] = useAddPostMutation()
-	const appStatus = useAppSelector(selectAppStatus)
-
-
-	const onSubmit: SubmitHandler<PostType> = async data => {
-		const formData = new FormData()
-		formData.append('file', finalPics)
-
-		const res = await addPostPhoto(formData).unwrap()
-		await addPost({ ...data, childrenMetadata: [{ uploadId: res.images[0].uploadId }] })
-		onClose()
-	}
 
 	const finalPics = useSelector<AppRootStateType, File>(state => state.postReducer.filteredPics)
 	const urlFinalPics = useSelector<AppRootStateType, string>(
 		state => state.postReducer.urlFilteredPics
 	)
+
+	const user = useAppSelector(selectUser)
+
+	const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+			setDescription(e.currentTarget.value)
+	}
+
+	const onAddPost = async () => {
+		const formData = new FormData()
+		formData.append('file', finalPics)
+
+		const res = await addPostPhoto(formData).unwrap()
+		await addPost({ description, childrenMetadata: [{ uploadId: res.images[0].uploadId }] })
+		onClose()
+	}
+
 	return (
-		<Popup onClose={onClose}>
-			<div className={s.container}>
-				<TitlePopup title='Add publication' onClose={onClose} />
+			<>
+				<HeaderForModal
+					title='Publication'
+					btnTitle='Publish'
+					clickBack={() => setFlag('filter')}
+					callBack={onAddPost}
+				/>
 				<div className={s.wrapper}>
-					<div className={s.photo}>
-						<Image src={urlFinalPics} alt='publication-photo' width='350' height={450} />
+					<Image src={urlFinalPics} alt='publication-photo' width={486} height={500} />
+					<div className={s.postInfo}>
+						<div className={s.profileInfo}>
+							<Avatar small/>
+							<span>{user?.userName}</span>
+						</div>
+						<div className={s.desc}>
+							<div className={s.textArea}>
+								<TextArea
+									title='Add publication descriptions'
+									placeholder='Text'
+									value={description}
+									onChange={onChange}
+									maxLength={500}
+								/>
+							</div>
+							{<span className={s.limit}>{description.length}/500</span>}
+						</div>
 					</div>
-					<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-						<label>Add publication description</label>
-						<textarea placeholder='Textarea' {...register('description')} rows={4} />
-						<Button title='Add publication'  disabled={appStatus === 'loading'}/>
-					</form>
 				</div>
-			</div>
-		</Popup>
+			</>
 	)
 }

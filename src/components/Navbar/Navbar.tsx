@@ -9,7 +9,7 @@ import { CreatePost } from 'modules/postModules'
 import { useState } from 'react'
 
 const navData = [
-	{ id: 1, title: 'Home', icon: homeIcon, href: '/home', alt: 'home-page' },
+	{ id: 1, title: 'Home', icon: homeIcon, href: '/', alt: 'home-page' },
 	{ id: 2, title: 'Create', icon: addIcon, href: '', alt: 'create-page' },
 	{ id: 3, title: 'My profile', icon: userIcon, href: '/profile', alt: 'profile-page' }
 ]

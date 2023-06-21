@@ -25,7 +25,7 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				) : flag === 'filter' ? (
 					<AddFilters setFlag={flagChangeHandler} />
 				) : flag === 'final' ? (
-					<AddPublication onClose={onClose} />
+					<AddPublication onClose={onClose} setFlag={flagChangeHandler} />
 				) : (
 					<div>ooops, something was wrong</div>
 				)}
