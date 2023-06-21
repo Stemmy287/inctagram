@@ -34,7 +34,7 @@ export const authApi = createApi({
 			query: () => 'auth/me',
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				try {
-					const res = await queryFulfilled
+					await queryFulfilled
 					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))

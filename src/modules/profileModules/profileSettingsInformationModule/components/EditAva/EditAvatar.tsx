@@ -13,7 +13,7 @@ import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectAppStatus } from '../../../../appModules'
 
 export const EditAvatar = () => {
-	const { data, isLoading } = useFetchProfileQuery(null)
+	const { data } = useFetchProfileQuery(null)
 	const status = useAppSelector(selectAppStatus)
 
 	const [openModal, setOpenModal] = useState(false)
