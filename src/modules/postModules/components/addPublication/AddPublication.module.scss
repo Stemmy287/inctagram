@@ -1,34 +1,32 @@
 @import "common/styles/mixins";
 @import "common/styles/variables";
 
-.container {
-  min-width: 700px;
-  min-height: 450px;
-
   .title {
   }
 
   .wrapper {
     display: flex;
 
-    .avatarFromServer {
-      width: 50%;
-      min-height: 100%;
-    }
-
-    .form {
-      width: 50%;
-      min-height: 100%;
+    .postInfo {
+      width: 491px;
       padding: 24px;
-
-      textarea {
-        background-color: $dark100;
-        border: 1px solid $dark100;
-        resize: none;
-        border-radius: 2px;
-        width: 100%;
+      @include flex-column;
+      .profileInfo {
+        @include flex-center-vert;
+        column-gap: 12px;
       }
-
+      .desc {
+        @include flex-column;
+        padding-bottom: 19px;
+        border-bottom: 1px solid $dark100;
+        .textArea {
+          margin-top: 24px;
+          height: 140px;
+        }
+        .limit {
+          @include text(12px, 400, 16px, $light900);
+          align-self: end;
+        }
+      }
     }
   }
-}

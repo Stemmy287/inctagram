@@ -5,16 +5,15 @@ import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '../../../profileApi/profileApi'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
+import { ProfileType, useCreateProfileMutation, useFetchProfileQuery } from '../../../profileApi/profileApi'
 import { TextArea } from '../../../../../components/TextArea/TextArea'
 
 export const GeneralInformation: NextPageWithLayout = () => {
-	const user = useAppSelector(selectUser)
+	const {data} = useFetchProfileQuery(null)
+
 	const [createProfile] = useCreateProfileMutation()
 
-	const date = new Date(user?.dateOfBirth as string)
+	const date = new Date(data?.dateOfBirth as string)
 	const formattedDate =
 		date.getFullYear() +
 		'-' +
@@ -33,11 +32,11 @@ export const GeneralInformation: NextPageWithLayout = () => {
 
 	const { register, handleSubmit } = useForm<ProfileType>({
 		defaultValues: {
-			userName: user?.userName,
-			firstName: user?.firstName,
-			lastName: user?.lastName,
-			city: user?.city,
-			aboutMe: user?.aboutMe
+			userName: data?.userName,
+			firstName: data?.firstName,
+			lastName: data?.lastName,
+			city: data?.city,
+			aboutMe: data?.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})

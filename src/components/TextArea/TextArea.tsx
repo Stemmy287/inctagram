@@ -4,7 +4,7 @@ import { UseFormRegister } from 'react-hook-form'
 
 type PropsType = {
 	title?: string
-	register: UseFormRegister<any>
+	register?: UseFormRegister<any>
 	error?: string
 }
 
@@ -13,14 +13,20 @@ type DefaultTextAreaPropsType = DetailedHTMLProps<
 	HTMLTextAreaElement
 >
 
-export const TextArea = ({title, register, error, ...restProps}: PropsType & DefaultTextAreaPropsType) => {
+export const TextArea = ({ title, register, error, ...restProps }: PropsType & DefaultTextAreaPropsType) => {
 	return (
 		<div className={s.container}>
 			{title && <span className={s.title}>{title}</span>}
-			<textarea
-				className={error ? `${s.textarea} ${s.textareaError}` : s.textarea}
-				{...register(restProps.name || '')}
-			/>
+			{register ? <textarea
+					className={error ? `${s.textarea} ${s.textareaError}` : s.textarea}
+					{...register(restProps.name!)}
+					{...restProps}
+				/> :
+				<textarea
+					className={error ? `${s.textarea} ${s.textareaError}` : s.textarea}
+					{...restProps}
+				/>
+			}
 			{error && <span className={s.error}>{error}</span>}
 		</div>
 	)
