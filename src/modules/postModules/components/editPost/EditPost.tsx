@@ -33,14 +33,9 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.currentTarget.value)
 	}
-	const onCloseHandler = () => {
-	}
-
-	const onModalHandler = () => {
-	}
 
 	return (
-		<Popup onClose={onCloseHandler}>
+		<Popup onClose={() => {}}>
 			<TitlePopup title={'Edit post'} onClose={onClose} />
 			<div className={s.wrapper}>
 				<Image
@@ -49,7 +44,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 					alt='post img'
 					width={490}
 					height={490}
-					onClick={onModalHandler}
+					onClick={() => {}}
 				/>
 				<div className={s.content}>
 					<div className={s.userInfo}>
