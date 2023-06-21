@@ -6,14 +6,12 @@ import { Button } from '../../../../../components/Button/Button'
 import { SocialInfo } from '../../../../../components/SocialInfo/SocialInfo'
 import { PostsList } from '../PostsList/PostsList'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import { loggedIn } from '../../../../authModules'
 import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
 
 export const Profile = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
-	const user = useAppSelector(selectUser)
-	const {} = useFetchProfileQuery(null, { skip: !isLoggedIn })
+	const {data} = useFetchProfileQuery(null, { skip: !isLoggedIn })
 
 	const router = useRouter()
 
@@ -27,7 +25,7 @@ export const Profile = () => {
 				<Avatar />
 				<div className={s.mainInfo}>
 					<div className={s.userNameAndBtn}>
-						<h3>{user?.userName}</h3>
+						<h3>{data?.userName}</h3>
 						<div className={s.buttonWrapper}>
 							<Button title='Profile Settings' callback={toSettingsHandler} style={'white'} />
 						</div>
@@ -37,10 +35,10 @@ export const Profile = () => {
 						<SocialInfo count={'3214'} title={'Subscribers'} />
 						<SocialInfo count={'2571'} title={'Publications'} />
 					</div>
-					<span className={s.description}>{user?.aboutMe || 'tell us about yourself!'}</span>
+					<span className={s.description}>{data?.aboutMe || 'tell us about yourself!'}</span>
 				</div>
 			</div>
-			<PostsList profileId={user?.id || 0} />
+			<PostsList profileId={data?.id || 0} />
 		</>
 	)
 }

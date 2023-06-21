@@ -1,23 +1,12 @@
 import { authActions, AuthInitialStateType, authReducer } from './authReducer'
-import { UserType } from '../authApi/authApi'
-
 
 let initialState: AuthInitialStateType
 
 beforeEach(() => {
 	initialState = {
 		token: '',
-		isLoggedIn: false,
-		user: {} as UserType
+		isLoggedIn: false
 	}
-})
-
-test('should handle setUser', () => {
-	const user: UserType = { userId: 1, userName: 'John Doe', email: 'emailtest@mail.com' }
-	const action = authActions.setUser({ user })
-
-	const newState = authReducer(initialState, action)
-	expect(newState.user).toEqual(user)
 })
 
 test('should handle setIsLoggedIn', () => {

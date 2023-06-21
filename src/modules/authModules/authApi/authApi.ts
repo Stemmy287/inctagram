@@ -15,9 +15,8 @@ export const authApi = createApi({
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				const res = await queryFulfilled
+				await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
-				localStorage.setItem('token', res.data.accessToken)
 			}
 		}),
 		logout: builder.mutation<void, void>({
@@ -29,7 +28,6 @@ export const authApi = createApi({
 				await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: false }))
 				dispatch(authActions.setToken({ token: null }))
-				localStorage.removeItem('token')
 			}
 		}),
 		me: builder.query<UserType, void>({
@@ -38,7 +36,6 @@ export const authApi = createApi({
 				try {
 					const res = await queryFulfilled
 					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
-					dispatch(authActions.setUser({ user: res.data }))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}

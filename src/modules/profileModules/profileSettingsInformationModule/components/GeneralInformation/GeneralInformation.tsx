@@ -5,15 +5,17 @@ import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-import { ProfileType, useCreateProfileMutation, useFetchProfileQuery } from '../../../profileApi/profileApi'
+import {
+	ProfileType,
+	useCreateProfileMutation,
+	useFetchProfileQuery
+} from '../../../profileApi/profileApi'
 import { TextArea } from '../../../../../components/TextArea/TextArea'
 
 export const GeneralInformation: NextPageWithLayout = () => {
-	const {data} = useFetchProfileQuery(null)
-
+	const { data } = useFetchProfileQuery(null)
 	const [createProfile] = useCreateProfileMutation()
-
-	const date = new Date(data?.dateOfBirth as string)
+	const date = new Date(data!.dateOfBirth as string)
 	const formattedDate =
 		date.getFullYear() +
 		'-' +
@@ -32,19 +34,16 @@ export const GeneralInformation: NextPageWithLayout = () => {
 
 	const { register, handleSubmit } = useForm<ProfileType>({
 		defaultValues: {
-			userName: data?.userName,
-			firstName: data?.firstName,
-			lastName: data?.lastName,
-			city: data?.city,
-			aboutMe: data?.aboutMe
+			userName: data!.userName,
+			firstName: data!.firstName,
+			lastName: data!.lastName,
+			city: data!.city,
+			aboutMe: data!.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<ProfileType> = async data => {
-		await createProfile(data)
-		// useFetchProfileQuery(null)
-	}
+	const onSubmit: SubmitHandler<ProfileType> = data => createProfile(data)
 
 	return (
 		<form className={s.container} onSubmit={handleSubmit(onSubmit)}>

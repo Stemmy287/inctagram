@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '../../api/baseQueryWithReauth'
-import { profileActions } from '../profileReducer/profileReducer'
 import { httpMethods } from '../../../assets/utils/httpMethods/httpMethods'
 
 export const profileApi = createApi({
@@ -10,10 +9,6 @@ export const profileApi = createApi({
 	endpoints: builder => ({
 		fetchProfile: builder.query<FetchUserResponseType, null>({
 			query: () => 'users/profile',
-			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				const res = await queryFulfilled
-				dispatch(profileActions.setUser({ user: res.data }))
-			},
 			providesTags: ['Profile']
 		}),
 		createProfile: builder.mutation<FetchUserResponseType, ProfileType>({

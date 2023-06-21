@@ -7,14 +7,16 @@ import s from './AddAvatar.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
 import { useUploadImageMutation } from 'modules/profileModules/profileApi/profileApi'
-import { appActions } from 'modules/appModules'
+import { appActions, selectAppStatus } from 'modules/appModules'
 import { convertFileToBase64 } from 'assets/utils/convertFileToBase64/convertFileToBase64'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 
 type PropsType = {
 	onClose: () => void
 }
 
 export const AddAvatar: FC<PropsType> = ({ onClose }) => {
+	const status = useAppSelector(selectAppStatus)
 	const dispatch = useAppDispatch()
 	const [ava, setAva] = useState<StaticImageData | string>(defaultAva)
 	const [file, setFile] = useState<File>()
@@ -64,7 +66,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 						{ava === defaultAva ? (
 							<Button callback={refClick} title='Select from computer' />
 						) : (
-							<Button callback={onSaveHandler} title='Save' />
+							<Button callback={onSaveHandler} title='Save' disabled={status === 'loading'} />
 						)}
 					</div>
 				</div>

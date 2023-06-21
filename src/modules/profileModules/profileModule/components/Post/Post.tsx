@@ -4,11 +4,9 @@ import Image from 'next/image'
 import close from '../../../../../../public/icons/closeIcon.svg'
 import { FetchPostResponseType, postActions, PostMenuModule } from '../../../../postModules'
 import { Popup } from '../../../../../components/Popup/Popup'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
-
 import { useAppDispatch } from '../../../../../assets/hooks/useAppDispatch'
 import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
+import { useFetchProfileQuery } from '../../../profileApi/profileApi'
 
 type PropsType = {
 	post: FetchPostResponseType
@@ -16,7 +14,7 @@ type PropsType = {
 
 export const Post = ({ post }: PropsType) => {
 	const [isActive, setIsActive] = useState(false)
-	const user = useAppSelector(selectUser)
+	const { data } = useFetchProfileQuery(null)
 	const dispatch = useAppDispatch()
 
 	const onCloseHandler = () => {
@@ -56,7 +54,7 @@ export const Post = ({ post }: PropsType) => {
 							<div className={s.header}>
 								<div className={s.avatarAndLogin}>
 									<Avatar small />
-									<span>{user?.userName}</span>
+									<span>{data?.userName}</span>
 								</div>
 								<PostMenuModule description={post.description} postId={post.id.toString()} />
 							</div>
@@ -71,4 +69,3 @@ export const Post = ({ post }: PropsType) => {
 		</>
 	)
 }
-

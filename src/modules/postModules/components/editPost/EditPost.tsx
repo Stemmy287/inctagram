@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import { useEditPostMutation } from '../../postApi/postApi'
 import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileModules/profileReducer/profileReducer-selector'
 import { Popup } from '../../../../components/Popup/Popup'
 import s from '../editPost/EditPost.module.scss'
 import Image from 'next/image'
@@ -14,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { selectAppStatus } from '../../../appModules'
 import { selectShowedPost } from '../../postReducer/postReducer-selector'
 import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
+import { useFetchProfileQuery } from '../../../profileModules/profileApi/profileApi'
 
 type PropsType = {
 	onClose: () => void
@@ -29,7 +29,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const [isActive, setIsActive] = useState(false)
 	const [editPost] = useEditPostMutation()
 	const [value, setValue] = useState(description)
-	const user = useAppSelector(selectUser)
+	const { data } = useFetchProfileQuery(null)
 	const appStatus = useAppSelector(selectAppStatus)
 	const postImage = useAppSelector(selectShowedPost)
 
@@ -48,6 +48,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.currentTarget.value)
 	}
+
 	const onCloseHandler = () => {
 		setIsActive(false)
 	}
@@ -75,7 +76,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 						<div className={s.content}>
 							<div className={s.userInfo}>
 								<Avatar />
-								<span>{user?.userName}</span>
+								<span>{data?.userName}</span>
 							</div>
 							<div className={s.description}>
 								<form className={s.form} onSubmit={handleSubmit(onSubmit)}>

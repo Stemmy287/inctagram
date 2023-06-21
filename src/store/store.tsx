@@ -6,7 +6,6 @@ import { authApi } from 'modules/authModules'
 import { profileApi } from 'modules/profileModules/profileApi/profileApi'
 import { postApi } from 'modules/postModules/postApi/postApi'
 import { postReducer } from 'modules/postModules/postReducer/postReducer'
-import { profileReducer } from '../modules/profileModules/profileReducer/profileReducer'
 
 const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
@@ -14,8 +13,7 @@ const rootReducer = combineReducers({
 	[profileApi.reducerPath]: profileApi.reducer,
 	app: appReducer,
 	authReducer: authReducer,
-	postReducer: postReducer,
-	profileReducer: profileReducer
+	postReducer: postReducer
 })
 
 export const store = configureStore({
@@ -30,8 +28,3 @@ export const store = configureStore({
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>
-
-if (typeof window !== 'undefined') {
-	//@ts-ignore
-	window.store = store
-}
