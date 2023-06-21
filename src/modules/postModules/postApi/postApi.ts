@@ -14,7 +14,12 @@ export const postApi = createApi({
 				return endpointName
 			},
 			merge: (currentCache, newItems) => {
-				currentCache.items.push(...newItems.items)
+
+				if (currentCache.page !== newItems.page) {
+					currentCache.page = newItems.page
+					currentCache.items.push(...newItems.items)
+				}
+
 			},
 			forceRefetch({ currentArg, previousArg}) {
 				return !(previousArg?.pageNumber === currentArg?.pageNumber)
