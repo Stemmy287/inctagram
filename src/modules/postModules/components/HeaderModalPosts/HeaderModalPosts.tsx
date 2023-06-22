@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import s from './Header.module.scss'
+import s from './HeaderModalPosts.module.scss'
 import Image from 'next/image'
 import arrowBack from '../../../../../public/icons/arrow-ios-back.svg'
 
@@ -10,7 +10,7 @@ type PropsType = {
 	btnTitle: string
 }
 
-export const HeaderForModal: FC<PropsType> = ({ btnTitle, title, callBack, clickBack }) => {
+export const HeaderModalPosts: FC<PropsType> = ({ btnTitle, title, callBack, clickBack }) => {
 	return (
 		<div className={s.header}>
 			<Image src={arrowBack} alt={'back button'} onClick={clickBack} className={s.arrow} />

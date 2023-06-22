@@ -1,17 +1,14 @@
 import React, { ChangeEvent, useState } from 'react'
-import { useEditPostMutation } from '../../postApi/postApi'
-import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
-import { Popup } from '../../../../components/Popup/Popup'
-import s from '../editPost/EditPost.module.scss'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import s from './EditPost.module.scss'
 import Image from 'next/image'
-
-import { TitlePopup } from '../../../../components/TitlePopup/TitlePopup'
-import { Button } from '../../../../components/Button/Button'
-import { selectAppStatus } from '../../../appModules'
-import { selectShowedPost } from '../../postReducer/postReducer-selector'
-import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
-import { TextArea } from '../../../../components/TextArea/TextArea'
-import { useFetchProfileQuery } from '../../../profileModules/profileApi/profileApi'
+import { TitlePopup } from '../../../../../components/TitlePopup/TitlePopup'
+import { Button } from '../../../../../components/Button/Button'
+import { selectAppStatus } from '../../../../appModules'
+import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
+import { TextArea } from '../../../../../components/TextArea/TextArea'
+import { useFetchProfileQuery } from '../../../profileApi/profileApi'
+import { selectShowedPost, useEditPostMutation } from '../../../../postModules'
 
 type PropsType = {
 	onClose: () => void
@@ -20,6 +17,7 @@ type PropsType = {
 }
 
 export const EditPost = ({ onClose, description, postId }: PropsType) => {
+
 	const [editPost] = useEditPostMutation()
 	const [value, setValue] = useState(description)
 	const { data } = useFetchProfileQuery(null)
@@ -35,7 +33,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	}
 
 	return (
-		<Popup onClose={() => {}}>
+		<>
 			<TitlePopup title={'Edit post'} onClose={onClose} />
 			<div className={s.wrapper}>
 				<Image
@@ -70,6 +68,6 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 					</div>
 				</div>
 			</div>
-		</Popup>
+		</>
 	)
 }

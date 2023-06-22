@@ -1,0 +1,24 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+
+.notification {
+  width: 378px;
+  padding: 30px 24px;
+  row-gap: 18px;
+
+  .description {
+    margin-bottom: 30px;
+  }
+
+  .logout {
+    display: flex;
+    justify-content: end;
+    margin-top: 18px;
+
+    .btns {
+      width: 96px;
+      margin-left: 15px;
+    }
+  }
+}

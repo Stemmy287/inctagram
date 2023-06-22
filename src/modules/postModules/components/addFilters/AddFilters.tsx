@@ -9,7 +9,7 @@ import { AppRootStateType } from 'store/store'
 import { postActions } from 'modules/postModules/postReducer/postReducer'
 
 import { setImageFilter } from 'assets/utils/setImageFilter/setImageFilter'
-import { HeaderForModal } from 'modules/postModules'
+import { HeaderModalPosts } from 'modules/postModules'
 
 export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag }) => {
 	const dispatch = useDispatch()
@@ -35,7 +35,7 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag })
 
 	return (
 		<div className={s.container}>
-			<HeaderForModal
+			<HeaderModalPosts
 				title={'Filters'}
 				btnTitle={'Next'}
 				callBack={handleImageSubmit}

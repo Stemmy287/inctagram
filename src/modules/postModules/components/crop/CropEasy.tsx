@@ -10,7 +10,7 @@ import {
 import { FC, useState, useEffect } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 import { FlagType } from '../createPost/CreatePost'
-import { HeaderForModal } from '../headerForModal/HeaderForModal'
+import { HeaderModalPosts } from '../HeaderModalPosts/HeaderModalPosts'
 import s from './CropEasy.module.scss'
 import { CropPhotoComponent } from './CropPhoto/CropPhotoComponent'
 
@@ -92,7 +92,7 @@ export const CropEasy: FC<PropsType> = ({ setFlag }) => {
 
 	return (
 		<div>
-			<HeaderForModal
+			<HeaderModalPosts
 				title={'Cropping'}
 				callBack={cropImage}
 				btnTitle={'Next'}

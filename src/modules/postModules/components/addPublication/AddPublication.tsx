@@ -3,7 +3,7 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from 'store/store'
-import { FlagType, HeaderForModal, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
+import { FlagType, HeaderModalPosts, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
 import { TextArea } from '../../../../components/TextArea/TextArea'
 import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
 import { useFetchProfileQuery } from '../../../profileModules/profileApi/profileApi'
@@ -42,7 +42,7 @@ export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 
 	return (
 			<>
-				<HeaderForModal
+				<HeaderModalPosts
 					title='Publication'
 					btnTitle='Publish'
 					clickBack={() => setFlag('filter')}
