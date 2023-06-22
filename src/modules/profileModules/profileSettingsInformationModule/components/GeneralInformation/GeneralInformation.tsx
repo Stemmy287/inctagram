@@ -15,7 +15,7 @@ import { TextArea } from '../../../../../components/TextArea/TextArea'
 export const GeneralInformation: NextPageWithLayout = () => {
 	const { data } = useFetchProfileQuery(null)
 	const [createProfile] = useCreateProfileMutation()
-	const date = new Date(data!.dateOfBirth as string)
+	const date = new Date(data?.dateOfBirth as string)
 	const formattedDate =
 		date.getFullYear() +
 		'-' +
@@ -34,12 +34,11 @@ export const GeneralInformation: NextPageWithLayout = () => {
 
 	const { register, handleSubmit } = useForm<ProfileType>({
 		defaultValues: {
-			userName: data!.userName,
-			firstName: data!.firstName,
-			lastName: data!.lastName,
-			city: data!.city,
-			aboutMe: data!.aboutMe,
-			dateOfBirth: data!.dateOfBirth
+			userName: data?.userName,
+			firstName: data?.firstName,
+			lastName: data?.lastName,
+			city: data?.city,
+			aboutMe: data?.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})
