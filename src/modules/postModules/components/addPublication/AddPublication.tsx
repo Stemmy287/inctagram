@@ -4,10 +4,9 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from 'store/store'
 import { FlagType, HeaderForModal, useAddPostMutation, useAddPostPhotoMutation } from 'modules/postModules'
-import { useAppSelector } from '../../../../assets/hooks/useAppSelector'
 import { TextArea } from '../../../../components/TextArea/TextArea'
 import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
-import { selectUser } from '../../../profileModules/profileReducer/profileReducer-selector'
+import { useFetchProfileQuery } from '../../../profileModules/profileApi/profileApi'
 
 type PropsType = {
 	onClose: () => void
@@ -18,6 +17,8 @@ export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 
 	const [description, setDescription] = useState('')
 
+	const {data: user} = useFetchProfileQuery(null)
+
 	const [addPostPhoto] = useAddPostPhotoMutation()
 	const [addPost] = useAddPostMutation()
 
@@ -25,8 +26,6 @@ export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 	const urlFinalPics = useSelector<AppRootStateType, string>(
 		state => state.postReducer.urlFilteredPics
 	)
-
-	const user = useAppSelector(selectUser)
 
 	const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 			setDescription(e.currentTarget.value)
