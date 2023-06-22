@@ -38,7 +38,8 @@ export const GeneralInformation: NextPageWithLayout = () => {
 			firstName: data!.firstName,
 			lastName: data!.lastName,
 			city: data!.city,
-			aboutMe: data!.aboutMe
+			aboutMe: data!.aboutMe,
+			dateOfBirth: data!.dateOfBirth
 		},
 		resolver: yupResolver(schema)
 	})
