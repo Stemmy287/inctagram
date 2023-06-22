@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react'
 import { SettingButton } from '../../../../../src/components/Button/SettingButton/SettingButton'
 import {VerticalContainer} from '../../../../../storybook-utils/components/containers/vertical';
+import {action} from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Data Entry/Buttons/Setting Button',
@@ -13,7 +14,7 @@ export const Default = {
   render: args => {
     return (
         <VerticalContainer>
-          <SettingButton {...args}  />
+          <SettingButton {...args} callback={action('clicked')} />
         </VerticalContainer>
     )
   },

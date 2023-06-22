@@ -3,6 +3,7 @@ import { LogoutButton } from '../../../../../src/components/Button/LogoutButton/
 import {VerticalContainer} from '../../../../../storybook-utils/components/containers/vertical';
 import {Provider} from 'react-redux';
 import { store } from 'store/store'
+import {action} from '@storybook/addon-actions';
 
 
 export default {
@@ -17,7 +18,7 @@ export const Default = {
     return (
         <VerticalContainer>
           <Provider store={store}>
-            <LogoutButton {...args}  />
+            <LogoutButton {...args} callback={action('clicked')} />
           </Provider>
         </VerticalContainer>
     )
