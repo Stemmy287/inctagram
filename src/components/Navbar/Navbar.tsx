@@ -15,8 +15,12 @@ const navData = [
 ]
 export const Navbar = () => {
 	const [isActive, setIsActive] = useState(false)
+
+	const onCreate = () => {
+		setIsActive(true)
+	}
 	const onCloseHandler = () => {
-		setIsActive(!isActive)
+		setIsActive(false)
 	}
 	return (
 		<>
@@ -28,7 +32,7 @@ export const Navbar = () => {
 								key={i.id}
 								className={s.link}
 								href={i.href}
-								onClick={ i.id === 2 ? onCloseHandler : () => {}}
+								onClick={ i.id === 2 ? onCreate : () => {}}
 							>
 								<Image className={s.icon} src={i.icon} alt={i.alt} />
 								<div className={s.title}> {i.title}</div>
