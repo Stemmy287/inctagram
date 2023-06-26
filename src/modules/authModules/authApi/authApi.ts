@@ -35,7 +35,7 @@ export const authApi = createApi({
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled
-					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
+					dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}
