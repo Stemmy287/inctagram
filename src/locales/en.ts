@@ -1,0 +1,21 @@
+export const en = {
+	signIn: 'Sign in',
+	signUp: 'Sign up',
+	signUpTitle: 'Sign up',
+	haveAccount: 'Do you have an account?',
+	dontHaveAccount: 'Don’t have an account?',
+	forgotPassword: 'Forgot Password?',
+	forgotPasswordTitle: 'Forgot Password',
+	instructions: 'Enter your email address and we will send you further instructions',
+	email: 'Email',
+	password: 'Password',
+	userName: 'username',
+	passwordConfirmation: 'Password confirmation',
+	emailSent: 'Email sent',
+	ok: 'OK',
+	emailConfirm: 'We have sent a link to confirm your email to',
+	sendLink: 'Send Link',
+	sendLinkAgain: 'Send Link Again',
+	backToSignIn: 'Back to Sign In',
+	linkHasBeenSent: 'The link has been sent by email. If you dont receive an email send link again'
+};

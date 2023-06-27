@@ -11,6 +11,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Notification } from 'components/Notification/Notification'
 import { PasswordRecoveryType, useRecoveryPasswordMutation } from 'modules/authModules/authApi/authApi'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
+import { useRouter } from 'next/router'
 
 export const PasswordRecovery = () => {
 	const [isActive, setIsActive] = useState(false)
@@ -22,6 +25,10 @@ export const PasswordRecovery = () => {
 		email: yup.string().email('email should be correct').required('field required'),
 		recaptcha: yup.string().required()
 	})
+
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	const {
 		register,
@@ -59,32 +66,32 @@ export const PasswordRecovery = () => {
 		<>
 			<LoginDetailsWrapper>
 				<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-					<h1 className={s.title}>Forgot Password</h1>
+					<h1 className={s.title}>{t.forgotPasswordTitle}</h1>
 					<div>
 						<Input
-							title='Email'
+							title={t.email}
 							register={register}
 							name={'email'}
 							error={errors.email?.message || ''}
 							disabled={isLoading}
 						/>
 						<div className={s.desc}>
-							<span>Enter your email address and we will send you further instructions</span>
+							<span>{t.instructions}</span>
 						</div>
 					</div>
 					<div className={s.btn}>
 						{resendLink && (
 							<span className={s.resend}>
-								The link has been sent by email. If you dont receive an email send link again
+								{t.linkHasBeenSent}
 							</span>
 						)}
 						<Button
-							title={resendLink ? 'Send Link Again' : 'Send Link'}
+							title={resendLink ? t.sendLinkAgain : t.sendLink}
 							disabled={!!errors.email || isLoading}
 						/>
 					</div>
 					<Link className={s.link} href={'login'}>
-						Back to Sign In
+						{t.backToSignIn}
 					</Link>
 					<Captcha callback={onCaptcha} error={!!errors.recaptcha?.message} reset={isSuccess} />
 				</form>
@@ -92,9 +99,9 @@ export const PasswordRecovery = () => {
 			{isActive && (
 				<Popup onClose={onClosePopupHandler}>
 					<Notification
-						title='Email sent'
-						buttonTitle='OK'
-						message={`We have sent a link to confirm your email to ${getValues().email}`}
+						title={t.emailSent}
+						buttonTitle={t.ok}
+						message={`${t.emailConfirm} ${getValues().email}`}
 						onClose={onClosePopupHandler}
 					/>
 				</Popup>
