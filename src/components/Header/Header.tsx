@@ -18,7 +18,7 @@ export const Header = () => {
 		{ value: 'Russian',img: russia }
 	];
 
-	const {push} = useRouter()
+	const {push, locale} = useRouter()
 
 	const onSelectLanguage = (select: OptionsSelectorType) => {
 		const locale = select.value === 'English' ? 'en' : 'ru'
@@ -28,7 +28,7 @@ export const Header = () => {
 	return (
 		<div className={s.header}>
 			<h1 className={s.title}>Inctagram</h1>
-			<SelectLanguage firstItem={options[0]} options={options} onChange={onSelectLanguage}/>
+			<SelectLanguage firstItem={ locale === 'en' ? options[0] : options[1]} options={options} onChange={onSelectLanguage}/>
 			{isLoading === 'loading' && isInitialized && (
 					<LoadingLine />
 			)}
