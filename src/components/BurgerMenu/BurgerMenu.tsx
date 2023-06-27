@@ -4,7 +4,7 @@ import postMenu from '../../../public/icons/more-horizontal-outline.svg'
 import trash from '../../../public/icons/trash-outline.svg'
 import edit from '../../../public/icons/edit-2-outline.svg'
 import Image from 'next/image'
-import useOnClickOutside from 'assets/hooks/useOutsideClick'
+import useOnClickOutside from 'assets/hooks/useOnClickOutside'
 
 type PropsType = {
 	onEditClick: () => void

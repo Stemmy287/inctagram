@@ -1,0 +1,66 @@
+@import "common/styles/mixins.scss";
+@import "common/styles/variables.scss";
+
+.container {
+  position: relative;
+  z-index: 100;
+  width: 163px;
+  .select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 9px 6px 12px;
+    border: 1px solid $dark100;
+    border-radius: 2px;
+    height: 36px;
+    cursor: pointer;
+    @include text(400, 14px, 14px);
+    user-select: none;
+
+    &:hover {
+      border: 1px solid $light100;
+    }
+
+    &[data-disabled="true"] {
+      pointer-events: none;
+      color: $dark100;
+    }
+  }
+
+  .optionsList {
+    position: absolute;
+    width: 100%;
+    border: 1px solid $light100;
+    border-top: none;
+
+    .option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 6px 18px 6px 12px;
+      cursor: pointer;
+      @include text(400, 14px, 14px);
+      background-color: $dark500;
+
+      .flag {
+        margin-right: 17px;
+      }
+
+      &:hover {
+        background-color: $dark300;
+      }
+    }
+  }
+
+  .activeOptions {
+    border: 1px solid $light100;
+    border-top: none;
+
+  }
+
+  .active {
+    border: 1px solid $light100;
+    background-color: $dark500;
+  }
+}
