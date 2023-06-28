@@ -5,6 +5,9 @@ import { TitlePopup } from '../../../../../components/TitlePopup/TitlePopup'
 import { Button } from '../../../../../components/Button/Button'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectAppStatus } from '../../../../appModules'
+import { useRouter } from 'next/router'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
@@ -22,15 +25,19 @@ export const DeletePost = ({onClose, postId}: PropsType) => {
 		onClose()
 	}
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<>
-			<TitlePopup onClose={onClose} title={'Delete Post'} />
+			<TitlePopup onClose={onClose} title={t.deletePost} />
 			<div className={s.notification}>
-				<span className={s.description}>Are you sure you want to delete this post?</span>
+				<span className={s.description}>{t.sureDelete}</span>
 				<div className={s.logout}>
 					<div className={s.btns}>
 						<Button
-							title={'Yes'}
+							title={t.yes}
 							callback={deletePostHandler}
 							disabled={appStatus === 'loading'}
 							style={'opacity'}
@@ -38,7 +45,7 @@ export const DeletePost = ({onClose, postId}: PropsType) => {
 					</div>
 					<div className={s.btns}>
 						<Button
-							title={'No'}
+							title={t.no}
 							callback={onClose}
 							disabled={appStatus === 'loading'}
 						/>

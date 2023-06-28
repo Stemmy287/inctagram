@@ -9,6 +9,9 @@ import { Avatar } from '../../../profileSettingsInformationModule/components/Ava
 import { TextArea } from '../../../../../components/TextArea/TextArea'
 import { useFetchProfileQuery } from '../../../profileApi/profileApi'
 import { selectShowedPost, useEditPostMutation } from '../../../../postModules'
+import { useRouter } from 'next/router'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
@@ -24,6 +27,10 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 	const appStatus = useAppSelector(selectAppStatus)
 	const postImage = useAppSelector(selectShowedPost)
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	const onEditPost = () => {
 		editPost({ description: value, postId: postId })
 	}
@@ -34,7 +41,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 
 	return (
 		<>
-			<TitlePopup title={'Edit post'} onClose={onClose} />
+			<TitlePopup title={t.editPost} onClose={onClose} />
 			<div className={s.wrapper}>
 				<Image
 					className={s.closedPost}
@@ -52,7 +59,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 					<div className={s.description}>
 						<div className={s.textArea}>
 							<TextArea
-								title='Add publication descriptions'
+								title={t.publicationDescriptions}
 								placeholder='Text'
 								value={value}
 								onChange={onChange}
@@ -61,7 +68,7 @@ export const EditPost = ({ onClose, description, postId }: PropsType) => {
 						</div>
 						{<span className={s.limit}>{value.length}/500</span>}
 						<Button
-							title='Save Changes'
+							title={t.saveChanges}
 							disabled={appStatus === 'loading'}
 							callback={onEditPost}
 						/>

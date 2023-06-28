@@ -7,6 +7,9 @@ import { FlagType, HeaderModalPosts, useAddPostMutation, useAddPostPhotoMutation
 import { TextArea } from '../../../../components/TextArea/TextArea'
 import { Avatar } from '../../../profileModules/profileSettingsInformationModule/components/Avatar/Avatar'
 import { useFetchProfileQuery } from '../../../profileModules/profileApi/profileApi'
+import { useRouter } from 'next/router'
+import { en } from '../../../../locales/en'
+import { ru } from '../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
@@ -40,11 +43,15 @@ export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 		onClose()
 	}
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 			<>
 				<HeaderModalPosts
-					title='Publication'
-					btnTitle='Publish'
+					title={t.publication}
+					btnTitle={t.publish}
 					clickBack={() => setFlag('filter')}
 					callBack={onAddPost}
 				/>
@@ -58,7 +65,7 @@ export const AddPublication: FC<PropsType> = ({ onClose, setFlag }) => {
 						<div className={s.desc}>
 							<div className={s.textArea}>
 								<TextArea
-									title='Add publication descriptions'
+									title={t.publicationDescriptions}
 									placeholder='Text'
 									value={description}
 									onChange={onChange}

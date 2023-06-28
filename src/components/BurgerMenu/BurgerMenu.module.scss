@@ -8,7 +8,7 @@
   }
 
   .menu {
-    width: 137px;
+    min-width: 137px;
     height: 85px;
     position: absolute;
     top: 35px;
@@ -22,7 +22,7 @@
       justify-content: start;
       margin: 10px 0 12px 10px;
       cursor: pointer;
-
+      min-width: 137px;
       .btn {
         font-size: 15px;
         margin-left: 10px;

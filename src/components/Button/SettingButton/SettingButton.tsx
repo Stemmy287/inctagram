@@ -18,7 +18,14 @@ export const SettingButton = ({title, callback}: PropsType) => {
 		'My payments': '/profile/settings_payments',
 	} as {[key: string]: string}
 
-	const isActive = comparisonTable[title] === router.pathname
+	const comparisonTableRu = {
+		'Общая информация': '/profile/settings_information',
+		'Устройства': '/profile/settings_devices',
+		'Управление Аккаунтом': '/profile/settings_management',
+		'Мои платежи': '/profile/settings_payments',
+	} as {[key: string]: string}
+
+	const isActive = comparisonTable[title] === router.pathname || comparisonTableRu[title] === router.pathname
 
 	return <button className={isActive ? `${s.button} ${s.active}` : s.button} onClick={callback}>{title}</button>
 }

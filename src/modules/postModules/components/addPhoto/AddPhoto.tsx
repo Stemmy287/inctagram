@@ -6,6 +6,9 @@ import s from './AddPhoto.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useDispatch } from 'react-redux'
 import { FlagType, postActions } from 'modules/postModules'
+import { useRouter } from 'next/router'
+import { en } from '../../../../locales/en'
+import { ru } from '../../../../locales/ru'
 
 type PropsType = {
 	uploadHandler?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -35,9 +38,13 @@ export const AddPhoto: FC<PropsType> = ({ onClose, setFlag }) => {
 		setFlag('crop')
 	}
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<>
-			<TitlePopup title='Add photo' onClose={onClose} />
+			<TitlePopup title={t.addPhoto} onClose={onClose} />
 			<div className={s.container}>
 				<div className={s.wrapper}>
 					<div className={s.photo}>
@@ -50,7 +57,7 @@ export const AddPhoto: FC<PropsType> = ({ onClose, setFlag }) => {
 						/>
 					</div>
 					<div className={s.btn}>
-						<Button callback={refClick} title='Select from computer' />
+						<Button callback={refClick} title={t.selectFromComputer} />
 					</div>
 				</div>
 			</div>

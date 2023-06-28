@@ -7,14 +7,22 @@ import Link from 'next/link'
 import { LogoutButton } from 'components/Button/LogoutButton/LogoutButton'
 import { CreatePost } from 'modules/postModules'
 import { useState } from 'react'
+import { en } from '../../locales/en'
+import { ru } from '../../locales/ru'
+import { useRouter } from 'next/router'
 
-const navData = [
-	{ id: 1, title: 'Home', icon: homeIcon, href: '/', alt: 'home-page' },
-	{ id: 2, title: 'Create', icon: addIcon, href: '', alt: 'create-page' },
-	{ id: 3, title: 'My profile', icon: userIcon, href: '/profile', alt: 'profile-page' }
-]
 export const Navbar = () => {
 	const [isActive, setIsActive] = useState(false)
+
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
+	const navData = [
+		{ id: 1, title: t.home, icon: homeIcon, href: '/', alt: 'home-page' },
+		{ id: 2, title: t.createPost, icon: addIcon, href: '', alt: 'create-page' },
+		{ id: 3, title: t.myProfile, icon: userIcon, href: '/profile', alt: 'profile-page' }
+	]
 
 	const onCreate = () => {
 		setIsActive(true)
@@ -22,6 +30,7 @@ export const Navbar = () => {
 	const onCloseHandler = () => {
 		setIsActive(false)
 	}
+
 	return (
 		<>
 			<div className={s.navWrapper}>

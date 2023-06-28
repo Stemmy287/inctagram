@@ -10,6 +10,9 @@ import { useUploadImageMutation } from 'modules/profileModules/profileApi/profil
 import { appActions, selectAppStatus } from 'modules/appModules'
 import { convertFileToBase64 } from 'assets/utils/convertFileToBase64/convertFileToBase64'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import { useRouter } from 'next/router'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
@@ -24,6 +27,10 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 	const refClick = () => inputRef.current?.click()
 
 	const [uploadImage] = useUploadImageMutation()
+
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length) {
@@ -50,7 +57,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 
 	return (
 		<Popup onClose={onClose}>
-			<TitlePopup title='Add a profile photo' onClose={onClose} />
+			<TitlePopup title={t.addAProfilePhoto} onClose={onClose} />
 			<div className={s.container}>
 				<div className={s.wrapper}>
 					<div className={s.photo}>
@@ -64,9 +71,9 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 					</div>
 					<div className={s.btn}>
 						{ava === defaultAva ? (
-							<Button callback={refClick} title='Select from computer' />
+							<Button callback={refClick} title={t.selectFromComputer} />
 						) : (
-							<Button callback={onSaveHandler} title='Save' disabled={status === 'loading'} />
+							<Button callback={onSaveHandler} title={t.save} disabled={status === 'loading'} />
 						)}
 					</div>
 				</div>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { SettingButton } from '../Button/SettingButton/SettingButton'
 import { useRouter } from 'next/router'
+import { en } from '../../locales/en'
+import { ru } from '../../locales/ru'
 
 export const SettingsNavBar = () => {
 
@@ -10,11 +12,13 @@ export const SettingsNavBar = () => {
 		router.push(path)
 	}
 
+	const t = router.locale === 'en' ? en : ru
+
 	const arrBtns = [
-		{title: 'General information', callback: () => {pushRouter('/profile/settings_information')}},
-		{title: 'Devices', callback: () => {pushRouter('/profile/settings_devices')}},
-		{title: 'Account Management', callback: () => {pushRouter('/profile/settings_management')}},
-		{title: 'My payments', callback: () => {pushRouter('/profile/settings_payments')}},
+		{title: t.generalInformation, callback: () => {pushRouter('/profile/settings_information')}},
+		{title: t.devices, callback: () => {pushRouter('/profile/settings_devices')}},
+		{title: t.accountManagement, callback: () => {pushRouter('/profile/settings_management')}},
+		{title: t.myPayments, callback: () => {pushRouter('/profile/settings_payments')}},
 	]
 
 	return (

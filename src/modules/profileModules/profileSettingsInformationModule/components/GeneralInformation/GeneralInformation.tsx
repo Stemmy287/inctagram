@@ -11,6 +11,9 @@ import {
 	useFetchProfileQuery
 } from '../../../profileApi/profileApi'
 import { TextArea } from '../../../../../components/TextArea/TextArea'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
+import { useRouter } from 'next/router'
 
 export const GeneralInformation: NextPageWithLayout = () => {
 	const { data } = useFetchProfileQuery(null)
@@ -43,15 +46,19 @@ export const GeneralInformation: NextPageWithLayout = () => {
 		resolver: yupResolver(schema)
 	})
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	const onSubmit: SubmitHandler<ProfileType> = data => createProfile(data)
 
 	return (
 		<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-			<Input title='Username' register={register} name={'userName'} />
-			<Input title='First Name' register={register} name={'firstName'} />
-			<Input title='Last Name' register={register} name={'lastName'} />
+			<Input title={t.userName} register={register} name={'userName'} />
+			<Input title={t.firstName} register={register} name={'firstName'} />
+			<Input title={t.lastName} register={register} name={'lastName'} />
 			<div className={s.calendar}>
-				<label>Date of birthday</label>
+				<label>{t.dateOfBirthday}</label>
 				<input
 					type='date'
 					{...register('dateOfBirth')}
@@ -59,11 +66,11 @@ export const GeneralInformation: NextPageWithLayout = () => {
 					defaultValue={formattedDate}
 				/>
 			</div>
-			<Input title='City' register={register} name={'city'} />
-			<TextArea title='About me' register={register} name='aboutMe' />
+			<Input title={t.city} register={register} name={'city'} />
+			<TextArea title={t.aboutMe} register={register} name='aboutMe' />
 			<div className={s.line}></div>
 			<div className={s.btn}>
-				<Button title='Save Changes' />
+				<Button title={t.saveChanges} />
 			</div>
 		</form>
 	)

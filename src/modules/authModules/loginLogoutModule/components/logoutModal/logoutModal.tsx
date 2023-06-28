@@ -6,6 +6,8 @@ import s from './logoutModal.module.scss'
 import { useRouter } from 'next/router'
 import { useLogoutMutation } from 'modules/authModules/authApi/authApi'
 import { useFetchProfileQuery } from '../../../../profileModules/profileApi/profileApi'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 type PropsType = {
 	setIsActive: (isActive: boolean) => void
@@ -24,17 +26,19 @@ export const LogoutModal: FC<PropsType> = ({ setIsActive }) => {
 		router.push('/auth/login')
 	}
 
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<Popup onClose={onClosePopupHandler}>
-			<TitlePopup title={'Log Out'} onClose={onClosePopupHandler} />
+			<TitlePopup title={t.logout} onClose={onClosePopupHandler} />
 			<div className={s.notification}>
-				<span>Are you really want to log out of your account {data?.userName}?</span>
+				<span>{t.confirmLogout} {data?.userName}?</span>
 				<div className={s.logout}>
 					<div className={s.btn}>
-						<Button title={'Log Out'} callback={() => logout()} />
+						<Button title={t.logout} callback={() => logout()} />
 					</div>
 					<div className={s.btn}>
-						<Button title={'No'} callback={onClosePopupHandler} />
+						<Button title={t.no} callback={onClosePopupHandler} />
 					</div>
 				</div>
 			</div>

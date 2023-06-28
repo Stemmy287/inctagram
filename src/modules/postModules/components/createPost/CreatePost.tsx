@@ -4,6 +4,9 @@ import s from './CreatePost.module.scss'
 import { AddFilters, AddPhoto, AddPublication, CropEasy } from 'modules/postModules'
 import { TitlePopup } from '../../../../components/TitlePopup/TitlePopup'
 import { Button } from '../../../../components/Button/Button'
+import { useRouter } from 'next/router'
+import { en } from '../../../../locales/en'
+import { ru } from '../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
@@ -31,6 +34,9 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 		onClose()
 	}
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	return (
 		<>
@@ -50,12 +56,12 @@ export const CreatePost: FC<PropsType> = ({ onClose }) => {
 				</div>
 			</Popup>
 			{isActiveNotify && <Popup onClose={onCloseNotify}>
-				<TitlePopup title='Close' onClose={onCloseNotify}/>
+				<TitlePopup title={t.close} onClose={onCloseNotify}/>
 				<div className={s.notify}>
-					<span>If you close everything will be deleted</span>
+					<span>{t.confirmClose}</span>
 					<div className={s.btns}>
-						<Button style='opacity' title='No' callback={onCloseNotify}/>
-						<Button title='Yes' callback={onCloseCreatePost}/>
+						<Button style='opacity' title={t.no} callback={onCloseNotify}/>
+						<Button title={t.yes} callback={onCloseCreatePost}/>
 					</div>
 				</div>
 			</Popup>}

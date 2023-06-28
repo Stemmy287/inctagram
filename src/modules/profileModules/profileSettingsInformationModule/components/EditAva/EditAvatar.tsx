@@ -11,6 +11,9 @@ import { Avatar } from '../Avatar/Avatar'
 import { Button } from '../../../../../components/Button/Button'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
 import { selectAppStatus } from '../../../../appModules'
+import { useRouter } from 'next/router'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 export const EditAvatar = () => {
 	const { data } = useFetchProfileQuery(null)
@@ -18,6 +21,10 @@ export const EditAvatar = () => {
 
 	const [openModal, setOpenModal] = useState(false)
 	const [deleteAvatar] = useDeleteAvatarMutation()
+
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	const onCloseHandler = () => setOpenModal(!openModal)
 	const deleteAvatarHandler = () => deleteAvatar()
@@ -38,7 +45,7 @@ export const EditAvatar = () => {
 				)}
 			</div>
 			<Button
-				title={'Add a profile photo'}
+				title={t.addAProfilePhoto}
 				style={'opacity'}
 				callback={onCloseHandler}
 				disabled={status === 'loading'}
