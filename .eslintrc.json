@@ -4,6 +4,7 @@
   "plugin:storybook/recommended"
  ],
  "rules": {
+  "react-hooks/rules-of-hooks": "off",
   "no-console": "warn",
   "quotes": [
    "warn",

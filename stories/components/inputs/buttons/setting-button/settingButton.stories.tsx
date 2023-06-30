@@ -10,8 +10,7 @@ export default {
 
 
 export const Default = {
-  // @ts-ignore
-  render: args => {
+  render: (args: {title: string}) => {
     return (
         <VerticalContainer>
           <SettingButton {...args} callback={action('clicked')} />

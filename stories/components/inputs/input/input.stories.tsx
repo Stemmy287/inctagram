@@ -1,18 +1,15 @@
 import { Meta } from '@storybook/react'
 import { Input } from '../../../../src/components/Input/Input'
-import {useState} from "react";
-import {VerticalContainer} from "../../../../storybook-utils/components/containers/vertical";
+import {useState} from 'react';
+import {VerticalContainer} from '../../../../storybook-utils/components/containers/vertical';
 
 export default {
   title: 'Components/Data Entry/Text Field',
   component: Input,
 } as Meta<typeof Input>
 
-
 export const Default = {
-  // @ts-ignore
-  render: args => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  render: (args: {}) => {
     const [text, setText] = useState('Text Field')
     return (
         <VerticalContainer>
@@ -24,9 +21,8 @@ export const Default = {
 }
 
 export const DefaultError = {
-  // @ts-ignore
-  render: args => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+  render: (args: {}) => {
     const [text, setText] = useState('error')
     return (
         <VerticalContainer>
@@ -38,17 +34,12 @@ export const DefaultError = {
 }
 
 export const Password = {
-  // @ts-ignore
-  render: args => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  render: (args: {title: string, disabled: boolean, error: string, name: string, password: boolean}) => {
     const [text, setText] = useState('password')
     return (
         <VerticalContainer>
-          <Input onChange={e => setText(e.currentTarget.value)}
-             value={text}    {...args}
-          />
+          <Input onChange={e => setText(e.currentTarget.value)} value={text} {...args}/>
         </VerticalContainer>
-
     )
   },
   args: {
