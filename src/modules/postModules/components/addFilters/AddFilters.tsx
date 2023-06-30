@@ -9,7 +9,10 @@ import { AppRootStateType } from 'store/store'
 import { postActions } from 'modules/postModules/postReducer/postReducer'
 
 import { setImageFilter } from 'assets/utils/setImageFilter/setImageFilter'
-import { HeaderForModal } from 'modules/postModules'
+import { HeaderModalPosts } from 'modules/postModules'
+import { useRouter } from 'next/router'
+import { en } from '../../../../locales/en'
+import { ru } from '../../../../locales/ru'
 
 export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag }) => {
 	const dispatch = useDispatch()
@@ -33,11 +36,15 @@ export const AddFilters: NextPage<PropsType & PropsWithChildren> = ({ setFlag })
 		setFlag('crop')
 	}
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<div className={s.container}>
-			<HeaderForModal
-				title={'Filters'}
-				btnTitle={'Next'}
+			<HeaderModalPosts
+				title={t.filters}
+				btnTitle={t.next}
 				callBack={handleImageSubmit}
 				clickBack={clickBackHandler}
 			/>

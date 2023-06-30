@@ -1,28 +1,36 @@
 import React from 'react'
 import s from './Header.module.scss'
+import russia from '../../../public/icons/FlagRussia.svg'
+import unitedKingdom from '../../../public/icons/FlagUnitedKingdom.svg'
 import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { selectAppStatus, selectIsInitialized } from 'modules/appModules/appSelectors'
 import { LoadingLine } from 'components/LoadingLine/LoadingLine'
-import { LogoutButton } from 'components/Button/LogoutButton/LogoutButton'
-import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
+import { SelectLanguage } from '../SelectLanguage/SelectLanguage'
+import { OptionsSelectorType } from '../SelectLanguage/types'
+import { useRouter } from 'next/router'
 
 export const Header = () => {
 	const isLoading = useAppSelector(selectAppStatus)
 	const isInitialized = useAppSelector(selectIsInitialized)
-	const isLoggedIn = useAppSelector(loggedIn)
+
+	const options = [
+		{ value: 'English',img: unitedKingdom },
+		{ value: 'Russian',img: russia }
+	];
+
+	const {push, locale} = useRouter()
+
+	const onSelectLanguage = (select: OptionsSelectorType) => {
+		const locale = select.value === 'English' ? 'en' : 'ru'
+		push('/', '/', { locale })
+	}
 
 	return (
 		<div className={s.header}>
 			<h1 className={s.title}>Inctagram</h1>
+			<SelectLanguage firstItem={ locale === 'en' ? options[0] : options[1]} options={options} onChange={onSelectLanguage}/>
 			{isLoading === 'loading' && isInitialized && (
-				<div className={s.loading}>
 					<LoadingLine />
-				</div>
-			)}
-			{isLoggedIn && ( // вставить нужное условие (типа isSettings)
-				<div className={s.outButton}>
-					<LogoutButton />
-				</div>
 			)}
 		</div>
 	)

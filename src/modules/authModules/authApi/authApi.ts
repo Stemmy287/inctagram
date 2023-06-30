@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { appActions } from 'modules/appModules/appReducer'
 import { authActions } from 'modules/authModules/authReducer/authReducer'
 import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
+import { httpMethods } from '../../../assets/utils/httpMethods/httpMethods'
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
@@ -10,19 +11,18 @@ export const authApi = createApi({
 		login: builder.mutation<LoginResponseType, LoginFormData>({
 			query: body => ({
 				url: 'auth/login',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				const res = await queryFulfilled
+				await queryFulfilled
 				dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
-				localStorage.setItem('token', res.data.accessToken)
 			}
 		}),
 		logout: builder.mutation<void, void>({
 			query: () => ({
 				url: 'auth/logout',
-				method: 'POST'
+				method: httpMethods.POST
 			}),
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				await queryFulfilled
@@ -34,9 +34,8 @@ export const authApi = createApi({
 			query: () => 'auth/me',
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				try {
-					const res = await queryFulfilled
-					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
-					dispatch(authActions.setUser({ user: res.data }))
+					await queryFulfilled
+					dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}
@@ -45,35 +44,35 @@ export const authApi = createApi({
 		recoveryPassword: builder.mutation<void, PasswordRecoveryType>({
 			query: body => ({
 				url: 'auth/password-recovery',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			})
 		}),
 		resetPassword: builder.mutation<void, Omit<ResetPasswordType, 'passwordConfirmation'>>({
 			query: body => ({
 				url: 'auth/new-password',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			})
 		}),
 		registration: builder.mutation<string, RegisterParamsType>({
 			query: body => ({
 				url: 'auth/registration',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			})
 		}),
 		regConfirmation: builder.mutation<void, ConfirmationType>({
 			query: body => ({
 				url: 'auth/registration-confirmation',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			})
 		}),
 		regEmailResending: builder.mutation<void, regEmailResendingType>({
 			query: body => ({
 				url: 'auth/registration-email-resending',
-				method: 'POST',
+				method: httpMethods.POST,
 				body
 			})
 		})

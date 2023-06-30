@@ -15,6 +15,8 @@ import { useAppSelector } from 'assets/hooks/useAppSelector'
 import { loggedIn } from 'modules/authModules/authReducer/authSelectors'
 import { LoginFormData, useLoginMutation } from 'modules/authModules/authApi/authApi'
 import { useEffect } from 'react'
+import { en } from 'locales/en'
+import { ru } from 'locales/ru'
 
 export const Login: NextPageWithLayout = () => {
 	const [login, { isLoading }] = useLoginMutation()
@@ -22,6 +24,8 @@ export const Login: NextPageWithLayout = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
 
 	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -49,20 +53,20 @@ export const Login: NextPageWithLayout = () => {
 	return (
 		<LoginDetailsWrapper>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-				<h1 className={s.title}>Sing in</h1>
+				<h1 className={s.title}>{t.signIn}</h1>
 				<div className={s.logo}>
 					<Image src={googleLogo} alt={'sing in using google account'} onClick={() => {}} />
 					<Image src={githubLogo} alt={'sing in using github account'} onClick={() => {}} />
 				</div>
 				<Input
-					title='Email'
+					title={t.email}
 					register={register}
 					name={'email'}
 					error={errors.email?.message || ''}
 					disabled={isLoading}
 				/>
 				<Input
-					title='Password'
+					title={t.password}
 					register={register}
 					name={'password'}
 					error={errors.password?.message || ''}
@@ -72,17 +76,17 @@ export const Login: NextPageWithLayout = () => {
 				<div className={s.forgotLinkBlock}>
 					<Link className={s.forgotLink} href={'password-recovery'}>
 						{' '}
-						Forgot password
+						{t.forgotPassword}
 					</Link>
 				</div>
-				<Button title='Sign in' disabled={isLoading} />
+				<Button title={t.signIn} disabled={isLoading} />
 			</form>
 			<div className={s.desc}>
 				<div>
-					<span>Don’t have an account?</span>
+					<span>{t.dontHaveAccount}</span>
 				</div>
 				<Link className={s.link} href={'sign-up'}>
-					Sign up
+					{t.signUp}
 				</Link>
 			</div>
 		</LoginDetailsWrapper>

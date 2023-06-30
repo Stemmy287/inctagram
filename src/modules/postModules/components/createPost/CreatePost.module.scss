@@ -5,3 +5,19 @@
   min-width: 450px;
   min-height: 350px;
 }
+
+.notify {
+  padding: 30px 24px;
+  > span {
+    @include text(16px, 400, 24px);
+    margin-bottom: 18px;
+  }
+  .btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    > button {
+      width: 100px;
+    }
+  }
+}

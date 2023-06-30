@@ -10,9 +10,12 @@ import {
 import { FC, useState, useEffect } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 import { FlagType } from '../createPost/CreatePost'
-import { HeaderForModal } from '../headerForModal/HeaderForModal'
+import { HeaderModalPosts } from '../HeaderModalPosts/HeaderModalPosts'
 import s from './CropEasy.module.scss'
 import { CropPhotoComponent } from './CropPhoto/CropPhotoComponent'
+import { useRouter } from 'next/router'
+import { en } from '../../../../locales/en'
+import { ru } from '../../../../locales/ru'
 
 type PropsType = {
 	setFlag: (flag: FlagType) => void
@@ -90,12 +93,16 @@ export const CropEasy: FC<PropsType> = ({ setFlag }) => {
 		})
 	}, [pics])
 
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<div>
-			<HeaderForModal
-				title={'Cropping'}
+			<HeaderModalPosts
+				title={t.cropping}
 				callBack={cropImage}
-				btnTitle={'Next'}
+				btnTitle={t.next}
 				clickBack={() => setFlag('load')}
 			/>
 			<div className={s.wrapper}>

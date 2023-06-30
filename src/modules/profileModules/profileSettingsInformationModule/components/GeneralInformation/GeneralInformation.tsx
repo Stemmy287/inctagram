@@ -5,15 +5,20 @@ import s from './GeneralInformation.module.scss'
 import { NextPageWithLayout } from 'pages/_app'
 import { Input } from 'components/Input/Input'
 import { Button } from 'components/Button/Button'
-import { ProfileType, useCreateProfileMutation } from '../../../profileApi/profileApi'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
+import {
+	ProfileType,
+	useCreateProfileMutation,
+	useFetchProfileQuery
+} from '../../../profileApi/profileApi'
+import { TextArea } from '../../../../../components/TextArea/TextArea'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
+import { useRouter } from 'next/router'
 
 export const GeneralInformation: NextPageWithLayout = () => {
-	const user = useAppSelector(selectUser)
+	const { data } = useFetchProfileQuery(null)
 	const [createProfile] = useCreateProfileMutation()
-
-	const date = new Date(user?.dateOfBirth as string)
+	const date = new Date(data?.dateOfBirth as string)
 	const formattedDate =
 		date.getFullYear() +
 		'-' +
@@ -32,40 +37,41 @@ export const GeneralInformation: NextPageWithLayout = () => {
 
 	const { register, handleSubmit } = useForm<ProfileType>({
 		defaultValues: {
-			userName: user?.userName,
-			firstName: user?.firstName,
-			lastName: user?.lastName,
-			city: user?.city,
-			aboutMe: user?.aboutMe
+			userName: data?.userName,
+			firstName: data?.firstName,
+			lastName: data?.lastName,
+			city: data?.city,
+			aboutMe: data?.aboutMe
 		},
 		resolver: yupResolver(schema)
 	})
 
-	const onSubmit: SubmitHandler<ProfileType> = async data => {
-		await createProfile(data)
-		// useFetchProfileQuery(null)
-	}
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
+
+	const onSubmit: SubmitHandler<ProfileType> = data => createProfile(data)
 
 	return (
-			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-				<Input title='Username' register={register} name={'userName'} />
-				<Input title='First Name' register={register} name={'firstName'} />
-				<Input title='Last Name' register={register} name={'lastName'} />
-				<label>Date of birth</label>
-				<div className={s.calendar}>
-					<input
-						type='date'
-						{...register('dateOfBirth')}
-						className={s.calendarInput}
-						defaultValue={formattedDate}
-					/>
-				</div>
-				<Input title='City' register={register} name={'city'} />
-				<label>About me</label>
-				<textarea placeholder='Textarea' {...register('aboutMe')} rows={4} />
-				<div className={s.btn}>
-					<Button title='Save Changes' />
-				</div>
-			</form>
+		<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
+			<Input title={t.userName} register={register} name={'userName'} />
+			<Input title={t.firstName} register={register} name={'firstName'} />
+			<Input title={t.lastName} register={register} name={'lastName'} />
+			<div className={s.calendar}>
+				<label>{t.dateOfBirthday}</label>
+				<input
+					type='date'
+					{...register('dateOfBirth')}
+					className={s.calendarInput}
+					defaultValue={formattedDate}
+				/>
+			</div>
+			<Input title={t.city} register={register} name={'city'} />
+			<TextArea title={t.aboutMe} register={register} name='aboutMe' />
+			<div className={s.line}></div>
+			<div className={s.btn}>
+				<Button title={t.saveChanges} />
+			</div>
+		</form>
 	)
 }

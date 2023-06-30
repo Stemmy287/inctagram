@@ -9,14 +9,9 @@
   @include flex-center-vert;
   justify-content: space-between;
   position: relative;
+  padding: 0 60px;
   .title {
     @include text(26px, 600);
-    padding: 60px;
-  }
-
-  .loading {
-    position: absolute;
-    bottom: 0;
   }
 
   .outButton {

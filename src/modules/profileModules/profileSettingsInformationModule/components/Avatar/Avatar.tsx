@@ -1,23 +1,36 @@
 import React from 'react'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import Image from 'next/image'
 import s from './Avatar.module.scss'
-import image from '../../../../../../public/icons/image.svg'
+import defaultAva from '../../../../../../public/images/defaultPhoto.png'
+import { useFetchProfileQuery } from '../../../profileApi/profileApi'
 
+type PropsType = {
+	small?: boolean
+}
 
-export const Avatar = () => {
-	const avatarFromServer = useAppSelector(selectUser)?.avatars[0]?.url
+export const Avatar = ({ small }: PropsType) => {
+	const { data } = useFetchProfileQuery(null)
 
 	return (
 		<div className={s.container}>
-			{avatarFromServer
-				?
-				<Image src={avatarFromServer} alt={'avatar'} width={192} height={192} className={s.avatarFromServer} />
-				:
+			{!!data?.avatars.length ? (
+				<Image
+					src={data.avatars[0].url}
+					alt={'avatar'}
+					width={small ? 36 : 192}
+					height={small ? 36 : 192}
+					className={s.avatarFromServer}
+				/>
+			) : (
 				<div className={s.borderDefault}>
-					<Image src={image} alt={'default ava'} height={42} width={42} />
-				</div>}
+					<Image
+						src={defaultAva}
+						alt={'default ava'}
+						height={small ? 36 : 192}
+						width={small ? 36 : 192}
+					/>
+				</div>
+			)}
 		</div>
 	)
 }

@@ -8,10 +8,10 @@ import { Button } from 'components/Button/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ResetPasswordType, useResetPasswordMutation } from 'modules/authModules/authApi/authApi'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
-type PropsType = {}
-
-export const ResetPassword = ({}: PropsType) => {
+export const ResetPassword = () => {
 	const router = useRouter()
 
 	const [resetPassword, { isLoading, isSuccess }] = useResetPasswordMutation()
@@ -29,6 +29,8 @@ export const ResetPassword = ({}: PropsType) => {
 			.oneOf([yup.ref('newPassword')], 'The password must match the new password')
 			.required()
 	})
+
+	const t = router.locale === 'en' ? en : ru
 
 	const {
 		register,
@@ -50,11 +52,11 @@ export const ResetPassword = ({}: PropsType) => {
 	return (
 		<LoginDetailsWrapper>
 			<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-				<h1 className={s.title}>Create New Password</h1>
+				<h1 className={s.title}>{t.createNewPassword}</h1>
 				<Input
 					register={register}
 					name='newPassword'
-					title='New password'
+					title={t.newPassword}
 					error={errors.newPassword?.message}
 					disabled={isLoading}
 					password
@@ -63,15 +65,15 @@ export const ResetPassword = ({}: PropsType) => {
 					<Input
 						register={register}
 						name='passwordConfirmation'
-						title='Password confirmation'
+						title={t.passwordConfirmation}
 						error={errors.passwordConfirmation?.message}
 						disabled={isLoading}
 						password
 					/>
-					<span className={s.warn}>Your password must be between 6 and 20 characters</span>
+					<span className={s.warn}>{t.passwordCharacters}</span>
 				</div>
 				<Button
-					title='Create new password'
+					title={t.createNewPasswordButton}
 					disabled={!!errors.newPassword || !!errors.passwordConfirmation || isLoading}
 				/>
 			</form>

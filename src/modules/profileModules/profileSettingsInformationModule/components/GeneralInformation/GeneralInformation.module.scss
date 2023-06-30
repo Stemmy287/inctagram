@@ -1,22 +1,48 @@
 @import 'common/styles/mixins.scss';
 @import 'common/styles/variables.scss';
+
 .container {
   margin-top: 16px;
   @include flex-column;
   justify-content: space-between;
   width: 494px;
-  row-gap: 12px;
+  row-gap: 22px;
+
+  .line {
+    border-bottom: 1px solid $dark300;
+    position: relative;
+    left: -47.5%;
+    width: 148%;
+  }
 
   .btn {
     align-self: flex-end;
-    width: 159px;
+    min-width: 159px;
   }
 
-  label {
-    color: $dark100;
-    font-size: 14px;
-    margin-bottom: 12px;
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    label {
+      color: $dark100;
+      @include text(14px, 400, 24px, $dark100)
+    }
+    .calendarInput {
+      padding: 6px 12px;
+      color: white;
+      width: fit-content;
+      border-radius: 2px;
+      border: 1px solid $dark300;
+      @include text(16px, 400, 24px);
+      font-family: inherit;
+      cursor: pointer;
+      background: $dark500 url("../../../../../../public/images/calendar.png") no-repeat 90%;
+      &::-webkit-calendar-picker-indicator {
+        opacity: 0;
+      }
+    }
   }
+
 
   textarea {
     background-color: $dark300;
@@ -25,18 +51,6 @@
     resize: none;
     border-radius: 2px;
     color: white;
-  }
-
-  .calendar {
-    .calendarInput {
-      margin-bottom: 12px;
-      padding: 5px;
-      background-color: $dark100;
-      color: white;
-      border: none;
-      width: fit-content;
-      border-radius: 2px;
-    }
   }
 }
 

@@ -1,19 +1,18 @@
-@import 'common/styles/mixins.scss';
-@import 'common/styles/variables.scss';
-
+@import "common/styles/mixins";
+@import "common/styles/variables";
 .container {
   @include flex-column;
-  position: absolute;
-
+  position: relative;
   .showmenu {
     cursor: pointer;
   }
 
   .menu {
-    width: 137px;
+    min-width: 137px;
     height: 85px;
-    position: relative;
-    right: 112px;
+    position: absolute;
+    top: 35px;
+    left: -114px;
     border: 1px #4c4c4c solid;
     background-color: black;
     z-index: 99;
@@ -23,34 +22,13 @@
       justify-content: start;
       margin: 10px 0 12px 10px;
       cursor: pointer;
-
+      min-width: 137px;
       .btn {
         font-size: 15px;
         margin-left: 10px;
         display: flex;
         align-items: center;
       }
-    }
-  }
-}
-
-.notification {
-  width: 378px;
-  padding: 30px 24px;
-  row-gap: 18px;
-
-  .description {
-    margin-bottom: 30px;
-  }
-
-  .logout {
-    display: flex;
-    justify-content: end;
-    margin-top: 18px;
-
-    .btns {
-      width: 96px;
-      margin-left: 15px;
     }
   }
 }

@@ -6,14 +6,14 @@ import { Button } from '../../../../../components/Button/Button'
 import { SocialInfo } from '../../../../../components/SocialInfo/SocialInfo'
 import { PostsList } from '../PostsList/PostsList'
 import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
 import { loggedIn } from '../../../../authModules'
 import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 export const Profile = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
-	const user = useAppSelector(selectUser)
-	const {} = useFetchProfileQuery(null, { skip: !isLoggedIn })
+	const {data} = useFetchProfileQuery(null, { skip: !isLoggedIn })
 
 	const router = useRouter()
 
@@ -21,26 +21,28 @@ export const Profile = () => {
 		router.push('/profile/settings_information')
 	}
 
+	const t = router.locale === 'en' ? en : ru
+
 	return (
 		<>
 			<div className={s.hatProfile}>
 				<Avatar />
 				<div className={s.mainInfo}>
 					<div className={s.userNameAndBtn}>
-						<h3>{user?.userName}</h3>
+						<h3>{data?.userName}</h3>
 						<div className={s.buttonWrapper}>
-							<Button title='Profile Settings' callback={toSettingsHandler} style={'white'} />
+							<Button title={t.profileSettings} callback={toSettingsHandler} style={'white'} />
 						</div>
 					</div>
 					<div className={s.socialInfo}>
-						<SocialInfo count={'1234'} title={'Subscriptions'} />
-						<SocialInfo count={'3214'} title={'Subscribers'} />
-						<SocialInfo count={'2571'} title={'Publications'} />
+						<SocialInfo count={'1234'} title={t.subscriptions} />
+						<SocialInfo count={'3214'} title={t.subscribers} />
+						<SocialInfo count={'2571'} title={t.publications} />
 					</div>
-					<span className={s.description}>{user?.aboutMe || 'tell us about yourself!'}</span>
+					<span className={s.description}>{data?.aboutMe || t.aboutYourself}</span>
 				</div>
 			</div>
-			<PostsList profileId={user?.id || 0} />
+			<PostsList profileId={data?.id || 0} />
 		</>
 	)
 }

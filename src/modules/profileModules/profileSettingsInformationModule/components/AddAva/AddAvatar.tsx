@@ -7,21 +7,30 @@ import s from './AddAvatar.module.scss'
 import { TitlePopup } from 'components/TitlePopup/TitlePopup'
 import { useAppDispatch } from 'assets/hooks/useAppDispatch'
 import { useUploadImageMutation } from 'modules/profileModules/profileApi/profileApi'
-import { profileActions } from 'modules/profileModules/profileReducer/profileReducer'
-import { appActions } from 'modules/appModules'
+import { appActions, selectAppStatus } from 'modules/appModules'
 import { convertFileToBase64 } from 'assets/utils/convertFileToBase64/convertFileToBase64'
+import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
+import { useRouter } from 'next/router'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 type PropsType = {
 	onClose: () => void
 }
 
 export const AddAvatar: FC<PropsType> = ({ onClose }) => {
+	const status = useAppSelector(selectAppStatus)
 	const dispatch = useAppDispatch()
 	const [ava, setAva] = useState<StaticImageData | string>(defaultAva)
 	const [file, setFile] = useState<File>()
 	const inputRef = React.useRef<HTMLInputElement>(null)
 	const refClick = () => inputRef.current?.click()
+
 	const [uploadImage] = useUploadImageMutation()
+
+	const router = useRouter()
+
+	const t = router.locale === 'en' ? en : ru
 
 	const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length) {
@@ -33,7 +42,7 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 					setAva(file64)
 				})
 			} else {
-				dispatch(appActions.setAppError({ error: 'Файл слишком большого размера' }))
+				dispatch(appActions.setAppError({ error: 'File is too big' }))
 			}
 		}
 	}
@@ -43,15 +52,12 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 		formData.append('file', file as File)
 
 		await uploadImage(formData)
-		convertFileToBase64(file as File, (file64: string) => {
-			dispatch(profileActions.setAva({ ava: file64 }))
-		})
 		onClose()
 	}
 
 	return (
 		<Popup onClose={onClose}>
-			<TitlePopup title='Add a profile photo' onClose={onClose} />
+			<TitlePopup title={t.addAProfilePhoto} onClose={onClose} />
 			<div className={s.container}>
 				<div className={s.wrapper}>
 					<div className={s.photo}>
@@ -65,9 +71,9 @@ export const AddAvatar: FC<PropsType> = ({ onClose }) => {
 					</div>
 					<div className={s.btn}>
 						{ava === defaultAva ? (
-							<Button callback={refClick} title='Select from computer' />
+							<Button callback={refClick} title={t.selectFromComputer} />
 						) : (
-							<Button callback={onSaveHandler} title='Save' />
+							<Button callback={onSaveHandler} title={t.save} disabled={status === 'loading'} />
 						)}
 					</div>
 				</div>

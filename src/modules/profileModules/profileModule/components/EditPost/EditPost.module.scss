@@ -1,0 +1,40 @@
+@import "../../../../../common/styles/mixins";
+@import "../../../../../common/styles/variables";
+
+.wrapper {
+  display: flex;
+
+  .content {
+    padding: 24px 24px;
+    width: 485px;
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+
+      column-gap: 12px;
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+
+      .textArea {
+        margin-top: 24px;
+        height: 140px;
+      }
+
+      .limit {
+        @include text(12px, 400, 16px, $light900);
+        align-self: end;
+      }
+
+      > button {
+        max-width: 200px;
+        align-self: end;
+        position: relative;
+        top: 183px;
+      }
+    }
+  }
+}

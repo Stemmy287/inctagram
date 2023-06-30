@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import s from './Post.module.scss'
 import Image from 'next/image'
 import close from '../../../../../../public/icons/closeIcon.svg'
-import { FetchPostResponseType } from 'modules/postModules/postApi/postApi'
+import { BurgerMenu, FetchPostResponseType, postActions } from '../../../../postModules'
 import { Popup } from '../../../../../components/Popup/Popup'
-import { PostMenuModule } from 'modules/postModules/components/postMenuModule/PostMenu'
-import { useAppSelector } from '../../../../../assets/hooks/useAppSelector'
-import { selectUser } from '../../../profileReducer/profileReducer-selector'
+import { useAppDispatch } from '../../../../../assets/hooks/useAppDispatch'
 import { Avatar } from '../../../profileSettingsInformationModule/components/Avatar/Avatar'
-
+import { useFetchProfileQuery } from '../../../profileApi/profileApi'
+import { EditPost } from '../EditPost/EditPost'
+import { DeletePost } from '../DeletePost/DeletePost'
 
 type PropsType = {
 	post: FetchPostResponseType
@@ -17,7 +17,10 @@ type PropsType = {
 export const Post = ({ post }: PropsType) => {
 
 	const [isActive, setIsActive] = useState(false)
-	const user = useAppSelector(selectUser)
+	const [isEditActive, setIsEditActive] = useState(false)
+	const [isDeleteActive, setIsDeleteActive] = useState(false)
+	const { data } = useFetchProfileQuery(null)
+	const dispatch = useAppDispatch()
 
 	const onCloseHandler = () => {
 		setIsActive(false)
@@ -27,8 +30,26 @@ export const Post = ({ post }: PropsType) => {
 		setIsActive(true)
 	}
 
+	const onEditClick = () => {
+		setIsEditActive(true)
+	}
+
+	const onEditClose = () => {
+		setIsEditActive(false)
+	}
+
+	const onDeleteClick = () => {
+		setIsDeleteActive(true)
+	}
+
+	const onDeleteClose = () => {
+		setIsDeleteActive(false)
+	}
+
 	const filterImageSize = () => {
-		return post.images.filter(ps => ps.width === 640)
+		const filtered = post.images.filter(ps => ps.width === 640)
+		dispatch(postActions.setShowedPost({ value: filtered[0].url }))
+		return filtered
 	}
 
 	return (
@@ -41,27 +62,44 @@ export const Post = ({ post }: PropsType) => {
 				height={229}
 				onClick={onModalHandler}
 			/>
-			{isActive && <Popup onClose={onCloseHandler}>
-				<div className={s.openedPost}>
-					<Image
-						src={filterImageSize()[0].url}
-						alt='post img'
-						width={filterImageSize()[0].width}
-						height={filterImageSize()[0].height}
-					/>
-					<div className={s.content}>
-						<div className={s.header}>
-							<Avatar />
-							<span>{user?.userName}</span>
-							<div className={s.burgerMenu}>
-								<PostMenuModule postId={post.id.toString()} />
+			{isActive && (
+				<Popup onClose={onCloseHandler}>
+					<div className={s.openedPost}>
+						<Image
+							src={filterImageSize()[0].url}
+							alt='post img'
+							width={filterImageSize()[0].width}
+							height={filterImageSize()[0].height}
+						/>
+						<div className={s.content}>
+							<div className={s.header}>
+								<div className={s.avatarAndLogin}>
+									<Avatar small />
+									<span>{data?.userName}</span>
+								</div>
+								<BurgerMenu
+									onEditClick={onEditClick}
+									onDeleteClick={onDeleteClick}
+								/>
+							</div>
+							<div className={s.description}>
+								<div>{post.description}</div>
 							</div>
 						</div>
+						<Image src={close} alt='close' className={s.close} onClick={onCloseHandler} />
 					</div>
-					<Image src={close} alt='close' className={s.close} onClick={onCloseHandler} />
-				</div>
-			</Popup>}
+				</Popup>
+			)}
+			{isEditActive && (
+				<Popup onClose={onEditClose}>
+					<EditPost description={post.description} onClose={onEditClose} postId={post.id.toString()} />
+				</Popup>
+			)}
+			{isDeleteActive && (
+				<Popup onClose={onDeleteClose}>
+					<DeletePost onClose={onDeleteClose} postId={post.id.toString()}/>
+				</Popup>
+			)}
 		</>
 	)
 }
-

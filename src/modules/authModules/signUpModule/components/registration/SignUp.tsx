@@ -16,6 +16,8 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { PopupSignUp } from '../popupSignUp/popupSignUp'
 import Image from 'next/image'
 import Link from 'next/link'
+import { en } from '../../../../../locales/en'
+import { ru } from '../../../../../locales/ru'
 
 export const SignUp: NextPageWithLayout = () => {
 	const isLoggedIn = useAppSelector(loggedIn)
@@ -24,6 +26,8 @@ export const SignUp: NextPageWithLayout = () => {
 	const [email, setEmail] = useState('')
 
 	const [isActive, setIsActive] = useState(false)
+
+	const t = router.locale === 'en' ? en : ru
 
 	const schema = yup.object().shape({
 		userName: yup.string().required('').min(5, 'min 5 symbols'),
@@ -75,7 +79,7 @@ export const SignUp: NextPageWithLayout = () => {
 		<>
 			<LoginDetailsWrapper>
 				<form className={s.container} onSubmit={handleSubmit(onSubmit)}>
-					<h1 className={s.title}>Sign Up</h1>
+					<h1 className={s.title}>{t.signUpTitle}</h1>
 					<div className={s.authIcons}>
 						<Image className={s.icon} src={googleIcon} alt='google-icon' />
 						<Image className={s.icon} src={githubIcon} alt='github-icon' />
@@ -83,13 +87,13 @@ export const SignUp: NextPageWithLayout = () => {
 					<div>
 						<div className={s.inputs}>
 							<Input
-								title='Username'
+								title={t.userName}
 								register={register}
 								name={'userName'}
 								error={errors.userName?.message || ''}
 							/>
 							<Input
-								title='Email'
+								title={t.email}
 								register={register}
 								name={'email'}
 								error={errors.email?.message || ''}
@@ -97,27 +101,27 @@ export const SignUp: NextPageWithLayout = () => {
 
 							<Input
 								password
-								title='Password'
+								title={t.password}
 								register={register}
 								name={'password'}
 								error={errors.password?.message || ''}
 							/>
 							<Input
 								password
-								title='Password confirmation'
+								title={t.passwordConfirmation}
 								register={register}
 								name={'passwordConfirm'}
 								error={errors.password?.message || ''}
 							/>
 						</div>
 						<div className={s.desc}>
-							<span>Enter your email address and we will send you further instructions</span>
+							<span>{t.instructions}</span>
 						</div>
 					</div>
-					<Button title='Sign Up' disabled={!!errors.password || isLoading} />
-					<h3>Do you have an account?</h3>
+					<Button title={t.signUp} disabled={!!errors.password || isLoading} />
+					<h3>{t.haveAccount}</h3>
 					<Link className={s.link} href={'login'}>
-						Sign In
+						{t.signIn}
 					</Link>
 				</form>
 			</LoginDetailsWrapper>

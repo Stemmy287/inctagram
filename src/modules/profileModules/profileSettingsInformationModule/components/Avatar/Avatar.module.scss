@@ -2,7 +2,6 @@
 @import 'common/styles/variables.scss';
 
 .container {
-  margin-bottom: 25px;
   .avatarFromServer {
     border-radius: 50%;
   }
@@ -11,7 +10,9 @@
     background-color: $dark500;
     @include flex-center;
     border-radius: 50%;
-    margin: 15px;
+    > img {
+      border-radius: 50%;
+    }
   }
 }
 
