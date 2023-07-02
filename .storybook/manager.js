@@ -4,7 +4,9 @@ import logo from '../public/images/inctagram-logo.png'
 
 addons.setConfig({
   theme: {
-    ...themes.light,
+    ...themes.dark,
+    base: 'dark',
+    fontBase: '#59008c',
     brandTitle: 'INCTAGRAM',
     brandUrl: 'https://inctagram-woad.vercel.app',
     brandImage: logo,
