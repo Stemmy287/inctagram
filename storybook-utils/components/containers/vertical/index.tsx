@@ -11,6 +11,6 @@ const styles: CSSProperties = {
 }
 
 // @ts-ignore
-export const VerticalContainer = ({ children }) => {
+export const SoriesWrapper = ({ children }) => {
   return <div style={styles}>{children}</div>
 }

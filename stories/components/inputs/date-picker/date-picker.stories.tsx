@@ -1,6 +1,6 @@
 import {Meta} from '@storybook/react'
 import {DatePick} from '../../../../src/components/DatePicker/DatePicker'
-import {VerticalContainer} from '../../../../storybook-utils/components/containers/vertical';
+import {SoriesWrapper} from '../../../../storybook-utils/components/containers/vertical';
 import {ValuePreview} from '../../../../storybook-utils/components/previews/value-preview';
 import {useState} from 'react';
 
@@ -13,10 +13,10 @@ export const Default = {
     render: (args: any) => {
         const [startDate, setStartDate] = useState<Date>(new Date());
         return (
-            <VerticalContainer>
+            <SoriesWrapper>
                 <DatePick {...args} selected={startDate} onChange={(date: Date) => setStartDate(date)}/>
                 <ValuePreview>checked: {String(startDate)}</ValuePreview>
-            </VerticalContainer>
+            </SoriesWrapper>
         )
     },
     args: {

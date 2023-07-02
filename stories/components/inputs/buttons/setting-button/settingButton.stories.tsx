@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react'
 import { SettingButton } from '../../../../../src/components/Button/SettingButton/SettingButton'
-import {VerticalContainer} from '../../../../../storybook-utils/components/containers/vertical';
+import {SoriesWrapper} from '../../../../../storybook-utils/components/containers/vertical';
 import {action} from '@storybook/addon-actions';
 
 export default {
@@ -12,9 +12,9 @@ export default {
 export const Default = {
   render: (args: {title: string}) => {
     return (
-        <VerticalContainer>
+        <SoriesWrapper>
           <SettingButton {...args} callback={action('clicked')} />
-        </VerticalContainer>
+        </SoriesWrapper>
     )
   },
   args: {

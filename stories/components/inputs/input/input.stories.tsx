@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react'
 import { Input } from '../../../../src/components/Input/Input'
 import {useState} from 'react';
-import {VerticalContainer} from '../../../../storybook-utils/components/containers/vertical';
+import {SoriesWrapper} from '../../../../storybook-utils/components/containers/vertical';
 
 export default {
   title: 'Components/Data Entry/Text Field',
@@ -12,10 +12,10 @@ export const Default = {
   render: (args: {}) => {
     const [text, setText] = useState('Text Field')
     return (
-        <VerticalContainer>
+        <SoriesWrapper>
           <Input onChange={e => setText(e.currentTarget.value)}
                  value={text} name={'text'} title={'Text Field'}/>
-        </VerticalContainer>
+        </SoriesWrapper>
     )
   }
 }
@@ -25,10 +25,10 @@ export const DefaultError = {
   render: (args: {}) => {
     const [text, setText] = useState('error')
     return (
-        <VerticalContainer>
+        <SoriesWrapper>
           <Input onChange={e => setText(e.currentTarget.value)}
                  value={text} name={'text'} title={'Text Field'} error={'error'}/>
-        </VerticalContainer>
+        </SoriesWrapper>
     )
   }
 }
@@ -37,9 +37,9 @@ export const Password = {
   render: (args: {title: string, disabled: boolean, error: string, name: string, password: boolean}) => {
     const [text, setText] = useState('password')
     return (
-        <VerticalContainer>
+        <SoriesWrapper>
           <Input onChange={e => setText(e.currentTarget.value)} value={text} {...args}/>
-        </VerticalContainer>
+        </SoriesWrapper>
     )
   },
   args: {
