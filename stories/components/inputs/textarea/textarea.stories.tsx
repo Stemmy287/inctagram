@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/react'
 import {TextArea} from '../../../../src/components/TextArea/TextArea';
-import {SoriesWrapper} from '../../../../storybook-utils/components/containers/vertical';
+import {StoriesWrapper} from '../../../../storybook-utils/components/containers/vertical';
 
 export default {
   title: 'Components/Data Entry/Textarea',
   component: TextArea,
-  decorators: [(Story) => <SoriesWrapper><Story /></SoriesWrapper>],
+  decorators: [(Story) => <StoriesWrapper><Story /></StoriesWrapper>],
 } as Meta<typeof TextArea>
 
 export const Primary = {
