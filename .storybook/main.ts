@@ -7,6 +7,7 @@ const config: StorybookConfig = {
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
 		'@storybook/addon-actions',
+		'@storybook/addon-backgrounds',
 	],
 	framework: {
 		name: '@storybook/nextjs',
@@ -15,6 +16,7 @@ const config: StorybookConfig = {
 	features: {
 		storyStoreV7: true
 	},
+
 	docs: {
 		autodocs: true
 	}
