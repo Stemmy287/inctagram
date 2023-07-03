@@ -5,14 +5,17 @@ import unitedKingdom from '../../../../public/icons/FlagUnitedKingdom.svg';
 import russia from '../../../../public/icons/FlagRussia.svg';
 import {useRouter} from 'next/router';
 
-
 const options = [
     { value: 'English',img: unitedKingdom },
     { value: 'Russian',img: russia }
 ]
+
 export default {
     title: 'Components/Disclosure/Select Language',
     component: SelectLanguage,
+    parameters: {
+        backgrounds: { default: 'dark' },
+    },
     argTypes: {
         disabled: {
             options: [true, false],
@@ -30,7 +33,6 @@ export default {
 export const Default = {
     render: (args: {	firstItem: OptionsSelectorType, options: OptionsSelectorType[],
         onChange: (data: OptionsSelectorType) => void, disabled?: boolean}) => {
-
         const {push, locale} = useRouter()
         const onSelectLanguage = (select: OptionsSelectorType) => {
             const locale = select.value === 'English' ? 'en' : 'ru'
@@ -38,5 +40,5 @@ export const Default = {
         }
         return <SelectLanguage {...args} options={options}
                                firstItem={ locale === 'en' ? options[0] : options[1]} onChange={onSelectLanguage}/>
-    },
+    }
 }

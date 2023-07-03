@@ -6,6 +6,10 @@ import {Button} from '../../../../src/components/Button/Button';
 export default {
   title: 'Components/Feedback/Popup',
   component: Popup,
+  parameters: {
+    backgrounds: {default: 'dark'},
+    controls: {disable: true}
+  }
 } as Meta<typeof Popup>
 
 export const Default = {
@@ -17,7 +21,5 @@ export const Default = {
       </Popup> : null}
       {!open ? <Button callback={() => setOpen(true)} title={'Popup!'}/> : null}
     </>
-  },
-  args: {
-  },
+  }
 }

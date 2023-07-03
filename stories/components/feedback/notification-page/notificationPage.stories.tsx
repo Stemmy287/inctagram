@@ -2,12 +2,13 @@ import { Meta } from '@storybook/react'
 import {NotificationPage} from '../../../../src/components/NotificationPage/NotificationPage';
 import img from '../../../../public/images/defaultPhoto.png'
 
-
 export default {
   title: 'Components/Feedback/Notification Page',
   component: NotificationPage,
+  parameters: {
+    backgrounds: {default: 'dark'}
+  }
 } as Meta<typeof NotificationPage>
-
 export const Default = {
   args: {
     title: 'NotificationPage',

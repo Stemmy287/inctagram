@@ -6,6 +6,9 @@ import {Button} from '../../../../src/components/Button/Button';
 export default {
   title: 'Components/Feedback/Notification',
   component: Notification,
+  parameters: {
+    backgrounds: {default: 'dark'}
+  }
 } as Meta<typeof Notification>
 
 export const Default = {
@@ -24,5 +27,5 @@ export const Default = {
         ' pariatur illum sed dolore voluptas? Et sequi animi et voluptas itaque ' +
         'ut suscipit optio sit labore voluptas quo rerum exercitationem. ' +
         'In harum vero a dolores exercitationem est odio rerum. '
-  },
+  }
 }

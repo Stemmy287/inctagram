@@ -4,6 +4,10 @@ import {LoginDetailsWrapper} from '../../../../src/components/LoginDetailsWrappe
 export default {
     title: 'Components/Layout/Login Details Wrapper',
     component: LoginDetailsWrapper,
+    parameters: {
+        backgrounds: {default: 'dark'},
+        controls: {disable: true}
+    }
 } as Meta<typeof LoginDetailsWrapper>
 
 export const Default = {

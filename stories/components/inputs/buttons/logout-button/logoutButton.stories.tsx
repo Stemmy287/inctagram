@@ -7,19 +7,12 @@ import { store } from 'store/store'
 export default {
   title: 'Components/Data Entry/Buttons/Logout Button',
   component: LogoutButton,
+    decorators: [(Story) => <Provider store={store}><StoriesWrapper><Story/></StoriesWrapper></Provider>],
+    parameters: {
+        backgrounds: {default: 'dark'},
+        controls: {disable: true}
+    }
 } as Meta<typeof LogoutButton>
 
 export const Default = {
-  render: (args: {}) => {
-      return (
-        <StoriesWrapper>
-          <Provider store={store}>
-            <LogoutButton {...args}  />
-          </Provider>
-        </StoriesWrapper>
-    )
-  },
-  args: {
-
-  },
 }

@@ -6,8 +6,12 @@ export default {
   title: 'Components/Layout/header',
   component: Header,
   decorators: [(Story) => <Provider store={store}><Story /></Provider>],
+  parameters: {
+    backgrounds: {default: 'dark'},
+    controls: {disable: true}
+  }
 } as Meta<typeof Header>
 
-export const Primary = {
-  args: {}
+export const Default = {
+
 }

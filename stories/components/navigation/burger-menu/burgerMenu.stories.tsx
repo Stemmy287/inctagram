@@ -7,6 +7,10 @@ export default {
   title: 'Components/Navigation/Burger menu',
   component: BurgerMenu,
   decorators: [(Story) => <StoriesWrapper><Story /></StoriesWrapper>],
+  parameters: {
+    backgrounds: {default: 'dark'},
+    controls: {disable: true}
+  }
 } as Meta<typeof BurgerMenu>
 
 export const Primary = {

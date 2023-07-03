@@ -11,7 +11,11 @@ import {Button} from '../../../../src/components/Button/Button';
 export default {
     title: 'Components/Feedback/SnackBar',
     component: SnackBar,
-    decorators: [(Story) => <Provider store={store}><Story/></Provider>]
+    decorators: [(Story) => <Provider store={store}><Story/></Provider>],
+    parameters: {
+        backgrounds: {default: 'dark'},
+        controls: {disable: true}
+    }
 } as Meta<typeof SnackBar>
 
 export const Default = {
@@ -23,7 +27,7 @@ export const Default = {
         }
         return <>
             <Button callback={onError} title={'Show Snackbar!'}/>
-        {error? <><SnackBar /> <h3>Wait 5 seconds!</h3></>: null}
+        {error? <><SnackBar /> <h3 style={{color: "#8f8f8f"}}>Wait 5 seconds!</h3></>: null}
         </>
     }
 }

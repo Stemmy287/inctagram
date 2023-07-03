@@ -11,8 +11,8 @@ export default {
   argTypes: {
     title: {
       options: ['General information', 'Devices', 'Account Management', 'My payments'],
-      control: { type: 'radio' },
-    },
+      control: { type: 'radio' }
+    }
   }
 } as Meta<typeof SettingButton>
 

@@ -1,9 +1,9 @@
 import { themes } from '@storybook/theming';
 
-const preview = {
+const preview  = {
     parameters: {
         docs: {
-            theme: themes.light,
+            theme: themes.dark,
 
         }
     },
