@@ -6,7 +6,7 @@ import {store} from 'store/store';
 
 
 export default {
-  title: 'Components/Layout/navbar',
+  title: 'Components/Navigation/Navbar',
   component: Navbar,
   decorators: [(Story) => <Provider store={store}><Story /></Provider>],
 } as Meta<typeof Navbar>

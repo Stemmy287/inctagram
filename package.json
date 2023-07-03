@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build",
     "clean": "rm -rf build && rm -rf node_modules && rm -rf storybook-static",
-    "msa-deploy": "scp -r  ./storybook-static/ msaserj:/home/msa/storybook/"
+    "msa-deploy": "scp -r  ./storybook-static msaserj:/home/msa/storybook/"
   },
   "dependencies": {
     "@babel/core": "^7.21.8",
