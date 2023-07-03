@@ -3,7 +3,7 @@ import React from 'react';
 import {SettingsNavBar} from '../../../../src/components/SettingsNavBar/SettingsNavBar';
 
 export default {
-    title: 'Components/Layout/Settings Navbar',
+    title: 'Components/Navigation/Settings Navbar',
     component: SettingsNavBar,
     parameters: {
         backgrounds: {default: 'dark'},

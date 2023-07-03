@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {SettingButton} from '../../../../../src/components/Button/SettingButton/SettingButton';
 
 export default {
-  title: 'Components/Layout/Settings Navbar/Settings Button',
+  title: 'Components/Navigation/Settings Navbar/Settings Button',
   component: SettingButton,
   parameters: { actions: { argTypesRegex: '^on.*' } },
   decorators: [(Story) => <StoriesWrapper><Story /></StoriesWrapper>],

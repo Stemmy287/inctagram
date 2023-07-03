@@ -12,6 +12,5 @@ addons.setConfig({
     brandImage: logo,
     brandTarget: '_blank',
     colorPrimary: '#0048ff',
-
   },
 })
