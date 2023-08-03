@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "serve-storybook": "serve storybook-static",
-    "clean": "rm -rf build && rm -rf node_modules && rm -rf storybook-static"
+    "clean-all": "rm -rf build && rm -rf node_modules && rm -rf storybook-static"
   },
   "dependencies": {
     "@babel/core": "^7.21.8",
