@@ -1,9 +1,21 @@
 {
-	"extends": "next/core-web-vitals",
-	"rules": {
-		"no-console": "warn",
-		"quotes": ["warn", "single"],
-		"prefer-const": "warn",
-		"max-len": ["warn", { "code": 120 }]
-	}
+ "extends": [
+  "next/core-web-vitals",
+  "plugin:storybook/recommended"
+ ],
+ "rules": {
+  "react-hooks/rules-of-hooks": "off",
+  "no-console": "warn",
+  "quotes": [
+   "warn",
+   "single"
+  ],
+  "prefer-const": "warn",
+  "max-len": [
+   "warn",
+   {
+    "code": 120
+   }
+  ]
+ }
 }

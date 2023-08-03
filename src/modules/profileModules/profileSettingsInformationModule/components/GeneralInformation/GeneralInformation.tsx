@@ -43,6 +43,7 @@ export const GeneralInformation: NextPageWithLayout = () => {
 			city: data?.city,
 			aboutMe: data?.aboutMe
 		},
+		// @ts-ignore
 		resolver: yupResolver(schema)
 	})
 

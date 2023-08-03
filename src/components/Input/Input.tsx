@@ -9,7 +9,7 @@ type PropsType = {
 	title?: string
 	disabled?: boolean
 	error?: string
-	register: UseFormRegister<any>
+	register?: UseFormRegister<any>
 	name: string
 	password?: boolean
 }
@@ -47,9 +47,10 @@ export const Input = ({
 				<input
 					className={error ? `${s.input} ${s.errorInput}` : s.input}
 					disabled={disabled}
-					{...register(name)}
+					{...register ? register(name) :''}
 					data-isshowpassword={password && isShowPassword}
 					autoComplete={password ? 'off' : 'on'}
+					{...restProps}
 				/>
 				{password && eyePassword}
 			</div>

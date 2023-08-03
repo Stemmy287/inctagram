@@ -37,7 +37,7 @@ export const PasswordRecovery = () => {
 		formState: { errors },
 		getValues,
 		setError
-	} = useForm<PasswordRecoveryType>({
+	} = useForm<Omit<PasswordRecoveryType, 'recaptcha'> & {recaptcha: string }  >({
 		resolver: yupResolver(schema)
 	})
 	const onSubmit: SubmitHandler<PasswordRecoveryType> = async data => {

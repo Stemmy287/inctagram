@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static",
+    "clean-all": "rm -rf build && rm -rf node_modules && rm -rf storybook-static"
   },
   "dependencies": {
     "@babel/core": "^7.21.8",
@@ -23,6 +27,7 @@
     "@types/react-redux": "^7.1.25",
     "axios": "^1.4.0",
     "babel-jest": "^29.5.0",
+    "clsx": "^1.2.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "next": "13.3.1",
@@ -42,10 +47,22 @@
     "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^7.1.0",
+    "@storybook/addon-backgrounds": "^7.1.0",
+    "@storybook/addon-essentials": "^7.1.0",
+    "@storybook/addon-interactions": "7.1.0",
+    "@storybook/addon-links": "^7.1.0",
+    "@storybook/addon-mdx-gfm": "^7.1.0",
+    "@storybook/blocks": "^7.1.0",
+    "@storybook/nextjs": "^7.1.0",
+    "@storybook/react": "^7.1.0",
+    "@storybook/testing-library": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/jest": "^29.5.1",
+    "eslint-plugin-storybook": "^0.6.13",
     "jest": "^29.5.0",
     "prettier": "2.8.8",
+    "storybook": "^7.1.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1"
   }
