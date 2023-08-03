@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { appActions } from 'modules/appModules/appReducer'
 import { authActions } from 'modules/authModules/authReducer/authReducer'
 import { baseQueryWithReauth } from 'modules/api/baseQueryWithReauth'
-import { httpMethods } from '../../../assets/utils/httpMethods/httpMethods'
+import { httpMethods } from 'assets/utils/httpMethods/httpMethods'
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
@@ -35,7 +35,7 @@ export const authApi = createApi({
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled
-					dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
+					dispatch(authActions.setIsLoggedIn({ isLoggedIn: true }))
 				} finally {
 					dispatch(appActions.setAppInitialized({ isInitialized: true }))
 				}
