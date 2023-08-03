@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "storybook": "storybook dev -p 6007",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static",
     "clean": "rm -rf build && rm -rf node_modules && rm -rf storybook-static"
   },
   "dependencies": {

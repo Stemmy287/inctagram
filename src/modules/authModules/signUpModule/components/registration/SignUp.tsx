@@ -49,7 +49,7 @@ export const SignUp: NextPageWithLayout = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm<RegisterParamsType>({
+	} = useForm<RegisterParamsType & { passwordConfirm: string }>({
 		resolver: yupResolver(schema)
 	})
 
